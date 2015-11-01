@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="capanegocios.Usuario" table="usuario">
+<id column="id_usuario" name="id" type="long" >
+<generator class="foreign">             
+        <param name="property">tipo</param> 
+    </generator>
+    </id>
+<property column="nombre" name="nombre" type="string" />
+<property column="apellido" name="apellido" type="string" />
+<property column="email" name="email" type="string" />
+<property column="contrasena" name="contrasena" type="string" />
+
+<list name="lugares" cascade="all-delete-orphan" >
+<key column = "id_lugar"/>
+<index column ="orden"/>
+<one-to-many class="capanegocios.Lugar"/>
+</list>
+
+<one-to-one name="tipo" cascade="persist,delete"/>
+</class>
+</hibernate-mapping>

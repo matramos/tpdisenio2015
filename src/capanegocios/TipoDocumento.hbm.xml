@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="capanegocios.TipoDocumento" table="tipo_de_documento">
+<id column="tipodocumento" name="tipo" type="long" />
+<property column="dni" name="dni" type="boolean" />
+<property column ="ci" name="ci" type="boolean"/>
+<property column ="le" name="le" type="boolean"/>
+<property column ="lc" name="lc" type="boolean"/>
+</class>
+</hibernate-mapping>

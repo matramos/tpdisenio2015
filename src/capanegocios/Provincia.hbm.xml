@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="capanegocios.Provincia" table="provincia">
+<id column="id_provincia" name="id" type="long" />
+<property column="nombre_provincia" name="nombre" type="string" />
+
+<list name="localidades" cascade="all-delete-orphan" >
+<key column = "id_provincia"/>
+<index column ="orden"/>
+<one-to-many class="capanegocios.Localidad"/>
+</list>
+</class>
+</hibernate-mapping>
