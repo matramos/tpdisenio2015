@@ -11,7 +11,7 @@ import org.hibernate.cfg.Configuration;
 public class Aver {
 public static void main (String[] args){
 		
-		
+		// puta
 		Configuration cfg = new Configuration();
 		cfg.configure ("hibernate.cfg.xml");
 		/*cfg.addClass(capanegocios.Localidad.class);
