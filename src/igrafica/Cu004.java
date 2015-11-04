@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
 import java.util.EventObject;
 import java.util.Iterator;
 import java.util.List;
@@ -39,9 +40,13 @@ import javax.swing.table.TableColumn;
 import igrafica.TestModel.ColumnContext;
 import com.mxrck.autocompleter.*;
 
+import DTO.ListaDeportesDTO;
 import DTO.ListaLugaresDTO;
+import DTO.LugarDTO;
 import capanegocios.Lugar;
+import gestores.GestorDeportes;
 import gestores.GestorLugar;
+import java.awt.event.ItemEvent;
 
 public class Cu004 extends JFrame {
 
@@ -56,6 +61,7 @@ public class Cu004 extends JFrame {
 	private JTextField resultado;
     private TestModel model;
     private ListaLugaresDTO lugares;
+    private ListaDeportesDTO deportes;
 	/**
 	 * Launch the application.
 	 */
@@ -125,17 +131,19 @@ public class Cu004 extends JFrame {
 		
 		lugares = GestorLugar.getListadoLugares();
 		
-		textAutoCompleter.addItem(lugares.getLugares().get(0).getNombre());
-		Iterator iter = lugares.getLugares().iterator();
-		/*while (iter.hasNext()){
-			Lugar lugarD = (Lugar) iter.next();
-			textAutoCompleter.addItem(lugarD.getNombre());
-		}*/
+		
+		for(LugarDTO object: lugares.getLugares()){
+			
+			textAutoCompleter.addItem(object.getNombre());
+		}
+		
 		
 		disponibilidad = new JTextField();
 		disponibilidad.setBounds(280, 103, 86, 20);
 		contentPane.add(disponibilidad);
 		disponibilidad.setColumns(10);
+		
+		//deportes = GestorDeportes.getListadoDeportes();
 		
 		deporte = new JTextField();
 		deporte.setBounds(473, 75, 86, 20);
@@ -145,23 +153,134 @@ public class Cu004 extends JFrame {
 		JLabel lblModalidad = new JLabel("Modalidad");
 		lblModalidad.setBounds(427, 106, 63, 14);
 		contentPane.add(lblModalidad);
-		
-		JComboBox comboModalidad = new JComboBox();
-		comboModalidad.setBounds(500, 103, 112, 20);
-		contentPane.add(comboModalidad);
-		
-		JLabel lblPuntosVictoria = new JLabel("Puntos Victoria");
-		lblPuntosVictoria.setBounds(396, 136, 94, 14);
-		contentPane.add(lblPuntosVictoria);
-		
+
+
 		puntosVictoria = new JTextField();
 		puntosVictoria.setBounds(500, 134, 86, 20);
 		contentPane.add(puntosVictoria);
 		puntosVictoria.setColumns(10);
 		
+		JTextArea reglamento = new JTextArea();
+		reglamento.setBounds(75, 377, 255, 159);
+		contentPane.add(reglamento);
+		
+		puntosEmpate = new JTextField();
+		puntosEmpate.setBounds(539, 218, 86, 20);
+		contentPane.add(puntosEmpate);
+		puntosEmpate.setColumns(10);
+
+
 		JCheckBox chckbxSePermiteEmpate = new JCheckBox("Se permite empate?");
+		chckbxSePermiteEmpate.setSelected(true);
+		chckbxSePermiteEmpate.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				if(arg0.getStateChange()== ItemEvent.SELECTED){
+					puntosEmpate.setEditable(true);
+				}
+				else{
+					puntosEmpate.setEditable(false);
+				}
+			}
+		});
+		
 		chckbxSePermiteEmpate.setBounds(393, 181, 140, 23);
 		contentPane.add(chckbxSePermiteEmpate);
+		
+		resultado = new JTextField();
+		resultado.setBounds(609, 294, 86, 20);
+		contentPane.add(resultado);
+		resultado.setColumns(10);
+		
+		JComboBox comboCantidadSets = new JComboBox();
+		comboCantidadSets.addItem(1);
+		
+		comboCantidadSets.addItem(3);
+		
+		comboCantidadSets.addItem(5);
+		
+		comboCantidadSets.addItem(7);
+		
+		comboCantidadSets.addItem(9);
+		comboCantidadSets.setBounds(542, 374, 70, 20);
+		contentPane.add(comboCantidadSets);
+		
+		JComboBox comboPuntos = new JComboBox();
+		comboPuntos.setBounds(559, 258, 86, 20);
+		contentPane.add(comboPuntos);
+		
+		JComboBox comboFormaPuntuacion = new JComboBox();
+		comboFormaPuntuacion.addItem("Puntuacion");
+		comboFormaPuntuacion.addItem("Sets");
+		comboFormaPuntuacion.addItem("Resultado final");
+		comboFormaPuntuacion.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+                String seleccion = (String) arg0.getItem();
+				if(arg0.getStateChange()== ItemEvent.SELECTED){
+					if(seleccion == "Sets"){
+					comboCantidadSets.setEnabled(true);
+					chckbxSePermiteEmpate.setEnabled(false);
+					puntosEmpate.setEditable(false);
+					
+					
+				}
+					else{
+					comboCantidadSets.setEnabled(false);
+					chckbxSePermiteEmpate.setEnabled(true);
+					puntosEmpate.setEditable(true);
+					
+				}
+				
+				
+				
+			}
+		}});
+		comboFormaPuntuacion.setBounds(534, 331, 147, 20);
+		contentPane.add(comboFormaPuntuacion);
+		
+		
+		
+		JComboBox comboModalidad = new JComboBox();
+		comboModalidad.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+                String seleccion = (String) arg0.getItem();
+				if(arg0.getStateChange()== ItemEvent.SELECTED){
+					if(seleccion == "Liga"){
+					puntosVictoria.setEditable(true);
+					chckbxSePermiteEmpate.setEnabled(true);
+					puntosEmpate.setEditable(true);
+					resultado.setEditable(true);
+					comboPuntos.setEnabled(true);
+				}
+					else{
+					puntosVictoria.setEditable(false);
+					chckbxSePermiteEmpate.setEnabled(false);
+					puntosEmpate.setEditable(false);
+					resultado.setEditable(false);
+					comboPuntos.setEnabled(false);
+					
+				}
+				
+				
+				
+			}
+		}});
+		comboModalidad.setBounds(500, 103, 112, 20);
+		contentPane.add(comboModalidad);
+		
+		comboModalidad.addItem("Liga");
+		comboModalidad.addItem("Eliminatoria simple");
+		comboModalidad.addItem("Eliminatoria doble");
+		
+		
+		JLabel lblPuntosVictoria = new JLabel("Puntos Victoria");
+		lblPuntosVictoria.setBounds(396, 136, 94, 14);
+		contentPane.add(lblPuntosVictoria);
+		
+		
+		
+		
+		
+		
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(75, 180, 255, 159);
@@ -186,11 +305,7 @@ public class Cu004 extends JFrame {
 		lblPuntosEmpate.setBounds(427, 221, 106, 14);
 		contentPane.add(lblPuntosEmpate);
 		
-		puntosEmpate = new JTextField();
-		puntosEmpate.setBounds(539, 218, 86, 20);
-		contentPane.add(puntosEmpate);
-		puntosEmpate.setColumns(10);
-		
+				
 		JLabel lblPuntosPorPresentarse = new JLabel("Puntos por Presentarse");
 		lblPuntosPorPresentarse.setBounds(396, 261, 137, 14);
 		contentPane.add(lblPuntosPorPresentarse);
@@ -199,26 +314,19 @@ public class Cu004 extends JFrame {
 		lblResultadoPorNo.setBounds(356, 297, 289, 14);
 		contentPane.add(lblResultadoPorNo);
 		
-		resultado = new JTextField();
-		resultado.setBounds(609, 294, 86, 20);
-		contentPane.add(resultado);
-		resultado.setColumns(10);
+		
 		
 		JLabel lblFormaDePuntuacin = new JLabel("Forma de Puntuaci\u00F3n");
 		lblFormaDePuntuacin.setBounds(356, 334, 134, 14);
 		contentPane.add(lblFormaDePuntuacin);
 		
-		JComboBox comboFormaPuntuacion = new JComboBox();
-		comboFormaPuntuacion.setBounds(534, 331, 147, 20);
-		contentPane.add(comboFormaPuntuacion);
+		
 		
 		JLabel lblCantidadDeSets = new JLabel("Cantidad de Sets");
 		lblCantidadDeSets.setBounds(381, 377, 109, 14);
 		contentPane.add(lblCantidadDeSets);
 		
-		JComboBox comboCantidadSets = new JComboBox();
-		comboCantidadSets.setBounds(542, 374, 70, 20);
-		contentPane.add(comboCantidadSets);
+		
 		
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.setBounds(424, 513, 89, 23);
@@ -233,17 +341,12 @@ public class Cu004 extends JFrame {
 		lblDarDeAlta.setFont(new Font("Arial",Font.BOLD,18));
 		contentPane.add(lblDarDeAlta);
 		
-		JTextArea reglamento = new JTextArea();
-		reglamento.setBounds(75, 377, 255, 159);
-		contentPane.add(reglamento);
-		
+	
 		JLabel reg = new JLabel("Reglamento (opcional)");
 		reg.setBounds(75, 350, 140, 14);
 		contentPane.add(reg);
 		
-		JComboBox comboPuntos = new JComboBox();
-		comboPuntos.setBounds(559, 258, 86, 20);
-		contentPane.add(comboPuntos);
+		
 	}
 
 }
