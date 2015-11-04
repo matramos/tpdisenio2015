@@ -40,6 +40,7 @@ import javax.swing.table.TableColumn;
 import igrafica.TestModel.ColumnContext;
 import com.mxrck.autocompleter.*;
 
+import DTO.DeporteDTO;
 import DTO.ListaDeportesDTO;
 import DTO.ListaLugaresDTO;
 import DTO.LugarDTO;
@@ -127,14 +128,14 @@ public class Cu004 extends JFrame {
 		lugar.setBounds(94, 103, 86, 20);
 		contentPane.add(lugar);
 		lugar.setColumns(10);
-		TextAutoCompleter textAutoCompleter = new TextAutoCompleter(lugar);
+		TextAutoCompleter lugaresAC = new TextAutoCompleter(lugar);
 		
 		lugares = GestorLugar.getListadoLugares();
 		
 		
 		for(LugarDTO object: lugares.getLugares()){
 			
-			textAutoCompleter.addItem(object.getNombre());
+			lugaresAC.addItem(object.getNombre());
 		}
 		
 		
@@ -143,12 +144,20 @@ public class Cu004 extends JFrame {
 		contentPane.add(disponibilidad);
 		disponibilidad.setColumns(10);
 		
-		//deportes = GestorDeportes.getListadoDeportes();
+		
 		
 		deporte = new JTextField();
 		deporte.setBounds(473, 75, 86, 20);
 		contentPane.add(deporte);
 		deporte.setColumns(10);
+		TextAutoCompleter deportesAC = new TextAutoCompleter(deporte);
+		
+		deportes = GestorDeportes.getListadoDeportes();
+		
+		for(DeporteDTO depor: deportes.getDeportes()){
+			
+			deportesAC.addItem(depor.getNombre());
+		}
 		
 		JLabel lblModalidad = new JLabel("Modalidad");
 		lblModalidad.setBounds(427, 106, 63, 14);

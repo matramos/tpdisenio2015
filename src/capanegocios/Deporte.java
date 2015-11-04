@@ -6,7 +6,7 @@ public class Deporte {
 	private long id;
 	private String nombre;
 	private List<SeRealizaEn> serealizaen;
-	
+	private List<Competencia> competencias;
 	
 	public void setId(long id){
 		this.id=id;

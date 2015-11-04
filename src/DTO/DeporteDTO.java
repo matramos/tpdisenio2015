@@ -21,7 +21,7 @@ public class DeporteDTO {
 		this.nombre = nombre;
 	}
 	
-	public String getNombre (String nombre){
+	public String getNombre (){
 		return nombre;
 	}
 	
