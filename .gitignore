@@ -1,0 +1,8 @@
+#este archivo sirve para ignorar a la hora de hacer commits directorios
+#y archivos que son particulares de la versión de eclipse que corre cada uno
+
+/bin/
+bin/**
+tmp/**
+tmp/**/*
+.settings/

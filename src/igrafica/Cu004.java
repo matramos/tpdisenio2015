@@ -105,7 +105,11 @@ public class Cu004 extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	//ESTE ES EL CONSTRUCTOR, NO?-matt
 	public Cu004() {
+		
+		//DEFINIMOS LA VENTANA?--matt
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		setResizable(false);
@@ -164,7 +168,7 @@ public class Cu004 extends JFrame {
 		}
 		
 		/*Toda esta parte hay que corregirla despues para que busque los lugares despues de haber elegido el deporte,
-		 o sea, que busque la lista de lugares con un id_deporte en la base de datos, mañana lo voy a ver*/
+		 o sea, que busque la lista de lugares con un id_deporte en la base de datos, maï¿½ana lo voy a ver*/
 		
 		
 		disponibilidad = new JTextField();
