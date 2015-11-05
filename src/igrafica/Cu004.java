@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.EventObject;
 import java.util.Iterator;
 import java.util.List;
@@ -55,6 +56,7 @@ import DTO.ListaDeportesDTO;
 import DTO.ListaLugaresDTO;
 import DTO.LugarDTO;
 import capanegocios.Lugar;
+import gestores.GestorCompetencias;
 import gestores.GestorDeportes;
 import gestores.GestorLugar;
 import java.awt.event.ItemEvent;
@@ -251,7 +253,7 @@ public class Cu004 extends JFrame {
 		comboPuntos.setBounds(559, 258, 86, 20);
 		contentPane.add(comboPuntos);
 		
-		JComboBox comboFormaPuntuacion = new JComboBox();
+		final JComboBox comboFormaPuntuacion = new JComboBox();
 		comboFormaPuntuacion.addItem("Puntuacion");
 		comboFormaPuntuacion.addItem("Sets");
 		comboFormaPuntuacion.addItem("Resultado final");
@@ -282,7 +284,7 @@ public class Cu004 extends JFrame {
 		
 		
 		
-		JComboBox comboModalidad = new JComboBox();
+		final JComboBox comboModalidad = new JComboBox();
 		comboModalidad.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
                 String seleccion = (String) arg0.getItem();
@@ -376,7 +378,7 @@ public class Cu004 extends JFrame {
 		lblSeleccioneUnNombre.setVisible(false);
 		contentPane.add(lblSeleccioneUnNombre);
 		
-		
+		final Date ahora = new Date();
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -392,8 +394,15 @@ public class Cu004 extends JFrame {
 					competencia.setPuntos_empate(Integer.parseInt(puntosEmpate.getText()));
 					competencia.setPermite_empates(chckbxSePermiteEmpate.isSelected());
 					competencia.setReglamento(reglamento.getText());
-					
-					
+					competencia.setResultado_final(Integer.parseInt(resultado.getText()));
+					competencia.setCantidad_sets((int)comboCantidadSets.getSelectedItem());
+					competencia.setModalidad((String) comboModalidad.getSelectedItem());
+					competencia.setDeporte(deporte.getText());
+					competencia.setPuntos_presentarse((int)comboPuntos.getSelectedItem());
+					competencia.setFecha_hora(ahora);
+					competencia.setPuntuacion((String)comboFormaPuntuacion.getSelectedItem());
+					/*Falta agregar los lugares y disponibilidad*/
+					GestorCompetencias.crearCompetencia(competencia);
 					
 				}
 			}

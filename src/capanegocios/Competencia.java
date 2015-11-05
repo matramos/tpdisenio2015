@@ -1,38 +1,56 @@
 package capanegocios;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
+
+import DTO.CompetenciaDTO;
 
 public class Competencia {
 
-	private int id_competencia;
+	private long id_competencia;
 	private String nombre;
 	private int cantidad_sets;
-	private String modalidad;
+	private Modalidad modalidad;
 	private String reglamento;
+	private Deporte deporte;
 	private int puntos_presentarse;
 	private int puntos_ganador;
 	private int puntos_empate;
 	private boolean permite_empates;
 	private Date fecha_hora;
 	private int sets;
-	private int puntuacion;
+	private FormaPuntuacion puntuacion;
 	private int resultado_final;
 	private List<Participante> participantes;
 	private List<Ronda> rondas;
-	public Competencia(int id_competencia,String nombre,int cantidad_sets,String modalidad,String reglamento,int puntos_presentarse,
-			int puntos_empate,boolean permite_empates,Date fecha_hora,int sets,int puntuacion,int resultado_final){
-		this.id_competencia=id_competencia;
-		this.nombre=nombre;
-		this.cantidad_sets=cantidad_sets;
-		this.modalidad=modalidad;
-		this.reglamento=reglamento;
-		this.puntos_presentarse=puntos_presentarse;
-		this.puntos_empate=puntos_empate;
-		this.permite_empates=permite_empates;
-		this.fecha_hora=fecha_hora;
-		this.sets=sets;
-		this.puntuacion=puntuacion;
-		this.resultado_final=resultado_final;
+	private Estado estado;
+	
+	public Competencia(CompetenciaDTO competenciaDTO){
+		this.id_competencia=competenciaDTO.getId_competencia();
+		this.nombre=competenciaDTO.getNombre();
+		this.cantidad_sets=competenciaDTO.getCantidad_sets();
+		this.reglamento=competenciaDTO.getReglamento();
+		this.puntos_presentarse=competenciaDTO.getPuntos_presentarse();
+		this.puntos_empate=competenciaDTO.getPuntos_empate();
+		this.permite_empates=competenciaDTO.isPermite_empates();
+		this.fecha_hora=competenciaDTO.getFecha_hora();
+		this.sets=competenciaDTO.getSets();
+		this.resultado_final=competenciaDTO.getResultado_final();
+	}
+	
+	public void setDeporte(Deporte deporte){
+		this.deporte = deporte;
+	}
+	
+	public void setPuntuacion(FormaPuntuacion puntuacion){
+		this.puntuacion = puntuacion;
+	}
+	
+	public void setModalidad(Modalidad modalidad){
+		this.modalidad = modalidad;
+	}
+	
+	public void setEstado(Estado estado){
+		this.estado = estado;
 	}
 }

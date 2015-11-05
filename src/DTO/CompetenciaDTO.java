@@ -1,11 +1,11 @@
 package DTO;
 
-import java.sql.Date;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import capanegocios.Lugar;
 import capanegocios.Participante;
-import capanegocios.Ronda;;
+import capanegocios.Ronda;
 
 public class CompetenciaDTO {
 	//Atributos de CompetenciaDTO
@@ -14,19 +14,33 @@ public class CompetenciaDTO {
 	private int cantidad_sets;
 	private String modalidad;
 	private String reglamento;
+	private String deporte;
 	private int puntos_presentarse;
 	private int puntos_ganador;
 	private int puntos_empate;
 	private boolean permite_empates;
 	private Date fecha_hora;
 	private int sets;
-	private int puntuacion;
+	private String puntuacion;
 	private int resultado_final;
+	private List<String> lugares;
 	private List<Participante> participantes;
 	private List<Ronda> rondas;
 	
 	
-
+	
+	public List<String> getLugares() {
+		return lugares;
+	}
+	public void setLugares(List<String> lugares) {
+		this.lugares = lugares;
+	}
+	public String getDeporte() {
+		return deporte;
+	}
+	public void setDeporte(String deporte) {
+		this.deporte = deporte;
+	}
 	public long getId_competencia() {
 		return id_competencia;
 	}
@@ -93,10 +107,10 @@ public class CompetenciaDTO {
 	public void setSets(int sets) {
 		this.sets = sets;
 	}
-	public int getPuntuacion() {
+	public String getPuntuacion() {
 		return puntuacion;
 	}
-	public void setPuntuacion(int puntuacion) {
+	public void setPuntuacion(String puntuacion) {
 		this.puntuacion = puntuacion;
 	}
 	public int getResultado_final() {
