@@ -1,7 +1,11 @@
 package gestores;
 
-import DTO.CompetenciaDTO;
-import capanegocios.Competencia;
+import java.util.ArrayList;
+
+import DAO.*;
+import DTO.*;
+import capanegocios.*;
+
 
 public class GestorCompetencias {
 	
@@ -27,5 +31,10 @@ public class GestorCompetencias {
 		
 		CompetenciaDAO.agregarCompetencia(competencia);
 		
+	}
+	
+	public static ArrayList<CompetenciaDTO> buscarCompetencias(String string, int i, int j, int k) {
+		
+		return null;
 	}
 }
