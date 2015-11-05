@@ -2,11 +2,19 @@ package igrafica;
 
 import java.awt.BorderLayout;
 
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.EventObject;
 import java.util.Iterator;
 import java.util.List;
@@ -19,6 +27,7 @@ import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Component;
 
 import javax.swing.JLabel;
@@ -63,6 +72,8 @@ public class Cu004 extends JFrame {
     private TestModel model;
     private ListaLugaresDTO lugares;
     private ListaDeportesDTO deportes;
+    private Clip clip;
+    private String ruta="/audio/";
 	/**
 	 * Launch the application.
 	 */
@@ -79,6 +90,18 @@ public class Cu004 extends JFrame {
 		});
 	}
 
+	
+	public void sonido(String archivo){
+		try{
+			clip = AudioSystem.getClip();
+			clip.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream(ruta + archivo + ".wav")));
+			clip.start();
+			
+			
+		}catch(Exception e){
+			
+		}
+	}
 	/**
 	 * Create the frame.
 	 */
@@ -93,17 +116,17 @@ public class Cu004 extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setBounds(46, 78, 46, 14);
+		lblNombre.setBounds(56, 75, 46, 14);
 		contentPane.add(lblNombre);
 		
 		JLabel Lugar = new JLabel("Lugar");
-		Lugar.setBounds(46, 106, 46, 14);
+		Lugar.setBounds(56, 118, 46, 14);
 		contentPane.add(Lugar);
 		
 		
 		
 		JLabel lblDisponibilidad = new JLabel("Disponibilidad");
-		lblDisponibilidad.setBounds(200, 106, 89, 14);
+		lblDisponibilidad.setBounds(210, 118, 89, 14);
 		contentPane.add(lblDisponibilidad);
 		
 		JButton btnAgregar = new JButton("Agregar");
@@ -112,7 +135,7 @@ public class Cu004 extends JFrame {
 				model.addTest(new Test(lugar.getText(), disponibilidad.getText()));
 			}
 		});
-		btnAgregar.setBounds(170, 146, 89, 23);
+		btnAgregar.setBounds(169, 146, 89, 23);
 		contentPane.add(btnAgregar);
 		
 		JLabel lblDeporte = new JLabel("Deporte");
@@ -120,27 +143,32 @@ public class Cu004 extends JFrame {
 		contentPane.add(lblDeporte);
 		
 		nombre = new JTextField();
-		nombre.setBounds(94, 75, 86, 20);
+		nombre.setBounds(104, 72, 86, 20);
 		contentPane.add(nombre);
 		nombre.setColumns(10);
 		
 		lugar = new JTextField();
-		lugar.setBounds(94, 103, 86, 20);
+		lugar.setBounds(104, 115, 86, 20);
 		contentPane.add(lugar);
 		lugar.setColumns(10);
 		TextAutoCompleter lugaresAC = new TextAutoCompleter(lugar);
 		
+		
+		/*Recupero los lugares (tipo ListaLugaresDTO)*/
 		lugares = GestorLugar.getListadoLugares();
 		
-		
+		/*Recorro la lista y voy agregando al autocomplete los lugares */
 		for(LugarDTO object: lugares.getLugares()){
 			
 			lugaresAC.addItem(object.getNombre());
 		}
 		
+		/*Toda esta parte hay que corregirla despues para que busque los lugares despues de haber elegido el deporte,
+		 o sea, que busque la lista de lugares con un id_deporte en la base de datos, mañana lo voy a ver*/
+		
 		
 		disponibilidad = new JTextField();
-		disponibilidad.setBounds(280, 103, 86, 20);
+		disponibilidad.setBounds(290, 115, 86, 20);
 		contentPane.add(disponibilidad);
 		disponibilidad.setColumns(10);
 		
@@ -152,6 +180,7 @@ public class Cu004 extends JFrame {
 		deporte.setColumns(10);
 		TextAutoCompleter deportesAC = new TextAutoCompleter(deporte);
 		
+		/*Recupero la lista de deportes (tipo ListaDeportesDTO)*/
 		deportes = GestorDeportes.getListadoDeportes();
 		
 		for(DeporteDTO depor: deportes.getDeportes()){
@@ -336,8 +365,28 @@ public class Cu004 extends JFrame {
 		contentPane.add(lblCantidadDeSets);
 		
 		
+		JLabel lblSeleccioneUnNombre = new JLabel("seleccione un nombre");
+		lblSeleccioneUnNombre.setBounds(104, 90, 179, 14);
+		lblSeleccioneUnNombre.setForeground(Color.red);
+		lblSeleccioneUnNombre.setVisible(false);
+		contentPane.add(lblSeleccioneUnNombre);
+		
 		
 		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(nombre.getText().isEmpty()){
+					lblSeleccioneUnNombre.setVisible(true);
+					sonido("error");
+				}
+				/*Aca irian las demas validaciones*/
+				else{
+					/*Crear un dto competenecia y setearlo con los datos de los campos, despues mandar un mensaje al gestor para crear
+					 la competencia con el dto como parametro, desde el gestor crear el objeto competencia y pedir lo que falta a la
+					 base de datos*/
+				}
+			}
+		});
 		btnAceptar.setBounds(424, 513, 89, 23);
 		contentPane.add(btnAceptar);
 		
@@ -356,8 +405,9 @@ public class Cu004 extends JFrame {
 		contentPane.add(reg);
 		
 		
+		
+		
 	}
-
 }
 class ButtonRenderer extends JButton implements TableCellRenderer{
 

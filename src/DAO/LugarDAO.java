@@ -17,6 +17,7 @@ import capanegocios.Provincia;
 public class LugarDAO {
 
 		public static ListaLugaresDTO getListado(){
+			/*metodos para hacer la conexion*/
 			Configuration cfg = new Configuration();
 			cfg.configure ("hibernate.cfg.xml");
 			SessionFactory factory = cfg.buildSessionFactory();
@@ -24,8 +25,9 @@ public class LugarDAO {
 			
 			Transaction tx = session.beginTransaction();
 			
+			//Creo la consulta
 			Query query = session.createQuery("from Lugar");
-			
+			//Hago la consulta y la cargo a una lista de lugares
 			List<Lugar> lugares= (List<Lugar>) query.list();
 			
 			tx.commit();
@@ -35,7 +37,7 @@ public class LugarDAO {
 			ListaLugaresDTO listalugares= new ListaLugaresDTO();
 			
 				
-			
+			//armo con los lugares una ListaLugaresDTO y los retorno
 			for(Lugar object: lugares){
 				
 				
