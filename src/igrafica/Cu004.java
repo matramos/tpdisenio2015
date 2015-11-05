@@ -49,6 +49,7 @@ import javax.swing.table.TableColumn;
 import igrafica.TestModel.ColumnContext;
 import com.mxrck.autocompleter.*;
 
+import DTO.CompetenciaDTO;
 import DTO.DeporteDTO;
 import DTO.ListaDeportesDTO;
 import DTO.ListaLugaresDTO;
@@ -202,7 +203,7 @@ public class Cu004 extends JFrame {
 		contentPane.add(puntosVictoria);
 		puntosVictoria.setColumns(10);
 		
-		JTextArea reglamento = new JTextArea();
+		final JTextArea reglamento = new JTextArea();
 		reglamento.setBounds(75, 377, 255, 159);
 		contentPane.add(reglamento);
 		
@@ -212,7 +213,7 @@ public class Cu004 extends JFrame {
 		puntosEmpate.setColumns(10);
 
 
-		JCheckBox chckbxSePermiteEmpate = new JCheckBox("Se permite empate?");
+		final JCheckBox chckbxSePermiteEmpate = new JCheckBox("Se permite empate?");
 		chckbxSePermiteEmpate.setSelected(true);
 		chckbxSePermiteEmpate.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
@@ -233,7 +234,7 @@ public class Cu004 extends JFrame {
 		contentPane.add(resultado);
 		resultado.setColumns(10);
 		
-		JComboBox comboCantidadSets = new JComboBox();
+		final JComboBox comboCantidadSets = new JComboBox();
 		comboCantidadSets.addItem(1);
 		
 		comboCantidadSets.addItem(3);
@@ -246,7 +247,7 @@ public class Cu004 extends JFrame {
 		comboCantidadSets.setBounds(542, 374, 70, 20);
 		contentPane.add(comboCantidadSets);
 		
-		JComboBox comboPuntos = new JComboBox();
+		final JComboBox comboPuntos = new JComboBox();
 		comboPuntos.setBounds(559, 258, 86, 20);
 		contentPane.add(comboPuntos);
 		
@@ -369,7 +370,7 @@ public class Cu004 extends JFrame {
 		contentPane.add(lblCantidadDeSets);
 		
 		
-		JLabel lblSeleccioneUnNombre = new JLabel("seleccione un nombre");
+		final JLabel lblSeleccioneUnNombre = new JLabel("seleccione un nombre");
 		lblSeleccioneUnNombre.setBounds(104, 90, 179, 14);
 		lblSeleccioneUnNombre.setForeground(Color.red);
 		lblSeleccioneUnNombre.setVisible(false);
@@ -385,9 +386,15 @@ public class Cu004 extends JFrame {
 				}
 				/*Aca irian las demas validaciones*/
 				else{
-					/*Crear un dto competenecia y setearlo con los datos de los campos, despues mandar un mensaje al gestor para crear
-					 la competencia con el dto como parametro, desde el gestor crear el objeto competencia y pedir lo que falta a la
-					 base de datos*/
+					CompetenciaDTO competencia = new CompetenciaDTO();
+					competencia.setNombre(nombre.getText());
+					competencia.setPuntos_ganador(Integer.parseInt(puntosVictoria.getText()));
+					competencia.setPuntos_empate(Integer.parseInt(puntosEmpate.getText()));
+					competencia.setPermite_empates(chckbxSePermiteEmpate.isSelected());
+					competencia.setReglamento(reglamento.getText());
+					
+					
+					
 				}
 			}
 		});

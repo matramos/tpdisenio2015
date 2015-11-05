@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="capanegocios.Deporte" table="deporte">
+<id column="id_deporte" name="id" type="long" />
+<property column="nombre" name="nombre" type="string" />
+
+<list name="serealizaen" cascade="all-delete-orphan" >
+<key column = "id_deporte"/>
+<index column ="orden"/>
+<one-to-many class="capanegocios.SeRealizaEn"/>
+</list>
+
+
+
+
+</class>
+</hibernate-mapping>
