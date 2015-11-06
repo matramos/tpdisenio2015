@@ -1,5 +1,7 @@
 package igrafica;
 
+import java.util.ArrayList;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -21,12 +23,19 @@ import javax.swing.table.DefaultTableModel;
 import DAO.CompetenciaDAO;
 import DTO.ListaCompetenciasDTO;
 
+import DTO.CompetenciaDTO;
+import DTO.DeporteDTO;
+import DTO.ListaDeportesDTO;
+import gestores.GestorCompetencias;
+import gestores.GestorDeportes;
+
 public class Cu003 extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField nombre;
 	private JTable table;
 	private ListaCompetenciasDTO competencias;
+    private ListaDeportesDTO deportes;
 
 	/**
 	 * Launch the application.
@@ -71,13 +80,36 @@ public class Cu003 extends JFrame {
 		comboDeporte.setBounds(206, 203, 172, 20);
 		contentPane.add(comboDeporte);
 		
+		comboDeporte.addItem(null);
+		//Recuperamos los Deportes y los mostramos en el ComboBox
+		//habria que ver de ordenarlos alfabeticamente
+		deportes = GestorDeportes.getListadoDeportes();
+		
+		for(DeporteDTO depor: deportes.getDeportes()){
+			
+			comboDeporte.addItem(depor.getNombre());
+		}
+		
 		JComboBox comboModalidad = new JComboBox();
 		comboModalidad.setBounds(508, 147, 172, 20);
 		contentPane.add(comboModalidad);
 		
+		//Agregamos las modalidades de manera directa
+		comboModalidad.addItem(null);
+		comboModalidad.addItem("Liga");
+		comboModalidad.addItem("Eliminación Simple");
+		comboModalidad.addItem("Eliminación Doble");
+		
 		JComboBox comboEstado = new JComboBox();
 		comboEstado.setBounds(508, 203, 172, 20);
 		contentPane.add(comboEstado);
+		
+		//Los estados tambien los agregamos de manera directa
+		comboEstado.addItem(null);
+		comboEstado.addItem("Creada");
+		comboEstado.addItem("Planificada");
+		comboEstado.addItem("En Disputa");
+		comboEstado.addItem("Finalizada");
 		
 		JLabel lblNombreDeCompetencia = new JLabel("Nombre de competencia");
 		lblNombreDeCompetencia.setBounds(206, 122, 151, 14);
@@ -104,6 +136,17 @@ public class Cu003 extends JFrame {
 		});
 		btnCancelar.setBounds(206, 286, 151, 23);
 		contentPane.add(btnCancelar);
+		JButton btnBuscar = new JButton("Buscar");
+		//Definimos la accion del boton BUSCAR
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ArrayList<CompetenciaDTO> listaCompetenciasEncontradas = 
+						GestorCompetencias.buscarCompetencias(nombre.getText(), comboDeporte.getSelectedIndex(), 
+								comboModalidad.getSelectedIndex(), comboEstado.getSelectedIndex())
+			}
+		});
+		btnBuscar.setBounds(206, 286, 151, 23);
+		contentPane.add(btnBuscar);
 		
 		JButton btnCrearCompetencia = new JButton("Crear competencia");
 		btnCrearCompetencia.addActionListener(new ActionListener() {
@@ -136,15 +179,15 @@ public class Cu003 extends JFrame {
 		));
 		scrollPane.setViewportView(table);
 		
-		JButton btnCancelar_1 = new JButton("Cancelar");
-		btnCancelar_1.addActionListener(new ActionListener() {
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				menuprincipal ventana = new menuprincipal();
 				ventana.setVisible(true);
 				dispose();
 			}
 		});
-		btnCancelar_1.setBounds(381, 522, 89, 23);
-		contentPane.add(btnCancelar_1);
+		btnCancelar.setBounds(381, 522, 89, 23);
+		contentPane.add(btnCancelar);
 	}
 }

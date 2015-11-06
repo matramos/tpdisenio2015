@@ -21,13 +21,12 @@ public class GestorCompetencias {
 		Modalidad modalidad = CompetenciaDAO.getModalidad(idmodalidadPrim);
 		competencia.setModalidad(modalidad);
 		
-		/*
 		for(String object: competenciaDTO.getLugares()){
 			Lugar lugar = LugarDAO.getLugar(object);
 			Disponibilidad disponibilidad = new Disponibilidad(competenciaDTO.getDisponibilidad());
 			competencia.setDisponibilidad(disponibilidad);
 			
-		}*/
+		}
 		Estado estado = new Estado();
 		estado.setId_estado(1);
 		estado.setNombre("Creada");
@@ -35,5 +34,10 @@ public class GestorCompetencias {
 		
 		CompetenciaDAO.agregarCompetencia(competencia);
 		
+	}
+	
+	public static ArrayList<CompetenciaDTO> buscarCompetencias(String string, int i, int j, int k) {
+		
+		return null;
 	}
 }
