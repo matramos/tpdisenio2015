@@ -158,42 +158,63 @@ public class Cu004 extends JFrame {
 		lugar.setBounds(104, 115, 86, 20);
 		contentPane.add(lugar);
 		lugar.setColumns(10);
-		TextAutoCompleter lugaresAC = new TextAutoCompleter(lugar);
+		lugar.setEditable(false);
 		
 		
-		/*Recupero los lugares (tipo ListaLugaresDTO)*/
-		lugares = GestorLugar.getListadoLugares();
-		
-		/*Recorro la lista y voy agregando al autocomplete los lugares */
-		for(LugarDTO object: lugares.getLugares()){
-			
-			lugaresAC.addItem(object.getNombre());
-		}
 		
 		/*Toda esta parte hay que corregirla despues para que busque los lugares despues de haber elegido el deporte,
 		 o sea, que busque la lista de lugares con un id_deporte en la base de datos, ma�ana lo voy a ver*/
 		
-		
+		deportes = GestorDeportes.getListadoDeportes();
 		disponibilidad = new JTextField();
 		disponibilidad.setBounds(290, 115, 86, 20);
 		contentPane.add(disponibilidad);
 		disponibilidad.setColumns(10);
-		
-		
-		
 		deporte = new JTextField();
+		deporte.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			if(deporte.getText()!=""){
+				lugar.setEditable(true);
+				long idDeporteElegido = deportes.returnId(deporte.getText());
+				
+				lugares = GestorLugar.getListadoLugares(idDeporteElegido);
+				
+				TextAutoCompleter lugaresAC = new TextAutoCompleter(lugar);
+				for(LugarDTO object: lugares.getLugares()){
+				
+					lugaresAC.addItem(object.getNombre());
+				}
+				
+
+			}
+			else{
+				lugar.setEditable(false);
+			}
+			}
+		});
 		deporte.setBounds(473, 75, 86, 20);
 		contentPane.add(deporte);
-		deporte.setColumns(10);
-		TextAutoCompleter deportesAC = new TextAutoCompleter(deporte);
-		
+		deporte.setColumns(10);		
 		/*Recupero la lista de deportes (tipo ListaDeportesDTO)*/
-		deportes = GestorDeportes.getListadoDeportes();
 		
+		TextAutoCompleter deportesAC = new TextAutoCompleter(deporte);
 		for(DeporteDTO depor: deportes.getDeportes()){
 			
 			deportesAC.addItem(depor.getNombre());
 		}
+		
+		
+
+		
+		
+		
+		
+		
+		
+		/*Recupero los lugares (tipo ListaLugaresDTO)*/
+		
+		/*Recorro la lista y voy agregando al autocomplete los lugares */
+
 		
 		JLabel lblModalidad = new JLabel("Modalidad");
 		lblModalidad.setBounds(427, 106, 63, 14);
@@ -396,13 +417,26 @@ public class Cu004 extends JFrame {
 					competencia.setReglamento(reglamento.getText());
 					competencia.setResultado_final(Integer.parseInt(resultado.getText()));
 					competencia.setCantidad_sets((int)comboCantidadSets.getSelectedItem());
-					competencia.setModalidad((String) comboModalidad.getSelectedItem());
-					competencia.setDeporte(deporte.getText());
 					competencia.setPuntos_presentarse((int)comboPuntos.getSelectedItem());
 					competencia.setFecha_hora(ahora);
-					competencia.setPuntuacion((String)comboFormaPuntuacion.getSelectedItem());
+					
 					/*Falta agregar los lugares y disponibilidad*/
-					GestorCompetencias.crearCompetencia(competencia);
+					long idforma;
+					long idmodalidad;
+					if(comboFormaPuntuacion.getSelectedIndex()==0)
+						idforma = 2;
+					else if(comboFormaPuntuacion.getSelectedIndex()==1)
+						idforma=1;
+					else
+						idforma=3;
+					
+					if(comboModalidad.getSelectedIndex()==0)
+						idmodalidad = 1;
+					else if(comboModalidad.getSelectedIndex()==1)
+						idmodalidad=2;
+					else
+						idmodalidad=3;
+					GestorCompetencias.crearCompetencia(competencia,idforma,deporte.getText(),idmodalidad);
 					
 				}
 			}

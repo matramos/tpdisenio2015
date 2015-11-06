@@ -1,7 +1,6 @@
-package capanegocios;
+package DTO;
 
-public class Estado {
-	
+public class EstadoDTO {
 	private int id_estado;
 	private String nombre;
 	public int getId_estado() {
@@ -16,6 +15,4 @@ public class Estado {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
-	
 }

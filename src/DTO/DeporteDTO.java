@@ -7,7 +7,7 @@ import capanegocios.SeRealizaEn;
 public class DeporteDTO {
 	private long id;
 	private String nombre;
-	private List<SeRealizaEn> serealizaen;
+	private List<SeRealizaEnDTO> serealizaen;
 	
 	public void setId(long id){
 		this.id = id;
@@ -25,11 +25,16 @@ public class DeporteDTO {
 		return nombre;
 	}
 	
-	public void setSerealizaen(List<SeRealizaEn> serealizaen){
+	public void setSerealizaen(List<SeRealizaEnDTO> serealizaen){
 		this.serealizaen = serealizaen;
 	}
 	
-	public List<SeRealizaEn> getSerealizaen(){
+	
+	public List<SeRealizaEnDTO> getSerealizaen(){
 		return serealizaen;
+	}
+	
+	public void addSerealizaen(SeRealizaEnDTO serealizaen){
+		this.serealizaen.add(serealizaen);
 	}
 }

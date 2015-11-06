@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
                                          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
- <session-factory>
+ <session-factory name="">
   <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
   <property name="hibernate.connection.password">admin</property>
   <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/Tp2015</property>
@@ -17,7 +17,8 @@
   <mapping resource="capanegocios/TipoDocumento.hbm.xml"/>
   <mapping resource="capanegocios/SeRealizaEn.hbm.xml"/>
   <mapping resource="capanegocios/Deporte.hbm.xml"/>
-  
-  
-  </session-factory>
+  <mapping resource="capanegocios/Competencia.hbm.xml"/>
+  <mapping resource="capanegocios/Estado.hbm.xml"/>
+  <mapping resource="capanegocios/Modalidad.hbm.xml"/>
+ </session-factory>
 </hibernate-configuration>

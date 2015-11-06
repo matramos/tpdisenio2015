@@ -12,9 +12,9 @@ public class CompetenciaDTO {
 	private long id_competencia;
 	private String nombre;
 	private int cantidad_sets;
-	private String modalidad;
+	private ModalidadDTO modalidad;
 	private String reglamento;
-	private String deporte;
+	private DeporteDTO deporte;
 	private int puntos_presentarse;
 	private int puntos_ganador;
 	private int puntos_empate;
@@ -22,6 +22,7 @@ public class CompetenciaDTO {
 	private Date fecha_hora;
 	private int sets;
 	private String puntuacion;
+	private EstadoDTO estado;
 	private int resultado_final;
 	private List<String> lugares;
 	private List<Participante> participantes;
@@ -35,10 +36,10 @@ public class CompetenciaDTO {
 	public void setLugares(List<String> lugares) {
 		this.lugares = lugares;
 	}
-	public String getDeporte() {
+	public DeporteDTO getDeporte() {
 		return deporte;
 	}
-	public void setDeporte(String deporte) {
+	public void setDeporte(DeporteDTO deporte) {
 		this.deporte = deporte;
 	}
 	public long getId_competencia() {
@@ -59,10 +60,10 @@ public class CompetenciaDTO {
 	public void setCantidad_sets(int cantidad_sets) {
 		this.cantidad_sets = cantidad_sets;
 	}
-	public String getModalidad() {
+	public ModalidadDTO getModalidad() {
 		return modalidad;
 	}
-	public void setModalidad(String modalidad) {
+	public void setModalidad(ModalidadDTO modalidad) {
 		this.modalidad = modalidad;
 	}
 	public String getReglamento() {
@@ -130,6 +131,12 @@ public class CompetenciaDTO {
 	}
 	public void setRondas(List<Ronda> rondas) {
 		this.rondas = rondas;
+	}
+	public EstadoDTO getEstado() {
+		return estado;
+	}
+	public void setEstado(EstadoDTO estado) {
+		this.estado = estado;
 	}
 	
 }

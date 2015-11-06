@@ -1,9 +1,12 @@
 package DTO;
 
+import java.util.List;
+
 public class LugarDTO {
 	private long id;
 	private String nombre;
 	private String descripcion;
+	private List<SeRealizaEnDTO> serealizaen;
 	
 	public void setId(long id){
 		this.id = id;
@@ -27,5 +30,17 @@ public class LugarDTO {
 	
 	public String getDescripcion (){
 		return descripcion;
+	}
+
+	public List<SeRealizaEnDTO> getSerealizaen() {
+		return serealizaen;
+	}
+
+	public void setSerealizaen(List<SeRealizaEnDTO> serealizaen) {
+		this.serealizaen = serealizaen;
+	}
+	
+	public void addSerealizaen(SeRealizaEnDTO serealizaen){
+		this.serealizaen.add(serealizaen);
 	}
 }

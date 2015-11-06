@@ -19,5 +19,12 @@ public class ListaDeportesDTO {
 		this.deportes.add(deporte);
 	}
 	
-	
+	public long returnId(String deporte){
+		long id=0;
+		for(DeporteDTO object: this.deportes){
+			if(object.getNombre().equals(deporte))
+				id=object.getId();
+		}
+		return id;
+	}
 }

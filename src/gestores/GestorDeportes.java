@@ -23,4 +23,17 @@ public class GestorDeportes {
 		
 		return listaDeportes;
 	}
+	
+	public static DeporteDTO getDeporteDTO(String deporte){
+		listaDeportes = DeporteDAO.getListado();
+		
+		
+		/*Iterator iter = listaLugares.iterator();
+		while (iter.hasNext()){
+			Object l = iter.next();
+			lugares.addLugar( l);
+		}*/
+		
+		return listaDeportes;
+	}
 }

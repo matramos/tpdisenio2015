@@ -18,11 +18,15 @@ import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
+import DAO.CompetenciaDAO;
+import DTO.ListaCompetenciasDTO;
+
 public class Cu003 extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField nombre;
 	private JTable table;
+	private ListaCompetenciasDTO competencias;
 
 	/**
 	 * Launch the application.
@@ -92,6 +96,12 @@ public class Cu003 extends JFrame {
 		contentPane.add(lblEstado);
 		
 		JButton btnCancelar = new JButton("Buscar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				competencias = CompetenciaDAO.getListado(); //habria que comunicarse con el gestor primero
+				System.out.println(competencias.getCompetencias().get(0).getNombre());//imprimo el nombre por consola para ver que anda, que es lo unico que recupere
+			}
+		});
 		btnCancelar.setBounds(206, 286, 151, 23);
 		contentPane.add(btnCancelar);
 		

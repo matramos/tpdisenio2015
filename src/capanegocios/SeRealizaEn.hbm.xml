@@ -8,8 +8,12 @@
 <key-property name="iddeporte" column = "id_deporte" ></key-property>
 </composite-id>
 
- 
-
+ <many-to-one name="lugar" class="capanegocios.Lugar" fetch="select" insert="false" update="false">
+ <column name="id_lugar" not-null="true"/>
+ </many-to-one>
+ <many-to-one name="deporte" class="capanegocios.Deporte" fetch="select" insert="false" update="false">
+ <column name="id_deporte" not-null="true"/>
+ </many-to-one>
 
 </class>
 </hibernate-mapping>

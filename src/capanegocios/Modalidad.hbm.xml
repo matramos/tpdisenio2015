@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="capanegocios.Modalidad" table="modalidad">
+<id column="id_modalidad" name="id_modalidad" type="long" />
+<property column="liga" name="liga"  />
+<property column="eliminatoriasimple" name="eliminatoriasimple"  type="boolean"/>
+<property column="eliminatoriadoble" name="eliminatoriadoble"  type="boolean"/>
+
+</class>
+</hibernate-mapping>

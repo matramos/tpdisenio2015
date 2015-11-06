@@ -24,5 +24,18 @@ public class GestorLugar {
 		
 		return listaLugares;
 	}
+	public static ListaLugaresDTO getListadoLugares(long idDeporte){
+		//guardo la lista de lugares dto al DAO y la retorno
+		listaLugares = LugarDAO.getListado(idDeporte);
+		
+		
+		/*Iterator iter = listaLugares.iterator();
+		while (iter.hasNext()){
+			Object l = iter.next();
+			lugares.addLugar( l);
+		}*/
+		
+		return listaLugares;
+	}
 }
 
