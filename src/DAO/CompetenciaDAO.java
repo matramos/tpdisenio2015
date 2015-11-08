@@ -1,5 +1,6 @@
 package DAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -21,7 +22,7 @@ import capanegocios.Modalidad;
 
 public class CompetenciaDAO {
 	
-	public static FormaPuntuacion getFormaPuntuacion(long idforma){
+	public static FormaPuntuacion getFormaPuntuacion(int idforma){
 		Configuration cfg = new Configuration();
 		cfg.configure ("hibernate.cfg.xml");
 		SessionFactory factory = cfg.buildSessionFactory();
@@ -29,16 +30,22 @@ public class CompetenciaDAO {
 		
 		Transaction tx = session.beginTransaction();
 		
-		Query query = session.createQuery("from FormaPuntuacion f where f.id_formadepuntuacion=?");
-		query.setParameter(0, idforma);
+		Query query = session.createQuery("from FormaPuntuacion");
+
 		
-		FormaPuntuacion formaRec = (FormaPuntuacion) query.uniqueResult();
+		List<FormaPuntuacion> formas = (List<FormaPuntuacion>) query.list();
 
 		tx.commit();
+		FormaPuntuacion forma = new FormaPuntuacion();
+		for(FormaPuntuacion object: formas){
+			if(object.getId_formadepuntuacion()==idforma){
+				forma=object;
+			}
+		}
 		session.close();
 		factory.close();
-		
-		return formaRec;
+		return forma;
+	
 	}
 	
 	public static Modalidad getModalidad(long idmodalidad){
@@ -61,19 +68,107 @@ public class CompetenciaDAO {
 		return modalidadRec;
 	}
 	
-	public static void agregarCompetencia(Competencia competencia){
+	public static ArrayList<Competencia> buscarCompetencias(String nombre, int deporteID, int modalidadID, int estadoID){
+		Configuration cfg = new Configuration();
+		cfg.configure ("hibernate.cfg.xml");
+		SessionFactory factory = cfg.buildSessionFactory();
+		Session session = factory.openSession();
+		
+		Transaction tx = session.beginTransaction();
+		
+		String consulta = "from Competencia ";
+		int nombrePar = -1;
+		int deportePar = -1;
+		int modalidadPar = -1;
+		int estadoPar = -1;
+		Boolean qnombre = false; 
+		Boolean qdeporte = false;
+		Boolean qmodalidad = false; 
+		Boolean qestado = false;
+		
+		if(!(nombre.equals("todas")) || deporteID!=-1 || modalidadID!=-1 || estadoID!=-1){
+			consulta += "c where ";
+		}
+		
+		if(!(nombre.equals("todas"))){
+			consulta += "c.nombre=? ";
+			qnombre = true;
+			nombrePar +=1;
+		}
+		if(deporteID!=-1){
+			if(qnombre){
+				consulta += "and ";
+			}
+			consulta += "c.deporte.id=? ";
+			qdeporte = true;
+			deportePar = nombrePar +1;
+			
+		}
+		if(modalidadID!=-1){
+			if(qdeporte || qnombre){
+				consulta += "and ";
+			}
+			consulta += "c.modalidad=? ";
+			qmodalidad = true;
+			modalidadPar = deportePar +1;
+		}
+		if(estadoID!=-1){
+			if(qdeporte || qnombre || qmodalidad){
+				consulta += "and ";
+			}
+			consulta += "c.estado=? ";
+			estadoPar = modalidadPar +1;
+			qestado = true;
+		}
+		
+		
+		
+		Query query = session.createQuery(consulta);
+		if(qnombre){
+			query.setParameter(nombrePar, nombre);
+		}
+		if(qdeporte){
+			query.setParameter(deportePar, (long) deporteID);
+		}
+		if(qmodalidad){
+			query.setParameter(modalidadPar, (long) modalidadID);
+		}
+		if(qestado){
+			query.setParameter(estadoPar, (long) estadoID);
+		}
+			
+		ArrayList<Competencia> competencias= (ArrayList<Competencia>) query.list();
+		
+		
+		tx.commit();
+		session.close();
+		factory.close();
+		
+		return competencias;
+	}
+
+	
+	public static boolean agregarCompetencia(Competencia competencia){
+		boolean bool=false;
 		Configuration cfg = new Configuration();
 		cfg.configure ("hibernate.cfg.xml");
 		SessionFactory factory = cfg.buildSessionFactory();
 		Session session = factory.openSession();
 		Transaction tx = session.beginTransaction();
 		
-		session.persist(competencia);
+		System.out.println(competencia.getId_competencia());
+		session.saveOrUpdate(competencia);
 		
 
 		tx.commit();
+		if(tx.getStatus().COMMITTED != null){
+			bool=true;
+		}
+		
 		session.close();
 		factory.close();
+		
+		return bool;
 		
 	}
 	

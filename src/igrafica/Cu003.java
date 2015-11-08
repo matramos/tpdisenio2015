@@ -34,8 +34,8 @@ public class Cu003 extends JFrame {
 	private JPanel contentPane;
 	private JTextField nombre;
 	private JTable table;
-	private ListaCompetenciasDTO competencias;
     private ListaDeportesDTO deportes;
+    private ListaCompetenciasDTO competencias;
 
 	/**
 	 * Launch the application.
@@ -72,11 +72,12 @@ public class Cu003 extends JFrame {
 		contentPane.add(lblBsquedaDeCompetencias);
 		
 		nombre = new JTextField();
+		nombre.setText("todas");
 		nombre.setBounds(206, 147, 172, 20);
 		contentPane.add(nombre);
 		nombre.setColumns(10);
 		
-		JComboBox comboDeporte = new JComboBox();
+		JComboBox<String> comboDeporte = new JComboBox<>();
 		comboDeporte.setBounds(206, 203, 172, 20);
 		contentPane.add(comboDeporte);
 		
@@ -90,17 +91,17 @@ public class Cu003 extends JFrame {
 			comboDeporte.addItem(depor.getNombre());
 		}
 		
-		JComboBox comboModalidad = new JComboBox();
+		JComboBox<String> comboModalidad = new JComboBox<String>();
 		comboModalidad.setBounds(508, 147, 172, 20);
 		contentPane.add(comboModalidad);
 		
 		//Agregamos las modalidades de manera directa
 		comboModalidad.addItem(null);
 		comboModalidad.addItem("Liga");
-		comboModalidad.addItem("EliminaciÃ³n Simple");
-		comboModalidad.addItem("EliminaciÃ³n Doble");
+		comboModalidad.addItem("Eliminación Simple");
+		comboModalidad.addItem("Eliminación Doble");
 		
-		JComboBox comboEstado = new JComboBox();
+		JComboBox<String> comboEstado = new JComboBox<>();
 		comboEstado.setBounds(508, 203, 172, 20);
 		contentPane.add(comboEstado);
 		
@@ -127,22 +128,27 @@ public class Cu003 extends JFrame {
 		lblEstado.setBounds(508, 178, 46, 14);
 		contentPane.add(lblEstado);
 		
-		JButton btnCancelar = new JButton("Buscar");
-		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				competencias = CompetenciaDAO.getListado(); //habria que comunicarse con el gestor primero
-				System.out.println(competencias.getCompetencias().get(0).getNombre());//imprimo el nombre por consola para ver que anda, que es lo unico que recupere
-			}
-		});
-		btnCancelar.setBounds(206, 286, 151, 23);
-		contentPane.add(btnCancelar);
 		JButton btnBuscar = new JButton("Buscar");
 		//Definimos la accion del boton BUSCAR
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ArrayList<CompetenciaDTO> listaCompetenciasEncontradas = 
 						GestorCompetencias.buscarCompetencias(nombre.getText(), comboDeporte.getSelectedIndex(), 
-								comboModalidad.getSelectedIndex(), comboEstado.getSelectedIndex())
+								comboModalidad.getSelectedIndex(), comboEstado.getSelectedIndex());
+				//Descomentar para ver que estamos eligiendo
+				System.out.println("Aca se ve lo que elegi");
+				System.out.println(nombre.getText());
+				System.out.println("Aca arriba");
+				//System.out.println(comboDeporte.getSelectedIndex()); 
+				//System.out.println(comboModalidad.getSelectedIndex());
+				//System.out.println(comboEstado.getSelectedIndex());
+				//Mostramos por consola lo que encontramos
+				for(CompetenciaDTO CDTO : listaCompetenciasEncontradas){
+					System.out.println(CDTO.getNombre());
+					System.out.println(CDTO.getDeporte());
+					System.out.println(CDTO.getModalidad());
+					System.out.println(CDTO.getEstado());
+				}
 			}
 		});
 		btnBuscar.setBounds(206, 286, 151, 23);
@@ -166,12 +172,8 @@ public class Cu003 extends JFrame {
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
+				{null, null, null, null, null}
+				
 			},
 			new String[] {
 					"Nombre","Deporte Asociado","Modalidad","Estado","Ver", "Eliminar"   

@@ -164,7 +164,6 @@ public class Cu004 extends JFrame {
 		
 		/*Toda esta parte hay que corregirla despues para que busque los lugares despues de haber elegido el deporte,
 		 o sea, que busque la lista de lugares con un id_deporte en la base de datos, ma�ana lo voy a ver*/
-		
 		deportes = GestorDeportes.getListadoDeportes();
 		disponibilidad = new JTextField();
 		disponibilidad.setBounds(290, 115, 86, 20);
@@ -202,14 +201,6 @@ public class Cu004 extends JFrame {
 			
 			deportesAC.addItem(depor.getNombre());
 		}
-		
-		
-
-		
-		
-		
-		
-		
 		
 		/*Recupero los lugares (tipo ListaLugaresDTO)*/
 		
@@ -269,10 +260,11 @@ public class Cu004 extends JFrame {
 		comboCantidadSets.addItem(9);
 		comboCantidadSets.setBounds(542, 374, 70, 20);
 		contentPane.add(comboCantidadSets);
-		
+		comboCantidadSets.setEnabled(false);
 		final JComboBox comboPuntos = new JComboBox();
 		comboPuntos.setBounds(559, 258, 86, 20);
 		contentPane.add(comboPuntos);
+		comboPuntos.addItem(1);
 		
 		final JComboBox comboFormaPuntuacion = new JComboBox();
 		comboFormaPuntuacion.addItem("Puntuacion");
@@ -343,11 +335,6 @@ public class Cu004 extends JFrame {
 		contentPane.add(lblPuntosVictoria);
 		
 		
-		
-		
-		
-		
-		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(75, 180, 255, 159);
 		contentPane.add(scrollPane);
@@ -409,7 +396,9 @@ public class Cu004 extends JFrame {
 				}
 				/*Aca irian las demas validaciones*/
 				else{
+					long idcomp=2;
 					CompetenciaDTO competencia = new CompetenciaDTO();
+					competencia.setId_competencia(idcomp);
 					competencia.setNombre(nombre.getText());
 					competencia.setPuntos_ganador(Integer.parseInt(puntosVictoria.getText()));
 					competencia.setPuntos_empate(Integer.parseInt(puntosEmpate.getText()));
@@ -421,7 +410,7 @@ public class Cu004 extends JFrame {
 					competencia.setFecha_hora(ahora);
 					
 					/*Falta agregar los lugares y disponibilidad*/
-					long idforma;
+					int idforma;
 					long idmodalidad;
 					if(comboFormaPuntuacion.getSelectedIndex()==0)
 						idforma = 2;
@@ -436,7 +425,15 @@ public class Cu004 extends JFrame {
 						idmodalidad=2;
 					else
 						idmodalidad=3;
-					GestorCompetencias.crearCompetencia(competencia,idforma,deporte.getText(),idmodalidad);
+					
+					if(GestorCompetencias.crearCompetencia(competencia,idforma,deporte.getText(),idmodalidad)){
+						System.out.println("sirvi");
+						JOptionPane.showMessageDialog(null, "Se cargo con exito");
+						Cu008 ventana = new Cu008();
+						ventana.setVisible(true);
+						dispose();
+					}
+					
 					
 				}
 			}
@@ -445,6 +442,13 @@ public class Cu004 extends JFrame {
 		contentPane.add(btnAceptar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Cu003 ventana = new Cu003();
+				ventana.setVisible(true);
+				dispose();
+			}
+		});
 		btnCancelar.setBounds(581, 513, 89, 23);
 		contentPane.add(btnCancelar);
 		

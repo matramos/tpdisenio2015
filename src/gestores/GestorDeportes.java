@@ -3,13 +3,14 @@ package gestores;
 import java.util.List;
 
 import DAO.DeporteDAO;
-
+import DTO.DeporteDTO;
 import DTO.ListaDeportesDTO;
 import capanegocios.Deporte;
 import capanegocios.Lugar;
 
 public class GestorDeportes {
 	private static ListaDeportesDTO listaDeportes;
+	private static DeporteDTO deporteD;
 
 	public static ListaDeportesDTO getListadoDeportes(){
 		listaDeportes = DeporteDAO.getListado();
@@ -25,7 +26,7 @@ public class GestorDeportes {
 	}
 	
 	public static DeporteDTO getDeporteDTO(String deporte){
-		listaDeportes = DeporteDAO.getListado();
+		deporteD = DeporteDAO.getDeporteDTO(deporte);
 		
 		
 		/*Iterator iter = listaLugares.iterator();
@@ -34,6 +35,6 @@ public class GestorDeportes {
 			lugares.addLugar( l);
 		}*/
 		
-		return listaDeportes;
+		return deporteD;
 	}
 }

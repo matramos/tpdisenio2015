@@ -4,8 +4,7 @@
 <class name="capanegocios.Modalidad" table="modalidad">
 <id column="id_modalidad" name="id_modalidad" type="long" />
 <property column="liga" name="liga"  />
-<property column="eliminatoriasimple" name="eliminatoriasimple"  type="boolean"/>
-<property column="eliminatoriadoble" name="eliminatoriadoble"  type="boolean"/>
+
 
 </class>
 </hibernate-mapping>

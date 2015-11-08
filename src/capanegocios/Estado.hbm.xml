@@ -4,7 +4,5 @@
 <class name="capanegocios.Estado" table="estado">
 <id column="id_estado" name="id_estado" type="long" />
 <property column="nombre" name="nombre"  />
-
-
 </class>
 </hibernate-mapping>

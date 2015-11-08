@@ -3,12 +3,17 @@
 <hibernate-mapping>
 <class name="capanegocios.Competencia" table="competencia">
 <id column="id_competencia" name="id_competencia" type="long" />
-<property column="nombre" name="nombre" type="string" />
 
- <many-to-one name="deporte" class="capanegocios.Deporte" fetch="select" insert="false" update="false">
+<property column="nombre" name="nombre"/>
+<property column="reglamento" name = "reglamento"/>
+
+
+
+
+<!--  <many-to-one name="deporte" class="capanegocios.Deporte" fetch="select" insert="false" update="false">
  <column name="id_deporte" not-null="true"/>
  </many-to-one>
- 
+
  <many-to-one name="modalidad" class="capanegocios.Modalidad" fetch="select" insert="false" update="false">
  <column name="id_modalidad" not-null="true"/>
  </many-to-one>
@@ -17,5 +22,9 @@
  <column name="id_estado" not-null="true"/>
  </many-to-one>
  
+ <many-to-one name="puntuacion" class="capanegocios.FormaPuntuacion" fetch="select" insert="false" update="false">
+ <column name="id_forma_puntuacion" not-null="true"/>
+ </many-to-one>
+-->
 </class>
 </hibernate-mapping>

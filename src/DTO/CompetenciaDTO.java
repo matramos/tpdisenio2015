@@ -3,6 +3,7 @@ package DTO;
 import java.util.Date;
 import java.util.List;
 
+import capanegocios.Competencia;
 import capanegocios.Lugar;
 import capanegocios.Participante;
 import capanegocios.Ronda;
@@ -29,7 +30,17 @@ public class CompetenciaDTO {
 	private List<Ronda> rondas;
 	
 	
+	public CompetenciaDTO(Competencia comp) {
+		this.id_competencia = comp.getId_competencia();
+		this.nombre = comp.getNombre();
+		//this.modalidad = comp.getModalidad().getNombre();
+		//this.estado = comp.getEstado().getNombre();
+		
+	}
 	
+	public CompetenciaDTO() {
+	}
+
 	public List<String> getLugares() {
 		return lugares;
 	}

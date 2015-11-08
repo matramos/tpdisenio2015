@@ -103,6 +103,13 @@ public class Cu008 extends JFrame {
 		contentPane.add(btnAgregarParticipante);
 		
 		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				menuprincipal ventana = new menuprincipal();
+				ventana.setVisible(true);
+				dispose();
+			}
+		});
 		btnVolver.setBounds(335, 400, 89, 23);
 		contentPane.add(btnVolver);
 	}

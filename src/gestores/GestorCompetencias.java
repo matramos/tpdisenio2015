@@ -1,5 +1,7 @@
 package gestores;
 
+import java.util.ArrayList;
+
 import DAO.CompetenciaDAO;
 import DAO.DeporteDAO;
 import DTO.CompetenciaDTO;
@@ -11,33 +13,48 @@ import capanegocios.Modalidad;
 
 public class GestorCompetencias {
 	
-	public static void crearCompetencia(CompetenciaDTO competenciaDTO, long idformaPrim, String deportePrim, long idmodalidadPrim){
+	public static boolean crearCompetencia(CompetenciaDTO competenciaDTO, int idformaPrim, String deportePrim, long idmodalidadPrim){
+		boolean bool = false;
 		Competencia competencia = new Competencia();
 		competencia.CompetenciaDTO(competenciaDTO);
 		Deporte deporte = DeporteDAO.getDeporte(deportePrim);
+		
 		competencia.setDeporte(deporte);
 		FormaPuntuacion forma = CompetenciaDAO.getFormaPuntuacion(idformaPrim);
 		competencia.setPuntuacion(forma);
 		Modalidad modalidad = CompetenciaDAO.getModalidad(idmodalidadPrim);
 		competencia.setModalidad(modalidad);
 		
-		for(String object: competenciaDTO.getLugares()){
+		/*for(String object: competenciaDTO.getLugares()){
 			Lugar lugar = LugarDAO.getLugar(object);
 			Disponibilidad disponibilidad = new Disponibilidad(competenciaDTO.getDisponibilidad());
 			competencia.setDisponibilidad(disponibilidad);
 			
-		}
+		}*/
 		Estado estado = new Estado();
 		estado.setId_estado(1);
 		estado.setNombre("Creada");
 		competencia.setEstado(estado);
+		competencia.setId_competencia(competenciaDTO.getId_competencia());
 		
-		CompetenciaDAO.agregarCompetencia(competencia);
+		bool = CompetenciaDAO.agregarCompetencia(competencia);
+		return  bool;
 		
 	}
 	
-	public static ArrayList<CompetenciaDTO> buscarCompetencias(String string, int i, int j, int k) {
+	public static ArrayList<CompetenciaDTO> buscarCompetencias(String nombreComp, int deporteID, int modalidadID, int estadoID) {
+		ArrayList<CompetenciaDTO> competenciasQueRetornan = new ArrayList<>(); 
+		ArrayList<Competencia> competenciasEncontradas = CompetenciaDAO.buscarCompetencias(nombreComp, deporteID, modalidadID, estadoID);
+		for(Competencia comp : competenciasEncontradas){
+			CompetenciaDTO compDTO = new CompetenciaDTO(comp);
+			competenciasQueRetornan.add(compDTO);
+		}
+		return competenciasQueRetornan;
+	}
+
+	
+	/*public static ArrayList<CompetenciaDTO> buscarCompetencias(String string, int i, int j, int k) {
 		
 		return null;
-	}
+	}*/
 }

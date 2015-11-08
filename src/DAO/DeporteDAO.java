@@ -57,8 +57,8 @@ public class DeporteDAO {
 		return listadeportes;
 	}
 	
-	public static Deporte getDeporte(String deporte){
-		
+	public static DeporteDTO getDeporteDTO(String deporte){
+		DeporteDTO depDTO = new DeporteDTO();
 		Configuration cfg = new Configuration();
 		cfg.configure ("hibernate.cfg.xml");
 		SessionFactory factory = cfg.buildSessionFactory();
@@ -72,9 +72,35 @@ public class DeporteDAO {
 		Deporte deporteRec = (Deporte) query.uniqueResult();
 
 		tx.commit();
+		
+		depDTO.setId(deporteRec.getId());
+		depDTO.setNombre(deporteRec.getNombre());
+		session.close();
+		factory.close();
+		
+		return depDTO;
+	}
+	
+	public static Deporte getDeporte(String deporte){
+		Configuration cfg = new Configuration();
+		cfg.configure ("hibernate.cfg.xml");
+		SessionFactory factory = cfg.buildSessionFactory();
+		Session session = factory.openSession();
+		
+		Transaction tx = session.beginTransaction();
+		
+		Query query = session.createQuery("from Deporte d where d.nombre=?");
+		query.setParameter(0, deporte);
+		
+		Deporte deporteRec = (Deporte) query.uniqueResult();
+
+		tx.commit();
+		
+		
 		session.close();
 		factory.close();
 		
 		return deporteRec;
 	}
+	
 }

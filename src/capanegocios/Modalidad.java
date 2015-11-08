@@ -5,6 +5,8 @@ public class Modalidad {
 	public boolean liga;
 	public boolean elminatoriasimple;
 	public boolean eliminatoriadoble;
+	
+	
 	public long getId_modalidad() {
 		return id_modalidad;
 	}

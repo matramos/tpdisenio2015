@@ -26,7 +26,7 @@ public class Competencia {
 	private Estado estado;
 	
 	public void CompetenciaDTO(CompetenciaDTO competenciaDTO){
-		this.id_competencia=competenciaDTO.getId_competencia();
+		//this.id_competencia=competenciaDTO.getId_competencia();
 		this.nombre=competenciaDTO.getNombre();
 		this.cantidad_sets=competenciaDTO.getCantidad_sets();
 		this.reglamento=competenciaDTO.getReglamento();
