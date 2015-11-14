@@ -148,14 +148,14 @@ public class CompetenciaDAO {
 	
 	public static boolean agregarCompetencia(Competencia competencia){
 		boolean bool=false;
-		Configuration cfg = new Configuration();
+		/*Configuration cfg = new Configuration();
 		cfg.configure ("hibernate.cfg.xml");
 		SessionFactory factory = cfg.buildSessionFactory();
-		Session session = factory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = factory.openSession();*/
+		Transaction tx = Transaccion.session.beginTransaction();
 		
 		System.out.println(competencia.getId_competencia());
-		session.saveOrUpdate(competencia);
+		Transaccion.session.saveOrUpdate(competencia);
 		
 
 		tx.commit();
@@ -163,22 +163,20 @@ public class CompetenciaDAO {
 			bool=true;
 		}
 		
-		session.close();
-		factory.close();
 		
 		return bool;
 		
 	}
 	
 	public static ListaCompetenciasDTO getListado(){
-		Configuration cfg = new Configuration();
+		/*Configuration cfg = new Configuration();
 		cfg.configure ("hibernate.cfg.xml");
 		SessionFactory factory = cfg.buildSessionFactory();
-		Session session = factory.openSession();
+		Session session = factory.openSession();*/
 		
-		Transaction tx = session.beginTransaction();
+		Transaction tx = Transaccion.session.beginTransaction();
 		
-		Query query = session.createQuery("from Competencia");
+		Query query = Transaccion.session.createQuery("from Competencia");
 		/*La linea anterior va a recuperar todas las competencias sin filtros.
 		 para buscar con filtros va a haber que usar parametros, en el primer metodo
 		 de esta clase hay un ejemplo de como se usan en las consultas*/
@@ -213,8 +211,7 @@ public class CompetenciaDAO {
 		}
 		
 		tx.commit();
-		session.close();
-		factory.close();
+		
 		
 		return listacompetencias;
 	}
