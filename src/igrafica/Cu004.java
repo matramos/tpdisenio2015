@@ -72,7 +72,7 @@ public class Cu004 extends JFrame {
 	private JTable table;
 	private JTextField puntosEmpate;
 	private JTextField resultado;
-    private TestModel model;
+    private TestModel model;// variable para tablas
     private ListaLugaresDTO lugares;
     private ListaDeportesDTO deportes;
     private Clip clip;
@@ -135,7 +135,7 @@ public class Cu004 extends JFrame {
 		JLabel lblDisponibilidad = new JLabel("Disponibilidad");
 		lblDisponibilidad.setBounds(210, 118, 89, 14);
 		contentPane.add(lblDisponibilidad);
-		
+		// boton agregar para la tabla
 		JButton btnAgregar = new JButton("Agregar");
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -637,7 +637,7 @@ class Test {
     }
 }
 
-
+// class model
 class TestModel extends DefaultTableModel {
     private static final ColumnContext[] COLUMN_ARRAY = {
         new ColumnContext("Lugar",     String.class, true),
