@@ -1,7 +1,8 @@
 package igrafica;
 
 import java.util.ArrayList;
-
+import java.util.EventObject;
+import java.util.Objects;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -9,16 +10,25 @@ import java.awt.Font;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.CellEditorListener;
+import javax.swing.event.ChangeEvent;
+
 import java.awt.CardLayout;
+import java.awt.Component;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 
 import DAO.CompetenciaDAO;
 import DTO.ListaCompetenciasDTO;
@@ -28,14 +38,16 @@ import DTO.DeporteDTO;
 import DTO.ListaDeportesDTO;
 import gestores.GestorCompetencias;
 import gestores.GestorDeportes;
+import igrafica.TestModel.ColumnContext;
 
 public class Cu003 extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField nombre;
-	private JTable table;
     private ListaDeportesDTO deportes;
     private ListaCompetenciasDTO competencias;
+    private TestModelCU3 model;
+    private JTable table;
 
 	/**
 	 * Launch the application.
@@ -128,6 +140,31 @@ public class Cu003 extends JFrame {
 		lblEstado.setBounds(508, 178, 46, 14);
 		contentPane.add(lblEstado);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(98, 335, 567, 159);
+		contentPane.add(scrollPane);
+		
+		model = new TestModelCU3();
+		table = new JTable(model);
+	    
+	    TableColumn column1 = table.getColumnModel().getColumn(3);
+	    column1.setCellRenderer(new DeleteButtonRendererCU3());
+	    column1.setCellEditor(new DeleteButtonEditorCU3(table));
+	    column1.setMinWidth(20);
+	    column1.setMaxWidth(20);
+	    column1.setResizable(false);
+	    
+	    TableColumn column2 = table.getColumnModel().getColumn(4);
+	    column2.setCellRenderer(new DeleteButtonRendererCU3());
+	    column2.setCellEditor(new DeleteButtonEditorCU3(table));
+	    column2.setMinWidth(20);
+	    column2.setMaxWidth(20);
+	    column2.setResizable(false);
+		
+		table.getColumnModel().getColumn(0).setPreferredWidth(55);
+		scrollPane.setViewportView(table);
+		
+		
 		JButton btnBuscar = new JButton("Buscar");
 		//Definimos la accion del boton BUSCAR
 		btnBuscar.addActionListener(new ActionListener() {
@@ -148,9 +185,13 @@ public class Cu003 extends JFrame {
 					System.out.println(CDTO.getDeporte());
 					System.out.println(CDTO.getModalidad());
 					System.out.println(CDTO.getEstado());
+					//model.addTest(new TestCU3(CDTO.getNombre(),CDTO.getDeporte().getNombre(),""+CDTO.getModalidad().getId_modalidad()));
+					model.addTest(new TestCU3(CDTO.getNombre(),"",""));
 				}
 			}
+			
 		});
+		
 		btnBuscar.setBounds(206, 286, 151, 23);
 		contentPane.add(btnBuscar);
 		
@@ -165,22 +206,6 @@ public class Cu003 extends JFrame {
 		btnCrearCompetencia.setBounds(529, 286, 151, 23);
 		contentPane.add(btnCrearCompetencia);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(104, 348, 630, 143);
-		contentPane.add(scrollPane);
-		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null}
-				
-			},
-			new String[] {
-					"Nombre","Deporte Asociado","Modalidad","Estado","Ver", "Eliminar"   
-			}
-		));
-		scrollPane.setViewportView(table);
-		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -191,5 +216,172 @@ public class Cu003 extends JFrame {
 		});
 		btnCancelar.setBounds(381, 522, 89, 23);
 		contentPane.add(btnCancelar);
+		
+		
 	}
+	
 }
+
+class TestCU3 {
+    private String nombreCompetencia, deporteAsociado,modalidad;
+    public TestCU3(String nombreCompetencia, String deporteAsociado, String modalidad) {
+        this.nombreCompetencia=nombreCompetencia;
+        this.deporteAsociado=deporteAsociado;
+        this.modalidad=modalidad;
+    }
+    public void setNombreCompetencia(String str) {
+        nombreCompetencia = str;
+    }
+    public void setDeporteAsociado(String str) {
+        deporteAsociado = str;
+    }
+    public void setModalidad(String str) {
+    	modalidad = modalidad;
+    }
+    public String getnombreCompetencia() {
+        return nombreCompetencia;
+    }
+    public String getdeporteAsociado() {
+        return deporteAsociado;
+    }
+    public String getmodalidad() {
+    	return modalidad;
+    }
+}
+
+
+class TestModelCU3 extends DefaultTableModel {
+    private static final ColumnContext[] COLUMN_ARRAY = {
+        new ColumnContext("Nombre de Competencia",     String.class, true),
+        new ColumnContext("Deporte Asociado",    String.class,  true),
+        new ColumnContext("Modalidad", String.class, true),
+        new ColumnContext("", String.class, true), 
+        new ColumnContext("", String.class,  true)
+    };
+    public void addTest(TestCU3 t) {
+        Object[] obj = {t.getnombreCompetencia(), t.getdeporteAsociado(),t.getmodalidad(),"",""};
+        super.addRow(obj);
+    }
+    @Override public boolean isCellEditable(int row, int col) {
+        return COLUMN_ARRAY[col].isEditable;
+    }
+    @Override public Class<?> getColumnClass(int modelIndex) {
+        return COLUMN_ARRAY[modelIndex].columnClass;
+    }
+    @Override public int getColumnCount() {
+        return COLUMN_ARRAY.length;
+    }
+    @Override public String getColumnName(int modelIndex) {
+        return COLUMN_ARRAY[modelIndex].columnName;
+    }
+    public static class ColumnContext {
+        public final String  columnName;
+        public final Class   columnClass;
+        public final boolean isEditable;
+        public ColumnContext(String columnName, Class columnClass, boolean isEditable) {
+            this.columnName = columnName;
+            this.columnClass = columnClass;
+            this.isEditable = isEditable;
+        }
+    }
+}
+
+class DeleteButtonCU3 extends JButton {
+    @Override public void updateUI() {
+        super.updateUI();
+        setBorder(BorderFactory.createEmptyBorder());
+        setFocusable(false);
+        setRolloverEnabled(false);
+        setText("X");
+    }
+}
+
+class DeleteButtonRendererCU3 extends DeleteButton implements TableCellRenderer {
+    public DeleteButtonRendererCU3() {
+        super();
+        setName("Table.cellRenderer");
+    }
+    @Override public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        return this;
+    }
+}
+
+class DeleteButtonEditorCU3 extends DeleteButton implements TableCellEditor {
+    public DeleteButtonEditorCU3(final JTable table) {
+        super();
+        addActionListener(new ActionListener() {
+            @Override public void actionPerformed(ActionEvent e) {
+                int row = table.convertRowIndexToModel(table.getEditingRow());
+                fireEditingStopped();
+				((DefaultTableModel) table.getModel()).removeRow(row);
+                //String nombre = table.getValueAt(row, 1).toString();
+                //JOptionPane.showMessageDialog(null, nombre);
+            }
+        });
+    }
+    @Override public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+        return this;
+    }
+    @Override public Object getCellEditorValue() {
+        return "";
+    }
+
+    //Copied from AbstractCellEditor
+    //protected EventListenerList listenerList = new EventListenerList();
+    //protected transient ChangeEvent changeEvent;
+
+    @Override public boolean isCellEditable(EventObject e) {
+        return true;
+    }
+    @Override public boolean shouldSelectCell(EventObject anEvent) {
+        return true;
+    }
+    @Override public boolean stopCellEditing() {
+        fireEditingStopped();
+        return true;
+    }
+    @Override public void cancelCellEditing() {
+        fireEditingCanceled();
+    }
+    @Override public void addCellEditorListener(CellEditorListener l) {
+        listenerList.add(CellEditorListener.class, l);
+    }
+    @Override public void removeCellEditorListener(CellEditorListener l) {
+        listenerList.remove(CellEditorListener.class, l);
+    }
+    public CellEditorListener[] getCellEditorListeners() {
+        return listenerList.getListeners(CellEditorListener.class);
+    }
+    protected void fireEditingStopped() {
+        // Guaranteed to return a non-null array
+        Object[] listeners = listenerList.getListenerList();
+        // Process the listeners last to first, notifying
+        // those that are interested in this event
+        for (int i = listeners.length - 2; i >= 0; i -= 2) {
+            if (listeners[i] == CellEditorListener.class) {
+                // Lazily create the event:
+                if (Objects.isNull(changeEvent)) {
+                    changeEvent = new ChangeEvent(this);
+                }
+                ((CellEditorListener) listeners[i + 1]).editingStopped(changeEvent);
+            }
+        }
+    }
+    protected void fireEditingCanceled() {
+        // Guaranteed to return a non-null array
+        Object[] listeners = listenerList.getListenerList();
+        // Process the listeners last to first, notifying
+        // those that are interested in this event
+        for (int i = listeners.length - 2; i >= 0; i -= 2) {
+            if (listeners[i] == CellEditorListener.class) {
+                // Lazily create the event:
+                if (Objects.isNull(changeEvent)) {
+                    changeEvent = new ChangeEvent(this);
+                }
+                ((CellEditorListener) listeners[i + 1]).editingCanceled(changeEvent);
+            }
+        }
+    }
+}
+
+
