@@ -10,6 +10,7 @@ import org.hibernate.cfg.Configuration;
 
 import DTO.ListaLugaresDTO;
 import DTO.LugarDTO;
+import Inicio.Transaccion;
 import capanegocios.Deporte;
 import capanegocios.Lugar;
 import capanegocios.Provincia;
@@ -19,22 +20,22 @@ public class LugarDAO {
 
 		public static ListaLugaresDTO getListado(){
 			/*metodos para hacer la conexion*/
-			Configuration cfg = new Configuration();
+			/*Configuration cfg = new Configuration();
 			cfg.configure ("hibernate.cfg.xml");
 			SessionFactory factory = cfg.buildSessionFactory();
 			Session session = factory.openSession();
-			
-			Transaction tx = session.beginTransaction();
+			*/
+			Transaction tx = Transaccion.session.beginTransaction();
 			
 			//Creo la consulta
-			Query query = session.createQuery("from Lugar");
+			Query query = Transaccion.session.createQuery("from Lugar");
 			//Hago la consulta y la cargo a una lista de lugares
 			List<Lugar> lugares= (List<Lugar>) query.list();
 			
 			tx.commit();
 			
-			session.close();
-			factory.close();
+			/*session.close();
+			factory.close();*/
 			ListaLugaresDTO listalugares= new ListaLugaresDTO();
 			
 				
@@ -50,17 +51,18 @@ public class LugarDAO {
 			}
 			return listalugares;
 		}
+		
 		public static ListaLugaresDTO getListado(long idDeporte){
 			/*metodos para hacer la conexion*/
-			Configuration cfg = new Configuration();
+			/*Configuration cfg = new Configuration();
 			cfg.configure ("hibernate.cfg.xml");
 			SessionFactory factory = cfg.buildSessionFactory();
 			Session session = factory.openSession();
 			
-			Transaction tx = session.beginTransaction();
-			
+			Transaction tx = session.beginTransaction();*/
+			Transaction tx = Transaccion.session.beginTransaction();
 			//Creo la consulta
-			Query query = session.createQuery("from SeRealizaEn s where s.iddeporte=?");
+			Query query = Transaccion.session.createQuery("from SeRealizaEn s where s.iddeporte=?");
 			query.setParameter(0, idDeporte);
 			//Hago la consulta y la cargo a una lista de lugares
 			List<SeRealizaEn> serealizaen= (List<SeRealizaEn>) query.list();
@@ -81,9 +83,9 @@ public class LugarDAO {
 				listalugares.addLugar(lugar);
 				
 			}
-			session.close();
-			factory.close();
-			System.out.println(listalugares.getLugares().get(0).getNombre());
+			/*session.close();
+			factory.close();*/
+			//System.out.println(listalugares.getLugares().get(0).getNombre());
 			return listalugares;
 		}
 }

@@ -15,6 +15,7 @@ import DTO.EstadoDTO;
 import DTO.ListaCompetenciasDTO;
 import DTO.ListaDeportesDTO;
 import DTO.ModalidadDTO;
+import Inicio.Transaccion;
 import capanegocios.Competencia;
 import capanegocios.Deporte;
 import capanegocios.FormaPuntuacion;
@@ -23,14 +24,14 @@ import capanegocios.Modalidad;
 public class CompetenciaDAO {
 	
 	public static FormaPuntuacion getFormaPuntuacion(int idforma){
-		Configuration cfg = new Configuration();
+		/*Configuration cfg = new Configuration();
 		cfg.configure ("hibernate.cfg.xml");
 		SessionFactory factory = cfg.buildSessionFactory();
-		Session session = factory.openSession();
+		Session session = factory.openSession();*/
 		
-		Transaction tx = session.beginTransaction();
+		Transaction tx = Transaccion.session.beginTransaction();
 		
-		Query query = session.createQuery("from FormaPuntuacion");
+		Query query = Transaccion.session.createQuery("from FormaPuntuacion");
 
 		
 		List<FormaPuntuacion> formas = (List<FormaPuntuacion>) query.list();
@@ -42,39 +43,37 @@ public class CompetenciaDAO {
 				forma=object;
 			}
 		}
-		session.close();
-		factory.close();
+		
 		return forma;
 	
 	}
 	
 	public static Modalidad getModalidad(long idmodalidad){
-		Configuration cfg = new Configuration();
+		/*Configuration cfg = new Configuration();
 		cfg.configure ("hibernate.cfg.xml");
 		SessionFactory factory = cfg.buildSessionFactory();
-		Session session = factory.openSession();
+		Session session = factory.openSession();*/
 		
-		Transaction tx = session.beginTransaction();
+		Transaction tx = Transaccion.session.beginTransaction();
 		
-		Query query = session.createQuery("from Modalidad m where m.id_modalidad=?");
+		Query query = Transaccion.session.createQuery("from Modalidad m where m.id_modalidad=?");
 		query.setParameter(0, idmodalidad);
 		
 		Modalidad modalidadRec = (Modalidad) query.uniqueResult();
 
 		tx.commit();
-		session.close();
-		factory.close();
+		
 		
 		return modalidadRec;
 	}
 	
 	public static ArrayList<Competencia> buscarCompetencias(String nombre, int deporteID, int modalidadID, int estadoID){
-		Configuration cfg = new Configuration();
+		/*Configuration cfg = new Configuration();
 		cfg.configure ("hibernate.cfg.xml");
 		SessionFactory factory = cfg.buildSessionFactory();
-		Session session = factory.openSession();
+		Session session = factory.openSession();*/
 		
-		Transaction tx = session.beginTransaction();
+		Transaction tx = Transaccion.session.beginTransaction();
 		
 		String consulta = "from Competencia ";
 		int nombrePar = -1;
@@ -123,7 +122,7 @@ public class CompetenciaDAO {
 		
 		
 		
-		Query query = session.createQuery(consulta);
+		Query query = Transaccion.session.createQuery(consulta);
 		if(qnombre){
 			query.setParameter(nombrePar, nombre);
 		}
@@ -141,8 +140,7 @@ public class CompetenciaDAO {
 		
 		
 		tx.commit();
-		session.close();
-		factory.close();
+		
 		
 		return competencias;
 	}

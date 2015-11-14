@@ -14,6 +14,7 @@ import DTO.ListaDeportesDTO;
 import DTO.ListaLugaresDTO;
 import DTO.LugarDTO;
 import DTO.SeRealizaEnDTO;
+import Inicio.Transaccion;
 import capanegocios.Deporte;
 import capanegocios.Lugar;
 import capanegocios.SeRealizaEn;
@@ -21,14 +22,15 @@ import capanegocios.SeRealizaEn;
 public class DeporteDAO {
 	
 	public static ListaDeportesDTO getListado(){
-		Configuration cfg = new Configuration();
+		/*Configuration cfg = new Configuration();
 		cfg.configure ("hibernate.cfg.xml");
 		SessionFactory factory = cfg.buildSessionFactory();
 		Session session = factory.openSession();
-		
 		Transaction tx = session.beginTransaction();
 		
-		Query query = session.createQuery("from Deporte");
+		Query query = session.createQuery("from Deporte");*/
+		Transaction tx = Transaccion.session.beginTransaction();
+		Query query = Transaccion.session.createQuery("from Deporte");
 		
 		List<Deporte> deportes= (List<Deporte>) query.list();
 
@@ -51,22 +53,23 @@ public class DeporteDAO {
 		}
 		
 		tx.commit();
+		/*tx.commit();
 		session.close();
-		factory.close();
+		factory.close();*/
 		
 		return listadeportes;
 	}
 	
 	public static DeporteDTO getDeporteDTO(String deporte){
 		DeporteDTO depDTO = new DeporteDTO();
-		Configuration cfg = new Configuration();
+		/*Configuration cfg = new Configuration();
 		cfg.configure ("hibernate.cfg.xml");
 		SessionFactory factory = cfg.buildSessionFactory();
 		Session session = factory.openSession();
+		*/
+		Transaction tx = Transaccion.session.beginTransaction();
 		
-		Transaction tx = session.beginTransaction();
-		
-		Query query = session.createQuery("from Deporte d where d.nombre=?");
+		Query query = Transaccion.session.createQuery("from Deporte d where d.nombre=?");
 		query.setParameter(0, deporte);
 		
 		Deporte deporteRec = (Deporte) query.uniqueResult();
@@ -75,21 +78,21 @@ public class DeporteDAO {
 		
 		depDTO.setId(deporteRec.getId());
 		depDTO.setNombre(deporteRec.getNombre());
-		session.close();
-		factory.close();
+		/*session.close();
+		factory.close();*/
 		
 		return depDTO;
 	}
 	
 	public static Deporte getDeporte(String deporte){
-		Configuration cfg = new Configuration();
+		/*Configuration cfg = new Configuration();
 		cfg.configure ("hibernate.cfg.xml");
 		SessionFactory factory = cfg.buildSessionFactory();
 		Session session = factory.openSession();
+		*/
+		Transaction tx = Transaccion.session.beginTransaction();
 		
-		Transaction tx = session.beginTransaction();
-		
-		Query query = session.createQuery("from Deporte d where d.nombre=?");
+		Query query = Transaccion.session.createQuery("from Deporte d where d.nombre=?");
 		query.setParameter(0, deporte);
 		
 		Deporte deporteRec = (Deporte) query.uniqueResult();
@@ -97,8 +100,8 @@ public class DeporteDAO {
 		tx.commit();
 		
 		
-		session.close();
-		factory.close();
+		/*session.close();
+		factory.close();*/
 		
 		return deporteRec;
 	}
