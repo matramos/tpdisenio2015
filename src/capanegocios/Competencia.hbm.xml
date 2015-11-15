@@ -2,11 +2,17 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 <class name="capanegocios.Competencia" table="competencia">
-<id column="id_competencia" name="id_competencia" type="long" />
+<id column="id_competencia" name="id_competencia" />
 
 <property column="nombre" name="nombre"/>
 <property column="reglamento" name = "reglamento"/>
 
+
+<list name="participantes" cascade="all-delete-orphan" >
+<key column = "id_competencia"/>
+<index column ="orden"/>
+<one-to-many class="capanegocios.Participante"/>
+</list> 
 
 
 <!--  <many-to-one name="deporte" class="capanegocios.Deporte" fetch="select" insert="false" update="false">
@@ -26,5 +32,6 @@
  <column name="id_forma_puntuacion" not-null="true"/>
  </many-to-one>
 -->
+
 </class>
 </hibernate-mapping>

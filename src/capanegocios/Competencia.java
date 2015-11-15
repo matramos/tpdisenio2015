@@ -1,5 +1,6 @@
 package capanegocios;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class Competencia {
 	private int sets;
 	private FormaPuntuacion puntuacion;
 	private int resultado_final;
-	private List<Participante> participantes;
+	private List<Participante> participantes = new ArrayList<Participante>();
 	private List<Ronda> rondas;
 	private Estado estado;
 	
@@ -37,6 +38,7 @@ public class Competencia {
 		this.sets=competenciaDTO.getSets();
 		this.resultado_final=competenciaDTO.getResultado_final();
 	}
+	
 	
 	public void setDeporte(Deporte deporte){
 		this.deporte = deporte;

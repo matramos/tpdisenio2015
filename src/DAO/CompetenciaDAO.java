@@ -15,7 +15,7 @@ import DTO.EstadoDTO;
 import DTO.ListaCompetenciasDTO;
 import DTO.ListaDeportesDTO;
 import DTO.ModalidadDTO;
-import Inicio.Transaccion;
+import Inicio.CrearSesion;
 import capanegocios.Competencia;
 import capanegocios.Deporte;
 import capanegocios.FormaPuntuacion;
@@ -29,9 +29,9 @@ public class CompetenciaDAO {
 		SessionFactory factory = cfg.buildSessionFactory();
 		Session session = factory.openSession();*/
 		
-		Transaction tx = Transaccion.session.beginTransaction();
+		Transaction tx = CrearSesion.session.beginTransaction();
 		
-		Query query = Transaccion.session.createQuery("from FormaPuntuacion");
+		Query query = CrearSesion.session.createQuery("from FormaPuntuacion");
 
 		
 		List<FormaPuntuacion> formas = (List<FormaPuntuacion>) query.list();
@@ -54,9 +54,9 @@ public class CompetenciaDAO {
 		SessionFactory factory = cfg.buildSessionFactory();
 		Session session = factory.openSession();*/
 		
-		Transaction tx = Transaccion.session.beginTransaction();
+		Transaction tx = CrearSesion.session.beginTransaction();
 		
-		Query query = Transaccion.session.createQuery("from Modalidad m where m.id_modalidad=?");
+		Query query = CrearSesion.session.createQuery("from Modalidad m where m.id_modalidad=?");
 		query.setParameter(0, idmodalidad);
 		
 		Modalidad modalidadRec = (Modalidad) query.uniqueResult();
@@ -73,7 +73,7 @@ public class CompetenciaDAO {
 		SessionFactory factory = cfg.buildSessionFactory();
 		Session session = factory.openSession();*/
 		
-		Transaction tx = Transaccion.session.beginTransaction();
+		Transaction tx = CrearSesion.session.beginTransaction();
 		
 		String consulta = "from Competencia ";
 		int nombrePar = -1;
@@ -122,7 +122,7 @@ public class CompetenciaDAO {
 		
 		
 		
-		Query query = Transaccion.session.createQuery(consulta);
+		Query query = CrearSesion.session.createQuery(consulta);
 		if(qnombre){
 			query.setParameter(nombrePar, nombre);
 		}
@@ -152,10 +152,10 @@ public class CompetenciaDAO {
 		cfg.configure ("hibernate.cfg.xml");
 		SessionFactory factory = cfg.buildSessionFactory();
 		Session session = factory.openSession();*/
-		Transaction tx = Transaccion.session.beginTransaction();
+		Transaction tx = CrearSesion.session.beginTransaction();
 		
 		System.out.println(competencia.getId_competencia());
-		Transaccion.session.saveOrUpdate(competencia);
+		CrearSesion.session.saveOrUpdate(competencia);
 		
 
 		tx.commit();
@@ -174,9 +174,9 @@ public class CompetenciaDAO {
 		SessionFactory factory = cfg.buildSessionFactory();
 		Session session = factory.openSession();*/
 		
-		Transaction tx = Transaccion.session.beginTransaction();
+		Transaction tx = CrearSesion.session.beginTransaction();
 		
-		Query query = Transaccion.session.createQuery("from Competencia");
+		Query query = CrearSesion.session.createQuery("from Competencia");
 		/*La linea anterior va a recuperar todas las competencias sin filtros.
 		 para buscar con filtros va a haber que usar parametros, en el primer metodo
 		 de esta clase hay un ejemplo de como se usan en las consultas*/

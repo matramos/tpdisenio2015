@@ -3,8 +3,8 @@
 <hibernate-mapping>
 <class name="capanegocios.Usuario" table="usuario">
 <id column="id_usuario" name="id" type="long" >
-<generator class="foreign">             
-        <param name="property">tipo</param> 
+<generator class="sequence">             
+        <param name="sequence">sequsuario</param> 
     </generator>
     </id>
 <property column="nombre" name="nombre" type="string" />

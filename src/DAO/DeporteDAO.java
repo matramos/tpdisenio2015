@@ -14,7 +14,7 @@ import DTO.ListaDeportesDTO;
 import DTO.ListaLugaresDTO;
 import DTO.LugarDTO;
 import DTO.SeRealizaEnDTO;
-import Inicio.Transaccion;
+import Inicio.CrearSesion;
 import capanegocios.Deporte;
 import capanegocios.Lugar;
 import capanegocios.SeRealizaEn;
@@ -29,8 +29,8 @@ public class DeporteDAO {
 		Transaction tx = session.beginTransaction();
 		
 		Query query = session.createQuery("from Deporte");*/
-		Transaction tx = Transaccion.session.beginTransaction();
-		Query query = Transaccion.session.createQuery("from Deporte");
+		Transaction tx = CrearSesion.session.beginTransaction();
+		Query query = CrearSesion.session.createQuery("from Deporte");
 		
 		List<Deporte> deportes= (List<Deporte>) query.list();
 
@@ -67,9 +67,9 @@ public class DeporteDAO {
 		SessionFactory factory = cfg.buildSessionFactory();
 		Session session = factory.openSession();
 		*/
-		Transaction tx = Transaccion.session.beginTransaction();
+		Transaction tx = CrearSesion.session.beginTransaction();
 		
-		Query query = Transaccion.session.createQuery("from Deporte d where d.nombre=?");
+		Query query = CrearSesion.session.createQuery("from Deporte d where d.nombre=?");
 		query.setParameter(0, deporte);
 		
 		Deporte deporteRec = (Deporte) query.uniqueResult();
@@ -90,9 +90,9 @@ public class DeporteDAO {
 		SessionFactory factory = cfg.buildSessionFactory();
 		Session session = factory.openSession();
 		*/
-		Transaction tx = Transaccion.session.beginTransaction();
+		Transaction tx = CrearSesion.session.beginTransaction();
 		
-		Query query = Transaccion.session.createQuery("from Deporte d where d.nombre=?");
+		Query query = CrearSesion.session.createQuery("from Deporte d where d.nombre=?");
 		query.setParameter(0, deporte);
 		
 		Deporte deporteRec = (Deporte) query.uniqueResult();

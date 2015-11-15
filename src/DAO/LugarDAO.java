@@ -10,7 +10,7 @@ import org.hibernate.cfg.Configuration;
 
 import DTO.ListaLugaresDTO;
 import DTO.LugarDTO;
-import Inicio.Transaccion;
+import Inicio.CrearSesion;
 import capanegocios.Deporte;
 import capanegocios.Lugar;
 import capanegocios.Provincia;
@@ -25,10 +25,10 @@ public class LugarDAO {
 			SessionFactory factory = cfg.buildSessionFactory();
 			Session session = factory.openSession();
 			*/
-			Transaction tx = Transaccion.session.beginTransaction();
+			Transaction tx = CrearSesion.session.beginTransaction();
 			
 			//Creo la consulta
-			Query query = Transaccion.session.createQuery("from Lugar");
+			Query query = CrearSesion.session.createQuery("from Lugar");
 			//Hago la consulta y la cargo a una lista de lugares
 			List<Lugar> lugares= (List<Lugar>) query.list();
 			
@@ -60,9 +60,9 @@ public class LugarDAO {
 			Session session = factory.openSession();
 			
 			Transaction tx = session.beginTransaction();*/
-			Transaction tx = Transaccion.session.beginTransaction();
+			Transaction tx = CrearSesion.session.beginTransaction();
 			//Creo la consulta
-			Query query = Transaccion.session.createQuery("from SeRealizaEn s where s.iddeporte=?");
+			Query query = CrearSesion.session.createQuery("from SeRealizaEn s where s.iddeporte=?");
 			query.setParameter(0, idDeporte);
 			//Hago la consulta y la cargo a una lista de lugares
 			List<SeRealizaEn> serealizaen= (List<SeRealizaEn>) query.list();

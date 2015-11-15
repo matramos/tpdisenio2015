@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="capanegocios.Participante" table="participante">
+<id column="id_participante" name="id_participante" >
+<generator class="sequence">             
+        <param name="sequence">sequsuario</param> 
+    </generator>
+    </id>
+<property column="email" name="email"  />
+<property column="nombre" name="nombre" />
+<property column="imagen" name="imagen" />
+<property column="puntaje" name="puntaje" />
+<property column="partidosganados" name="partidosGanados" />
+<property column="partidosperdidos" name="partidosPerdidos" />
+<property column="partidosempatados" name="partidosEmpatados" />
+<property column="tantosfavor" name="tantosFav" />
+<property column="tantoscontra" name="tantosCont" />
+<property column="tantosdiferencia" name="tantosDif" />
+
+
+<!-- <many-to-one name="participante" class="capanegocios.Participante" fetch="select" insert="false" update="false">
+ <column name="id_participante" not-null="true"/>
+</many-to-one>
+  -->
+</class>
+</hibernate-mapping>

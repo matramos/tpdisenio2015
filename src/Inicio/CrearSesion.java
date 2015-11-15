@@ -10,7 +10,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 
-public class Transaccion {
+public class CrearSesion {
 
 	
 	public static Configuration cfg;
