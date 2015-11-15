@@ -26,13 +26,19 @@ public class CompetenciaDTO {
 	private EstadoDTO estado;
 	private int resultado_final;
 	private List<String> lugares;
-	private List<Participante> participantes;
+	private List<ParticipanteDTO> participantes;
 	private List<Ronda> rondas;
 	
 	
 	public CompetenciaDTO(Competencia comp) {
 		this.id_competencia = comp.getId_competencia();
 		this.nombre = comp.getNombre();
+		List<Participante> listaParticipantes = comp.getParticipantes();
+		
+		for(Participante part : listaParticipantes){
+			ParticipanteDTO partDTO = new ParticipanteDTO(part);
+			this.participantes.add(partDTO);
+		}
 		//this.modalidad = comp.getModalidad().getNombre();
 		//this.estado = comp.getEstado().getNombre();
 		
@@ -131,10 +137,10 @@ public class CompetenciaDTO {
 	public void setResultado_final(int resultado_final) {
 		this.resultado_final = resultado_final;
 	}
-	public List<Participante> getParticipantes() {
+	public List<ParticipanteDTO> getParticipantes() {
 		return participantes;
 	}
-	public void setParticipantes(List<Participante> participantes) {
+	public void setParticipantes(List<ParticipanteDTO> participantes) {
 		this.participantes = participantes;
 	}
 	public List<Ronda> getRondas() {

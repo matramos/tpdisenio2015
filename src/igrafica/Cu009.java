@@ -9,6 +9,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import DTO.CompetenciaDTO;
+import gestores.GestorCompetencias;
+
 import java.awt.CardLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -22,6 +26,7 @@ public class Cu009 extends JFrame {
 	private JTextField txtNombre;
 	private JTextField txtEmail;
 	private JTextField txturl;
+	private CompetenciaDTO competencia;
 
 	/**
 	 * Launch the application.
@@ -30,7 +35,7 @@ public class Cu009 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Cu009 frame = new Cu009();
+					Cu009 frame = new Cu009(1);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +47,7 @@ public class Cu009 extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Cu009() {
+	public Cu009(long id_competencia) {
 		setTitle("Gevico");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
@@ -109,13 +114,17 @@ public class Cu009 extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Cu008 ventana = new Cu008();
+				Cu008 ventana = new Cu008(id_competencia);
 				ventana.setVisible(true);
 				dispose();
 			}
 		});
 		btnCancelar.setBounds(566, 511, 89, 23);
 		contentPane.add(btnCancelar);
+		
+		competencia= GestorCompetencias.getCompetencia(id_competencia);
+		
+		lblNombrecompetencia.setText(competencia.getNombre());
 		
 	}
 

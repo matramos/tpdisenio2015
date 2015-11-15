@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import DAO.CompetenciaDAO;
 import DAO.DeporteDAO;
 import DTO.CompetenciaDTO;
+import DTO.ListaDeportesDTO;
 import capanegocios.Competencia;
 import capanegocios.Deporte;
 import capanegocios.Estado;
@@ -12,6 +13,8 @@ import capanegocios.FormaPuntuacion;
 import capanegocios.Modalidad;
 
 public class GestorCompetencias {
+	
+	private static Competencia competencia;
 	
 	public static boolean crearCompetencia(CompetenciaDTO competenciaDTO, int idformaPrim, String deportePrim, long idmodalidadPrim){
 		boolean bool = false;
@@ -57,4 +60,20 @@ public class GestorCompetencias {
 		
 		return null;
 	}*/
+
+public static CompetenciaDTO getCompetencia(long id_competencia){
+	
+	competencia = CompetenciaDAO.getCompetencia(id_competencia);
+	
+	CompetenciaDTO competencia2 = new CompetenciaDTO(competencia);
+	
+	
+	/*Iterator iter = listaLugares.iterator();
+	while (iter.hasNext()){
+		Object l = iter.next();
+		lugares.addLugar( l);
+	}*/
+	
+	return competencia2;
+}
 }

@@ -14,12 +14,15 @@ import DTO.DeporteDTO;
 import DTO.EstadoDTO;
 import DTO.ListaCompetenciasDTO;
 import DTO.ListaDeportesDTO;
+import DTO.ListaLugaresDTO;
+import DTO.LugarDTO;
 import DTO.ModalidadDTO;
 import Inicio.CrearSesion;
 import capanegocios.Competencia;
 import capanegocios.Deporte;
 import capanegocios.FormaPuntuacion;
 import capanegocios.Modalidad;
+import capanegocios.SeRealizaEn;
 
 public class CompetenciaDAO {
 	
@@ -214,6 +217,30 @@ public class CompetenciaDAO {
 		
 		
 		return listacompetencias;
+	}
+	
+	public static Competencia getCompetencia(long id_competencia){
+		
+		/*metodos para hacer la conexion*/
+		/*Configuration cfg = new Configuration();
+		cfg.configure ("hibernate.cfg.xml");
+		SessionFactory factory = cfg.buildSessionFactory();
+		Session session = factory.openSession();
+		
+		Transaction tx = session.beginTransaction();*/
+		Transaction tx = CrearSesion.session.beginTransaction();
+		//Creo la consulta
+		Query query = CrearSesion.session.createQuery("from Competencia s where s.id_competencia=?");
+		query.setParameter(0, id_competencia);
+		//Hago la consulta y la cargo a una lista de lugares
+		Competencia competencia= (Competencia) query.uniqueResult();
+		
+		tx.commit();
+		
+		/*session.close();
+		factory.close();*/
+		//System.out.println(listalugares.getLugares().get(0).getNombre());
+		return competencia;
 	}
 
 }

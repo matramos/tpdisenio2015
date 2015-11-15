@@ -429,7 +429,7 @@ public class Cu004 extends JFrame {
 					if(GestorCompetencias.crearCompetencia(competencia,idforma,deporte.getText(),idmodalidad)){
 						System.out.println("sirvi");
 						JOptionPane.showMessageDialog(null, "Se cargo con exito");
-						Cu008 ventana = new Cu008();
+						Cu008 ventana = new Cu008(idcomp);
 						ventana.setVisible(true);
 						dispose();
 					}
