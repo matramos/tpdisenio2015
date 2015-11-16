@@ -233,10 +233,11 @@ public class CompetenciaDAO {
 		Query query = CrearSesion.session.createQuery("from Competencia s where s.id_competencia=?");
 		query.setParameter(0, id_competencia);
 		//Hago la consulta y la cargo a una lista de lugares
-		Competencia competencia= (Competencia) query.uniqueResult();
+		Competencia competencia= new Competencia();
+		competencia = (Competencia) query.uniqueResult();
 		
 		tx.commit();
-		
+
 		/*session.close();
 		factory.close();*/
 		//System.out.println(listalugares.getLugares().get(0).getNombre());

@@ -1,5 +1,6 @@
 package DTO;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class CompetenciaDTO {
 	private EstadoDTO estado;
 	private int resultado_final;
 	private List<String> lugares;
-	private List<ParticipanteDTO> participantes;
+	private List<ParticipanteDTO> participantes = new ArrayList<ParticipanteDTO>();
 	private List<Ronda> rondas;
 	
 	
@@ -35,7 +36,7 @@ public class CompetenciaDTO {
 		this.nombre = comp.getNombre();
 		List<Participante> listaParticipantes = comp.getParticipantes();
 		
-		for(Participante part : listaParticipantes){
+		for(Participante part : comp.getParticipantes()){
 			ParticipanteDTO partDTO = new ParticipanteDTO(part);
 			this.participantes.add(partDTO);
 		}

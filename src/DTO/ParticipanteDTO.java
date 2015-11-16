@@ -24,7 +24,7 @@ public class ParticipanteDTO {
 	
 	public ParticipanteDTO(Participante part) {
 		this.nombre= part.getNombre();
-		this.email=part.getEmail();
+		this.email= part.getEmail();
 		// TODO Auto-generated constructor stub
 	}
 	public long getId_participante() {

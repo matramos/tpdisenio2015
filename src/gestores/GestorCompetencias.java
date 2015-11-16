@@ -64,7 +64,6 @@ public class GestorCompetencias {
 public static CompetenciaDTO getCompetencia(long id_competencia){
 	
 	competencia = CompetenciaDAO.getCompetencia(id_competencia);
-	
 	CompetenciaDTO competencia2 = new CompetenciaDTO(competencia);
 	
 	
