@@ -2,8 +2,10 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 <class name="capanegocios.Competencia" table="competencia">
-<id column="id_competencia" name="id_competencia" />
-
+<id column="id_competencia" name="id_competencia" >
+<generator class="sequence">             
+    </generator>
+</id>
 <property column="nombre" name="nombre"/>
 <property column="reglamento" name = "reglamento"/>
 

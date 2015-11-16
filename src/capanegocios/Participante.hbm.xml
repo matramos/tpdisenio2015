@@ -4,7 +4,6 @@
 <class name="capanegocios.Participante" table="participante">
 <id column="id_participante" name="id_participante" >
 <generator class="sequence">             
-        <param name="sequence">sequsuario</param> 
     </generator>
     </id>
 <property column="email" name="email"  />
