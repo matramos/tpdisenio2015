@@ -10,7 +10,7 @@
 <property column="reglamento" name = "reglamento"/>
 
 
-<list name="participantes" cascade="all-delete-orphan" >
+<list name="participantes" cascade="all-delete-orphan">
 <key column = "id_competencia"/>
 <index column ="orden"/>
 <one-to-many class="capanegocios.Participante"/>
