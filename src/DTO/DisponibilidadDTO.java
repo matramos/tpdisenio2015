@@ -1,14 +1,15 @@
-package capanegocios;
+package DTO;
 
-public class Disponibilidad {
-	
-	private Lugar lugar;
+import capanegocios.Lugar;
+
+public class DisponibilidadDTO {
+	private LugarDTO lugar;
 	private int disponibilidad;
 	
-	public Lugar getLugar() {
+	public LugarDTO getLugar() {
 		return lugar;
 	}
-	public void setLugar(Lugar lugar) {
+	public void setLugar(LugarDTO lugar) {
 		this.lugar = lugar;
 	}
 	public int getDisponibilidad() {

@@ -149,25 +149,19 @@ public class CompetenciaDAO {
 	}
 
 	
-	public static boolean agregarCompetencia(Competencia competencia){
-		boolean bool=false;
-		/*Configuration cfg = new Configuration();
-		cfg.configure ("hibernate.cfg.xml");
-		SessionFactory factory = cfg.buildSessionFactory();
-		Session session = factory.openSession();*/
+	public static long agregarCompetencia(Competencia competencia){
+
+		
 		Transaction tx = CrearSesion.session.beginTransaction();
 		
-		System.out.println(competencia.getId_competencia());
-		CrearSesion.session.saveOrUpdate(competencia);
+		long idGenerado = (long) CrearSesion.session.save(competencia);
 		
 
 		tx.commit();
-		if(tx.getStatus().COMMITTED != null){
-			bool=true;
-		}
 		
 		
-		return bool;
+		
+		return idGenerado;
 		
 	}
 	

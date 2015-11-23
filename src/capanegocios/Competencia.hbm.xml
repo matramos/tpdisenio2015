@@ -8,6 +8,10 @@
 </id>
 <property column="nombre" name="nombre"/>
 <property column="reglamento" name = "reglamento"/>
+<property column="puntos_presentarse" name = "puntos_presentarse"/>
+<property column="puntos_ganador" name = "puntos_ganador"/>
+<property column="puntos_empate" name = "puntos_empate"/>
+<property column="permite_empates" name = "permite_empates"/>
 
 
 <list name="participantes" cascade="all-delete-orphan">
@@ -16,12 +20,36 @@
 <one-to-many class="capanegocios.Participante"/>
 </list> 
 
+<!-- <list name="disponibilidades" cascade="all-delete-orphan">
+<key column = "id_competencia"/>
+<index column ="orden"/>
+<one-to-many class="capanegocios.Disponibilidad"/>
+</list> -->
 
-<!--  <many-to-one name="deporte" class="capanegocios.Deporte" fetch="select" insert="false" update="false">
- <column name="id_deporte" not-null="true"/>
+<many-to-one name="deporte" class="capanegocios.Deporte">
+<column name="id_deporte" not-null="true"/>
+ </many-to-one>
+ 
+
+ 
+  <many-to-one name="modalidad" class="capanegocios.Modalidad" >
+ <column name="id_modalidad" not-null="true"/>
  </many-to-one>
 
+ <many-to-one name="puntuacion" class="capanegocios.FormaPuntuacion">
+ <column name="id_forma_puntuacion" not-null="true"/>
+ </many-to-one>
+ 
+ <many-to-one name="estado" class="capanegocios.Estado" >
+ <column name="id_estado" not-null="true"/>
+ </many-to-one>
+<!--
+  
+ 
 
+<many-to-one name="deporte" class="capanegocios.Deporte" fetch="select" insert="false" update="false">
+ <column name="id_deporte" not-null="true"/>
+ </many-to-one>
  <many-to-one name="modalidad" class="capanegocios.Modalidad" fetch="select" insert="false" update="false">
  <column name="id_modalidad" not-null="true"/>
  </many-to-one>

@@ -2,12 +2,13 @@ package capanegocios;
 
 public class Estado {
 	
-	private int id_estado;
+	private long id_estado;
 	private String nombre;
-	public int getId_estado() {
+	
+	public long getId_estado() {
 		return id_estado;
 	}
-	public void setId_estado(int id_estado) {
+	public void setId_estado(long id_estado) {
 		this.id_estado = id_estado;
 	}
 	public String getNombre() {
