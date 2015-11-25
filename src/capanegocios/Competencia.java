@@ -39,6 +39,9 @@ public class Competencia {
 		this.resultado_final=competenciaDTO.getResultado_final();
 	}
 	
+	public void agregarParticipante(Participante participante){
+		participantes.add(participante);
+	}
 	
 	public void setDeporte(Deporte deporte){
 		this.deporte = deporte;

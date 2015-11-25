@@ -4,13 +4,16 @@ import java.util.ArrayList;
 
 import DAO.CompetenciaDAO;
 import DAO.DeporteDAO;
+import DAO.ParticipanteDAO;
 import DTO.CompetenciaDTO;
 import DTO.ListaDeportesDTO;
+import DTO.ParticipanteDTO;
 import capanegocios.Competencia;
 import capanegocios.Deporte;
 import capanegocios.Estado;
 import capanegocios.FormaPuntuacion;
 import capanegocios.Modalidad;
+import capanegocios.Participante;
 
 public class GestorCompetencias {
 	
@@ -75,4 +78,28 @@ public static CompetenciaDTO getCompetencia(long id_competencia){
 	
 	return competencia2;
 }
+
+public static boolean agregarParticipante(ParticipanteDTO participanteDTO,long id_competencia){
+	
+	System.out.println(participanteDTO.getId_participante());
+	System.out.println(participanteDTO.getEmail());
+	
+	competencia = CompetenciaDAO.getCompetencia(id_competencia);
+	boolean bool = false;
+	Participante participante = new Participante();
+	
+	participante.ParticipanteDTO(participanteDTO);
+	
+	competencia.agregarParticipante(participante);
+	Estado estado = new Estado();
+	estado.setId_estado(1);
+	estado.setNombre("Creada");
+	competencia.setEstado(estado);
+	
+	
+	bool = CompetenciaDAO.agregarCompetencia(competencia);
+	return  bool;
 }
+}
+
+

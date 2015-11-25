@@ -14,5 +14,6 @@
 	<classpathentry kind="lib" path="lib/jboss-logging-3.3.0.Final.jar"/>
 	<classpathentry kind="lib" path="lib/postgresql-9.4-1202.jdbc4.jar"/>
 	<classpathentry kind="lib" path="lib/Autocompleter.jar"/>
+	<classpathentry kind="lib" path="miglayout15-swing.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
