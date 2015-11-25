@@ -4,14 +4,21 @@ import java.util.ArrayList;
 
 import DAO.CompetenciaDAO;
 import DAO.DeporteDAO;
+<<<<<<< HEAD
 import DAO.ParticipanteDAO;
+=======
+import DAO.LugarDAO;
+>>>>>>> branch 'master' of https://github.com/matramos/tpdisenio2015.git
 import DTO.CompetenciaDTO;
+import DTO.DisponibilidadDTO;
 import DTO.ListaDeportesDTO;
 import DTO.ParticipanteDTO;
 import capanegocios.Competencia;
 import capanegocios.Deporte;
+import capanegocios.Disponibilidad;
 import capanegocios.Estado;
 import capanegocios.FormaPuntuacion;
+import capanegocios.Lugar;
 import capanegocios.Modalidad;
 import capanegocios.Participante;
 
@@ -19,8 +26,8 @@ public class GestorCompetencias {
 	
 	private static Competencia competencia;
 	
-	public static boolean crearCompetencia(CompetenciaDTO competenciaDTO, int idformaPrim, String deportePrim, long idmodalidadPrim){
-		boolean bool = false;
+	public static long crearCompetencia(CompetenciaDTO competenciaDTO, int idformaPrim, String deportePrim, long idmodalidadPrim){
+		long idGenerado=-1;
 		Competencia competencia = new Competencia();
 		competencia.CompetenciaDTO(competenciaDTO);
 		Deporte deporte = DeporteDAO.getDeporte(deportePrim);
@@ -31,27 +38,31 @@ public class GestorCompetencias {
 		Modalidad modalidad = CompetenciaDAO.getModalidad(idmodalidadPrim);
 		competencia.setModalidad(modalidad);
 		
-		/*for(String object: competenciaDTO.getLugares()){
-			Lugar lugar = LugarDAO.getLugar(object);
-			Disponibilidad disponibilidad = new Disponibilidad(competenciaDTO.getDisponibilidad());
-			competencia.setDisponibilidad(disponibilidad);
+		/*for(DisponibilidadDTO object: competenciaDTO.getDisponibilidades()){
+			Lugar lugar = LugarDAO.getLugar(object.getLugar());
+			Disponibilidad disponibilidad = new Disponibilidad();
+			disponibilidad.setLugar(lugar);
+			disponibilidad.setDisponibilidad(object.getDisponibilidad());
+			competencia.addDisponibilidad(disponibilidad);
 			
 		}*/
 		Estado estado = new Estado();
 		estado.setId_estado(1);
 		estado.setNombre("Creada");
 		competencia.setEstado(estado);
-		competencia.setId_competencia(competenciaDTO.getId_competencia());
 		
-		bool = CompetenciaDAO.agregarCompetencia(competencia);
-		return  bool;
+		
+		idGenerado = CompetenciaDAO.agregarCompetencia(competencia);
+		return idGenerado;
 		
 	}
 	
 	public static ArrayList<CompetenciaDTO> buscarCompetencias(String nombreComp, int deporteID, int modalidadID, int estadoID) {
 		ArrayList<CompetenciaDTO> competenciasQueRetornan = new ArrayList<>(); 
 		ArrayList<Competencia> competenciasEncontradas = CompetenciaDAO.buscarCompetencias(nombreComp, deporteID, modalidadID, estadoID);
+		System.out.println(competenciasEncontradas.get(0).getDeporte().getNombre());
 		for(Competencia comp : competenciasEncontradas){
+			System.out.println(comp.getDeporte().getNombre());
 			CompetenciaDTO compDTO = new CompetenciaDTO(comp);
 			competenciasQueRetornan.add(compDTO);
 		}

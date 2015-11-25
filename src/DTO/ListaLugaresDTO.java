@@ -18,4 +18,13 @@ public class ListaLugaresDTO {
 	public void addLugar(LugarDTO lugar){
 		this.lugares.add(lugar);
 	}
+	
+	public LugarDTO getLugar(String lugar){
+		LugarDTO retorno = new LugarDTO();
+		for(LugarDTO object: lugares){
+			if(object.getNombre().equals(lugar))
+				retorno = object;
+		}
+		return retorno;
+	}
 }

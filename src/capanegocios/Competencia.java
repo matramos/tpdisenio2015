@@ -24,6 +24,7 @@ public class Competencia {
 	private int resultado_final;
 	private List<Participante> participantes = new ArrayList<Participante>();
 	private List<Ronda> rondas;
+	private List<Disponibilidad> disponibilidades = new ArrayList<Disponibilidad>();
 	private Estado estado;
 	
 	public void CompetenciaDTO(CompetenciaDTO competenciaDTO){
@@ -178,6 +179,19 @@ public class Competencia {
 	public Estado getEstado() {
 		return estado;
 	}
+
+
+	public List<Disponibilidad> getDisponibilidades() {
+		return disponibilidades;
+	}
+
+
+	public void setDisponibilidades(List<Disponibilidad> disponibilidades) {
+		this.disponibilidades = disponibilidades;
+	}
 	
+	public void addDisponibilidad(Disponibilidad disponibilidad){
+		this.disponibilidades.add(disponibilidad);
+	}
 	
 }

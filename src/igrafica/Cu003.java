@@ -173,9 +173,9 @@ public class Cu003 extends JFrame {
 						GestorCompetencias.buscarCompetencias(nombre.getText(), comboDeporte.getSelectedIndex(), 
 								comboModalidad.getSelectedIndex(), comboEstado.getSelectedIndex());
 				//Descomentar para ver que estamos eligiendo
-				System.out.println("Aca se ve lo que elegi");
+				
 				System.out.println(nombre.getText());
-				System.out.println("Aca arriba");
+				
 				//System.out.println(comboDeporte.getSelectedIndex()); 
 				//System.out.println(comboModalidad.getSelectedIndex());
 				//System.out.println(comboEstado.getSelectedIndex());
@@ -186,7 +186,7 @@ public class Cu003 extends JFrame {
 					System.out.println(CDTO.getModalidad());
 					System.out.println(CDTO.getEstado());
 					//model.addTest(new TestCU3(CDTO.getNombre(),CDTO.getDeporte().getNombre(),""+CDTO.getModalidad().getId_modalidad()));
-					model.addTest(new TestCU3(CDTO.getNombre(),"",""));
+					model.addTest(new TestCU3(CDTO.getNombre(),CDTO.getDeporte().getNombre(),""+CDTO.getModalidad().getId_modalidad()));
 				}
 			}
 			

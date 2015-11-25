@@ -14,9 +14,9 @@ public class CompetenciaDTO {
 	private long id_competencia;
 	private String nombre;
 	private int cantidad_sets;
-	private ModalidadDTO modalidad;
+	private ModalidadDTO modalidad = new ModalidadDTO();
 	private String reglamento;
-	private DeporteDTO deporte;
+	private DeporteDTO deporte = new DeporteDTO();
 	private int puntos_presentarse;
 	private int puntos_ganador;
 	private int puntos_empate;
@@ -29,6 +29,7 @@ public class CompetenciaDTO {
 	private List<String> lugares;
 	private List<ParticipanteDTO> participantes = new ArrayList<ParticipanteDTO>();
 	private List<Ronda> rondas;
+	private List<DisponibilidadDTO> disponibilidades;
 	
 	
 	public CompetenciaDTO(Competencia comp) {
@@ -40,12 +41,33 @@ public class CompetenciaDTO {
 			ParticipanteDTO partDTO = new ParticipanteDTO(part);
 			this.participantes.add(partDTO);
 		}
+		System.out.println(comp.getDeporte().getNombre());
+		this.deporte.setNombre(comp.getDeporte().getNombre());
+		this.deporte.setId(comp.getDeporte().getId());
+		
+		
+		this.modalidad.setId_modalidad(comp.getModalidad().getId_modalidad());
+		
 		//this.modalidad = comp.getModalidad().getNombre();
 		//this.estado = comp.getEstado().getNombre();
 		
 	}
 	
 	public CompetenciaDTO() {
+	}
+
+	
+	
+	public List<DisponibilidadDTO> getDisponibilidades() {
+		return disponibilidades;
+	}
+
+	public void setDisponibilidades(List<DisponibilidadDTO> disponibilidades) {
+		this.disponibilidades = disponibilidades;
+	}
+	
+	public void addDisponibilidad(DisponibilidadDTO disponibilidad){
+		this.disponibilidades.add(disponibilidad);
 	}
 
 	public List<String> getLugares() {

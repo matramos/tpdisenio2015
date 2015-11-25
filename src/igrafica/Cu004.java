@@ -52,6 +52,7 @@ import com.mxrck.autocompleter.*;
 
 import DTO.CompetenciaDTO;
 import DTO.DeporteDTO;
+import DTO.DisponibilidadDTO;
 import DTO.ListaDeportesDTO;
 import DTO.ListaLugaresDTO;
 import DTO.LugarDTO;
@@ -396,9 +397,13 @@ public class Cu004 extends JFrame {
 				}
 				/*Aca irian las demas validaciones*/
 				else{
-					long idcomp=2;
 					CompetenciaDTO competencia = new CompetenciaDTO();
-					competencia.setId_competencia(idcomp);
+					for(int i = 0; i<table.getRowCount();i++){
+						DisponibilidadDTO disponibilidad = new DisponibilidadDTO();
+						disponibilidad.setDisponibilidad((int)table.getValueAt(i, 1));
+						disponibilidad.setLugar(lugares.getLugar(table.getValueAt(i, 0).toString()));
+						competencia.addDisponibilidad(disponibilidad);
+					}
 					competencia.setNombre(nombre.getText());
 					competencia.setPuntos_ganador(Integer.parseInt(puntosVictoria.getText()));
 					competencia.setPuntos_empate(Integer.parseInt(puntosEmpate.getText()));
@@ -425,11 +430,12 @@ public class Cu004 extends JFrame {
 						idmodalidad=2;
 					else
 						idmodalidad=3;
-					
-					if(GestorCompetencias.crearCompetencia(competencia,idforma,deporte.getText(),idmodalidad)){
+					long idGenerado = GestorCompetencias.crearCompetencia(competencia,idforma,deporte.getText(),idmodalidad);
+					System.out.println(idGenerado);
+					if(idGenerado!=(long) -1){
 						System.out.println("sirvi");
 						JOptionPane.showMessageDialog(null, "Se cargo con exito");
-						Cu008 ventana = new Cu008(idcomp);
+						Cu008 ventana = new Cu008(idGenerado);
 						ventana.setVisible(true);
 						dispose();
 					}

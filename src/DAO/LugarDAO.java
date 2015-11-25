@@ -88,4 +88,17 @@ public class LugarDAO {
 			//System.out.println(listalugares.getLugares().get(0).getNombre());
 			return listalugares;
 		}
+
+		public static Lugar getLugar(LugarDTO lugar) {
+			Transaction tx = CrearSesion.session.beginTransaction();
+			//Creo la consulta
+			Query query = CrearSesion.session.createQuery("from Lugar l where l.nombre=?");
+			query.setParameter(0, lugar.getNombre());
+			//Hago la consulta y la cargo a una lista de lugares
+			Lugar lugarencontrado = (Lugar) query.uniqueResult();
+			
+			tx.commit();
+			
+			return lugarencontrado;
+		}
 }

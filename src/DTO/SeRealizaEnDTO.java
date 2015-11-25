@@ -1,5 +1,9 @@
 package DTO;
 
+import java.util.List;
+
+import capanegocios.SeRealizaEn;
+
 public class SeRealizaEnDTO {
 	public long id_lugar;
 	public long id_deporte;

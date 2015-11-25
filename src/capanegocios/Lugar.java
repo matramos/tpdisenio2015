@@ -7,6 +7,7 @@ public class Lugar {
 	private String nombre;
 	private String descripcion;
 	private List<SeRealizaEn> serealizaen;
+	private List<Disponibilidad> disponibilidad;
 	
 	public String getNombre(){
 		return nombre;
@@ -37,5 +38,12 @@ public class Lugar {
 	public void setDescripcion(String descripcion){
 		this.descripcion = descripcion;
 	}
+	public List<Disponibilidad> getDisponibilidad() {
+		return disponibilidad;
+	}
+	public void setDisponibilidad(List<Disponibilidad> disponibilidad) {
+		this.disponibilidad = disponibilidad;
+	}
+	
 	
 }
