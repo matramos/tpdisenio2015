@@ -11,5 +11,15 @@
 <index column ="orden"/>
 <one-to-many class="capanegocios.SeRealizaEn"/>
 </list>
+
+
+<!-- <list name="competencias" table = "disponibilidad" cascade="all-delete-orphan">
+<key column = "id_lugar"/>
+<index column ="orden"/>
+<many-to-many class="capanegocios.Competencia"/>
+</list> -->
+
+
+
 </class>
 </hibernate-mapping>

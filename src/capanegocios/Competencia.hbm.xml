@@ -12,7 +12,8 @@
 <property column="puntos_ganador" name = "puntos_ganador"/>
 <property column="puntos_empate" name = "puntos_empate"/>
 <property column="permite_empates" name = "permite_empates"/>
-
+<property name="resultado_final" column="resultado_np"/>
+<property column="fecha_hora" name ="fecha_hora"/>
 
 <list name="participantes" cascade="all-delete-orphan">
 <key column = "id_competencia"/>
@@ -20,11 +21,16 @@
 <one-to-many class="capanegocios.Participante"/>
 </list> 
 
-<!-- <list name="disponibilidades" cascade="all-delete-orphan">
+<list name="lugares" table ="disponibilidad" cascade="all-delete-orphan">
 <key column = "id_competencia"/>
 <index column ="orden"/>
-<one-to-many class="capanegocios.Disponibilidad"/>
-</list> -->
+<composite-element class="capanegocios.Disponibilidad">
+<!-- <parent name="competencia"/> -->
+<many-to-one name ="lugar" column="id_lugar" class="capanegocios.Lugar"/>
+<property name="disponibilidad" column="disponibilidad"/>
+</composite-element>
+
+</list>
 
 <many-to-one name="deporte" class="capanegocios.Deporte">
 <column name="id_deporte" not-null="true"/>

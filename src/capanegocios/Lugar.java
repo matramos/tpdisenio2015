@@ -7,8 +7,15 @@ public class Lugar {
 	private String nombre;
 	private String descripcion;
 	private List<SeRealizaEn> serealizaen;
-	private List<Disponibilidad> disponibilidad;
+	private List<Competencia> competencias;
+
 	
+	public List<Competencia> getCompetencias() {
+		return competencias;
+	}
+	public void setCompetencias(List<Competencia> competencias) {
+		this.competencias = competencias;
+	}
 	public String getNombre(){
 		return nombre;
 	}
@@ -37,12 +44,6 @@ public class Lugar {
 	
 	public void setDescripcion(String descripcion){
 		this.descripcion = descripcion;
-	}
-	public List<Disponibilidad> getDisponibilidad() {
-		return disponibilidad;
-	}
-	public void setDisponibilidad(List<Disponibilidad> disponibilidad) {
-		this.disponibilidad = disponibilidad;
 	}
 	
 	

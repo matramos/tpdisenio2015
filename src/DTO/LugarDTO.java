@@ -7,7 +7,17 @@ public class LugarDTO {
 	private String nombre;
 	private String descripcion;
 	private List<SeRealizaEnDTO> serealizaen;
+	private List<CompetenciaDTO> competencias;
 	
+	
+	public List<CompetenciaDTO> getCompetencias() {
+		return competencias;
+	}
+
+	public void setCompetencias(List<CompetenciaDTO> competencias) {
+		this.competencias = competencias;
+	}
+
 	public void setId(long id){
 		this.id = id;
 	}

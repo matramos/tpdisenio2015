@@ -26,10 +26,9 @@ public class CompetenciaDTO {
 	private String puntuacion;
 	private EstadoDTO estado;
 	private int resultado_final;
-	private List<String> lugares;
 	private List<ParticipanteDTO> participantes = new ArrayList<ParticipanteDTO>();
 	private List<Ronda> rondas;
-	private List<DisponibilidadDTO> disponibilidades;
+	private List<DisponibilidadDTO> lugares = new ArrayList<DisponibilidadDTO>();
 	
 	
 	public CompetenciaDTO(Competencia comp) {
@@ -58,24 +57,19 @@ public class CompetenciaDTO {
 
 	
 	
-	public List<DisponibilidadDTO> getDisponibilidades() {
-		return disponibilidades;
-	}
-
-	public void setDisponibilidades(List<DisponibilidadDTO> disponibilidades) {
-		this.disponibilidades = disponibilidades;
-	}
-	
-	public void addDisponibilidad(DisponibilidadDTO disponibilidad){
-		this.disponibilidades.add(disponibilidad);
-	}
-
-	public List<String> getLugares() {
+	public List<DisponibilidadDTO> getLugares() {
 		return lugares;
 	}
-	public void setLugares(List<String> lugares) {
+
+	public void setLugares(List<DisponibilidadDTO> lugares) {
 		this.lugares = lugares;
 	}
+	
+	public void addLugar(DisponibilidadDTO lugar){
+		this.lugares.add(lugar);
+	}
+
+	
 	public DeporteDTO getDeporte() {
 		return deporte;
 	}

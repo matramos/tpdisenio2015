@@ -1,6 +1,8 @@
 package gestores;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import DAO.CompetenciaDAO;
 import DAO.DeporteDAO;
@@ -31,7 +33,14 @@ public class GestorCompetencias {
 		competencia.setPuntuacion(forma);
 		Modalidad modalidad = CompetenciaDAO.getModalidad(idmodalidadPrim);
 		competencia.setModalidad(modalidad);
+		competencia.setResultado_final(competenciaDTO.getResultado_final());
 		
+		for(DisponibilidadDTO object: competenciaDTO.getLugares()){
+			Disponibilidad dispo = new Disponibilidad();
+			dispo.setDisponibilidad(object.getDisponibilidad());
+			dispo.setLugar(LugarDAO.getLugar(object.getLugar()));
+			competencia.addLugar(dispo);
+		}
 		/*for(DisponibilidadDTO object: competenciaDTO.getDisponibilidades()){
 			Lugar lugar = LugarDAO.getLugar(object.getLugar());
 			Disponibilidad disponibilidad = new Disponibilidad();
@@ -44,6 +53,18 @@ public class GestorCompetencias {
 		estado.setId_estado(1);
 		estado.setNombre("Creada");
 		competencia.setEstado(estado);
+		
+
+		/*Calendar fecha = new GregorianCalendar();
+		int año= fecha.get(Calendar.YEAR);
+		int mes = fecha.get(Calendar.MONTH)+1;
+		int dia = fecha.get(Calendar.DAY_OF_MONTH);
+		int hora = fecha.get(Calendar.HOUR_OF_DAY);
+		int minuto = fecha.get(Calendar.MINUTE);
+		int segundo = fecha.get(Calendar.SECOND);
+		String fechaActual = año+"/"+mes+"/"+dia+" "+hora+":"+minuto+":"+segundo;
+		java.sql.Date hoy = java.sql.Date.valueOf(fechaActual);
+		competencia.setFecha_hora(hoy);*/
 		
 		
 		idGenerado = CompetenciaDAO.agregarCompetencia(competencia);
