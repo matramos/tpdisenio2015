@@ -2,6 +2,7 @@ package DTO;
 
 import java.util.List;
 
+import capanegocios.Deporte;
 import capanegocios.SeRealizaEn;
 
 public class DeporteDTO {
@@ -9,6 +10,21 @@ public class DeporteDTO {
 	private String nombre;
 	private List<SeRealizaEnDTO> serealizaen;
 	
+	public DeporteDTO(Deporte deporte) {
+		this.id = deporte.getId();
+		this.nombre = deporte.getNombre();
+		for(SeRealizaEn realiza: deporte.getSerealizaen()){
+			SeRealizaEnDTO realizaDTO = new SeRealizaEnDTO();
+			realizaDTO.id_deporte=realiza.getIddeporte();
+			realizaDTO.id_lugar=realiza.getIdlugar();
+			serealizaen.add(realizaDTO);
+			}		
+	}
+
+	public DeporteDTO() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void setId(long id){
 		this.id = id;
 	}

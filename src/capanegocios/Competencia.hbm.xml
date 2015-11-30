@@ -4,34 +4,33 @@
 <class name="capanegocios.Competencia" table="competencia">
 <id column="id_competencia" name="id_competencia" />
 
-<property column="nombre" name="nombre"/>
-<property column="reglamento" name = "reglamento"/>
+	<property column="nombre" name="nombre"/>
+	<property column="reglamento" name = "reglamento"/>
 
 
-<list name="participantes" cascade="all-delete-orphan">
-<key column = "id_competencia"/>
-<index column ="orden"/>
-<one-to-many class="capanegocios.Participante"/>
-</list> 
+	<list name="participantes" cascade="all-delete-orphan">
+	<key column = "id_competencia"/>
+	<index column ="orden"/>
+	<one-to-many class="capanegocios.Participante"/>
+	</list> 
 
 
-<!--  <many-to-one name="deporte" class="capanegocios.Deporte" fetch="select" insert="false" update="false">
- <column name="id_deporte" not-null="true"/>
- </many-to-one>
+	<many-to-one name="deporte" class="capanegocios.Deporte" fetch="select" insert="false" update="false">
+	<column name="id_deporte" not-null="true"/>
+	</many-to-one>
 
 
- <many-to-one name="modalidad" class="capanegocios.Modalidad" fetch="select" insert="false" update="false">
- <column name="id_modalidad" not-null="true"/>
- </many-to-one>
+	<many-to-one name="modalidad" class="capanegocios.Modalidad" fetch="select" insert="false" update="false">
+	<column name="id_modalidad" not-null="true"/>
+	</many-to-one>
 
-<many-to-one name="estado" class="capanegocios.Estado" fetch="select" insert="false" update="false">
- <column name="id_estado" not-null="true"/>
- </many-to-one>
+	<many-to-one name="estado" class="capanegocios.Estado" fetch="select" insert="false" update="false">
+	<column name="id_estado" not-null="true"/>
+	</many-to-one>
  
- <many-to-one name="puntuacion" class="capanegocios.FormaPuntuacion" fetch="select" insert="false" update="false">
- <column name="id_forma_puntuacion" not-null="true"/>
- </many-to-one>
--->
+	<many-to-one name="puntuacion" class="capanegocios.FormaPuntuacion" fetch="select" insert="false" update="false">
+	<column name="id_forma_puntuacion" not-null="true"/>
+	</many-to-one>
 
 </class>
 </hibernate-mapping>

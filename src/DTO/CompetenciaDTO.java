@@ -35,22 +35,19 @@ public class CompetenciaDTO {
 	public CompetenciaDTO(Competencia comp) {
 		this.id_competencia = comp.getId_competencia();
 		this.nombre = comp.getNombre();
-		List<Participante> listaParticipantes = comp.getParticipantes();
 		
 		for(Participante part : comp.getParticipantes()){
 			ParticipanteDTO partDTO = new ParticipanteDTO(part);
 			this.participantes.add(partDTO);
 		}
-		System.out.println(comp.getDeporte().getNombre());
-		this.deporte.setNombre(comp.getDeporte().getNombre());
-		this.deporte.setId(comp.getDeporte().getId());
+		
+		//System.out.println(comp.getDeporte().getNombre());
+		this.deporte = new DeporteDTO(comp.getDeporte());
 		
 		
-		this.modalidad.setId_modalidad(comp.getModalidad().getId_modalidad());
+		this.modalidad=new ModalidadDTO(comp.getModalidad());
 		
-		//this.modalidad = comp.getModalidad().getNombre();
-		//this.estado = comp.getEstado().getNombre();
-		
+		this.estado = new EstadoDTO(comp.getEstado());
 	}
 	
 	public CompetenciaDTO() {

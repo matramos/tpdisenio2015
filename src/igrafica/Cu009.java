@@ -215,7 +215,7 @@ public class Cu009 extends JFrame {
 					System.out.println(participanteDTO.getId_participante());
 					
 				}
-				if(GestorCompetencias.agregarParticipante(participanteDTO,id_competencia)){
+				if(id_competencia == GestorCompetencias.agregarParticipante(participanteDTO,id_competencia)){
 					System.out.println("sirvi");
 					JOptionPane.showMessageDialog(null, "Se cargo con exito");
 					/*Cu008 ventana = new Cu008(idcomp);

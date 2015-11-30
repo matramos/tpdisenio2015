@@ -1,14 +1,10 @@
 package gestores;
 
 import java.util.ArrayList;
-
 import DAO.CompetenciaDAO;
 import DAO.DeporteDAO;
-<<<<<<< HEAD
 import DAO.ParticipanteDAO;
-=======
 import DAO.LugarDAO;
->>>>>>> branch 'master' of https://github.com/matramos/tpdisenio2015.git
 import DTO.CompetenciaDTO;
 import DTO.DisponibilidadDTO;
 import DTO.ListaDeportesDTO;
@@ -90,13 +86,13 @@ public static CompetenciaDTO getCompetencia(long id_competencia){
 	return competencia2;
 }
 
-public static boolean agregarParticipante(ParticipanteDTO participanteDTO,long id_competencia){
+public static long agregarParticipante(ParticipanteDTO participanteDTO,long id_competencia){
 	
 	System.out.println(participanteDTO.getId_participante());
 	System.out.println(participanteDTO.getEmail());
 	
 	competencia = CompetenciaDAO.getCompetencia(id_competencia);
-	boolean bool = false;
+	long res = 0;
 	Participante participante = new Participante();
 	
 	participante.ParticipanteDTO(participanteDTO);
@@ -108,8 +104,8 @@ public static boolean agregarParticipante(ParticipanteDTO participanteDTO,long i
 	competencia.setEstado(estado);
 	
 	
-	bool = CompetenciaDAO.agregarCompetencia(competencia);
-	return  bool;
+	res = CompetenciaDAO.agregarCompetencia(competencia);
+	return  res;
 }
 }
 
