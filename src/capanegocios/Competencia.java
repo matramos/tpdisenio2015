@@ -42,6 +42,9 @@ public class Competencia {
 		this.resultado_final=competenciaDTO.getResultado_final();
 	}
 	
+	public void agregarParticipante(Participante participante){
+		participantes.add(participante);
+	}
 	
 	
 
@@ -156,10 +159,6 @@ public class Competencia {
 
 	public void setParticipantes(List<Participante> participantes) {
 		this.participantes = participantes;
-	}
-	
-	public void agregarParticipante(Participante participante){
-		this.participantes.add(participante);
 	}
 
 	public List<Ronda> getRondas() {

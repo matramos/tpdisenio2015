@@ -33,6 +33,7 @@ public class Modalidad {
 	public void setEliminatoriadoble(boolean eliminatoriaDoble) {
 		this.eliminatoriadoble = eliminatoriaDoble;
 	}
+
 	
 	
 }

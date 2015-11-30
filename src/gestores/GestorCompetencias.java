@@ -3,9 +3,9 @@ package gestores;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-
 import DAO.CompetenciaDAO;
 import DAO.DeporteDAO;
+import DAO.ParticipanteDAO;
 import DAO.LugarDAO;
 import DTO.CompetenciaDTO;
 import DTO.DisponibilidadDTO;
@@ -132,4 +132,8 @@ public static long agregarParticipante(ParticipanteDTO participanteDTO,long id_c
 	res = CompetenciaDAO.agregarCompetencia(competencia);
 	return  res;
 }
+
 }
+
+
+

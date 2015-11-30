@@ -1,7 +1,9 @@
 package capanegocios;
 
 import java.util.List;
+import DTO.CompetenciaDTO;
 import DTO.ParticipanteDTO;
+
 public class Participante {
 	
 	private long id_participante;
@@ -17,12 +19,17 @@ public class Participante {
 	private int tantosDif;
 	
 	public void ParticipanteDTO(ParticipanteDTO participanteDTO) {
+		this.id_participante=participanteDTO.getId_participante();
+		this.email=participanteDTO.getEmail();
+		this.nombre=participanteDTO.getNombre();
+		this.imagen=participanteDTO.getImagen();
 		this.puntaje = participanteDTO.getPuntaje();
 		this.partidosGanados = participanteDTO.getPartidosGanados();
 		this.partidosPerdidos = participanteDTO.getPartidosPerdidos();
 		this.partidosEmpatados = participanteDTO.getPartidosEmpatados();
 		this.tantosFav = participanteDTO.getTantosFav();
 		this.tantosCont = participanteDTO.getTantosCont();
+		this.tantosDif=participanteDTO.getTantosDif();
 	}
 	public long getId_participante() {
 		return id_participante;

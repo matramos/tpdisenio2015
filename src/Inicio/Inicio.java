@@ -28,7 +28,11 @@ public class Inicio {
 	
 	public static void main(String[] args){
 	CrearSesion.empezarSesion();
-	
+
+	//menuprincipal menu = new menuprincipal();
+	//menu.setVisible(true);
+	Cu009 cu009 = new Cu009((long)1);
+	cu009.setVisible(true);
 
 	
 	//Transaction tx = CrearSesion.session.beginTransaction();
@@ -49,6 +53,10 @@ public class Inicio {
 	/*Transaction tx = CrearSesion.session.beginTransaction();
 	List<Participante> participantes = new ArrayList<Participante>();
 
+=======
+	/*Transaction tx = CrearSesion.session.beginTransaction();
+	List<Participante> participantes = new ArrayList<Participante>();
+>>>>>>> branch 'master' of https://github.com/matramos/tpdisenio2015.git
 	Competencia comp = new Competencia();
 	comp.setNombre("Liguilla pre libertadores");
 	Participante part = new Participante();
@@ -63,7 +71,10 @@ public class Inicio {
 	System.out.println(comp.getParticipantes().get(1).getNombre());
 
 	
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/matramos/tpdisenio2015.git
 	CrearSesion.session.saveOrUpdate(comp);
 	
 	
@@ -74,20 +85,7 @@ public class Inicio {
 	comp = (Competencia) query.uniqueResult()
 	
 	tx.commit();*/
-	
 
-	
-
-	/*System.out.println(comp.getNombre());
-	System.out.println(comp.getParticipantes().get(0).getNombre());
-		CrearSesion.terminarSesion();
-CrearSesion.terminarSesion();
-	
-	Cu004 cu = new Cu004();
-	cu.setVisible(true);
-	menuprincipal cu = new menuprincipal();
-	cu.setVisible(true);
-=======
 
 	Calendar fecha = new GregorianCalendar();
 	int año= fecha.get(Calendar.YEAR);
@@ -132,9 +130,8 @@ CrearSesion.terminarSesion();
 */
 	menuprincipal cu = new menuprincipal();
 	cu.setVisible(true);
-	//CrearSesion.terminarSesion();
-	}
-	
+
+}
 }
 
-	
+
