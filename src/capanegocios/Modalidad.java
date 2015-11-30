@@ -1,5 +1,7 @@
 package capanegocios;
 
+import DTO.ModalidadDTO;
+
 public class Modalidad {
 	public long id_modalidad;
 	public boolean liga;

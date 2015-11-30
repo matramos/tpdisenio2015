@@ -10,6 +10,7 @@ import DAO.LugarDAO;
 import DTO.CompetenciaDTO;
 import DTO.DisponibilidadDTO;
 import DTO.ListaDeportesDTO;
+import DTO.ParticipanteDTO;
 import capanegocios.Competencia;
 import capanegocios.Deporte;
 import capanegocios.Disponibilidad;
@@ -17,6 +18,8 @@ import capanegocios.Estado;
 import capanegocios.FormaPuntuacion;
 import capanegocios.Lugar;
 import capanegocios.Modalidad;
+import capanegocios.Participante;
+import capanegocios.SeRealizaEn;
 
 public class GestorCompetencias {
 	
@@ -75,9 +78,12 @@ public class GestorCompetencias {
 	public static ArrayList<CompetenciaDTO> buscarCompetencias(String nombreComp, int deporteID, int modalidadID, int estadoID) {
 		ArrayList<CompetenciaDTO> competenciasQueRetornan = new ArrayList<>(); 
 		ArrayList<Competencia> competenciasEncontradas = CompetenciaDAO.buscarCompetencias(nombreComp, deporteID, modalidadID, estadoID);
-		System.out.println(competenciasEncontradas.get(0).getDeporte().getNombre());
+		System.out.println(competenciasEncontradas.get(0).getDeporte().getSerealizaen().size());
+		for(SeRealizaEn comp : competenciasEncontradas.get(0).getDeporte().getSerealizaen()){
+			System.out.println(comp.getLugar());
+		}
 		for(Competencia comp : competenciasEncontradas){
-			System.out.println(comp.getDeporte().getNombre());
+			System.out.println(comp.getDeporte().getId());
 			CompetenciaDTO compDTO = new CompetenciaDTO(comp);
 			competenciasQueRetornan.add(compDTO);
 		}
@@ -103,5 +109,27 @@ public static CompetenciaDTO getCompetencia(long id_competencia){
 	}*/
 	
 	return competencia2;
+}
+
+public static long agregarParticipante(ParticipanteDTO participanteDTO,long id_competencia){
+	
+	System.out.println(participanteDTO.getId_participante());
+	System.out.println(participanteDTO.getEmail());
+	
+	competencia = CompetenciaDAO.getCompetencia(id_competencia);
+	long res = 0;
+	Participante participante = new Participante();
+	
+	participante.ParticipanteDTO(participanteDTO);
+	
+	competencia.agregarParticipante(participante);
+	Estado estado = new Estado();
+	estado.setId_estado(1);
+	estado.setNombre("Creada");
+	competencia.setEstado(estado);
+	
+	
+	res = CompetenciaDAO.agregarCompetencia(competencia);
+	return  res;
 }
 }

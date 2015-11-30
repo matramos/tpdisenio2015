@@ -12,11 +12,13 @@ import capanegocios.Disponibilidad;
 import capanegocios.Lugar;
 import capanegocios.Participante;
 import capanegocios.Provincia;
+import capanegocios.SeRealizaEn;
 import capanegocios.TipoDocumento;
 import capanegocios.Usuario;
 import igrafica.Cu003;
 import igrafica.Cu004;
 import igrafica.Cu008;
+import igrafica.Cu009;
 import igrafica.menuprincipal;
 import java.sql.Date;
 import java.util.Calendar;
@@ -26,9 +28,8 @@ public class Inicio {
 	
 	public static void main(String[] args){
 	CrearSesion.empezarSesion();
-	//menuprincipal menu = new menuprincipal();
-	//menu.setVisible(true);
 	
+
 	
 	//Transaction tx = CrearSesion.session.beginTransaction();
 	//Competencia comp = new Competencia();
@@ -44,6 +45,10 @@ public class Inicio {
 	//CrearSesion.session.saveOrUpdate(comp);
 	//tx.commit();
 	/*List<Participante> participantes = new ArrayList<Participante>();
+
+	/*Transaction tx = CrearSesion.session.beginTransaction();
+	List<Participante> participantes = new ArrayList<Participante>();
+
 	Competencia comp = new Competencia();
 	comp.setNombre("Liguilla pre libertadores");
 	Participante part = new Participante();
@@ -56,6 +61,9 @@ public class Inicio {
 	participantes.add(par2);
 	comp.setParticipantes(participantes);
 	System.out.println(comp.getParticipantes().get(1).getNombre());
+
+	
+
 	CrearSesion.session.saveOrUpdate(comp);
 	
 	
@@ -63,12 +71,13 @@ public class Inicio {
 	query.setParameter(0, (long)0);
 	
 	Competencia comp = new Competencia();
-	comp = (Competencia) query.uniqueResult();
+	comp = (Competencia) query.uniqueResult()
 	
-	tx.commit();
+	tx.commit();*/
 	
+
 	
-	System.out.println(comp.getParticipantes().get(0).getNombre());
+
 	/*System.out.println(comp.getNombre());
 	System.out.println(comp.getParticipantes().get(0).getNombre());
 		CrearSesion.terminarSesion();
@@ -78,6 +87,7 @@ CrearSesion.terminarSesion();
 	cu.setVisible(true);
 	menuprincipal cu = new menuprincipal();
 	cu.setVisible(true);
+=======
 
 	Calendar fecha = new GregorianCalendar();
 	int año= fecha.get(Calendar.YEAR);
@@ -103,10 +113,28 @@ CrearSesion.terminarSesion();
 	
 	CrearSesion.session.save(comp);
 	tx.commit();
-	*/
+		Query query = CrearSesion.session.createQuery("from Deporte");
+	
+	
+	List<Deporte> dep = new ArrayList<Deporte>();
+	dep = (ArrayList<Deporte>) query.list();
+
+	tx.commit();
+	System.out.println(dep.size());
+
+	for(Deporte depor: dep){
+		System.out.println(depor.getNombre());
+		System.out.println(depor.getSerealizaen().size());
+
+	}
 	menuprincipal cu = new menuprincipal();
 	cu.setVisible(true);
+*/
+	menuprincipal cu = new menuprincipal();
+	cu.setVisible(true);
+	//CrearSesion.terminarSesion();
 	}
 	
 }
+
 	

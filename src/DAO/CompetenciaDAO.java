@@ -144,7 +144,7 @@ public class CompetenciaDAO {
 		
 		tx.commit();
 		
-		
+		System.out.println(competencias.get(0).getDeporte());
 		return competencias;
 	}
 
@@ -231,7 +231,7 @@ public class CompetenciaDAO {
 		competencia = (Competencia) query.uniqueResult();
 		
 		tx.commit();
-
+		System.out.println(competencia.getId_competencia());
 		/*session.close();
 		factory.close();*/
 		//System.out.println(listalugares.getLugares().get(0).getNombre());

@@ -157,6 +157,10 @@ public class Competencia {
 	public void setParticipantes(List<Participante> participantes) {
 		this.participantes = participantes;
 	}
+	
+	public void agregarParticipante(Participante participante){
+		this.participantes.add(participante);
+	}
 
 	public List<Ronda> getRondas() {
 		return rondas;

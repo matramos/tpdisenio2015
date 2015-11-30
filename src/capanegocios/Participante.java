@@ -1,7 +1,7 @@
 package capanegocios;
 
 import java.util.List;
-
+import DTO.ParticipanteDTO;
 public class Participante {
 	
 	private long id_participante;
@@ -15,6 +15,15 @@ public class Participante {
 	private int tantosFav;
 	private int tantosCont;
 	private int tantosDif;
+	
+	public void ParticipanteDTO(ParticipanteDTO participanteDTO) {
+		this.puntaje = participanteDTO.getPuntaje();
+		this.partidosGanados = participanteDTO.getPartidosGanados();
+		this.partidosPerdidos = participanteDTO.getPartidosPerdidos();
+		this.partidosEmpatados = participanteDTO.getPartidosEmpatados();
+		this.tantosFav = participanteDTO.getTantosFav();
+		this.tantosCont = participanteDTO.getTantosCont();
+	}
 	public long getId_participante() {
 		return id_participante;
 	}

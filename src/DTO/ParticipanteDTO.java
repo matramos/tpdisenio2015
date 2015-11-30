@@ -2,6 +2,9 @@ package DTO;
 
 import java.util.List;
 
+import org.hibernate.Transaction;
+
+import Inicio.CrearSesion;
 import capanegocios.Competencia;
 import capanegocios.Encuentro;
 import capanegocios.Participante;
@@ -22,10 +25,20 @@ public class ParticipanteDTO {
 	private int tantosDif;
 	private List<Encuentro> encuentros;
 	
+	
 	public ParticipanteDTO(Participante part) {
 		this.nombre= part.getNombre();
 		this.email= part.getEmail();
 		// TODO Auto-generated constructor stub
+	}
+	public ParticipanteDTO() {
+		this.puntaje = 0;
+		this.partidosGanados = 0;
+		this.partidosPerdidos = 0;
+		this.partidosEmpatados = 0;
+		this.tantosFav = 0;
+		this.tantosCont = 0;
+		this.tantosDif = 0;
 	}
 	public long getId_participante() {
 		return id_participante;
