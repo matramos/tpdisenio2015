@@ -5,11 +5,10 @@
 <id column="id_deporte" name="id" type="long" />
 <property column="nombre" name="nombre" type="string" />
 
-<list name="serealizaen" cascade="all-delete-orphan" >
+<bag name="serealizaen" cascade="all-delete-orphan" >
 <key column = "id_deporte"/>
-<index column ="orden"/>
 <one-to-many class="capanegocios.SeRealizaEn"/>
-</list>
+</bag>
 
 
 

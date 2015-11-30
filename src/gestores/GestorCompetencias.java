@@ -78,12 +78,12 @@ public class GestorCompetencias {
 	public static ArrayList<CompetenciaDTO> buscarCompetencias(String nombreComp, int deporteID, int modalidadID, int estadoID) {
 		ArrayList<CompetenciaDTO> competenciasQueRetornan = new ArrayList<>(); 
 		ArrayList<Competencia> competenciasEncontradas = CompetenciaDAO.buscarCompetencias(nombreComp, deporteID, modalidadID, estadoID);
+		System.out.println(competenciasEncontradas.get(0).getDeporte().getNombre());
 		System.out.println(competenciasEncontradas.get(0).getDeporte().getSerealizaen().size());
-		for(SeRealizaEn comp : competenciasEncontradas.get(0).getDeporte().getSerealizaen()){
-			System.out.println(comp.getLugar());
-		}
+		System.out.println(competenciasEncontradas.get(0).getDeporte().getSerealizaen().get(0).getIddeporte());
+		System.out.println(competenciasEncontradas.get(0).getDeporte().getSerealizaen().get(0).getIdlugar());
+		
 		for(Competencia comp : competenciasEncontradas){
-			System.out.println(comp.getDeporte().getId());
 			CompetenciaDTO compDTO = new CompetenciaDTO(comp);
 			competenciasQueRetornan.add(compDTO);
 		}

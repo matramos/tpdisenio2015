@@ -2,7 +2,6 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 <class name="capanegocios.Competencia" table="competencia">
-<<<<<<< HEAD
 <id column="id_competencia" name="id_competencia" >
 <generator class="sequence">             
     </generator>
@@ -15,13 +14,10 @@
 <property column="permite_empates" name = "permite_empates"/>
 <property name="resultado_final" column="resultado_np"/>
 <property column="fecha_hora" name ="fecha_hora"/>
-=======
-<id column="id_competencia" name="id_competencia" />
 
-	<property column="nombre" name="nombre"/>
-	<property column="reglamento" name = "reglamento"/>
 
->>>>>>> branch 'master' of https://github.com/matramos/tpdisenio2015.git
+
+
 
 	<list name="participantes" cascade="all-delete-orphan">
 	<key column = "id_competencia"/>
@@ -29,7 +25,7 @@
 	<one-to-many class="capanegocios.Participante"/>
 	</list> 
 
-<<<<<<< HEAD
+
 <list name="lugares" table ="disponibilidad" cascade="all-delete-orphan">
 <key column = "id_competencia"/>
 <index column ="orden"/>
@@ -40,10 +36,9 @@
 </composite-element>
 
 </list>
-=======
->>>>>>> branch 'master' of https://github.com/matramos/tpdisenio2015.git
 
-	<many-to-one name="deporte" class="capanegocios.Deporte" fetch="select" insert="false" update="false">
+
+<!-- 	<many-to-one name="deporte" class="capanegocios.Deporte" fetch="select" insert="false" update="false">
 	<column name="id_deporte" not-null="true"/>
 	</many-to-one>
 
@@ -55,9 +50,14 @@
 	<many-to-one name="estado" class="capanegocios.Estado" fetch="select" insert="false" update="false">
 	<column name="id_estado" not-null="true"/>
 	</many-to-one>
- 
-<<<<<<< HEAD
+	<many-to-one name="puntuacion" class="capanegocios.FormaPuntuacion" fetch="select" insert="false" update="false">
+	<column name="id_forma_puntuacion" not-null="true"/>
+	</many-to-one>
+  -->
 
+<many-to-one name="deporte" class="capanegocios.Deporte" fetch="select" insert="false" update="false">
+	<column name="id_deporte" not-null="true"/>
+	</many-to-one>
  
   <many-to-one name="modalidad" class="capanegocios.Modalidad" >
  <column name="id_modalidad" not-null="true"/>
@@ -71,11 +71,9 @@
  <column name="id_estado" not-null="true"/>
  </many-to-one>
 
-=======
-	<many-to-one name="puntuacion" class="capanegocios.FormaPuntuacion" fetch="select" insert="false" update="false">
-	<column name="id_forma_puntuacion" not-null="true"/>
-	</many-to-one>
->>>>>>> branch 'master' of https://github.com/matramos/tpdisenio2015.git
+
+	
+
 
 </class>
 </hibernate-mapping>

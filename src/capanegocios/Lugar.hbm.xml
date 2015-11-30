@@ -6,11 +6,10 @@
 <property column="nombre" name="nombre" type="string" />
 <property column ="descripcion" name="descripcion" type="string"/>
 
-<list name="serealizaen" cascade="all-delete-orphan" >
+<bag name="serealizaen" cascade="all-delete-orphan" >
 <key column = "id_lugar"/>
-<index column ="orden"/>
 <one-to-many class="capanegocios.SeRealizaEn"/>
-</list>
+</bag>
 
 
 <!-- <list name="competencias" table = "disponibilidad" cascade="all-delete-orphan">

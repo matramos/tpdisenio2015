@@ -1,5 +1,6 @@
 package capanegocios;
 
+
 import java.util.List;
 
 public class Lugar {

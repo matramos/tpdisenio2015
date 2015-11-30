@@ -31,8 +31,8 @@ public class Inicio {
 
 	//menuprincipal menu = new menuprincipal();
 	//menu.setVisible(true);
-	Cu009 cu009 = new Cu009((long)1);
-	cu009.setVisible(true);
+	//Cu009 cu009 = new Cu009((long)1);
+	//cu009.setVisible(true);
 
 	
 	//Transaction tx = CrearSesion.session.beginTransaction();
@@ -87,13 +87,13 @@ public class Inicio {
 	tx.commit();*/
 
 
-	Calendar fecha = new GregorianCalendar();
+	/*Calendar fecha = new GregorianCalendar();
 	int año= fecha.get(Calendar.YEAR);
 	int mes = fecha.get(Calendar.MONTH)+1;
 	int dia = fecha.get(Calendar.DAY_OF_MONTH);
 	String fechaActual = año+"/"+mes+"/"+dia+"";
 	java.sql.Date hoy = java.sql.Date.valueOf(fechaActual);
-	System.out.println(fechaActual);
+	System.out.println(fechaActual);*/
 	/*Transaction tx = CrearSesion.session.beginTransaction();
 	
 	Competencia comp = new Competencia();
@@ -127,10 +127,25 @@ public class Inicio {
 	}
 	menuprincipal cu = new menuprincipal();
 	cu.setVisible(true);
+	
+	Query query = CrearSesion.session.createQuery("from Deporte");
+	
+	
+	List<Deporte> dep = new ArrayList<Deporte>();
+	dep = (ArrayList<Deporte>) query.list();
+
+	tx.commit();
+	
+	System.out.println(dep.get(0).getId());
+	System.out.println(dep.get(0).getSerealizaen().size());
+
 */
+	
 	menuprincipal cu = new menuprincipal();
 	cu.setVisible(true);
-
+		
+	
+	//CrearSesion.terminarSesion();
 }
 }
 
