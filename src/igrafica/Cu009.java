@@ -79,7 +79,7 @@ public class Cu009 extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Cu009(long id_competencia) {
+	public Cu009(final long id_competencia) {
 		
 		// codigo para agregar imagen por exploracion 
 		
@@ -115,7 +115,7 @@ public class Cu009 extends JFrame {
 		lblCompetencia.setBounds(28, 84, 78, 14);
 		contentPane.add(lblCompetencia);
 		
-		JLabel lblNombreDelParticipante = new JLabel("Nombre del Participante o Equipo:");
+		final JLabel lblNombreDelParticipante = new JLabel("Nombre del Participante o Equipo:");
 		lblNombreDelParticipante.setBounds(92, 122, 227, 14);
 		contentPane.add(lblNombreDelParticipante);
 		
@@ -144,7 +144,7 @@ public class Cu009 extends JFrame {
 		contentPane.add(txturl);
 		txturl.setColumns(10);
 		
-		JLabel lblimagen = new JLabel("");
+		final JLabel lblimagen = new JLabel("");
 		lblimagen.setBounds(92, 264, 148, 111);
 		contentPane.add(lblimagen);
 		lblimagen.setIcon(new ImageIcon(img));

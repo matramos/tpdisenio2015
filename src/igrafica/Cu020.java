@@ -50,7 +50,7 @@ public class Cu020 extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Cu020(long id_competencia) {
+	public Cu020(final long id_competencia) {
 		//BUSCAMOS LA COMPETENCIA
 		compe = GestorCompetencias.getCompetencia(id_competencia);
 		

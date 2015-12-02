@@ -55,7 +55,7 @@
 	</many-to-one>
   -->
 
-<many-to-one name="deporte" class="capanegocios.Deporte" fetch="select" insert="false" update="false">
+<many-to-one name="deporte" class="capanegocios.Deporte" >
 	<column name="id_deporte" not-null="true"/>
 	</many-to-one>
  

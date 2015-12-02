@@ -40,7 +40,7 @@ public class CompetenciaDTO {
 			this.participantes.add(partDTO);
 		}
 		
-		//System.out.println(comp.getDeporte().getNombre());
+		System.out.println(comp.getDeporte().getNombre());
 		this.deporte = new DeporteDTO(comp.getDeporte());
 		
 		
