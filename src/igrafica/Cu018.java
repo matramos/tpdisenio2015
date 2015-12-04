@@ -332,7 +332,7 @@ public class Cu018 extends JFrame {
 		
 		modalidad=competencia.getModalidad();
 		
-		if(modalidad.isElminatoriaSimple()== true ^ modalidad.isEliminatoriaDoble()== true){
+		if(modalidad.isEliminatoriaSimple()== true ^ modalidad.isEliminatoriaDoble()== true){
 			
 			set1.setPuntajep1(Integer.parseInt(txtS1P1.getText()));
 			set1.setPuntajep2(Integer.parseInt(txtS1P1.getText()));

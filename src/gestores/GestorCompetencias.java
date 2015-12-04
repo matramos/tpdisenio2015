@@ -1,7 +1,8 @@
 package gestores;
 
 import java.util.ArrayList;
-
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import DAO.CompetenciaDAO;
 import DAO.DeporteDAO;
 import DAO.ParticipanteDAO;
@@ -18,7 +19,7 @@ import capanegocios.FormaPuntuacion;
 import capanegocios.Lugar;
 import capanegocios.Modalidad;
 import capanegocios.Participante;
-
+import capanegocios.SeRealizaEn;
 public class GestorCompetencias {
 	
 	private static Competencia competencia;
@@ -34,7 +35,14 @@ public class GestorCompetencias {
 		competencia.setPuntuacion(forma);
 		Modalidad modalidad = CompetenciaDAO.getModalidad(idmodalidadPrim);
 		competencia.setModalidad(modalidad);
+		competencia.setResultado_final(competenciaDTO.getResultado_final());
 		
+		for(DisponibilidadDTO object: competenciaDTO.getLugares()){
+			Disponibilidad dispo = new Disponibilidad();
+			dispo.setDisponibilidad(object.getDisponibilidad());
+			dispo.setLugar(LugarDAO.getLugar(object.getLugar()));
+			competencia.addLugar(dispo);
+		}
 		/*for(DisponibilidadDTO object: competenciaDTO.getDisponibilidades()){
 			Lugar lugar = LugarDAO.getLugar(object.getLugar());
 			Disponibilidad disponibilidad = new Disponibilidad();
@@ -59,7 +67,7 @@ public class GestorCompetencias {
 		ArrayList<Competencia> competenciasEncontradas = CompetenciaDAO.buscarCompetencias(nombreComp, deporteID, modalidadID, estadoID);
 		System.out.println(competenciasEncontradas.get(0).getDeporte().getNombre());
 		for(Competencia comp : competenciasEncontradas){
-			System.out.println(comp.getDeporte().getNombre());
+			//System.out.println(comp.getDeporte().getNombre());
 			CompetenciaDTO compDTO = new CompetenciaDTO(comp);
 			competenciasQueRetornan.add(compDTO);
 		}
@@ -93,7 +101,7 @@ public static long agregarParticipante(ParticipanteDTO participanteDTO,long id_c
 	System.out.println(participanteDTO.getEmail());
 	
 	competencia = CompetenciaDAO.getCompetencia(id_competencia);
-	long bool = 0;
+	long res = 0;
 	Participante participante = new Participante();
 	
 	participante.ParticipanteDTO(participanteDTO);
@@ -105,9 +113,19 @@ public static long agregarParticipante(ParticipanteDTO participanteDTO,long id_c
 	competencia.setEstado(estado);
 	
 	
-	bool = CompetenciaDAO.agregarCompetencia(competencia);
-	return  bool;
-}
+	res = CompetenciaDAO.agregarCompetencia(competencia);
+	return  res;
 }
 
+public static void generarFixture(long id_competencia) {
+	competencia = buscarCompetencia(id_competencia);
+	GestorFixture.generarFixture(competencia);
+	
+}
 
+private static Competencia buscarCompetencia(long id_competencia) {
+	
+	return null;
+}
+
+}

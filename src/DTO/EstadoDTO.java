@@ -1,8 +1,18 @@
 package DTO;
 
+import capanegocios.Estado;
+
 public class EstadoDTO {
 	private long id_estado;
 	private String nombre;
+	
+	public EstadoDTO(Estado estado) {
+		this.id_estado = estado.getId_estado();
+		this.nombre = estado.getNombre();
+	}
+	public EstadoDTO() {
+		// TODO Auto-generated constructor stub
+	}
 	public long getId_estado() {
 		return id_estado;
 	}

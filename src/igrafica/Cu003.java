@@ -89,7 +89,7 @@ public class Cu003 extends JFrame {
 		contentPane.add(nombre);
 		nombre.setColumns(10);
 		
-		JComboBox<String> comboDeporte = new JComboBox<>();
+		final JComboBox<String> comboDeporte = new JComboBox<>();
 		comboDeporte.setBounds(206, 203, 172, 20);
 		contentPane.add(comboDeporte);
 		
@@ -103,17 +103,17 @@ public class Cu003 extends JFrame {
 			comboDeporte.addItem(depor.getNombre());
 		}
 		
-		JComboBox<String> comboModalidad = new JComboBox<String>();
+		final JComboBox<String> comboModalidad = new JComboBox<String>();
 		comboModalidad.setBounds(508, 147, 172, 20);
 		contentPane.add(comboModalidad);
 		
 		//Agregamos las modalidades de manera directa
 		comboModalidad.addItem(null);
 		comboModalidad.addItem("Liga");
-		comboModalidad.addItem("Eliminación Simple");
-		comboModalidad.addItem("Eliminación Doble");
+		comboModalidad.addItem("Eliminaciï¿½n Simple");
+		comboModalidad.addItem("Eliminaciï¿½n Doble");
 		
-		JComboBox<String> comboEstado = new JComboBox<>();
+		final JComboBox<String> comboEstado = new JComboBox<>();
 		comboEstado.setBounds(508, 203, 172, 20);
 		contentPane.add(comboEstado);
 		

@@ -1,14 +1,32 @@
 package DTO;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import capanegocios.Deporte;
 import capanegocios.SeRealizaEn;
 
 public class DeporteDTO {
 	private long id;
 	private String nombre;
-	private List<SeRealizaEnDTO> serealizaen;
+	private List<SeRealizaEnDTO> serealizaen = new ArrayList<SeRealizaEnDTO>();
 	
+	public DeporteDTO(Deporte deporte) {
+		this.id = deporte.getId();
+		this.nombre = deporte.getNombre();
+		System.out.println(deporte.getSerealizaen().size());
+		for(SeRealizaEn realiza: deporte.getSerealizaen()){
+			SeRealizaEnDTO realizaDTO = new SeRealizaEnDTO();
+			realizaDTO.id_deporte=realiza.getIddeporte();
+			realizaDTO.id_lugar=realiza.getIdlugar();
+			serealizaen.add(realizaDTO);
+			}		
+	}
+
+	public DeporteDTO() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void setId(long id){
 		this.id = id;
 	}

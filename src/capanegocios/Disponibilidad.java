@@ -5,6 +5,7 @@ public class Disponibilidad {
 	private Lugar lugar;
 	private int disponibilidad;
 	
+	
 	public Lugar getLugar() {
 		return lugar;
 	}

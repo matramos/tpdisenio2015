@@ -1,5 +1,7 @@
 package capanegocios;
 
+import DTO.ModalidadDTO;
+
 public class Modalidad {
 	public long id_modalidad;
 	public boolean liga;
@@ -31,6 +33,7 @@ public class Modalidad {
 	public void setEliminatoriadoble(boolean eliminatoriaDoble) {
 		this.eliminatoriadoble = eliminatoriaDoble;
 	}
+
 	
 	
 }

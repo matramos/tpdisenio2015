@@ -70,7 +70,7 @@ public class Cu008 extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Cu008(long id_competencia) {
+	public Cu008(final long id_competencia) {
 		setTitle("Gevico");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);

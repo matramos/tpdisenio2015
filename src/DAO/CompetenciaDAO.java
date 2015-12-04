@@ -144,7 +144,7 @@ public class CompetenciaDAO {
 		
 		tx.commit();
 		
-		
+		System.out.println(competencias.get(0).getDeporte());
 		return competencias;
 	}
 
@@ -192,7 +192,7 @@ public class CompetenciaDAO {
 			
 			competencia.setNombre(object.getNombre());
 			modalidad.setEliminatoriaDoble(object.getModalidad().getEliminatoriadoble());
-			modalidad.setElminatoriaSimple(object.getModalidad().getElminatoriasimple());
+			modalidad.setEliminatoriaSimple(object.getModalidad().getElminatoriasimple());
 			modalidad.setId_modalidad(object.getModalidad().getId_modalidad());
 			modalidad.setLiga(object.getModalidad().liga);
 			competencia.setModalidad(modalidad);
@@ -231,7 +231,7 @@ public class CompetenciaDAO {
 		competencia = (Competencia) query.uniqueResult();
 		
 		tx.commit();
-
+		System.out.println(competencia.getId_competencia());
 		/*session.close();
 		factory.close();*/
 		//System.out.println(listalugares.getLugares().get(0).getNombre());

@@ -61,6 +61,8 @@ import gestores.GestorCompetencias;
 import gestores.GestorDeportes;
 import gestores.GestorLugar;
 import java.awt.event.ItemEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Cu004 extends JFrame {
 
@@ -151,6 +153,17 @@ public class Cu004 extends JFrame {
 		contentPane.add(lblDeporte);
 		
 		nombre = new JTextField();
+		nombre.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				char c = arg0.getKeyChar();
+				if(Character.isLowerCase(c)){
+					String cad = (""+c).toUpperCase();
+					c=cad.charAt(0);
+					arg0.setKeyChar(c);
+				}
+			}
+		});
 		nombre.setBounds(104, 72, 86, 20);
 		contentPane.add(nombre);
 		nombre.setColumns(10);
@@ -400,9 +413,10 @@ public class Cu004 extends JFrame {
 					CompetenciaDTO competencia = new CompetenciaDTO();
 					for(int i = 0; i<table.getRowCount();i++){
 						DisponibilidadDTO disponibilidad = new DisponibilidadDTO();
-						disponibilidad.setDisponibilidad((int)table.getValueAt(i, 1));
+						String dis = (String) table.getValueAt(i, 1);
+						disponibilidad.setDisponibilidad(Integer.parseInt(dis));
 						disponibilidad.setLugar(lugares.getLugar(table.getValueAt(i, 0).toString()));
-						competencia.addDisponibilidad(disponibilidad);
+						competencia.addLugar(disponibilidad);
 					}
 					competencia.setNombre(nombre.getText());
 					competencia.setPuntos_ganador(Integer.parseInt(puntosVictoria.getText()));

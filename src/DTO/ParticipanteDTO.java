@@ -16,14 +16,14 @@ public class ParticipanteDTO {
 	private String email;
 	private String nombre;
 	public byte[] imagen;
-	private int puntaje;
+	public int puntaje;
 	private CompetenciaDTO competencia;
 	private int partidosGanados;
 	private int partidosPerdidos;
 	private int partidosEmpatados;
-	private int tantosFav;
+	public int tantosFav;
 	private int tantosCont;
-	private int tantosDif;
+	public int tantosDif;
 	private List<Encuentro> encuentros;
 	
 	
@@ -120,3 +120,5 @@ public class ParticipanteDTO {
 		this.encuentros = encuentros;
 	}
 }
+
+

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import DTO.CompetenciaDTO;
+import DTO.DisponibilidadDTO;
 
 public class Competencia {
 
@@ -24,7 +25,7 @@ public class Competencia {
 	private int resultado_final;
 	private List<Participante> participantes = new ArrayList<Participante>();
 	private List<Ronda> rondas;
-	private List<Disponibilidad> disponibilidades = new ArrayList<Disponibilidad>();
+	private List<Disponibilidad> lugares = new ArrayList<Disponibilidad>();
 	private Estado estado;
 	
 	public void CompetenciaDTO(CompetenciaDTO competenciaDTO){
@@ -33,6 +34,7 @@ public class Competencia {
 		this.cantidad_sets=competenciaDTO.getCantidad_sets();
 		this.reglamento=competenciaDTO.getReglamento();
 		this.puntos_presentarse=competenciaDTO.getPuntos_presentarse();
+		this.puntos_ganador=competenciaDTO.getPuntos_ganador();
 		this.puntos_empate=competenciaDTO.getPuntos_empate();
 		this.permite_empates=competenciaDTO.isPermite_empates();
 		this.fecha_hora=competenciaDTO.getFecha_hora();
@@ -44,6 +46,9 @@ public class Competencia {
 		participantes.add(participante);
 	}
 	
+	
+
+
 	public void setDeporte(Deporte deporte){
 		this.deporte = deporte;
 	}
@@ -181,17 +186,17 @@ public class Competencia {
 	}
 
 
-	public List<Disponibilidad> getDisponibilidades() {
-		return disponibilidades;
+	public List<Disponibilidad> getLugares() {
+		return lugares;
 	}
 
 
-	public void setDisponibilidades(List<Disponibilidad> disponibilidades) {
-		this.disponibilidades = disponibilidades;
+	public void setLugares(List<Disponibilidad> lugares) {
+		this.lugares = lugares;
 	}
 	
-	public void addDisponibilidad(Disponibilidad disponibilidad){
-		this.disponibilidades.add(disponibilidad);
+	public void addLugar(Disponibilidad lugar){
+		this.lugares.add(lugar);
 	}
 	
 }

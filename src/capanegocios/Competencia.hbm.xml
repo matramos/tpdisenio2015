@@ -2,36 +2,78 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 <class name="capanegocios.Competencia" table="competencia">
-<id column="id_competencia" name="id_competencia" />
-
+<id column="id_competencia" name="id_competencia" >
+<generator class="sequence">             
+    </generator>
+</id>
 <property column="nombre" name="nombre"/>
 <property column="reglamento" name = "reglamento"/>
+<property column="puntos_presentarse" name = "puntos_presentarse"/>
+<property column="puntos_ganador" name = "puntos_ganador"/>
+<property column="puntos_empate" name = "puntos_empate"/>
+<property column="permite_empates" name = "permite_empates"/>
+<property name="resultado_final" column="resultado_np"/>
+<property column="fecha_hora" name ="fecha_hora"/>
 
 
-<list name="participantes" cascade="all-delete-orphan">
+
+
+
+	<list name="participantes" cascade="all-delete-orphan">
+	<key column = "id_competencia"/>
+	<index column ="orden"/>
+	<one-to-many class="capanegocios.Participante"/>
+	</list> 
+
+
+<list name="lugares" table ="disponibilidad" cascade="all-delete-orphan">
 <key column = "id_competencia"/>
 <index column ="orden"/>
-<one-to-many class="capanegocios.Participante"/>
-</list> 
+<composite-element class="capanegocios.Disponibilidad">
+<!-- <parent name="competencia"/> -->
+<many-to-one name ="lugar" column="id_lugar" class="capanegocios.Lugar"/>
+<property name="disponibilidad" column="disponibilidad"/>
+</composite-element>
+
+</list>
 
 
-<!--  <many-to-one name="deporte" class="capanegocios.Deporte" fetch="select" insert="false" update="false">
- <column name="id_deporte" not-null="true"/>
- </many-to-one>
+<!-- 	<many-to-one name="deporte" class="capanegocios.Deporte" fetch="select" insert="false" update="false">
+	<column name="id_deporte" not-null="true"/>
+	</many-to-one>
 
 
- <many-to-one name="modalidad" class="capanegocios.Modalidad" fetch="select" insert="false" update="false">
+	<many-to-one name="modalidad" class="capanegocios.Modalidad" fetch="select" insert="false" update="false">
+	<column name="id_modalidad" not-null="true"/>
+	</many-to-one>
+
+	<many-to-one name="estado" class="capanegocios.Estado" fetch="select" insert="false" update="false">
+	<column name="id_estado" not-null="true"/>
+	</many-to-one>
+	<many-to-one name="puntuacion" class="capanegocios.FormaPuntuacion" fetch="select" insert="false" update="false">
+	<column name="id_forma_puntuacion" not-null="true"/>
+	</many-to-one>
+  -->
+
+<many-to-one name="deporte" class="capanegocios.Deporte" >
+	<column name="id_deporte" not-null="true"/>
+	</many-to-one>
+ 
+  <many-to-one name="modalidad" class="capanegocios.Modalidad" >
  <column name="id_modalidad" not-null="true"/>
  </many-to-one>
 
-<many-to-one name="estado" class="capanegocios.Estado" fetch="select" insert="false" update="false">
- <column name="id_estado" not-null="true"/>
- </many-to-one>
- 
- <many-to-one name="puntuacion" class="capanegocios.FormaPuntuacion" fetch="select" insert="false" update="false">
+ <many-to-one name="puntuacion" class="capanegocios.FormaPuntuacion">
  <column name="id_forma_puntuacion" not-null="true"/>
  </many-to-one>
--->
+ 
+ <many-to-one name="estado" class="capanegocios.Estado" >
+ <column name="id_estado" not-null="true"/>
+ </many-to-one>
+
+
+	
+
 
 </class>
 </hibernate-mapping>
