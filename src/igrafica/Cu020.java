@@ -171,9 +171,16 @@ public class Cu020 extends JFrame {
 		JButton btnGenerarFixture = new JButton("Generar fixture");
 		btnGenerarFixture.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent g) {
-				Cu017 ventanaGenFixture = new Cu017(id_competencia);
-				ventanaGenFixture.setVisible(true);
-				dispose();
+				if((compe.getEstado().getNombre()=="creada") || (compe.getEstado().getNombre()=="planificada")){
+					Cu017 ventanaGenFixture = new Cu017(id_competencia);
+					ventanaGenFixture.setVisible(true);
+					dispose();
+				}
+				else{
+					Cu017Error ventanaErrFixture = new Cu017Error();
+					ventanaErrFixture.setVisible(true);
+					dispose();
+				}
 			}
 		});
 		btnGenerarFixture.setBounds(575, 164, 175, 23);

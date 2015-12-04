@@ -59,13 +59,13 @@ public class GestorCompetencias {
 		
 
 		/*Calendar fecha = new GregorianCalendar();
-		int año= fecha.get(Calendar.YEAR);
+		int aï¿½o= fecha.get(Calendar.YEAR);
 		int mes = fecha.get(Calendar.MONTH)+1;
 		int dia = fecha.get(Calendar.DAY_OF_MONTH);
 		int hora = fecha.get(Calendar.HOUR_OF_DAY);
 		int minuto = fecha.get(Calendar.MINUTE);
 		int segundo = fecha.get(Calendar.SECOND);
-		String fechaActual = año+"/"+mes+"/"+dia+" "+hora+":"+minuto+":"+segundo;
+		String fechaActual = aï¿½o+"/"+mes+"/"+dia+" "+hora+":"+minuto+":"+segundo;
 		java.sql.Date hoy = java.sql.Date.valueOf(fechaActual);
 		competencia.setFecha_hora(hoy);*/
 		
@@ -131,6 +131,17 @@ public static long agregarParticipante(ParticipanteDTO participanteDTO,long id_c
 	
 	res = CompetenciaDAO.agregarCompetencia(competencia);
 	return  res;
+}
+
+public static void generarFixture(long id_competencia) {
+	competencia = buscarCompetencia(id_competencia);
+	GestorFixture.generarFixture(competencia);
+	
+}
+
+private static Competencia buscarCompetencia(long id_competencia) {
+	
+	return null;
 }
 
 }
