@@ -3,6 +3,7 @@ package igrafica;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,9 +16,16 @@ import java.awt.Component;
 
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.EventObject;
 import java.util.Objects;
 import java.awt.event.ActionEvent;
@@ -41,6 +49,7 @@ public class Cu008 extends JFrame {
 	private TestModelCU8 model;
 	private JTable table;
 	private CompetenciaDTO competencia;
+	private JLabel lblImagen;
 
 	/**
 	 * Launch the application.
@@ -81,7 +90,7 @@ public class Cu008 extends JFrame {
 		contentPane.add(lblCompetencia);
 		
 		JLabel lblCompe = new JLabel("");
-		lblCompe.setBounds(140, 98, 46, 14);
+		lblCompe.setBounds(181, 98, 46, 14);
 		contentPane.add(lblCompe);
 		
 		JButton btnAgregarParticipante = new JButton("Agregar Participante");
@@ -107,18 +116,20 @@ public class Cu008 extends JFrame {
 		contentPane.add(btnVolver);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(57, 146, 567, 159);
+		scrollPane.setBounds(57, 146, 601, 159);
 		contentPane.add(scrollPane);
 		
 		model = new TestModelCU8();
 		table = new JTable(model);
 	    
+		
 	    TableColumn column1 = table.getColumnModel().getColumn(2);
 	    column1.setCellRenderer(new DeleteButtonRendererCU8());
 	    column1.setCellEditor(new DeleteButtonEditorCU8(table));
 	    column1.setMinWidth(20);
 	    column1.setMaxWidth(20);
 	    column1.setResizable(false);
+	    
 	    
 	    TableColumn column2 = table.getColumnModel().getColumn(3);
 	    column2.setCellRenderer(new DeleteButtonRendererCU8());
@@ -138,7 +149,7 @@ public class Cu008 extends JFrame {
 			System.out.println(CDTO.getModalidad());
 			System.out.println(CDTO.getEstado());*/
 			//model.addTest(new TestCU3(CDTO.getNombre(),CDTO.getDeporte().getNombre(),""+CDTO.getModalidad().getId_modalidad()));
-			model.addTest(new TestCU8(PDTO.getNombre(),PDTO.getEmail()));
+			model.addTest(new TestCU8(PDTO.getNombre(),PDTO.getEmail(),PDTO.getImagen()));
 		}
 		
 		lblCompe.setText(competencia.getNombre());
@@ -150,9 +161,28 @@ public class Cu008 extends JFrame {
 
 class TestCU8 {
     private String nombreEquipo,email;
-    public TestCU8(String nombreEquipo, String email) {
+    private Image imagen;
+    
+    public TestCU8(String nombreEquipo, String email ,byte[] imagen) {
         this.nombreEquipo=nombreEquipo;
         this.email=email;
+        try {
+        /*
+        InputStream in = new ByteArrayInputStream(imagen);
+		BufferedImage bImageFromConvert = ImageIO.read(in);
+		ImageIO.write(bImageFromConvert, "jpg", new File("C:/Users/Fran/workspace/as/imagenCreada.jpg"));*/
+        
+        File newFile= new File("C:\\images\\destino\\imgTest-"+System.currentTimeMillis()+".jpg");
+        //BufferedImage imag=ImageIO.read(new ByteArrayInputStream(imagen));
+        //ImageIO.write(imag, "jpg", newFile);
+        Image image = ImageIO.read(newFile);
+        this.imagen=image;
+    } catch (IOException e){
+
+        e.printStackTrace();
+    }
+        
+		
     }
     public void setNombreEquipo(String str) {
         nombreEquipo = str;
@@ -167,6 +197,12 @@ class TestCU8 {
     public String getEmail() {
         return email;
     }
+    public void setImagen(Image str){
+    	imagen=str;
+    }
+    public Image getImagen(){
+    	return imagen;
+    }
 }
 
 
@@ -174,8 +210,9 @@ class TestModelCU8 extends DefaultTableModel {
     private static final ColumnContext[] COLUMN_ARRAY = {
         new ColumnContext("Nombre de Equipo o Participante",     String.class, true),
         new ColumnContext("Email",    String.class,  true),
-        new ColumnContext("", String.class, true), 
-        new ColumnContext("", String.class,  true)
+        new ColumnContext("Imagen", Image.class, true),
+        new ColumnContext("Eliminar Participante", String.class, true), 
+        new ColumnContext("Modificar Participante", String.class,  true)
     };
     public void addTest(TestCU8 t) {
         Object[] obj = {t.getnombreEquipo(), t.getEmail(),"",""};
@@ -211,7 +248,7 @@ class DeleteButtonCU8 extends JButton {
         setBorder(BorderFactory.createEmptyBorder());
         setFocusable(false);
         setRolloverEnabled(false);
-        setText("X");
+        setText("Eliminar Participante");
     }
 }
 

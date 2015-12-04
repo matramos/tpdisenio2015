@@ -22,7 +22,7 @@ public class Inicio {
 	CrearSesion.empezarSesion();
 	//menuprincipal menu = new menuprincipal();
 	//menu.setVisible(true);
-	Cu009 cu009 = new Cu009((long)1);
+	Cu008 cu009 = new Cu008((long)1);
 	cu009.setVisible(true);
 	
 	/*Transaction tx = CrearSesion.session.beginTransaction();
@@ -52,23 +52,3 @@ public class Inicio {
 	}
 	
 }
-
-/*
- * 
- * File archivo = null;
-					byte[] buffer = null;
-					if(!panel.url.isEmpty()){
-						try {
-							archivo = new File(panel.url);
-							InputStream ee = new FileInputStream(archivo);
-							buffer = new byte[(int) archivo.length()];
-							ee.read(buffer);
-							
-						} catch (Exception e1) {
-							
-							e1.printStackTrace();
-						}
-						
-						*/
- 
-	

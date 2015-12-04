@@ -1,14 +1,16 @@
-package capanegocios;
+package DTO;
 
 import java.util.List;
+import capanegocios.Competencia;
+import capanegocios.Encuentro;
 
-public class Ronda {
+public class RondaDTO {
 	private long id_ronda;
 	private Competencia competencia;
 	private int numeroRonda;
 	private boolean finalizado;
 	private boolean comenzada;
-	private List<Encuentro> encuentros;
+	private List<EncuentroDTO> encuentros;
 	public long getId_ronda() {
 		return id_ronda;
 	}
@@ -39,10 +41,10 @@ public class Ronda {
 	public void setComenzada(boolean comenzada) {
 		this.comenzada = comenzada;
 	}
-	public List<Encuentro> getEncuentros() {
+	public List<EncuentroDTO> getEncuentros() {
 		return encuentros;
 	}
-	public void setEncuentros(List<Encuentro> encuentros) {
+	public void setEncuentros(List<EncuentroDTO> encuentros) {
 		this.encuentros = encuentros;
 	}
 }

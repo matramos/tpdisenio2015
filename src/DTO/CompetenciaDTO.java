@@ -28,7 +28,7 @@ public class CompetenciaDTO {
 	private int resultado_final;
 	private List<String> lugares;
 	private List<ParticipanteDTO> participantes = new ArrayList<ParticipanteDTO>();
-	private List<Ronda> rondas;
+	private List<RondaDTO> rondas;
 	private List<DisponibilidadDTO> disponibilidades;
 	
 	
@@ -41,12 +41,12 @@ public class CompetenciaDTO {
 			ParticipanteDTO partDTO = new ParticipanteDTO(part);
 			this.participantes.add(partDTO);
 		}
-		System.out.println(comp.getDeporte().getNombre());
-		this.deporte.setNombre(comp.getDeporte().getNombre());
-		this.deporte.setId(comp.getDeporte().getId());
+		//System.out.println(comp.getDeporte().getNombre());
+		//this.deporte.setNombre(comp.getDeporte().getNombre());
+		//this.deporte.setId(comp.getDeporte().getId());
 		
 		
-		this.modalidad.setId_modalidad(comp.getModalidad().getId_modalidad());
+		//this.modalidad.setId_modalidad(comp.getModalidad().getId_modalidad());
 		
 		//this.modalidad = comp.getModalidad().getNombre();
 		//this.estado = comp.getEstado().getNombre();
@@ -166,10 +166,10 @@ public class CompetenciaDTO {
 	public void setParticipantes(List<ParticipanteDTO> participantes) {
 		this.participantes = participantes;
 	}
-	public List<Ronda> getRondas() {
+	public List<RondaDTO> getRondas() {
 		return rondas;
 	}
-	public void setRondas(List<Ronda> rondas) {
+	public void setRondas(List<RondaDTO> rondas) {
 		this.rondas = rondas;
 	}
 	public EstadoDTO getEstado() {
