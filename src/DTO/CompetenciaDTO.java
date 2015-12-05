@@ -40,14 +40,9 @@ public class CompetenciaDTO {
 			ParticipanteDTO partDTO = new ParticipanteDTO(part);
 			this.participantes.add(partDTO);
 		}
-		
 		this.deporte = new DeporteDTO(comp.getDeporte());
-		
-		
 		this.modalidad=new ModalidadDTO(comp.getModalidad());
-		
 		this.estado = new EstadoDTO(comp.getEstado());
-		
 	}
 	
 	public CompetenciaDTO() {

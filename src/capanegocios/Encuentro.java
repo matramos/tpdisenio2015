@@ -3,6 +3,8 @@ package capanegocios;
 import java.util.Date;
 import java.util.List;
 
+import DTO.SetDTO;
+
 public class Encuentro {
 	private long id_encuentro;
 	private boolean empate;
@@ -137,6 +139,10 @@ public class Encuentro {
 	}
 	public void setEncuentro2(Encuentro encuentro2) {
 		this.encuentro2 = encuentro2;
+	}
+	
+	public void addSet(Set set1){
+		sets.add(set1);
 	}
 	
 }

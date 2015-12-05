@@ -123,9 +123,11 @@ public static void generarFixture(long id_competencia) {
 	
 }
 
-private static Competencia buscarCompetencia(long id_competencia) {
+public static Competencia buscarCompetencia(long id_competencia) {
 	
-	return null;
+	competencia = CompetenciaDAO.getCompetencia(id_competencia);
+	
+	return competencia;
 }
 
 }

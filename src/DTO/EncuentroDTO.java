@@ -31,6 +31,45 @@ public class EncuentroDTO {
 	private EncuentroDTO encuentro1;
 	private EncuentroDTO encuentro2;
 	
+	public EncuentroDTO(Encuentro encuentro){
+		this.id_encuentro=encuentro.getId_encuentro();
+		this.empate=encuentro.isEmpate();
+		this.resultadoReg=encuentro.isResultadoReg();
+		this.orden=encuentro.getOrden();
+		this.fecha=encuentro.getFecha();
+		this.ganador=new ParticipanteDTO(encuentro.getGanador());
+		this.jugador1=new ParticipanteDTO(encuentro.getJugador1());
+		this.jugador2=new ParticipanteDTO(encuentro.getJugador2());
+		this.lugar=new LugarDTO(encuentro.getLugar());
+		this.ronda=new RondaDTO(encuentro.getRonda());
+		this.puntajep1=encuentro.getPuntajep1();
+		this.puntajep2=encuentro.getPuntajep2();
+		this.estadop1=encuentro.isEstadop1();
+		this.estadop2=encuentro.isEstadop2();
+		for(Encuentro rgan : encuentro.getRganadores()){
+			EncuentroDTO rganDTO = new EncuentroDTO(rgan);
+			this.rganadores.add(rganDTO);
+		}
+		for(Encuentro rper :encuentro.getRperdedores()){
+			EncuentroDTO rperDTO = new EncuentroDTO(rper);
+			this.rperdedores.add(rperDTO);
+		}
+		for(Set set : encuentro.getSets()){
+			SetDTO setDTO = new SetDTO(set);
+			this.sets.add(setDTO);
+		}
+		this.encuentro1=new EncuentroDTO(encuentro.getEncuentro1());
+		this.encuentro2=new EncuentroDTO(encuentro.getEncuentro2());
+	}
+	
+	
+	
+	public EncuentroDTO() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	public long getId_encuentro() {
 		return id_encuentro;
 	}
@@ -149,7 +188,6 @@ public class EncuentroDTO {
 	public void addSet(SetDTO set){
 		sets.add(set);
 	}
-	
 }
 	
 	

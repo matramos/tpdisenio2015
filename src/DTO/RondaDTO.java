@@ -3,25 +3,35 @@ package DTO;
 import java.util.List;
 import capanegocios.Competencia;
 import capanegocios.Encuentro;
+import capanegocios.Ronda;
 
 public class RondaDTO {
 	private long id_ronda;
-	private Competencia competencia;
 	private int numeroRonda;
 	private boolean finalizado;
 	private boolean comenzada;
 	private List<EncuentroDTO> encuentros;
+	
+	public RondaDTO(Ronda ronda){
+		this.id_ronda=ronda.getId_ronda();
+		this.numeroRonda=ronda.getNumeroRonda();
+		this.finalizado=ronda.isFinalizado();
+		this.comenzada=ronda.isComenzada();
+		for(Encuentro enc : ronda.getEncuentros()){
+			EncuentroDTO encDTO = new EncuentroDTO(enc);
+			this.encuentros.add(encDTO);
+		}
+	}
+	
+	public RondaDTO() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public long getId_ronda() {
 		return id_ronda;
 	}
 	public void setId_ronda(long id_ronda) {
 		this.id_ronda = id_ronda;
-	}
-	public Competencia getCompetencia() {
-		return competencia;
-	}
-	public void setCompetencia(Competencia competencia) {
-		this.competencia = competencia;
 	}
 	public int getNumeroRonda() {
 		return numeroRonda;

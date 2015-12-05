@@ -8,6 +8,7 @@ public class SeRealizaEn implements Serializable {
 	private Lugar lugar;
 	private Deporte deporte;
 	
+	
 	public void setIdlugar(long idlugar){
 		this.idlugar = idlugar;
 	}

@@ -6,7 +6,6 @@ public class Set {
 	private long id_set;
 	private int puntajep1;
 	private int puntajep2;
-	private Encuentro encuentro;
 	
 	public long getId_set() {
 		return id_set;
@@ -25,12 +24,6 @@ public class Set {
 	}
 	public void setPuntajep2(int puntajep2) {
 		this.puntajep2 = puntajep2;
-	}
-	public Encuentro getEncuentro() {
-		return encuentro;
-	}
-	public void setEncuentro(Encuentro encuentro) {
-		this.encuentro = encuentro;
 	}
 }
 

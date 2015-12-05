@@ -1,12 +1,23 @@
 package DTO;
 
 import capanegocios.Encuentro;
+import capanegocios.Set;
 
 public class SetDTO {
 	private long id_set;
 	private int puntajep1;
 	private int puntajep2;
-	private EncuentroDTO encuentro;
+	
+	public SetDTO(Set set){
+		this.id_set=set.getId_set();
+		this.puntajep1=set.getPuntajep1();
+		this.puntajep2=set.getPuntajep2();
+	}
+	
+	public SetDTO() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public long getId_set() {
 		return id_set;
 	}
@@ -24,11 +35,5 @@ public class SetDTO {
 	}
 	public void setPuntajep2(int puntajep2) {
 		this.puntajep2 = puntajep2;
-	}
-	public EncuentroDTO getEncuentro() {
-		return encuentro;
-	}
-	public void setEncuentro(EncuentroDTO encuentro) {
-		this.encuentro = encuentro;
 	}
 }

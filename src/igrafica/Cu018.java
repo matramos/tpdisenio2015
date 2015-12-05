@@ -25,6 +25,7 @@ import capanegocios.RegistroEncuentro;
 import capanegocios.Ronda;
 import capanegocios.Set;
 import gestores.GestorCompetencias;
+import gestores.GestorFixture;
 
 import java.awt.CardLayout;
 import javax.swing.JLabel;
@@ -58,15 +59,7 @@ public class Cu018 extends JFrame {
 	private JTextField txtRP1;
 	private JTextField txtRP2;
 	private JTextField txtEquipoGanador;
-	private CompetenciaDTO competencia;
-	private ListaRondasDTO listaRondas;
-	private RondaDTO ronda;
-	private ListaEncuentrosDTO listaEncuentros;
-	private EncuentroDTO encuentro;
-	private ParticipanteDTO participante1;
-	private ParticipanteDTO participante2;
-	private ModalidadDTO modalidad;
-	private RegistroEncuentroDTO registro;
+	private GestorFixture fixture;
 
 	/**
 	 * Launch the application.
@@ -296,87 +289,9 @@ public class Cu018 extends JFrame {
 		nombreP2.setBounds(428, 52, 64, 14);
 		contentPane.add(nombreP2);
 		
-		competencia= GestorCompetencias.getCompetencia(id_competencia);
-		listaRondas=(ListaRondasDTO) competencia.getRondas();
-		ronda=listaRondas.buscarRonda(id_ronda);
-		listaEncuentros=(ListaEncuentrosDTO) ronda.getEncuentros();
-		encuentro=listaEncuentros.buscarEncuentro(id_encuentro);
-		participante1=encuentro.getJugador1();
-		participante2=encuentro.getJugador2();
-		
-		int cantSets=competencia.getCantidad_sets();
-		/*
-		while(cantSets!=0){
-			Set set = new Set(id_set,);
-			cantSets --;
-		}*/
-		SetDTO set1 = new SetDTO();
-		SetDTO set2 = new SetDTO();
-		SetDTO set3 = new SetDTO();
-		SetDTO set4 = new SetDTO();
-		SetDTO set5 = new SetDTO();
-		SetDTO set6 = new SetDTO();
-		SetDTO set7 = new SetDTO();
-		SetDTO set8 = new SetDTO();
-		SetDTO set9 = new SetDTO();
-		
-		encuentro.addSet(set1);
-		encuentro.addSet(set2);
-		encuentro.addSet(set3);
-		encuentro.addSet(set4);
-		encuentro.addSet(set5);
-		encuentro.addSet(set6);
-		encuentro.addSet(set7);
-		encuentro.addSet(set8);
-		encuentro.addSet(set9);
-		
-		modalidad=competencia.getModalidad();
-		
-		if(modalidad.isEliminatoriaSimple()== true ^ modalidad.isEliminatoriaDoble()== true){
-			
-			set1.setPuntajep1(Integer.parseInt(txtS1P1.getText()));
-			set1.setPuntajep2(Integer.parseInt(txtS1P1.getText()));
-			set1.setEncuentro(encuentro);
-			
-			set2.setPuntajep1(Integer.parseInt(txtS1P1.getText()));
-			set2.setPuntajep2(Integer.parseInt(txtS1P1.getText()));
-			set2.setEncuentro(encuentro);
-			
-			set3.setPuntajep1(Integer.parseInt(txtS1P1.getText()));
-			set3.setPuntajep2(Integer.parseInt(txtS1P1.getText()));
-			set3.setEncuentro(encuentro);
-			
-			set4.setPuntajep1(Integer.parseInt(txtS1P1.getText()));
-			set4.setPuntajep2(Integer.parseInt(txtS1P1.getText()));
-			set4.setEncuentro(encuentro);
-			
-			set5.setPuntajep1(Integer.parseInt(txtS1P1.getText()));
-			set5.setPuntajep2(Integer.parseInt(txtS1P1.getText()));
-			set5.setEncuentro(encuentro);
-			
-			set6.setPuntajep1(Integer.parseInt(txtS1P1.getText()));
-			set6.setPuntajep2(Integer.parseInt(txtS1P1.getText()));
-			set6.setEncuentro(encuentro);
-			
-			set7.setPuntajep1(Integer.parseInt(txtS1P1.getText()));
-			set7.setPuntajep2(Integer.parseInt(txtS1P1.getText()));
-			set7.setEncuentro(encuentro);
-			
-			set8.setPuntajep1(Integer.parseInt(txtS1P1.getText()));
-			set8.setPuntajep2(Integer.parseInt(txtS1P1.getText()));
-			set8.setEncuentro(encuentro);
-			
-			set9.setPuntajep1(Integer.parseInt(txtS1P1.getText()));
-			set9.setPuntajep2(Integer.parseInt(txtS1P1.getText()));
-			set9.setEncuentro(encuentro);
-			
-			registro = new RegistroEncuentroDTO();
-		}
-		
-		
-		
-		
-		
+		//llamar al fixture
+		fixture.GestionarResultado(id_competencia,id_ronda,id_encuentro);
+	
 		//lblNombrecompetencia.setText(competencia.getNombre());
 	}
 }

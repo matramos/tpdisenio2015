@@ -11,7 +11,7 @@ public class ModalidadDTO {
 	public ModalidadDTO(Modalidad modalidad) {
 		this.id_modalidad = modalidad.getId_modalidad();
 		this.liga = modalidad.isLiga();
-		this.eliminatoriaSimple = modalidad.getElminatoriasimple();
+		this.eliminatoriaSimple = modalidad.getEliminatoriasimple();
 		this.eliminatoriaDoble = modalidad.getEliminatoriadoble();
 	}
 	

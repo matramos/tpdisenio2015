@@ -21,10 +21,10 @@ public class Modalidad {
 	public void setLiga(boolean liga) {
 		this.liga = liga;
 	}
-	public boolean getElminatoriasimple() {
+	public boolean getEliminatoriasimple() {
 		return elminatoriasimple;
 	}
-	public void setElminatoriasimple(boolean elminatoriaSimple) {
+	public void setEliminatoriasimple(boolean elminatoriaSimple) {
 		this.elminatoriasimple = elminatoriaSimple;
 	}
 	public boolean getEliminatoriadoble() {

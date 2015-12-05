@@ -19,6 +19,23 @@ public class Participante {
 	private int tantosCont;
 	private int tantosDif;
 	
+	public Participante(ParticipanteDTO jugador1) {
+		this.id_participante=jugador1.getId_participante();
+		this.email=jugador1.getEmail();
+		this.nombre=jugador1.getNombre();
+		this.imagen=jugador1.getImagen();
+		this.puntaje = jugador1.getPuntaje();
+		this.partidosGanados =jugador1.getPartidosGanados();
+		this.partidosPerdidos = jugador1.getPartidosPerdidos();
+		this.partidosEmpatados = jugador1.getPartidosEmpatados();
+		this.tantosFav = jugador1.getTantosFav();
+		this.tantosCont = jugador1.getTantosCont();
+		this.tantosDif=jugador1.getTantosDif();
+		// TODO Auto-generated constructor stub
+	}
+	public Participante() {
+		// TODO Auto-generated constructor stub
+	}
 	public void ParticipanteDTO(ParticipanteDTO participanteDTO) {
 		this.id_participante=participanteDTO.getId_participante();
 		this.email=participanteDTO.getEmail();
@@ -98,6 +115,4 @@ public class Participante {
 	public void setTantosDif(int tantosDif) {
 		this.tantosDif = tantosDif;
 	}
-	
-	
 }
