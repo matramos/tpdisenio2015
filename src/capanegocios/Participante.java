@@ -33,6 +33,9 @@ public class Participante {
 		this.tantosDif=jugador1.getTantosDif();
 		// TODO Auto-generated constructor stub
 	}
+	public Participante(String string) {
+		this.nombre=string;
+	}
 	public Participante() {
 		// TODO Auto-generated constructor stub
 	}

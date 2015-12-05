@@ -119,14 +119,14 @@ public static long agregarParticipante(ParticipanteDTO participanteDTO,long id_c
 
 public static void generarFixture(long id_competencia) {
 	competencia = buscarCompetencia(id_competencia);
+	if(competencia.getEstado().getNombre().equals("planificada")) competencia.borrarFixture();
 	GestorFixture.generarFixture(competencia);
 	
+	CompetenciaDAO.agregarCompetencia(competencia);
 }
 
 public static Competencia buscarCompetencia(long id_competencia) {
-	
 	competencia = CompetenciaDAO.getCompetencia(id_competencia);
-	
 	return competencia;
 }
 
