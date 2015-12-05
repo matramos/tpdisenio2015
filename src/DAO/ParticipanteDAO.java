@@ -15,8 +15,6 @@ public class ParticipanteDAO {
 		SessionFactory factory = cfg.buildSessionFactory();
 		Session session = factory.openSession();*/
 		Transaction tx = CrearSesion.session.beginTransaction();
-		
-		System.out.println(participante.getId_participante());
 		CrearSesion.session.saveOrUpdate(participante);
 		
 

@@ -144,7 +144,6 @@ public class CompetenciaDAO {
 		
 		tx.commit();
 		
-		System.out.println(competencias.get(0).getDeporte());
 		return competencias;
 	}
 
@@ -216,22 +215,16 @@ public class CompetenciaDAO {
 	public static Competencia getCompetencia(long id_competencia){
 		
 		/*metodos para hacer la conexion*/
-		/*Configuration cfg = new Configuration();
-		cfg.configure ("hibernate.cfg.xml");
-		SessionFactory factory = cfg.buildSessionFactory();
-		Session session = factory.openSession();
 		
-		Transaction tx = session.beginTransaction();*/
 		Transaction tx = CrearSesion.session.beginTransaction();
 		//Creo la consulta
 		Query query = CrearSesion.session.createQuery("from Competencia s where s.id_competencia=?");
 		query.setParameter(0, id_competencia);
-		//Hago la consulta y la cargo a una lista de lugares
+		//Hago la consulta
 		Competencia competencia= new Competencia();
 		competencia = (Competencia) query.uniqueResult();
 		
 		tx.commit();
-		System.out.println(competencia.getId_competencia());
 		/*session.close();
 		factory.close();*/
 		//System.out.println(listalugares.getLugares().get(0).getNombre());

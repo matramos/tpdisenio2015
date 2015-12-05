@@ -10,6 +10,7 @@ import DAO.LugarDAO;
 import DTO.CompetenciaDTO;
 import DTO.DisponibilidadDTO;
 import DTO.ListaDeportesDTO;
+import DTO.ListaParticipantesDTO;
 import DTO.ParticipanteDTO;
 import capanegocios.Competencia;
 import capanegocios.Deporte;
@@ -102,11 +103,6 @@ public static CompetenciaDTO getCompetencia(long id_competencia){
 	CompetenciaDTO competencia2 = new CompetenciaDTO(competencia);
 	
 	
-	/*Iterator iter = listaLugares.iterator();
-	while (iter.hasNext()){
-		Object l = iter.next();
-		lugares.addLugar( l);
-	}*/
 	
 	return competencia2;
 }
@@ -132,6 +128,17 @@ public static long agregarParticipante(ParticipanteDTO participanteDTO,long id_c
 	res = CompetenciaDAO.agregarCompetencia(competencia);
 	return  res;
 }
+
+public static ListaParticipantesDTO mostrarTabla(CompetenciaDTO competencia2) {
+	ListaParticipantesDTO participantes = new ListaParticipantesDTO();
+	for(ParticipanteDTO part : competencia2.getParticipantes()){
+		participantes.addParticipante(part);
+	}
+	participantes.ordenar();
+	return participantes;
+}
+
+
 
 }
 
