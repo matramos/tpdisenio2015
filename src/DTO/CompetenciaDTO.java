@@ -27,25 +27,21 @@ public class CompetenciaDTO {
 	private EstadoDTO estado;
 	private int resultado_final;
 	private List<ParticipanteDTO> participantes = new ArrayList<ParticipanteDTO>();
-	private List<Ronda> rondas;
+	private List<RondaDTO> rondas;
 	private List<DisponibilidadDTO> lugares = new ArrayList<DisponibilidadDTO>();
 	
 	
 	public CompetenciaDTO(Competencia comp) {
 		this.id_competencia = comp.getId_competencia();
 		this.nombre = comp.getNombre();
+		List<Participante> listaParticipantes = comp.getParticipantes();
 		
 		for(Participante part : comp.getParticipantes()){
 			ParticipanteDTO partDTO = new ParticipanteDTO(part);
 			this.participantes.add(partDTO);
 		}
-		
-		System.out.println(comp.getDeporte().getNombre());
 		this.deporte = new DeporteDTO(comp.getDeporte());
-		
-		
 		this.modalidad=new ModalidadDTO(comp.getModalidad());
-		
 		this.estado = new EstadoDTO(comp.getEstado());
 	}
 	
@@ -58,18 +54,14 @@ public class CompetenciaDTO {
 		return lugares;
 	}
 
-	public void setLugares(List<DisponibilidadDTO> lugares) {
-		this.lugares = lugares;
+	public DeporteDTO getDeporte() {
+		return deporte;
 	}
 	
 	public void addLugar(DisponibilidadDTO lugar){
 		this.lugares.add(lugar);
 	}
-
 	
-	public DeporteDTO getDeporte() {
-		return deporte;
-	}
 	public void setDeporte(DeporteDTO deporte) {
 		this.deporte = deporte;
 	}
@@ -157,10 +149,10 @@ public class CompetenciaDTO {
 	public void setParticipantes(List<ParticipanteDTO> participantes) {
 		this.participantes = participantes;
 	}
-	public List<Ronda> getRondas() {
+	public List<RondaDTO> getRondas() {
 		return rondas;
 	}
-	public void setRondas(List<Ronda> rondas) {
+	public void setRondas(List<RondaDTO> rondas) {
 		this.rondas = rondas;
 	}
 	public EstadoDTO getEstado() {

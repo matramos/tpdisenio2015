@@ -110,8 +110,8 @@ public class Cu003 extends JFrame {
 		//Agregamos las modalidades de manera directa
 		comboModalidad.addItem(null);
 		comboModalidad.addItem("Liga");
-		comboModalidad.addItem("Eliminación Simple");
-		comboModalidad.addItem("Eliminación Doble");
+		comboModalidad.addItem("Eliminaciï¿½n Simple");
+		comboModalidad.addItem("Eliminaciï¿½n Doble");
 		
 		final JComboBox<String> comboEstado = new JComboBox<>();
 		comboEstado.setBounds(508, 203, 172, 20);

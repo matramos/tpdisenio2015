@@ -1,5 +1,6 @@
 package DTO;
 
+import java.awt.Image;
 import java.util.List;
 
 import org.hibernate.Transaction;
@@ -14,7 +15,7 @@ public class ParticipanteDTO {
 	private long id_participante;
 	private String email;
 	private String nombre;
-	private String imagen;
+	public byte[] imagen;
 	public int puntaje;
 	private CompetenciaDTO competencia;
 	private int partidosGanados;
@@ -65,10 +66,10 @@ public class ParticipanteDTO {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getImagen() {
+	public byte[] getImagen() {
 		return imagen;
 	}
-	public void setImagen(String imagen) {
+	public void setImagen(byte[] imagen) {
 		this.imagen = imagen;
 	}
 	public int getPuntaje() {

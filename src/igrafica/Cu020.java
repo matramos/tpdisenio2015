@@ -53,6 +53,7 @@ public class Cu020 extends JFrame {
 	public Cu020(final long id_competencia) {
 		//BUSCAMOS LA COMPETENCIA
 		compe = GestorCompetencias.getCompetencia(id_competencia);
+		System.out.println(compe.getEstado().getNombre());
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
@@ -171,9 +172,17 @@ public class Cu020 extends JFrame {
 		JButton btnGenerarFixture = new JButton("Generar fixture");
 		btnGenerarFixture.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent g) {
-				Cu017 ventanaGenFixture = new Cu017(id_competencia);
-				ventanaGenFixture.setVisible(true);
-				dispose();
+				if((compe.getEstado().getNombre().equals("creada")) || 
+						(compe.getEstado().getNombre().equals("planificada"))){
+					Cu017 ventanaGenFixture = new Cu017(id_competencia);
+					ventanaGenFixture.setVisible(true);
+					dispose();
+				}
+				else{
+					Cu017Error ventanaErrFixture = new Cu017Error(id_competencia);
+					ventanaErrFixture.setVisible(true);
+					dispose();
+				}
 			}
 		});
 		btnGenerarFixture.setBounds(575, 164, 175, 23);
@@ -184,7 +193,7 @@ public class Cu020 extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				Cu021 ventanaPosiciones = new Cu021(id_competencia);
 				//ventanaPosiciones.setVisible(true);
-				//dispose();
+				dispose();
 			}
 		});
 		btnVerTablaDe.setBounds(403, 200, 170, 23);

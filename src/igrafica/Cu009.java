@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
 
+import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
@@ -28,8 +29,12 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.awt.event.ActionEvent;
 
@@ -42,9 +47,8 @@ public class Cu009 extends JFrame {
 	private CompetenciaDTO competencia;
 	private Clip clip;
     private String ruta="/audio/";
-    
+    private byte[] imageInByte;
     private JLabel lblImagen;
-    
     private Image mostrar;
 	
 
@@ -194,10 +198,7 @@ public class Cu009 extends JFrame {
         
 		btnIngresar.setBounds(276, 434, 89, 23);
 		contentPane.add(btnIngresar);
-		
-		
-		
-		
+
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -208,14 +209,27 @@ public class Cu009 extends JFrame {
 				}
 				/*Aca faltan las otras validaciones*/
 				else{
+					try {
+						BufferedImage originalImage = ImageIO.read(new File("lblImagen"));
+
+						// convert BufferedImage to byte array
+						ByteArrayOutputStream baos = new ByteArrayOutputStream();
+						ImageIO.write(originalImage, "jpg", baos);
+						baos.flush();
+						imageInByte = baos.toByteArray();
+						baos.close();
+					} catch (IOException e) {
+						System.out.println(e.getMessage());
+					}
 					
 					participanteDTO.setNombre(txtNombre.getText());
 					participanteDTO.setEmail(txtEmail.getText());
+					participanteDTO.imagen = imageInByte;
 					System.out.println(participanteDTO.getEmail());
 					System.out.println(participanteDTO.getId_participante());
 					
 				}
-				if(id_competencia == GestorCompetencias.agregarParticipante(participanteDTO,id_competencia)){
+				if(id_competencia==GestorCompetencias.agregarParticipante(participanteDTO,id_competencia)){
 					System.out.println("sirvi");
 					JOptionPane.showMessageDialog(null, "Se cargo con exito");
 					/*Cu008 ventana = new Cu008(idcomp);
@@ -239,7 +253,7 @@ public class Cu009 extends JFrame {
 		btnCancelar.setBounds(566, 511, 89, 23);
 		contentPane.add(btnCancelar);
 		
-		competencia= GestorCompetencias.getCompetencia(id_competencia);
+		competencia= (CompetenciaDTO) GestorCompetencias.getCompetencia(id_competencia);
 		
 		lblNombrecompetencia.setText(competencia.getNombre());
 		

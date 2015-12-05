@@ -21,7 +21,6 @@ import capanegocios.Lugar;
 import capanegocios.Modalidad;
 import capanegocios.Participante;
 import capanegocios.SeRealizaEn;
-
 public class GestorCompetencias {
 	
 	private static Competencia competencia;
@@ -58,18 +57,6 @@ public class GestorCompetencias {
 		estado.setNombre("Creada");
 		competencia.setEstado(estado);
 		
-
-		/*Calendar fecha = new GregorianCalendar();
-		int año= fecha.get(Calendar.YEAR);
-		int mes = fecha.get(Calendar.MONTH)+1;
-		int dia = fecha.get(Calendar.DAY_OF_MONTH);
-		int hora = fecha.get(Calendar.HOUR_OF_DAY);
-		int minuto = fecha.get(Calendar.MINUTE);
-		int segundo = fecha.get(Calendar.SECOND);
-		String fechaActual = año+"/"+mes+"/"+dia+" "+hora+":"+minuto+":"+segundo;
-		java.sql.Date hoy = java.sql.Date.valueOf(fechaActual);
-		competencia.setFecha_hora(hoy);*/
-		
 		
 		idGenerado = CompetenciaDAO.agregarCompetencia(competencia);
 		return idGenerado;
@@ -80,11 +67,8 @@ public class GestorCompetencias {
 		ArrayList<CompetenciaDTO> competenciasQueRetornan = new ArrayList<>(); 
 		ArrayList<Competencia> competenciasEncontradas = CompetenciaDAO.buscarCompetencias(nombreComp, deporteID, modalidadID, estadoID);
 		System.out.println(competenciasEncontradas.get(0).getDeporte().getNombre());
-		System.out.println(competenciasEncontradas.get(0).getDeporte().getSerealizaen().size());
-		System.out.println(competenciasEncontradas.get(0).getDeporte().getSerealizaen().get(0).getIddeporte());
-		System.out.println(competenciasEncontradas.get(0).getDeporte().getSerealizaen().get(0).getIdlugar());
-		
 		for(Competencia comp : competenciasEncontradas){
+			//System.out.println(comp.getDeporte().getNombre());
 			CompetenciaDTO compDTO = new CompetenciaDTO(comp);
 			competenciasQueRetornan.add(compDTO);
 		}
@@ -129,6 +113,7 @@ public static long agregarParticipante(ParticipanteDTO participanteDTO,long id_c
 	return  res;
 }
 
+
 public static ListaParticipantesDTO mostrarTabla(CompetenciaDTO competencia2) {
 	ListaParticipantesDTO participantes = new ListaParticipantesDTO();
 	for(ParticipanteDTO part : competencia2.getParticipantes()){
@@ -140,7 +125,19 @@ public static ListaParticipantesDTO mostrarTabla(CompetenciaDTO competencia2) {
 
 
 
+
+public static void generarFixture(long id_competencia) {
+	competencia = buscarCompetencia(id_competencia);
+	if(competencia.getEstado().getNombre().equals("planificada")) competencia.borrarFixture();
+	GestorFixture.generarFixture(competencia);
+	
+	CompetenciaDAO.agregarCompetencia(competencia);
+
 }
 
+public static Competencia buscarCompetencia(long id_competencia) {
+	competencia = CompetenciaDAO.getCompetencia(id_competencia);
+	return competencia;
+}
 
-
+}

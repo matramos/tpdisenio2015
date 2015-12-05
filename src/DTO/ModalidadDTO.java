@@ -18,7 +18,7 @@ public class ModalidadDTO {
 	public ModalidadDTO() {
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	public long getId_modalidad() {
 		return id_modalidad;
 	}
@@ -31,10 +31,10 @@ public class ModalidadDTO {
 	public void setLiga(boolean liga) {
 		this.liga = liga;
 	}
-	public boolean isElminatoriaSimple() {
+	public boolean isEliminatoriaSimple() {
 		return eliminatoriaSimple;
 	}
-	public void setElminatoriaSimple(boolean elminatoriaSimple) {
+	public void setEliminatoriaSimple(boolean elminatoriaSimple) {
 		this.eliminatoriaSimple = elminatoriaSimple;
 	}
 	public boolean isEliminatoriaDoble() {
@@ -43,11 +43,9 @@ public class ModalidadDTO {
 	public void setEliminatoriaDoble(boolean eliminatoriaDoble) {
 		this.eliminatoriaDoble = eliminatoriaDoble;
 	}
-	
 	public String getNombre(){
 		if(liga) return "Liga";
 		else if (eliminatoriaSimple) return "Eliminatoria Simple";
 		else return "Eliminatoria Doble";
 	}
-
 }

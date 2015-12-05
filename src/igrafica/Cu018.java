@@ -3,10 +3,30 @@ package igrafica;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import DTO.CompetenciaDTO;
+import DTO.EncuentroDTO;
+import DTO.ListaEncuentrosDTO;
+import DTO.ListaRondasDTO;
+import DTO.ModalidadDTO;
+import DTO.ParticipanteDTO;
+import DTO.RegistroEncuentroDTO;
+import DTO.RondaDTO;
+import DTO.SetDTO;
+import capanegocios.Competencia;
+import capanegocios.Encuentro;
+import capanegocios.Participante;
+import capanegocios.RegistroEncuentro;
+import capanegocios.Ronda;
+import capanegocios.Set;
+import gestores.GestorCompetencias;
+import gestores.GestorFixture;
+
 import java.awt.CardLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -17,8 +37,6 @@ import javax.swing.JButton;
 public class Cu018 extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtParticipante1;
-	private JTextField txtParticipante2;
 	private JLabel lblSePresento;
 	private JTextField txtS1P2;
 	private JTextField txtS1P1;
@@ -41,6 +59,7 @@ public class Cu018 extends JFrame {
 	private JTextField txtRP1;
 	private JTextField txtRP2;
 	private JTextField txtEquipoGanador;
+	private GestorFixture fixture;
 
 	/**
 	 * Launch the application.
@@ -49,7 +68,7 @@ public class Cu018 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Cu018 frame = new Cu018();
+					Cu018 frame = new Cu018(1,1,1);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -61,7 +80,7 @@ public class Cu018 extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Cu018() {
+	public Cu018(long id_competencia,long id_ronda,long id_encuentro) {
 		setTitle("Gevico");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
@@ -80,31 +99,21 @@ public class Cu018 extends JFrame {
 		lblParticipante.setBounds(126, 52, 77, 14);
 		contentPane.add(lblParticipante);
 		
-		txtParticipante1 = new JTextField();
-		txtParticipante1.setBounds(198, 49, 86, 20);
-		contentPane.add(txtParticipante1);
-		txtParticipante1.setColumns(10);
-		
 		JLabel lblParticipante_1 = new JLabel("Participante 2:");
 		lblParticipante_1.setBounds(347, 52, 80, 14);
 		contentPane.add(lblParticipante_1);
-		
-		txtParticipante2 = new JTextField();
-		txtParticipante2.setBounds(437, 49, 86, 20);
-		contentPane.add(txtParticipante2);
-		txtParticipante2.setColumns(10);
 		
 		lblSePresento = new JLabel("Se Presento?");
 		lblSePresento.setBounds(279, 99, 77, 14);
 		contentPane.add(lblSePresento);
 		
-		JCheckBox checkBox = new JCheckBox("");
-		checkBox.setBounds(239, 95, 21, 23);
-		contentPane.add(checkBox);
+		JCheckBox checkPart1 = new JCheckBox("");
+		checkPart1.setBounds(239, 95, 21, 23);
+		contentPane.add(checkPart1);
 		
-		JCheckBox checkBox_1 = new JCheckBox("");
-		checkBox_1.setBounds(362, 95, 97, 23);
-		contentPane.add(checkBox_1);
+		JCheckBox checkPart2 = new JCheckBox("");
+		checkPart2.setBounds(362, 95, 97, 23);
+		contentPane.add(checkPart2);
 		
 		JLabel lblSet = new JLabel("Set 1");
 		lblSet.setBounds(289, 125, 46, 14);
@@ -271,5 +280,18 @@ public class Cu018 extends JFrame {
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.setBounds(362, 537, 89, 23);
 		contentPane.add(btnAceptar);
+		
+		JLabel nombreP1 = new JLabel("nombreP1");
+		nombreP1.setBounds(214, 52, 78, 14);
+		contentPane.add(nombreP1);
+		
+		JLabel nombreP2 = new JLabel("nombreP2");
+		nombreP2.setBounds(428, 52, 64, 14);
+		contentPane.add(nombreP2);
+		
+		//llamar al fixture
+		fixture.GestionarResultado(id_competencia,id_ronda,id_encuentro);
+	
+		//lblNombrecompetencia.setText(competencia.getNombre());
 	}
 }

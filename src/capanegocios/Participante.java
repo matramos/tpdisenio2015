@@ -1,5 +1,6 @@
 package capanegocios;
 
+import java.awt.Image;
 import java.util.List;
 import DTO.CompetenciaDTO;
 import DTO.ParticipanteDTO;
@@ -9,7 +10,7 @@ public class Participante {
 	private long id_participante;
 	private String email;
 	private String nombre;
-	private String imagen;
+	private byte[] imagen;
 	private int puntaje;
 	private int partidosGanados;
 	private int partidosPerdidos;
@@ -18,6 +19,26 @@ public class Participante {
 	private int tantosCont;
 	private int tantosDif;
 	
+	public Participante(ParticipanteDTO jugador1) {
+		this.id_participante=jugador1.getId_participante();
+		this.email=jugador1.getEmail();
+		this.nombre=jugador1.getNombre();
+		this.imagen=jugador1.getImagen();
+		this.puntaje = jugador1.getPuntaje();
+		this.partidosGanados =jugador1.getPartidosGanados();
+		this.partidosPerdidos = jugador1.getPartidosPerdidos();
+		this.partidosEmpatados = jugador1.getPartidosEmpatados();
+		this.tantosFav = jugador1.getTantosFav();
+		this.tantosCont = jugador1.getTantosCont();
+		this.tantosDif=jugador1.getTantosDif();
+		// TODO Auto-generated constructor stub
+	}
+	public Participante(String string) {
+		this.nombre=string;
+	}
+	public Participante() {
+		// TODO Auto-generated constructor stub
+	}
 	public void ParticipanteDTO(ParticipanteDTO participanteDTO) {
 		this.id_participante=participanteDTO.getId_participante();
 		this.email=participanteDTO.getEmail();
@@ -49,10 +70,10 @@ public class Participante {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getImagen() {
+	public byte[] getImagen() {
 		return imagen;
 	}
-	public void setImagen(String imagen) {
+	public void setImagen(byte[] imagen) {
 		this.imagen = imagen;
 	}
 	public int getPuntaje() {
@@ -97,6 +118,4 @@ public class Participante {
 	public void setTantosDif(int tantosDif) {
 		this.tantosDif = tantosDif;
 	}
-	
-	
 }

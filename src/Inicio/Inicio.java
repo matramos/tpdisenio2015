@@ -6,6 +6,9 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Transaction;
 
+import DTO.CompetenciaDTO;
+import DTO.ListaParticipantesDTO;
+import DTO.ParticipanteDTO;
 import capanegocios.Competencia;
 import capanegocios.Deporte;
 import capanegocios.Disponibilidad;
@@ -15,10 +18,13 @@ import capanegocios.Provincia;
 import capanegocios.SeRealizaEn;
 import capanegocios.TipoDocumento;
 import capanegocios.Usuario;
+import gestores.GestorCompetencias;
 import igrafica.Cu003;
 import igrafica.Cu004;
 import igrafica.Cu008;
 import igrafica.Cu009;
+import igrafica.Cu020;
+import igrafica.Cu021;
 import igrafica.menuprincipal;
 import java.sql.Date;
 import java.util.Calendar;
@@ -139,12 +145,28 @@ public class Inicio {
 	System.out.println(dep.get(0).getId());
 	System.out.println(dep.get(0).getSerealizaen().size());
 
-*/
+
+	Query query = CrearSesion.session.createQuery("from Deporte");
 	
+	
+	List<Deporte> dep = new ArrayList<Deporte>();
+	dep = (ArrayList<Deporte>) query.list();
+
+	tx.commit();
+	
+	System.out.println(dep.size());
 	menuprincipal cu = new menuprincipal();
 	cu.setVisible(true);
-		
 	
+	
+	CompetenciaDTO competencia = GestorCompetencias.getCompetencia(id_competencia);
+	System.out.println(competencia.getParticipantes().size());
+	System.out.println(competencia.getParticipantes().get(0).getPuntaje());
+	*/
+	long id_competencia = 100;
+	
+	Cu020 cu = new Cu020(id_competencia);
+	cu.setVisible(true);
 	//CrearSesion.terminarSesion();
 }
 }

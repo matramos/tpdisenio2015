@@ -1,12 +1,23 @@
-package capanegocios;
+package DTO;
 
-import DTO.EncuentroDTO;
+import capanegocios.Encuentro;
+import capanegocios.Set;
 
-public class Set {
+public class SetDTO {
 	private long id_set;
 	private int puntajep1;
 	private int puntajep2;
 	
+	public SetDTO(Set set){
+		this.id_set=set.getId_set();
+		this.puntajep1=set.getPuntajep1();
+		this.puntajep2=set.getPuntajep2();
+	}
+	
+	public SetDTO() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public long getId_set() {
 		return id_set;
 	}
@@ -26,5 +37,3 @@ public class Set {
 		this.puntajep2 = puntajep2;
 	}
 }
-
-

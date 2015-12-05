@@ -191,7 +191,7 @@ public class CompetenciaDAO {
 			
 			competencia.setNombre(object.getNombre());
 			modalidad.setEliminatoriaDoble(object.getModalidad().getEliminatoriadoble());
-			modalidad.setElminatoriaSimple(object.getModalidad().getElminatoriasimple());
+			modalidad.setEliminatoriaSimple(object.getModalidad().getElminatoriasimple());
 			modalidad.setId_modalidad(object.getModalidad().getId_modalidad());
 			modalidad.setLiga(object.getModalidad().liga);
 			competencia.setModalidad(modalidad);
