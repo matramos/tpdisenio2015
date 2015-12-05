@@ -13,7 +13,6 @@ public class Encuentro {
 	private Participante jugador1;
 	private Participante jugador2;
 	private Lugar lugar;
-	private Ronda ronda;
 	private int puntajep1;
 	private int puntajep2;
 	private boolean estadop1;
@@ -23,6 +22,15 @@ public class Encuentro {
 	private List<Set> sets;	
 	private Encuentro encuentro1;
 	private Encuentro encuentro2;
+	
+	public Encuentro(Participante participante1, Participante participante2) {
+		this.jugador1 = participante1;
+		this.jugador2 = participante2;
+	}
+	
+	public Encuentro(){
+		
+	}
 	
 	public long getId_encuentro() {
 		return id_encuentro;
@@ -78,12 +86,7 @@ public class Encuentro {
 	public void setLugar(Lugar lugar) {
 		this.lugar = lugar;
 	}
-	public Ronda getRonda() {
-		return ronda;
-	}
-	public void setRonda(Ronda ronda) {
-		this.ronda = ronda;
-	}
+
 	public int getPuntajep1() {
 		return puntajep1;
 	}

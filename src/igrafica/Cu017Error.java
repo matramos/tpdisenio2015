@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Cu017Error extends JDialog {
 
@@ -19,7 +21,7 @@ public class Cu017Error extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			Cu017Error dialog = new Cu017Error();
+			Cu017Error dialog = new Cu017Error((long)1);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -30,7 +32,7 @@ public class Cu017Error extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Cu017Error() {
+	public Cu017Error(final long id_competencia) {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
@@ -47,15 +49,18 @@ public class Cu017Error extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent p) {
+						Cu020 caso20 = new Cu020(id_competencia);
+						caso20.setVisible(true);
+						dispose();
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
+
 		}
 	}
 

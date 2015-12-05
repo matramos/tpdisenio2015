@@ -1,26 +1,23 @@
 package capanegocios;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Ronda {
 	private long id_ronda;
-	private Competencia competencia;
 	private int numeroRonda;
 	private boolean finalizado;
 	private boolean comenzada;
-	private List<Encuentro> encuentros;
+	private List<Encuentro> encuentros = new ArrayList<Encuentro>();
+	
+	
 	public long getId_ronda() {
 		return id_ronda;
 	}
 	public void setId_ronda(long id_ronda) {
 		this.id_ronda = id_ronda;
 	}
-	public Competencia getCompetencia() {
-		return competencia;
-	}
-	public void setCompetencia(Competencia competencia) {
-		this.competencia = competencia;
-	}
+
 	public int getNumeroRonda() {
 		return numeroRonda;
 	}
@@ -44,5 +41,8 @@ public class Ronda {
 	}
 	public void setEncuentros(List<Encuentro> encuentros) {
 		this.encuentros = encuentros;
+	}
+	public void add(Encuentro encuentrito) {
+		encuentros.add(encuentrito);	
 	}
 }

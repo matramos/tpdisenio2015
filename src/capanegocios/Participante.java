@@ -19,6 +19,13 @@ public class Participante {
 	private int tantosCont;
 	private int tantosDif;
 	
+	public Participante(String string) {
+		this.nombre=string;
+	}
+	
+	public Participante() {
+
+	}
 	public void ParticipanteDTO(ParticipanteDTO participanteDTO) {
 		this.id_participante=participanteDTO.getId_participante();
 		this.email=participanteDTO.getEmail();

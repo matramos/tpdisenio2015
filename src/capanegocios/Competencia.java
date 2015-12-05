@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import DTO.CompetenciaDTO;
-import DTO.DisponibilidadDTO;
 
 public class Competencia {
 
@@ -24,7 +23,7 @@ public class Competencia {
 	private FormaPuntuacion puntuacion;
 	private int resultado_final;
 	private List<Participante> participantes = new ArrayList<Participante>();
-	private List<Ronda> rondas;
+	private List<Ronda> rondas = new ArrayList<Ronda>();
 	private List<Disponibilidad> lugares = new ArrayList<Disponibilidad>();
 	private Estado estado;
 	
@@ -197,6 +196,14 @@ public class Competencia {
 	
 	public void addLugar(Disponibilidad lugar){
 		this.lugares.add(lugar);
+	}
+
+	public void borrarFixture() {
+		rondas.clear();
+	}
+
+	public void addRonda(Ronda rondita) {
+		rondas.add(rondita);
 	}
 	
 }

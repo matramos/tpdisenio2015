@@ -12,6 +12,8 @@ import javax.swing.border.EmptyBorder;
 
 import DTO.CompetenciaDTO;
 import gestores.GestorCompetencias;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 public class Cu017 extends JDialog {
 
@@ -45,6 +47,11 @@ public class Cu017 extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		{
+			JLabel lbldeseaGenerarUn = new JLabel("¿Desea generar un nuevo fixture?");
+			lbldeseaGenerarUn.setFont(new Font("Dialog", Font.BOLD, 20));
+			contentPanel.add(lbldeseaGenerarUn);
+		}
+		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
@@ -54,6 +61,9 @@ public class Cu017 extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						GestorCompetencias.generarFixture(id_competencia);
+						Cu020 caso20 = new Cu020(id_competencia);
+						caso20.setVisible(true);
+						dispose();
 					}
 				});
 				buttonPane.add(okButton);
@@ -61,6 +71,13 @@ public class Cu017 extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent p) {
+						Cu020 caso20 = new Cu020(id_competencia);
+						caso20.setVisible(true);
+						dispose();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}

@@ -1,25 +1,22 @@
 package gestores;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+//import java.util.Calendar;
+//import java.util.GregorianCalendar;
 import DAO.CompetenciaDAO;
 import DAO.DeporteDAO;
-import DAO.ParticipanteDAO;
 import DAO.LugarDAO;
 import DTO.CompetenciaDTO;
 import DTO.DisponibilidadDTO;
-import DTO.ListaDeportesDTO;
 import DTO.ParticipanteDTO;
 import capanegocios.Competencia;
 import capanegocios.Deporte;
 import capanegocios.Disponibilidad;
 import capanegocios.Estado;
 import capanegocios.FormaPuntuacion;
-import capanegocios.Lugar;
 import capanegocios.Modalidad;
 import capanegocios.Participante;
-import capanegocios.SeRealizaEn;
+
 public class GestorCompetencias {
 	
 	private static Competencia competencia;
@@ -119,13 +116,15 @@ public static long agregarParticipante(ParticipanteDTO participanteDTO,long id_c
 
 public static void generarFixture(long id_competencia) {
 	competencia = buscarCompetencia(id_competencia);
+	if(competencia.getEstado().getNombre().equals("planificada")) competencia.borrarFixture();
 	GestorFixture.generarFixture(competencia);
 	
+	CompetenciaDAO.agregarCompetencia(competencia);
 }
 
-private static Competencia buscarCompetencia(long id_competencia) {
-	
-	return null;
+public static Competencia buscarCompetencia(long id_competencia) {
+	competencia = CompetenciaDAO.getCompetencia(id_competencia);
+	return competencia;
 }
 
 }

@@ -12,7 +12,7 @@
 <property column="puntos_ganador" name = "puntos_ganador"/>
 <property column="puntos_empate" name = "puntos_empate"/>
 <property column="permite_empates" name = "permite_empates"/>
-<property name="resultado_final" column="resultado_np"/>
+<!-- <property name="resultado_final" column="resultado_np"/> -->
 <property column="fecha_hora" name ="fecha_hora"/>
 
 
