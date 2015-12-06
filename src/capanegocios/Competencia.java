@@ -9,6 +9,7 @@ import DTO.DisponibilidadDTO;
 import DTO.ParticipanteDTO;
 import DTO.RondaDTO;
 
+
 public class Competencia {
 
 	private long id_competencia;

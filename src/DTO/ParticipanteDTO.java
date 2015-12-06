@@ -30,6 +30,13 @@ public class ParticipanteDTO {
 	public ParticipanteDTO(Participante part) {
 		this.nombre= part.getNombre();
 		this.email= part.getEmail();
+		this.puntaje = part.getPuntaje();
+		this.partidosGanados = part.getPartidosGanados();
+		this.partidosPerdidos = part.getPartidosPerdidos();
+		this.partidosEmpatados = part.getPartidosEmpatados();
+		this.tantosFav = part.getTantosFav();
+		this.tantosCont = part.getTantosCont();
+		this.tantosDif = part.getTantosDif();
 		// TODO Auto-generated constructor stub
 	}
 	public ParticipanteDTO() {
@@ -118,6 +125,27 @@ public class ParticipanteDTO {
 	}
 	public void setEncuentros(List<Encuentro> encuentros) {
 		this.encuentros = encuentros;
+	}
+	
+	public String[] crearFila(){
+		int longitud = 5;
+		if(tantosFav!=-1){
+			longitud+=3;
+		}
+		String[] resultado = new String[longitud];
+		resultado[0] = nombre;
+		resultado[1] = ""+puntaje;
+		resultado[2] = ""+partidosGanados;
+		resultado[3] = ""+partidosEmpatados;
+		resultado[4] = ""+partidosPerdidos;
+		if(tantosFav!=-1){
+			resultado[5] = ""+tantosFav;
+			resultado[6] = ""+tantosCont;
+			resultado[7] = ""+tantosDif;
+		}
+		return resultado;
+		
+		
 	}
 }
 

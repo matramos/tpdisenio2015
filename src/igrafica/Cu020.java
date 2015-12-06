@@ -192,7 +192,7 @@ public class Cu020 extends JFrame {
 		btnVerTablaDe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Cu021 ventanaPosiciones = new Cu021(id_competencia);
-				ventanaPosiciones.setVisible(true);
+				//ventanaPosiciones.setVisible(true);
 				dispose();
 			}
 		});
