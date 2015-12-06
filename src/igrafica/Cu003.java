@@ -48,6 +48,7 @@ public class Cu003 extends JFrame {
     private ListaCompetenciasDTO competencias;
     private TestModelCU3 model;
     private JTable table;
+    public ArrayList<CompetenciaDTO> listaCompetenciasEncontradas;
 
 	/**
 	 * Launch the application.
@@ -140,52 +141,42 @@ public class Cu003 extends JFrame {
 		lblEstado.setBounds(508, 178, 46, 14);
 		contentPane.add(lblEstado);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		final JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(98, 335, 567, 159);
 		contentPane.add(scrollPane);
 		
-		model = new TestModelCU3();
-		table = new JTable(model);
-	    
-	    TableColumn column1 = table.getColumnModel().getColumn(3);
-	    column1.setCellRenderer(new DeleteButtonRendererCU3());
-	    column1.setCellEditor(new DeleteButtonEditorCU3(table));
-	    column1.setMinWidth(20);
-	    column1.setMaxWidth(20);
-	    column1.setResizable(false);
-	    
-	    TableColumn column2 = table.getColumnModel().getColumn(4);
-	    column2.setCellRenderer(new DeleteButtonRendererCU3());
-	    column2.setCellEditor(new DeleteButtonEditorCU3(table));
-	    column2.setMinWidth(20);
-	    column2.setMaxWidth(20);
-	    column2.setResizable(false);
 		
-		table.getColumnModel().getColumn(0).setPreferredWidth(55);
-		scrollPane.setViewportView(table);
 		
 		
 		JButton btnBuscar = new JButton("Buscar");
 		//Definimos la accion del boton BUSCAR
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ArrayList<CompetenciaDTO> listaCompetenciasEncontradas = 
+				 listaCompetenciasEncontradas = 
 						GestorCompetencias.buscarCompetencias(nombre.getText(), comboDeporte.getSelectedIndex(), 
 								comboModalidad.getSelectedIndex(), comboEstado.getSelectedIndex());
 				//Descomentar para ver que estamos eligiendo
+				 model = new TestModelCU3();
+					table = new JTable(model);
+				    
+					TableColumn column1 = table.getColumnModel().getColumn(3);
+				    column1.setCellRenderer(new DeleteButtonRendererCU3());
+				    column1.setCellEditor(new DeleteButtonEditorCU3(table, listaCompetenciasEncontradas));
+				    column1.setMinWidth(20);
+				    column1.setMaxWidth(20);
+				    column1.setResizable(false);
+				    
+				    TableColumn column2 = table.getColumnModel().getColumn(4);
+				    column2.setCellRenderer(new DeleteButtonRenderer2CU3());
+				    column2.setCellEditor(new DeleteButtonEditor2CU3(table, listaCompetenciasEncontradas));
+				    column2.setMinWidth(60);
+				    column2.setMaxWidth(60);
+				    column2.setResizable(false);
+					
+					table.getColumnModel().getColumn(0).setPreferredWidth(55);
+					scrollPane.setViewportView(table);
 				
-				System.out.println(nombre.getText());
-				
-				//System.out.println(comboDeporte.getSelectedIndex()); 
-				//System.out.println(comboModalidad.getSelectedIndex());
-				//System.out.println(comboEstado.getSelectedIndex());
-				//Mostramos por consola lo que encontramos
 				for(CompetenciaDTO CDTO : listaCompetenciasEncontradas){
-					System.out.println(CDTO.getNombre());
-					System.out.println(CDTO.getDeporte());
-					System.out.println(CDTO.getModalidad());
-					System.out.println(CDTO.getEstado());
-					//model.addTest(new TestCU3(CDTO.getNombre(),CDTO.getDeporte().getNombre(),""+CDTO.getModalidad().getId_modalidad()));
 					model.addTest(new TestCU3(CDTO.getNombre(),CDTO.getDeporte().getNombre(),""+CDTO.getModalidad().getId_modalidad()));
 				}
 			}
@@ -221,6 +212,7 @@ public class Cu003 extends JFrame {
 	}
 	
 }
+
 
 class TestCU3 {
     private String nombreCompetencia, deporteAsociado,modalidad;
@@ -295,8 +287,16 @@ class DeleteButtonCU3 extends JButton {
         setText("X");
     }
 }
-
-class DeleteButtonRendererCU3 extends DeleteButton implements TableCellRenderer {
+class DeleteButton2CU3 extends JButton {
+    @Override public void updateUI() {
+        super.updateUI();
+        setBorder(BorderFactory.createEmptyBorder());
+        setFocusable(false);
+        setRolloverEnabled(false);
+        setText("Ver");
+    }
+}
+class DeleteButtonRendererCU3 extends DeleteButtonCU3 implements TableCellRenderer {
     public DeleteButtonRendererCU3() {
         super();
         setName("Table.cellRenderer");
@@ -306,14 +306,26 @@ class DeleteButtonRendererCU3 extends DeleteButton implements TableCellRenderer 
     }
 }
 
-class DeleteButtonEditorCU3 extends DeleteButton implements TableCellEditor {
-    public DeleteButtonEditorCU3(final JTable table) {
+class DeleteButtonRenderer2CU3 extends DeleteButton2CU3 implements TableCellRenderer {
+    public DeleteButtonRenderer2CU3() {
+        super();
+        setName("Table.cellRenderer");
+    }
+    @Override public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        return this;
+    }
+}
+
+class DeleteButtonEditorCU3 extends DeleteButtonCU3 implements TableCellEditor {
+    public DeleteButtonEditorCU3(final JTable table, final ArrayList<CompetenciaDTO> listaCompetenciasEncontradas) {
         super();
         addActionListener(new ActionListener() {
             @Override public void actionPerformed(ActionEvent e) {
                 int row = table.convertRowIndexToModel(table.getEditingRow());
                 fireEditingStopped();
-				((DefaultTableModel) table.getModel()).removeRow(row);
+                
+                ((DefaultTableModel) table.getModel()).removeRow(row);
+                
                 //String nombre = table.getValueAt(row, 1).toString();
                 //JOptionPane.showMessageDialog(null, nombre);
             }
@@ -382,6 +394,87 @@ class DeleteButtonEditorCU3 extends DeleteButton implements TableCellEditor {
             }
         }
     }
+    
+}
+
+class DeleteButtonEditor2CU3 extends DeleteButton2CU3 implements TableCellEditor {
+    public DeleteButtonEditor2CU3(final JTable table, final ArrayList<CompetenciaDTO> listaCompetenciasEncontradas) {
+        super();
+        addActionListener(new ActionListener() {
+            @Override public void actionPerformed(ActionEvent e) {
+                int row = table.convertRowIndexToModel(table.getEditingRow());
+                fireEditingStopped();
+                Cu020 ventana = new Cu020(listaCompetenciasEncontradas.get(row).getId_competencia());
+				ventana.setVisible(true);
+                //String nombre = table.getValueAt(row, 1).toString();
+                //JOptionPane.showMessageDialog(null, nombre);
+            }
+        });
+    }
+    @Override public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+        return this;
+    }
+    @Override public Object getCellEditorValue() {
+        return "";
+    }
+
+    //Copied from AbstractCellEditor
+    //protected EventListenerList listenerList = new EventListenerList();
+    //protected transient ChangeEvent changeEvent;
+
+    @Override public boolean isCellEditable(EventObject e) {
+        return true;
+    }
+    @Override public boolean shouldSelectCell(EventObject anEvent) {
+        return true;
+    }
+    @Override public boolean stopCellEditing() {
+        fireEditingStopped();
+        return true;
+    }
+    @Override public void cancelCellEditing() {
+        fireEditingCanceled();
+    }
+    @Override public void addCellEditorListener(CellEditorListener l) {
+        listenerList.add(CellEditorListener.class, l);
+    }
+    @Override public void removeCellEditorListener(CellEditorListener l) {
+        listenerList.remove(CellEditorListener.class, l);
+    }
+    public CellEditorListener[] getCellEditorListeners() {
+        return listenerList.getListeners(CellEditorListener.class);
+    }
+    protected void fireEditingStopped() {
+        // Guaranteed to return a non-null array
+        Object[] listeners = listenerList.getListenerList();
+        // Process the listeners last to first, notifying
+        // those that are interested in this event
+        for (int i = listeners.length - 2; i >= 0; i -= 2) {
+            if (listeners[i] == CellEditorListener.class) {
+                // Lazily create the event:
+                if (Objects.isNull(changeEvent)) {
+                    changeEvent = new ChangeEvent(this);
+                }
+                ((CellEditorListener) listeners[i + 1]).editingStopped(changeEvent);
+            }
+        }
+    }
+    protected void fireEditingCanceled() {
+        // Guaranteed to return a non-null array
+        Object[] listeners = listenerList.getListenerList();
+        // Process the listeners last to first, notifying
+        // those that are interested in this event
+        for (int i = listeners.length - 2; i >= 0; i -= 2) {
+            if (listeners[i] == CellEditorListener.class) {
+                // Lazily create the event:
+                if (Objects.isNull(changeEvent)) {
+                    changeEvent = new ChangeEvent(this);
+                }
+                ((CellEditorListener) listeners[i + 1]).editingCanceled(changeEvent);
+            }
+        }
+    }
+    
 }
 
 

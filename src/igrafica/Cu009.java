@@ -103,7 +103,7 @@ public class Cu009 extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		Image img = new ImageIcon(this.getClass().getResource("/messi.jpg")).getImage();
+		Image img = new ImageIcon(this.getClass().getResource("/silueta.gif")).getImage();
 		contentPane.setLayout(null);
 		
 		JLabel lblInscribirParticipante = new JLabel("INSCRIBIR PARTICIPANTE");
@@ -140,16 +140,13 @@ public class Cu009 extends JFrame {
 		//aca estaba antes
 		
 		JLabel lblImagenopcional = new JLabel("Imagen(opcional):");
-		lblImagenopcional.setBounds(92, 410, 148, 14);
+		lblImagenopcional.setBounds(92, 248, 148, 14);
 		contentPane.add(lblImagenopcional);
 		
-		txturl = new JTextField();
-		txturl.setBounds(92, 435, 134, 20);
-		contentPane.add(txturl);
-		txturl.setColumns(10);
+		
 		
 		final JLabel lblimagen = new JLabel("");
-		lblimagen.setBounds(92, 264, 148, 111);
+		lblimagen.setBounds(92, 283, 148, 111);
 		contentPane.add(lblimagen);
 		lblimagen.setIcon(new ImageIcon(img));
 		
@@ -189,14 +186,14 @@ public class Cu009 extends JFrame {
 			}
 		});
 		
-		panel.add(btnIngresar, "cell 0 2");
+		//panel.add(btnIngresar, "cell 0 2");
 	       
         JPanel panel_1 = new JPanel();
         panel_1.setBorder(new TitledBorder(null, "Acciones", TitledBorder.LEADING, TitledBorder.TOP, null, null));
         getContentPane().add(panel_1, BorderLayout.SOUTH);
         panel_1.setLayout(new MigLayout("", "[grow,right]", "[]"));
         
-		btnIngresar.setBounds(276, 434, 89, 23);
+		btnIngresar.setBounds(117, 425, 89, 23);
 		contentPane.add(btnIngresar);
 
 		JButton btnAceptar = new JButton("Aceptar");
@@ -225,12 +222,11 @@ public class Cu009 extends JFrame {
 					participanteDTO.setNombre(txtNombre.getText());
 					participanteDTO.setEmail(txtEmail.getText());
 					participanteDTO.imagen = imageInByte;
-					System.out.println(participanteDTO.getEmail());
-					System.out.println(participanteDTO.getId_participante());
+			
 					
 				}
 				if(id_competencia==GestorCompetencias.agregarParticipante(participanteDTO,id_competencia)){
-					System.out.println("sirvi");
+			
 					JOptionPane.showMessageDialog(null, "Se cargo con exito");
 					/*Cu008 ventana = new Cu008(idcomp);
 					ventana.setVisible(true);
