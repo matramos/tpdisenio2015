@@ -29,6 +29,10 @@ public class Lugar {
 			this.competencias.add(comp);
 		}
 	}
+	
+	public Lugar() {
+		
+	}
 	public List<Competencia> getCompetencias() {
 		return competencias;
 	}

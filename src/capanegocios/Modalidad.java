@@ -15,6 +15,10 @@ public class Modalidad {
 		this.eliminatoriasimple=modalidad.isEliminatoriaSimple();
 		this.eliminatoriadoble=modalidad.isEliminatoriaDoble();
 	}
+	
+	public Modalidad() {
+	}
+	
 	public long getId_modalidad() {
 		return id_modalidad;
 	}

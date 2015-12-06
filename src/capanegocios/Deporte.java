@@ -19,6 +19,10 @@ public class Deporte {
 		}
 	}
 
+	public Deporte() {
+		
+	}
+	
 	public void setId(long id){
 		this.id=id;
 		

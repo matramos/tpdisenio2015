@@ -17,6 +17,10 @@ public class SeRealizaEn implements Serializable {
 		this.lugar=new Lugar(realiza.getLugar());
 		this.deporte=new Deporte(realiza.getDeporte());
 	}
+	
+	public SeRealizaEn() {
+		
+	}
 
 	public void setIdlugar(long idlugar){
 		this.idlugar = idlugar;
