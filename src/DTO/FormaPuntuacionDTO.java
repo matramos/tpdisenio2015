@@ -1,22 +1,12 @@
-package capanegocios;
+package DTO;
 
-import DTO.FormaPuntuacionDTO;
-
-public class FormaPuntuacion {
+public class FormaPuntuacionDTO {
+	
 	public long id_formadepuntuacion;
 	public boolean sets;
 	public boolean resultadoFinal;
 	public boolean puntuacion;
 	
-	public FormaPuntuacion(FormaPuntuacionDTO puntuacion) {
-		this.id_formadepuntuacion=puntuacion.getId_formadepuntuacion();
-		this.sets=puntuacion.isSets();
-		this.resultadoFinal=puntuacion.isResultadoFinal();
-		this.puntuacion=puntuacion.isPuntuacion();
-	}
-	public FormaPuntuacion() {
-		// TODO Auto-generated constructor stub
-	}
 	public long getId_formadepuntuacion() {
 		return id_formadepuntuacion;
 	}
@@ -41,8 +31,4 @@ public class FormaPuntuacion {
 	public void setPuntuacion(boolean puntuacion) {
 		this.puntuacion = puntuacion;
 	}
-	
-	
-	
-	
 }

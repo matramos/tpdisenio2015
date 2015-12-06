@@ -2,12 +2,29 @@ package capanegocios;
 import java.util.ArrayList;
 import java.util.List;
 
+import DTO.EncuentroDTO;
+import DTO.RondaDTO;
+
 public class Ronda {
 	private long id_ronda;
 	private int numeroRonda;
 	private boolean finalizado;
 	private boolean comenzada;
 	private List<Encuentro> encuentros = new ArrayList<Encuentro>();
+	
+	public Ronda(RondaDTO ronda) {
+		this.id_ronda=ronda.getId_ronda();
+		this.numeroRonda=ronda.getNumeroRonda();
+		this.finalizado=ronda.isFinalizado();
+		this.comenzada=ronda.isComenzada();
+		for(EncuentroDTO encuentroDTO : ronda.getEncuentros()){
+			Encuentro encuentro = new Encuentro(encuentroDTO);
+			encuentros.add(encuentro);
+		}
+	}
+	public Ronda() {
+		// TODO Auto-generated constructor stub
+	}
 	public long getId_ronda() {
 		return id_ronda;
 	}

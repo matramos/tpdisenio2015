@@ -1,11 +1,20 @@
 package capanegocios;
 
+import DTO.DisponibilidadDTO;
+
 public class Disponibilidad {
 	
 	private Lugar lugar;
 	private int disponibilidad;
 	
 	
+	public Disponibilidad(DisponibilidadDTO disponibilidad) {
+		this.lugar=new Lugar(disponibilidad.getLugar());
+		this.disponibilidad=disponibilidad.getDisponibilidad();
+	}
+	public Disponibilidad() {
+		// TODO Auto-generated constructor stub
+	}
 	public Lugar getLugar() {
 		return lugar;
 	}

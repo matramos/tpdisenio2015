@@ -60,15 +60,9 @@ public class EncuentroDTO {
 		this.encuentro1=new EncuentroDTO(encuentro.getEncuentro1());
 		this.encuentro2=new EncuentroDTO(encuentro.getEncuentro2());
 	}
-	
-	
-	
 	public EncuentroDTO() {
 		// TODO Auto-generated constructor stub
 	}
-
-
-
 	public long getId_encuentro() {
 		return id_encuentro;
 	}

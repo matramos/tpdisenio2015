@@ -3,6 +3,7 @@ package capanegocios;
 import java.util.Date;
 import java.util.List;
 
+import DTO.EncuentroDTO;
 import DTO.SetDTO;
 
 public class Encuentro {
@@ -34,6 +35,37 @@ public class Encuentro {
 		
 	}
 	
+	public Encuentro(EncuentroDTO encuentro) {
+		
+		this.id_encuentro=encuentro.getId_encuentro();
+		this.empate=encuentro.isEmpate();
+		this.resultadoReg=encuentro.isResultadoReg();
+		this.orden=encuentro.getOrden();
+		this.fecha=encuentro.getFecha();
+		this.ganador=new Participante(encuentro.getGanador());
+		this.jugador1=new Participante(encuentro.getJugador1());
+		this.jugador2=new Participante(encuentro.getJugador2());
+		this.lugar=new Lugar(encuentro.getLugar());
+		this.puntajep1=encuentro.getPuntajep1();
+		this.puntajep2=encuentro.getPuntajep2();
+		this.estadop1=encuentro.isEstadop1();
+		this.estadop2=encuentro.isEstadop2();
+		for(EncuentroDTO encuDTO : encuentro.getRganadores()){
+			Encuentro encu = new Encuentro(encuDTO);
+			rganadores.add(encu);
+		}
+		for(EncuentroDTO encuDTO : encuentro.getRperdedores()){
+			Encuentro encu = new Encuentro(encuDTO);
+			rperdedores.add(encu);
+		}
+		for(SetDTO setDTO : encuentro.getSets()){
+			Set set = new Set(setDTO);
+			sets.add(set);
+		}
+		this.encuentro1=new Encuentro(encuentro.getEncuentro1());
+		this.encuentro2=new Encuentro(encuentro.getEncuentro2());
+	}
+
 	public long getId_encuentro() {
 		return id_encuentro;
 	}

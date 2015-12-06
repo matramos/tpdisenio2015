@@ -18,6 +18,12 @@ public class SetDTO {
 		// TODO Auto-generated constructor stub
 	}
 
+	public SetDTO(long id_set, int puntajep1, int puntajep2) {
+		this.id_set=id_set;
+		this.puntajep1=puntajep1;
+		this.puntajep2=puntajep2;
+	}
+
 	public long getId_set() {
 		return id_set;
 	}

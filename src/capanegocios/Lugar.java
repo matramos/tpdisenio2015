@@ -3,6 +3,11 @@ package capanegocios;
 
 import java.util.List;
 
+import DTO.CompetenciaDTO;
+import DTO.EncuentroDTO;
+import DTO.LugarDTO;
+import DTO.SeRealizaEnDTO;
+
 public class Lugar {
 	private long id;
 	private String nombre;
@@ -11,6 +16,19 @@ public class Lugar {
 	private List<Competencia> competencias;
 
 	
+	public Lugar(LugarDTO lugar) {
+		this.id=lugar.getId();
+		this.nombre=lugar.getNombre();
+		this.descripcion=lugar.getDescripcion();
+		for(SeRealizaEnDTO realizaDTO : lugar.getSerealizaen()){
+			SeRealizaEn realiza = new SeRealizaEn(realizaDTO);
+			this.serealizaen.add(realiza);
+		}
+		for(CompetenciaDTO compDTO :lugar.getCompetencias()){
+			Competencia comp = new Competencia(compDTO);
+			this.competencias.add(comp);
+		}
+	}
 	public List<Competencia> getCompetencias() {
 		return competencias;
 	}

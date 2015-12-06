@@ -5,10 +5,16 @@ import DTO.ModalidadDTO;
 public class Modalidad {
 	public long id_modalidad;
 	public boolean liga;
-	public boolean elminatoriasimple;
+	public boolean eliminatoriasimple;
 	public boolean eliminatoriadoble;
 	
 	
+	public Modalidad(ModalidadDTO modalidad) {
+		this.id_modalidad=modalidad.getId_modalidad();
+		this.liga=modalidad.isLiga();
+		this.eliminatoriasimple=modalidad.isEliminatoriaSimple();
+		this.eliminatoriadoble=modalidad.isEliminatoriaDoble();
+	}
 	public long getId_modalidad() {
 		return id_modalidad;
 	}
@@ -22,10 +28,10 @@ public class Modalidad {
 		this.liga = liga;
 	}
 	public boolean getEliminatoriasimple() {
-		return elminatoriasimple;
+		return eliminatoriasimple;
 	}
 	public void setEliminatoriasimple(boolean elminatoriaSimple) {
-		this.elminatoriasimple = elminatoriaSimple;
+		this.eliminatoriasimple = elminatoriaSimple;
 	}
 	public boolean getEliminatoriadoble() {
 		return eliminatoriadoble;

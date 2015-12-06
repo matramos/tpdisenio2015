@@ -9,14 +9,14 @@ import capanegocios.SeRealizaEn;
 public class SeRealizaEnDTO {
 	public long id_lugar;
 	public long id_deporte;
-	private Lugar lugar;
-	private Deporte deporte;
+	private LugarDTO lugar;
+	private DeporteDTO deporte;
 
 	public SeRealizaEnDTO(SeRealizaEn realiza){
 		this.id_lugar=realiza.getIdlugar();
 		this.id_deporte=realiza.getIddeporte();
-		this.lugar=realiza.getLugar();
-		this.deporte=realiza.getDeporte();
+		this.lugar=new LugarDTO(realiza.getLugar());
+		this.deporte=new DeporteDTO(realiza.getDeporte());
 	}
 	
 	public SeRealizaEnDTO() {
@@ -34,6 +34,22 @@ public class SeRealizaEnDTO {
 	}
 	public void setId_deporte(long id_deporte) {
 		this.id_deporte = id_deporte;
+	}
+
+	public LugarDTO getLugar() {
+		return lugar;
+	}
+
+	public void setLugar(LugarDTO lugar) {
+		this.lugar = lugar;
+	}
+
+	public DeporteDTO getDeporte() {
+		return deporte;
+	}
+
+	public void setDeporte(DeporteDTO deporte) {
+		this.deporte = deporte;
 	}
 
 	

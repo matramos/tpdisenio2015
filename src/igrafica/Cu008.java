@@ -90,7 +90,7 @@ public class Cu008 extends JFrame {
 		contentPane.add(lblCompetencia);
 		
 		JLabel lblCompe = new JLabel("");
-		lblCompe.setBounds(181, 98, 46, 14);
+		lblCompe.setBounds(181, 98, 95, 14);
 		contentPane.add(lblCompe);
 		
 		JButton btnAgregarParticipante = new JButton("Agregar Participante");

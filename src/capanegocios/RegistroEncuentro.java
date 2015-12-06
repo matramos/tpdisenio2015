@@ -2,6 +2,9 @@ package capanegocios;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
+
+import antlr.collections.List;
 
 public class RegistroEncuentro {
 
@@ -17,6 +20,22 @@ public class RegistroEncuentro {
 	Time hora;
 	int ganador;
 	boolean empate;
+	
+	public RegistroEncuentro(Encuentro encuentroActualizado) {
+		// faltan los comentados
+		//id_ registro
+		this.id_encuentro=encuentroActualizado.getId_encuentro();
+		this.puntajep1=encuentroActualizado.getPuntajep1();
+		this.puntajep2=encuentroActualizado.getPuntajep2();
+		//estado_encuentro
+		this.estado_participante1=encuentroActualizado.isEstadop1();
+		this.estado_participante2=encuentroActualizado.isEstadop2();
+		//numero_encuentro
+		//fecha
+		//hora
+		//this.ganador=encuentroActualizado.getGanador();
+		this.empate=encuentroActualizado.isEmpate();
+	}
 	
 	public long getId_registro() {
 		return id_registro;

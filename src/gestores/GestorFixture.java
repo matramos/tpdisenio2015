@@ -63,8 +63,6 @@ public class GestorFixture{
 	
 	public EncuentroDTO GestionarResultado(long id_competencia,long id_ronda,long id_encuentro){
 		
-		
-		
 		competencia= GestorCompetencias.buscarCompetencia(id_competencia);
 		listaRondas=(ListaRondas) competencia.getRondas();
 		ronda=listaRondas.buscarRonda(id_ronda);
@@ -80,52 +78,23 @@ public class GestorFixture{
 			encuentro.addSet(set1);
 		}
 		return encuentro;
-		/*
+	}
+
+	public void cargarResultado(long id_competencia,long id_ronda,EncuentroDTO encuentro) {
+		
+		competencia= GestorCompetencias.buscarCompetencia(id_competencia);
 		modalidad=competencia.getModalidad();
 		
 		if(modalidad.getEliminatoriasimple()== true ^ modalidad.getEliminatoriadoble()== true){
 			
+			//seteo el encuentro con los datos nuevos ingresados por el usuario
+			Encuentro encuentroActualizado = new Encuentro(encuentro);
+			//actualizo la competencia con el nuevo encuentro actualizado
+			competencia.ActualizarEncuentro(id_ronda,encuentroActualizado);
+			//creo el registro de encuentro
+			RegistroEncuentro registroEncuentro = new RegistroEncuentro(encuentroActualizado);
 			
-			set1.setPuntajep1(Integer.parseInt(txtS1P1.getText()));
-			set1.setPuntajep2(Integer.parseInt(txtS1P1.getText()));
-			set1.setEncuentro(encuentro);
-			
-			set2.setPuntajep1(Integer.parseInt(txtS1P1.getText()));
-			set2.setPuntajep2(Integer.parseInt(txtS1P1.getText()));
-			set2.setEncuentro(encuentro);
-			
-			set3.setPuntajep1(Integer.parseInt(txtS1P1.getText()));
-			set3.setPuntajep2(Integer.parseInt(txtS1P1.getText()));
-			set3.setEncuentro(encuentro);
-			
-			set4.setPuntajep1(Integer.parseInt(txtS1P1.getText()));
-			set4.setPuntajep2(Integer.parseInt(txtS1P1.getText()));
-			set4.setEncuentro(encuentro);
-			
-			set5.setPuntajep1(Integer.parseInt(txtS1P1.getText()));
-			set5.setPuntajep2(Integer.parseInt(txtS1P1.getText()));
-			set5.setEncuentro(encuentro);
-			
-			set6.setPuntajep1(Integer.parseInt(txtS1P1.getText()));
-			set6.setPuntajep2(Integer.parseInt(txtS1P1.getText()));
-			set6.setEncuentro(encuentro);
-			
-			set7.setPuntajep1(Integer.parseInt(txtS1P1.getText()));
-			set7.setPuntajep2(Integer.parseInt(txtS1P1.getText()));
-			set7.setEncuentro(encuentro);
-			
-			set8.setPuntajep1(Integer.parseInt(txtS1P1.getText()));
-			set8.setPuntajep2(Integer.parseInt(txtS1P1.getText()));
-			set8.setEncuentro(encuentro);
-			
-			set9.setPuntajep1(Integer.parseInt(txtS1P1.getText()));
-			set9.setPuntajep2(Integer.parseInt(txtS1P1.getText()));
-			set9.setEncuentro(encuentro);
-			
-			registro = new RegistroEncuentroDTO();
-			
-		}*/
-
+		}
 	}
 
 }

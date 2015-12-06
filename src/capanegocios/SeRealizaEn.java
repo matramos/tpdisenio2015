@@ -2,6 +2,8 @@ package capanegocios;
 
 import java.io.Serializable;
 
+import DTO.SeRealizaEnDTO;
+
 public class SeRealizaEn implements Serializable {
 	private long idlugar;
 	private long iddeporte;
@@ -9,6 +11,13 @@ public class SeRealizaEn implements Serializable {
 	private Deporte deporte;
 	
 	
+	public SeRealizaEn(SeRealizaEnDTO realiza) {
+		this.idlugar=realiza.getId_lugar();
+		this.iddeporte=realiza.getId_deporte();
+		this.lugar=new Lugar(realiza.getLugar());
+		this.deporte=new Deporte(realiza.getDeporte());
+	}
+
 	public void setIdlugar(long idlugar){
 		this.idlugar = idlugar;
 	}

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import capanegocios.Competencia;
+import capanegocios.FormaPuntuacion;
 import capanegocios.Lugar;
 import capanegocios.Participante;
 import capanegocios.Ronda;
@@ -23,7 +24,8 @@ public class CompetenciaDTO {
 	private boolean permite_empates;
 	private Date fecha_hora;
 	private int sets;
-	private String puntuacion;
+	//private String puntuacion;
+	private FormaPuntuacionDTO puntuacion;
 	private EstadoDTO estado;
 	private int resultado_final;
 	private List<ParticipanteDTO> participantes = new ArrayList<ParticipanteDTO>();
@@ -131,12 +133,13 @@ public class CompetenciaDTO {
 	public void setSets(int sets) {
 		this.sets = sets;
 	}
+	/*
 	public String getPuntuacion() {
 		return puntuacion;
 	}
 	public void setPuntuacion(String puntuacion) {
 		this.puntuacion = puntuacion;
-	}
+	}*/
 	public int getResultado_final() {
 		return resultado_final;
 	}
@@ -160,6 +163,18 @@ public class CompetenciaDTO {
 	}
 	public void setEstado(EstadoDTO estado) {
 		this.estado = estado;
+	}
+
+	public FormaPuntuacionDTO getPuntuacion() {
+		return puntuacion;
+	}
+
+	public void setPuntuacion(FormaPuntuacionDTO puntuacion) {
+		this.puntuacion = puntuacion;
+	}
+
+	public void setLugares(List<DisponibilidadDTO> lugares) {
+		this.lugares = lugares;
 	}
 	
 }

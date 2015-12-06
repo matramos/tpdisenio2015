@@ -1,12 +1,18 @@
 package capanegocios;
 
 import DTO.EncuentroDTO;
+import DTO.SetDTO;
 
 public class Set {
 	private long id_set;
 	private int puntajep1;
 	private int puntajep2;
 	
+	public Set(SetDTO set) {
+		this.id_set=set.getId_set();
+		this.puntajep1=set.getPuntajep1();
+		this.puntajep2=set.getPuntajep2();
+	}
 	public long getId_set() {
 		return id_set;
 	}

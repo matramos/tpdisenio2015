@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 import DTO.CompetenciaDTO;
+import DTO.DisponibilidadDTO;
+import DTO.ParticipanteDTO;
+import DTO.RondaDTO;
 
 public class Competencia {
 
@@ -27,6 +30,40 @@ public class Competencia {
 	private List<Disponibilidad> lugares = new ArrayList<Disponibilidad>();
 	private Estado estado;
 	
+	public Competencia(CompetenciaDTO competencia) {
+		this.id_competencia=competencia.getId_competencia();
+		this.nombre=competencia.getNombre();
+		this.cantidad_sets=competencia.getCantidad_sets();
+		this.modalidad=new Modalidad(competencia.getModalidad());
+		this.reglamento=competencia.getReglamento();
+		this.deporte=new Deporte(competencia.getDeporte());
+		this.puntos_presentarse=competencia.getPuntos_presentarse();
+		this.puntos_ganador=competencia.getPuntos_ganador();
+		this.puntos_empate=competencia.getPuntos_empate();
+		this.permite_empates=competencia.isPermite_empates();
+		this.fecha_hora=competencia.getFecha_hora();
+		this.sets=competencia.getSets();
+		this.puntuacion=new FormaPuntuacion(competencia.getPuntuacion());
+		this.resultado_final=competencia.getResultado_final();
+		for(ParticipanteDTO partDTO : competencia.getParticipantes()){
+			Participante part = new Participante(partDTO);
+			participantes.add(part);
+		}
+		for(RondaDTO rondaDTO : competencia.getRondas()){
+			Ronda ronda = new Ronda(rondaDTO);
+			rondas.add(ronda);
+		}
+		for(DisponibilidadDTO dispoDTO : competencia.getLugares()){
+			Disponibilidad dispo = new Disponibilidad(dispoDTO);
+			lugares.add(dispo);
+		}
+		this.estado=new Estado(competencia.getEstado());
+	}
+
+	public Competencia() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void CompetenciaDTO(CompetenciaDTO competenciaDTO){
 		//this.id_competencia=competenciaDTO.getId_competencia();
 		this.nombre=competenciaDTO.getNombre();
@@ -204,6 +241,26 @@ public class Competencia {
 
 	public void addRonda(Ronda rondita) {
 		rondas.add(rondita);
+	}
+
+	public void ActualizarEncuentro(long id_ronda,Encuentro encuentroActualizado) {
+		
+		int i=0;
+		int j=0;
+		for(Ronda ronda : rondas ){
+			if(ronda.getId_ronda()==id_ronda){
+				for(Encuentro encuentro : ronda.getEncuentros()){
+					if(encuentro.getId_encuentro()==encuentroActualizado.getId_encuentro()){
+						ronda.getEncuentros().set(j,encuentroActualizado);
+						Ronda rondaActualizada=ronda;
+						rondas.set(i, rondaActualizada);
+					}
+					j++;
+				}
+			}
+			i++;
+		}
+		
 	}
 	
 }
