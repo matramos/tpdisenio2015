@@ -1,5 +1,6 @@
 package capanegocios;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -14,9 +15,38 @@ public class Usuario {
 	private String email;
 	private TipoDocumento tipo;
 	private int documento;
-	private List<Lugar> lugares;
+	private List<Lugar> lugares = new ArrayList<Lugar>();
+	//private List<Competencia> competencias = new ArrayList<Competencia>();
+	private Localidad localidad;
+	private Auditoria auditoria;
 	
 	
+	
+	
+	//public List<Competencia> getCompetencias() {
+	//	return competencias;
+	//}
+
+	//public void setCompetencias(List<Competencia> competencias) {
+	//	this.competencias = competencias;
+	//}
+
+	public Localidad getLocalidad() {
+		return localidad;
+	}
+
+	public void setLocalidad(Localidad localidad) {
+		this.localidad = localidad;
+	}
+
+	public Auditoria getAuditoria() {
+		return auditoria;
+	}
+
+	public void setAuditoria(Auditoria auditoria) {
+		this.auditoria = auditoria;
+	}
+
 	public long getId(){
 		return id;
 	}

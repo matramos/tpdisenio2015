@@ -13,11 +13,17 @@
 <property column="contrasena" name="contrasena" type="string" />
 
 <list name="lugares" cascade="all-delete-orphan" >
-<key column = "id_lugar"/>
+<key column = "id_usuario"/>
 <index column ="orden"/>
 <one-to-many class="capanegocios.Lugar"/>
 </list>
 
+<!-- <list name="competencias" cascade="all-delete-orphan">
+	<key column = "id_usuario"/>
+	<index column ="orden"/>
+	<one-to-many class="capanegocios.Competencia"/>
+	</list>
+ -->
 <one-to-one name="tipo" cascade="persist,delete"/>
 </class>
 </hibernate-mapping>

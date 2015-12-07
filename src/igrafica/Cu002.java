@@ -7,6 +7,9 @@ import java.awt.Font;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import gestores.GestorUsuarios;
+
 import java.awt.CardLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -76,14 +79,24 @@ public class Cu002 extends JFrame {
 			}
 		});
 		btnRegistrarse.setBounds(221, 375, 106, 23);
+		btnRegistrarse.setEnabled(false);
 		contentPane.add(btnRegistrarse);
-		
-		JButton btnIngresar = new JButton("Ingresar");
-		btnIngresar.setBounds(522, 375, 89, 23);
-		contentPane.add(btnIngresar);
-		
+
 		passwordField = new JPasswordField();
 		passwordField.setBounds(333, 279, 150, 20);
 		contentPane.add(passwordField);
+		
+		JButton btnIngresar = new JButton("Ingresar");
+		btnIngresar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				menuprincipal ventana = new menuprincipal(GestorUsuarios.autenticarUsuario(textField.getText(), passwordField.getText()));
+				ventana.setVisible(true);
+				dispose();
+				
+			}
+		});
+		btnIngresar.setBounds(522, 375, 89, 23);
+		contentPane.add(btnIngresar);
+		
 	}
 }

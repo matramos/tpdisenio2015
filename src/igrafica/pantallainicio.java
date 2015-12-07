@@ -76,11 +76,10 @@ public class pantallainicio {
 		JButton btnVerCompetencias = new JButton("Ver competencias");
 		btnVerCompetencias.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Cu003 ventana = new Cu003();
-				ventana.setVisible(true);
-				frame.dispose();
+				
 			}
 		});
+		btnVerCompetencias.setEnabled(false);
 		btnVerCompetencias.setBounds(495, 444, 151, 23);
 		pantallaprincipal.add(btnVerCompetencias);
 		

@@ -70,7 +70,7 @@ public class CompetenciaDAO {
 		return modalidadRec;
 	}
 	
-	public static ArrayList<Competencia> buscarCompetencias(String nombre, int deporteID, int modalidadID, int estadoID){
+	public static ArrayList<Competencia> buscarCompetencias(String nombre, int deporteID, int modalidadID, int estadoID, long usuarioID){
 		/*Configuration cfg = new Configuration();
 		cfg.configure ("hibernate.cfg.xml");
 		SessionFactory factory = cfg.buildSessionFactory();
@@ -79,6 +79,7 @@ public class CompetenciaDAO {
 		Transaction tx = CrearSesion.session.beginTransaction();
 		
 		String consulta = "from Competencia ";
+		int cuenta = -1;
 		int nombrePar = -1;
 		int deportePar = -1;
 		int modalidadPar = -1;
@@ -88,14 +89,15 @@ public class CompetenciaDAO {
 		Boolean qmodalidad = false; 
 		Boolean qestado = false;
 		
-		if(!(nombre.equals("todas")) || deporteID!=-1 || modalidadID!=-1 || estadoID!=-1){
+		if(!(nombre.equals("")) || deporteID!=-1 || modalidadID!=-1 || estadoID!=-1){
 			consulta += "c where ";
 		}
 		
-		if(!(nombre.equals("todas"))){
-			consulta += "c.nombre=? ";
+		if(!(nombre.equals(""))){
+			consulta += "c.nombre like ? ";
 			qnombre = true;
-			nombrePar +=1;
+			cuenta++;
+			nombrePar =cuenta;
 		}
 		if(deporteID!=-1){
 			if(qnombre){
@@ -103,42 +105,52 @@ public class CompetenciaDAO {
 			}
 			consulta += "c.deporte.id=? ";
 			qdeporte = true;
-			deportePar = nombrePar +1;
+			cuenta++;
+			deportePar = cuenta;
 			
 		}
 		if(modalidadID!=-1){
 			if(qdeporte || qnombre){
 				consulta += "and ";
 			}
-			consulta += "c.modalidad=? ";
+			consulta += "c.modalidad.id_modalidad=? ";
 			qmodalidad = true;
-			modalidadPar = deportePar +1;
+			cuenta++;
+			modalidadPar = cuenta;
 		}
 		if(estadoID!=-1){
 			if(qdeporte || qnombre || qmodalidad){
 				consulta += "and ";
 			}
-			consulta += "c.estado=? ";
-			estadoPar = modalidadPar +1;
+			consulta += "c.estado.id=? ";
+			cuenta++;
+			estadoPar = cuenta;
 			qestado = true;
 		}
 		
+		if(qnombre || qdeporte || qmodalidad || qestado){
+			consulta += "and c.usuario.id = ?";
+		}
+		else
+			consulta += " c where c.usuario.id = ?";
+
 		
-		
+		System.out.println(consulta);
 		Query query = CrearSesion.session.createQuery(consulta);
 		if(qnombre){
-			query.setParameter(nombrePar, nombre);
+			query.setParameter(nombrePar, "%"+nombre+"%");
 		}
 		if(qdeporte){
 			query.setParameter(deportePar, (long) deporteID);
 		}
 		if(qmodalidad){
 			query.setParameter(modalidadPar, (long) modalidadID);
+			
 		}
 		if(qestado){
 			query.setParameter(estadoPar, (long) estadoID);
 		}
-			
+		query.setParameter(cuenta+1, usuarioID);
 		ArrayList<Competencia> competencias= (ArrayList<Competencia>) query.list();
 		
 		
@@ -195,7 +207,7 @@ public class CompetenciaDAO {
 			modalidad.setId_modalidad(object.getModalidad().getId_modalidad());
 			modalidad.setLiga(object.getModalidad().liga);
 			competencia.setModalidad(modalidad);
-			estado.setId_estado(object.getEstado().getId_estado());
+			estado.setId_estado(object.getEstado().getId());
 			estado.setNombre(object.getEstado().getNombre());
 			competencia.setEstado(estado);
 			deporte.setId(object.getDeporte().getId());

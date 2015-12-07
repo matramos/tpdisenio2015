@@ -6,6 +6,7 @@ import java.util.GregorianCalendar;
 import DAO.CompetenciaDAO;
 import DAO.DeporteDAO;
 import DAO.ParticipanteDAO;
+import DAO.UsuarioDAO;
 import DAO.LugarDAO;
 import DTO.CompetenciaDTO;
 import DTO.DisponibilidadDTO;
@@ -21,11 +22,12 @@ import capanegocios.Lugar;
 import capanegocios.Modalidad;
 import capanegocios.Participante;
 import capanegocios.SeRealizaEn;
+import capanegocios.Usuario;
 public class GestorCompetencias {
 	
 	private static Competencia competencia;
 	
-	public static long crearCompetencia(CompetenciaDTO competenciaDTO, int idformaPrim, String deportePrim, long idmodalidadPrim){
+	public static long crearCompetencia(CompetenciaDTO competenciaDTO, int idformaPrim, String deportePrim, long idmodalidadPrim,long idUsuario){
 		long idGenerado=-1;
 		Competencia competencia = new Competencia();
 		competencia.CompetenciaDTO(competenciaDTO);
@@ -38,6 +40,8 @@ public class GestorCompetencias {
 		competencia.setModalidad(modalidad);
 		competencia.setResultado_final(competenciaDTO.getResultado_final());
 		
+		Usuario usuario = UsuarioDAO.getUsuario(idUsuario);
+		competencia.setUsuario(usuario);
 		for(DisponibilidadDTO object: competenciaDTO.getLugares()){
 			Disponibilidad dispo = new Disponibilidad();
 			dispo.setDisponibilidad(object.getDisponibilidad());
@@ -53,7 +57,7 @@ public class GestorCompetencias {
 			
 		}*/
 		Estado estado = new Estado();
-		estado.setId_estado(1);
+		estado.setId(1);
 		estado.setNombre("Creada");
 		competencia.setEstado(estado);
 		
@@ -63,10 +67,10 @@ public class GestorCompetencias {
 		
 	}
 	
-	public static ArrayList<CompetenciaDTO> buscarCompetencias(String nombreComp, int deporteID, int modalidadID, int estadoID) {
+	public static ArrayList<CompetenciaDTO> buscarCompetencias(String nombreComp, int deporteID, int modalidadID, int estadoID, long usuarioID) {
 		ArrayList<CompetenciaDTO> competenciasQueRetornan = new ArrayList<>(); 
-		ArrayList<Competencia> competenciasEncontradas = CompetenciaDAO.buscarCompetencias(nombreComp, deporteID, modalidadID, estadoID);
-		System.out.println(competenciasEncontradas.get(0).getDeporte().getNombre());
+		ArrayList<Competencia> competenciasEncontradas = CompetenciaDAO.buscarCompetencias(nombreComp, deporteID, modalidadID, estadoID, usuarioID);
+		
 		for(Competencia comp : competenciasEncontradas){
 			//System.out.println(comp.getDeporte().getNombre());
 			CompetenciaDTO compDTO = new CompetenciaDTO(comp);
@@ -104,7 +108,7 @@ public static long agregarParticipante(ParticipanteDTO participanteDTO,long id_c
 	
 	competencia.agregarParticipante(participante);
 	Estado estado = new Estado();
-	estado.setId_estado(1);
+	estado.setId(1);
 	estado.setNombre("Creada");
 	competencia.setEstado(estado);
 	

@@ -59,7 +59,7 @@ public class Cu009 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Cu009 frame = new Cu009(1);
+					Cu009 frame = new Cu009(1,1);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -83,7 +83,7 @@ public class Cu009 extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Cu009(final long id_competencia) {
+	public Cu009(final long id_competencia,final long id_usuario) {
 		
 		// codigo para agregar imagen por exploracion 
 		
@@ -241,7 +241,7 @@ public class Cu009 extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Cu008 ventana = new Cu008(id_competencia);
+				Cu008 ventana = new Cu008(id_competencia,id_usuario);
 				ventana.setVisible(true);
 				dispose();
 			}
