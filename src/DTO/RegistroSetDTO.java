@@ -2,9 +2,9 @@ package DTO;
 
 public class RegistroSetDTO {
 
-	long id_registro_set;
-	int puntajeP1;
-	int puntajeP2;
+	private long id_registro_set;
+	private int puntajeP1;
+	private int puntajeP2;
 	
 	public long getId_registro_set() {
 		return id_registro_set;

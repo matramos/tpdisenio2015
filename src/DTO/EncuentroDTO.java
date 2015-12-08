@@ -30,6 +30,7 @@ public class EncuentroDTO {
 	private List<SetDTO> sets;	
 	private EncuentroDTO encuentro1;
 	private EncuentroDTO encuentro2;
+	private boolean estado_encuentro;
 	
 	public EncuentroDTO(Encuentro encuentro){
 		this.id_encuentro=encuentro.getId_encuentro();
@@ -59,6 +60,7 @@ public class EncuentroDTO {
 		}
 		this.encuentro1=new EncuentroDTO(encuentro.getEncuentro1());
 		this.encuentro2=new EncuentroDTO(encuentro.getEncuentro2());
+		this.estado_encuentro=encuentro.isEstado_encuentro();
 	}
 	public EncuentroDTO() {
 		// TODO Auto-generated constructor stub
@@ -180,6 +182,12 @@ public class EncuentroDTO {
 	
 	public void addSet(SetDTO set){
 		sets.add(set);
+	}
+	public boolean isEstado_encuentro() {
+		return estado_encuentro;
+	}
+	public void setEstado_encuentro(boolean estado_encuentro) {
+		this.estado_encuentro = estado_encuentro;
 	}
 }
 	

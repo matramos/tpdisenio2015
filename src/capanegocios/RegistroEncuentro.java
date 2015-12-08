@@ -3,37 +3,36 @@ package capanegocios;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
-
-import antlr.collections.List;
+import java.util.List;
 
 public class RegistroEncuentro {
 
-	long id_registro;
-	long id_encuentro;
-	int puntajep1;
-	int puntajep2;
-	boolean estado_encuentro;
-	boolean estado_participante1;
-	boolean estado_participante2;
-	int numero_encuentro;
-	Date fecha;
-	Time hora;
-	int ganador;
-	boolean empate;
+	private long id_registro;
+	private long id_encuentro;
+	private int puntajep1;
+	private int puntajep2;
+	private boolean estado_encuentro;
+	private boolean estado_participante1;
+	private boolean estado_participante2;
+	private int numero_encuentro;
+	private List<RegistroSet> registroSets = new ArrayList<RegistroSet>();
+	private Date fecha;
+	private Time hora;
+	private Participante ganador;
+	private boolean empate;
 	
-	public RegistroEncuentro(Encuentro encuentroActualizado) {
-		// faltan los comentados
-		//id_ registro
+	public RegistroEncuentro(Encuentro encuentroActualizado,List<RegistroSet> registroSets) {
 		this.id_encuentro=encuentroActualizado.getId_encuentro();
 		this.puntajep1=encuentroActualizado.getPuntajep1();
 		this.puntajep2=encuentroActualizado.getPuntajep2();
-		//estado_encuentro
+		this.estado_encuentro=encuentroActualizado.isEstado_encuentro();
 		this.estado_participante1=encuentroActualizado.isEstadop1();
 		this.estado_participante2=encuentroActualizado.isEstadop2();
-		//numero_encuentro
+		this.numero_encuentro=encuentroActualizado.getOrden();
+		this.registroSets=registroSets;
 		//fecha
 		//hora
-		//this.ganador=encuentroActualizado.getGanador();
+		this.ganador=encuentroActualizado.getGanador();
 		this.empate=encuentroActualizado.isEmpate();
 	}
 	
@@ -97,10 +96,10 @@ public class RegistroEncuentro {
 	public void setHora(Time hora) {
 		this.hora = hora;
 	}
-	public int getGanador() {
+	public Participante getGanador() {
 		return ganador;
 	}
-	public void setGanador(int ganador) {
+	public void setGanador(Participante ganador) {
 		this.ganador = ganador;
 	}
 	public boolean isEmpate() {
@@ -108,5 +107,13 @@ public class RegistroEncuentro {
 	}
 	public void setEmpate(boolean empate) {
 		this.empate = empate;
+	}
+
+	public List<RegistroSet> getRegistroSets() {
+		return registroSets;
+	}
+
+	public void setRegistroSets(List<RegistroSet> registroSets) {
+		this.registroSets = registroSets;
 	}
 }

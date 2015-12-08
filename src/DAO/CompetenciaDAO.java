@@ -150,18 +150,12 @@ public class CompetenciaDAO {
 	
 	public static long agregarCompetencia(Competencia competencia){
 
-		
 		Transaction tx = CrearSesion.session.beginTransaction();
-		
 		long idGenerado = (long) CrearSesion.session.save(competencia);
 		
-
 		tx.commit();
 		
-		
-		
 		return idGenerado;
-		
 	}
 	
 	public static ListaCompetenciasDTO getListado(){
@@ -231,4 +225,9 @@ public class CompetenciaDAO {
 		return competencia;
 	}
 
+	public static void actualizarCompetencia(Competencia competencia) {
+		Transaction tx = CrearSesion.session.beginTransaction();
+		CrearSesion.session.saveOrUpdate(competencia);
+		tx.commit();
+	}
 }

@@ -25,6 +25,7 @@ public class Encuentro {
 	private List<Set> sets;	
 	private Encuentro encuentro1;
 	private Encuentro encuentro2;
+	private boolean estado_encuentro;
 	
 	public Encuentro(Participante participante1, Participante participante2) {
 		this.jugador1 = participante1;
@@ -64,6 +65,7 @@ public class Encuentro {
 		}
 		this.encuentro1=new Encuentro(encuentro.getEncuentro1());
 		this.encuentro2=new Encuentro(encuentro.getEncuentro2());
+		this.estado_encuentro=encuentro.isEstado_encuentro();
 	}
 
 	public long getId_encuentro() {
@@ -178,6 +180,47 @@ public class Encuentro {
 	
 	public void addSet(Set set1){
 		sets.add(set1);
+	}
+
+	public boolean isEstado_encuentro() {
+		return estado_encuentro;
+	}
+
+	public void setEstado_encuentro(boolean estado_encuentro) {
+		this.estado_encuentro = estado_encuentro;
+	}
+
+	public void ActualizarEncuentro(EncuentroDTO encuentro) {
+		
+		this.id_encuentro=encuentro.getId_encuentro();
+		this.empate=encuentro.isEmpate();
+		this.resultadoReg=encuentro.isResultadoReg();
+		this.orden=encuentro.getOrden();
+		this.fecha=encuentro.getFecha();
+		this.ganador=new Participante(encuentro.getGanador());
+		this.jugador1=new Participante(encuentro.getJugador1());
+		this.jugador2=new Participante(encuentro.getJugador2());
+		this.lugar=new Lugar(encuentro.getLugar());
+		this.puntajep1=encuentro.getPuntajep1();
+		this.puntajep2=encuentro.getPuntajep2();
+		this.estadop1=encuentro.isEstadop1();
+		this.estadop2=encuentro.isEstadop2();
+		for(EncuentroDTO encuDTO : encuentro.getRganadores()){
+			Encuentro encu = new Encuentro(encuDTO);
+			rganadores.add(encu);
+		}
+		for(EncuentroDTO encuDTO : encuentro.getRperdedores()){
+			Encuentro encu = new Encuentro(encuDTO);
+			rperdedores.add(encu);
+		}
+		for(SetDTO setDTO : encuentro.getSets()){
+			Set set = new Set(setDTO);
+			sets.add(set);
+		}
+		this.encuentro1=new Encuentro(encuentro.getEncuentro1());
+		this.encuentro2=new Encuentro(encuentro.getEncuentro2());
+		this.estado_encuentro=encuentro.isEstado_encuentro();
+		
 	}
 	
 }

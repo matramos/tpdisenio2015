@@ -5,7 +5,9 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import DAO.CompetenciaDAO;
 import DAO.DeporteDAO;
+import DAO.EncuentroDAO;
 import DAO.ParticipanteDAO;
+import DAO.RondaDAO;
 import DAO.LugarDAO;
 import DTO.CompetenciaDTO;
 import DTO.DisponibilidadDTO;
@@ -15,15 +17,19 @@ import DTO.ParticipanteDTO;
 import capanegocios.Competencia;
 import capanegocios.Deporte;
 import capanegocios.Disponibilidad;
+import capanegocios.Encuentro;
 import capanegocios.Estado;
 import capanegocios.FormaPuntuacion;
 import capanegocios.Lugar;
 import capanegocios.Modalidad;
 import capanegocios.Participante;
+import capanegocios.Ronda;
 import capanegocios.SeRealizaEn;
 public class GestorCompetencias {
 	
 	private static Competencia competencia;
+	private static Ronda ronda;
+	private static Encuentro encuentro;
 	
 	public static long crearCompetencia(CompetenciaDTO competenciaDTO, int idformaPrim, String deportePrim, long idmodalidadPrim){
 		long idGenerado=-1;
@@ -139,5 +145,21 @@ public static Competencia buscarCompetencia(long id_competencia) {
 	competencia = CompetenciaDAO.getCompetencia(id_competencia);
 	return competencia;
 }
+
+public static Ronda buscarRonda(long id_ronda) {
+	ronda = RondaDAO.getRonda(id_ronda);
+	return ronda;
+}
+
+public static void actualizar(Competencia competencia) {
+	CompetenciaDAO.actualizarCompetencia(competencia); 
+}
+
+public static Encuentro buscarEncuentro(long id_encuentro) {
+	encuentro = EncuentroDAO.getEncuentro(id_encuentro);
+	return encuentro;
+}
+
+
 
 }

@@ -330,6 +330,6 @@ public class Cu018 extends JFrame {
 		}
 		encuentro.setSets(setActualizados);
 		//voy a gestionar fixture para cargar el resultado de los datos actualizados
-		fixture.cargarResultado(id_competencia,id_ronda,encuentro);
+		fixture.cargarResultado(id_competencia,id_ronda,id_encuentro,encuentro);
 	}
 }

@@ -2,21 +2,27 @@ package DTO;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
+
+import capanegocios.Participante;
+import capanegocios.RegistroSet;
 
 public class RegistroEncuentroDTO {
 
-	long id_registro;
-	long id_encuentro;
-	int puntajep1;
-	int puntajep2;
-	boolean estado_encuentro;
-	boolean estado_participante1;
-	boolean estado_participante2;
-	int numero_encuentro;
-	Date fecha;
-	Time hora;
-	int ganador;
-	boolean empate;
+	private long id_registro;
+	private long id_encuentro;
+	private int puntajep1;
+	private int puntajep2;
+	private boolean estado_encuentro;
+	private boolean estado_participante1;
+	private boolean estado_participante2;
+	private int numero_encuentro;
+	private List<RegistroSet> registroSets = new ArrayList<RegistroSet>();
+	private Date fecha;
+	private Time hora;
+	private Participante ganador;
+	private boolean empate;
 	
 	public long getId_registro() {
 		return id_registro;
@@ -78,10 +84,10 @@ public class RegistroEncuentroDTO {
 	public void setHora(Time hora) {
 		this.hora = hora;
 	}
-	public int getGanador() {
+	public Participante getGanador() {
 		return ganador;
 	}
-	public void setGanador(int ganador) {
+	public void setGanador(Participante ganador) {
 		this.ganador = ganador;
 	}
 	public boolean isEmpate() {
@@ -89,5 +95,11 @@ public class RegistroEncuentroDTO {
 	}
 	public void setEmpate(boolean empate) {
 		this.empate = empate;
+	}
+	public List<RegistroSet> getRegistroSets() {
+		return registroSets;
+	}
+	public void setRegistroSets(List<RegistroSet> registroSets) {
+		this.registroSets = registroSets;
 	}
 }

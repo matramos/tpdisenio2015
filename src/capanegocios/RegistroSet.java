@@ -2,10 +2,14 @@ package capanegocios;
 
 public class RegistroSet {
 
-	long id_registro_set;
-	int puntajeP1;
-	int puntajeP2;
+	private long id_registro_set;
+	private int puntajeP1;
+	private int puntajeP2;
 	
+	public RegistroSet(Set set) {
+		this.puntajeP1=set.getPuntajep1();
+		this.puntajeP2=set.getPuntajep2();
+	}
 	public long getId_registro_set() {
 		return id_registro_set;
 	}
