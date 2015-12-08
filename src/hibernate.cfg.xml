@@ -22,5 +22,6 @@
   <mapping resource="capanegocios/Modalidad.hbm.xml"/>
   <mapping resource="capanegocios/FormaPuntuacion.hbm.xml"/>
   <mapping resource="capanegocios/Participante.hbm.xml"/>
+  
  </session-factory>
 </hibernate-configuration>

@@ -21,7 +21,7 @@ public class Cu017Error extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			Cu017Error dialog = new Cu017Error((long)1);
+			Cu017Error dialog = new Cu017Error((long)1,1);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -32,7 +32,7 @@ public class Cu017Error extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Cu017Error(final long id_competencia) {
+	public Cu017Error(final long id_competencia, final long id_usuario) {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
@@ -51,7 +51,7 @@ public class Cu017Error extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent p) {
-						Cu020 caso20 = new Cu020(id_competencia);
+						Cu020 caso20 = new Cu020(id_competencia, id_usuario);
 						caso20.setVisible(true);
 						dispose();
 					}

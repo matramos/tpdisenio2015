@@ -68,8 +68,11 @@ public class GestorFixture{
 	
 	public EncuentroDTO GestionarResultado(long id_competencia,long id_ronda,long id_encuentro){
 		
+		System.out.println("entro en gestionar resultado");
 		competencia= GestorCompetencias.buscarCompetencia(id_competencia);
+		System.out.println(competencia.getNombre());
 		encuentro2= GestorCompetencias.buscarEncuentro(id_encuentro);
+		System.out.println(encuentro2.getId_encuentro());
 		listaRondas=(ListaRondas) competencia.getRondas();
 		ronda=listaRondas.buscarRonda(id_ronda);
 		listaEncuentros=(ListaEncuentros) ronda.getEncuentros();

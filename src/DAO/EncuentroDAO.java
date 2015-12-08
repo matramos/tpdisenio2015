@@ -24,7 +24,7 @@ public class EncuentroDAO {
 		tx.commit();
 		/*session.close();
 		factory.close();*/
-		//System.out.println(listalugares.getLugares().get(0).getNombre());
+		System.out.println("puta vida");
 		return encuentro;
 	}
 }

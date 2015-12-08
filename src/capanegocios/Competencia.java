@@ -30,6 +30,7 @@ public class Competencia {
 	private List<Ronda> rondas = new ArrayList<Ronda>();
 	private List<Disponibilidad> lugares = new ArrayList<Disponibilidad>();
 	private Estado estado;
+	private Usuario usuario;
 	
 	public Competencia(CompetenciaDTO competencia) {
 		this.id_competencia=competencia.getId_competencia();
@@ -85,6 +86,15 @@ public class Competencia {
 	
 	
 
+	
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
 	public void setDeporte(Deporte deporte){
 		this.deporte = deporte;

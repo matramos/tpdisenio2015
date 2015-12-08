@@ -7,7 +7,7 @@ public class EstadoDTO {
 	private String nombre;
 	
 	public EstadoDTO(Estado estado) {
-		this.id_estado = estado.getId_estado();
+		this.id_estado = estado.getId();
 		this.nombre = estado.getNombre();
 	}
 	public EstadoDTO() {

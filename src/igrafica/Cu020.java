@@ -38,7 +38,7 @@ public class Cu020 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Cu020 frame = new Cu020((long) 1);
+					Cu020 frame = new Cu020((long) 1, 1);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,7 +50,7 @@ public class Cu020 extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Cu020(final long id_competencia) {
+	public Cu020(final long id_competencia, final long id_usuario) {
 		//BUSCAMOS LA COMPETENCIA
 		compe = GestorCompetencias.getCompetencia(id_competencia);
 		System.out.println(compe.getEstado().getNombre());
@@ -95,17 +95,19 @@ public class Cu020 extends JFrame {
 		
 		JButton btnCancelar = new JButton("Ver fixture");
 		btnCancelar.setBounds(403, 164, 170, 23);
+		btnCancelar.setEnabled(false);
 		contentPane.add(btnCancelar);
 		
 		JButton btnCrearCompetencia = new JButton("Eliminar competencia");
 		btnCrearCompetencia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Cu004 ventana = new Cu004();
+				Cu004 ventana = new Cu004(id_usuario);
 				ventana.setVisible(true);
 				dispose();
 			}
 		});
 		btnCrearCompetencia.setBounds(575, 128, 175, 23);
+		btnCrearCompetencia.setEnabled(false);
 		contentPane.add(btnCrearCompetencia);
 		
 		JScrollPane scrollPane2 = new JScrollPane();
@@ -153,7 +155,7 @@ public class Cu020 extends JFrame {
 		JButton btnCancelar_1 = new JButton("Cancelar");
 		btnCancelar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				menuprincipal ventana = new menuprincipal();
+				menuprincipal ventana = new menuprincipal(id_usuario);
 				ventana.setVisible(true);
 				dispose();
 			}
@@ -167,6 +169,7 @@ public class Cu020 extends JFrame {
 		
 		JButton btnModificarCompetencia = new JButton("Modificar competencia");
 		btnModificarCompetencia.setBounds(403, 128, 170, 23);
+		btnModificarCompetencia.setEnabled(false);
 		contentPane.add(btnModificarCompetencia);
 		
 		JButton btnGenerarFixture = new JButton("Generar fixture");
@@ -174,12 +177,12 @@ public class Cu020 extends JFrame {
 			public void actionPerformed(ActionEvent g) {
 				if((compe.getEstado().getNombre().equals("creada")) || 
 						(compe.getEstado().getNombre().equals("planificada"))){
-					Cu017 ventanaGenFixture = new Cu017(id_competencia);
+					Cu017 ventanaGenFixture = new Cu017(id_competencia,id_usuario);
 					ventanaGenFixture.setVisible(true);
 					dispose();
 				}
 				else{
-					Cu017Error ventanaErrFixture = new Cu017Error(id_competencia);
+					Cu017Error ventanaErrFixture = new Cu017Error(id_competencia,id_usuario);
 					ventanaErrFixture.setVisible(true);
 					dispose();
 				}
@@ -191,7 +194,7 @@ public class Cu020 extends JFrame {
 		JButton btnVerTablaDe = new JButton("Ver tabla de posiciones");
 		btnVerTablaDe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Cu021 ventanaPosiciones = new Cu021(id_competencia);
+				Cu021 ventanaPosiciones = new Cu021(id_competencia,id_usuario);
 				//ventanaPosiciones.setVisible(true);
 				dispose();
 			}
@@ -202,7 +205,7 @@ public class Cu020 extends JFrame {
 		JButton btnVerParticipantes = new JButton("Ver participantes");
 		btnVerParticipantes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent p) {
-				Cu008 ventanaParticipantes = new Cu008(id_competencia);
+				Cu008 ventanaParticipantes = new Cu008(id_competencia,id_usuario);
 				ventanaParticipantes.setVisible(true);
 				dispose();
 			}

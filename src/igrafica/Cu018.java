@@ -59,7 +59,7 @@ public class Cu018 extends JFrame {
 	private JTextField txtS9P2;
 	private JTextField txtRP1;
 	private JTextField txtRP2;
-	private GestorFixture fixture;
+	private GestorFixture fixture = new GestorFixture();
 
 	/**
 	 * Launch the application.
@@ -83,6 +83,7 @@ public class Cu018 extends JFrame {
 	public Cu018(long id_competencia,long id_ronda,long id_encuentro) {
 		
 		//llamar al fixture
+				System.out.println("caca");
 				EncuentroDTO encuentro=fixture.GestionarResultado(id_competencia,id_ronda,id_encuentro);
 				int[] puntajeP1 = null;
 				int[] puntajeP2 = null;

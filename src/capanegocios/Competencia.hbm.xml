@@ -53,6 +53,10 @@
  <many-to-one name="estado" class="capanegocios.Estado" >
  <column name="id_estado" not-null="true"/>
  </many-to-one>
+ 
+ <many-to-one name="usuario" class="capanegocios.Usuario" >
+ <column name="id_usuario" not-null="true"/>
+ </many-to-one>
 
 
 	

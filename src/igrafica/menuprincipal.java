@@ -24,7 +24,7 @@ public class menuprincipal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					menuprincipal frame = new menuprincipal();
+					menuprincipal frame = new menuprincipal(1);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,7 +36,7 @@ public class menuprincipal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public menuprincipal() {
+	public menuprincipal(final long id_usuario) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Gevico");
 		setResizable(false);
@@ -54,7 +54,7 @@ public class menuprincipal extends JFrame {
 		JButton btnNewButton = new JButton("Listar Competencias");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Cu003 ventana = new Cu003();
+				Cu003 ventana = new Cu003(id_usuario);
 				ventana.setVisible(true);
 				dispose();
 			}
@@ -70,31 +70,41 @@ public class menuprincipal extends JFrame {
 			}
 		});
 		btnNewButton_1.setBounds(485, 154, 208, 84);
+		btnNewButton_1.setEnabled(false);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Listar Lugares de Realizaci\u00F3n");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Cu013 ventana = new Cu013();
+				Cu013 ventana = new Cu013(id_usuario);
 				ventana.setVisible(true);
 				dispose();
 			}
 		});
 		btnNewButton_2.setBounds(142, 264, 220, 84);
+		btnNewButton_2.setEnabled(false);
 		contentPane.add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("Modificar Datos de Usuario");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Cu007 ventana = new Cu007();
+				Cu007 ventana = new Cu007(id_usuario);
 				ventana.setVisible(true);
 				dispose();
 			}
 		});
 		btnNewButton_3.setBounds(485, 264, 208, 84);
+		btnNewButton_3.setEnabled(false);
 		contentPane.add(btnNewButton_3);
 		
 		JButton btnCerrarSesin = new JButton("Cerrar Sesi\u00F3n");
+		btnCerrarSesin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pantallainicio ventana = new pantallainicio();
+				ventana.main(null);
+				dispose();
+			}
+		});
 		btnCerrarSesin.setBounds(334, 393, 171, 44);
 		contentPane.add(btnCerrarSesin);
 	}

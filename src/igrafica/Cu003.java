@@ -17,6 +17,7 @@ import java.awt.CardLayout;
 import java.awt.Component;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.BorderFactory;
@@ -57,7 +58,7 @@ public class Cu003 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Cu003 frame = new Cu003();
+					Cu003 frame = new Cu003(1);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -69,7 +70,7 @@ public class Cu003 extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Cu003() {
+	public Cu003(final long id_usuario) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		setResizable(false);
@@ -85,13 +86,12 @@ public class Cu003 extends JFrame {
 		contentPane.add(lblBsquedaDeCompetencias);
 		
 		nombre = new JTextField();
-		nombre.setText("todas");
-		nombre.setBounds(206, 147, 172, 20);
+		nombre.setBounds(150, 149, 172, 20);
 		contentPane.add(nombre);
 		nombre.setColumns(10);
 		
 		final JComboBox<String> comboDeporte = new JComboBox<>();
-		comboDeporte.setBounds(206, 203, 172, 20);
+		comboDeporte.setBounds(150, 205, 172, 20);
 		contentPane.add(comboDeporte);
 		
 		comboDeporte.addItem(null);
@@ -105,17 +105,17 @@ public class Cu003 extends JFrame {
 		}
 		
 		final JComboBox<String> comboModalidad = new JComboBox<String>();
-		comboModalidad.setBounds(508, 147, 172, 20);
+		comboModalidad.setBounds(452, 149, 172, 20);
 		contentPane.add(comboModalidad);
 		
 		//Agregamos las modalidades de manera directa
 		comboModalidad.addItem(null);
 		comboModalidad.addItem("Liga");
-		comboModalidad.addItem("Eliminaci�n Simple");
-		comboModalidad.addItem("Eliminaci�n Doble");
+		comboModalidad.addItem("Eliminacion Simple");
+		comboModalidad.addItem("Eliminacion Doble");
 		
 		final JComboBox<String> comboEstado = new JComboBox<>();
-		comboEstado.setBounds(508, 203, 172, 20);
+		comboEstado.setBounds(452, 205, 172, 20);
 		contentPane.add(comboEstado);
 		
 		//Los estados tambien los agregamos de manera directa
@@ -126,19 +126,19 @@ public class Cu003 extends JFrame {
 		comboEstado.addItem("Finalizada");
 		
 		JLabel lblNombreDeCompetencia = new JLabel("Nombre de competencia");
-		lblNombreDeCompetencia.setBounds(206, 122, 151, 14);
+		lblNombreDeCompetencia.setBounds(150, 124, 151, 14);
 		contentPane.add(lblNombreDeCompetencia);
 		
 		JLabel lblDeporteAsociado = new JLabel("Deporte asociado");
-		lblDeporteAsociado.setBounds(206, 178, 109, 14);
+		lblDeporteAsociado.setBounds(150, 180, 109, 14);
 		contentPane.add(lblDeporteAsociado);
 		
 		JLabel lblModalidad = new JLabel("Modalidad");
-		lblModalidad.setBounds(508, 122, 59, 14);
+		lblModalidad.setBounds(452, 124, 59, 14);
 		contentPane.add(lblModalidad);
 		
 		JLabel lblEstado = new JLabel("Estado");
-		lblEstado.setBounds(508, 178, 46, 14);
+		lblEstado.setBounds(452, 180, 46, 14);
 		contentPane.add(lblEstado);
 		
 		final JScrollPane scrollPane = new JScrollPane();
@@ -152,9 +152,13 @@ public class Cu003 extends JFrame {
 		//Definimos la accion del boton BUSCAR
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(nombre.getText().equals("") && comboDeporte.getSelectedItem()==null && comboModalidad.getSelectedItem()==null && comboEstado.getSelectedItem()==null){
+					//JOptionPane.showMessageDialog(null, "Debe utilizar al menos un filtro");
+				}
+				//else{
 				 listaCompetenciasEncontradas = 
 						GestorCompetencias.buscarCompetencias(nombre.getText(), comboDeporte.getSelectedIndex(), 
-								comboModalidad.getSelectedIndex(), comboEstado.getSelectedIndex());
+								comboModalidad.getSelectedIndex(), comboEstado.getSelectedIndex(), id_usuario);
 				//Descomentar para ver que estamos eligiendo
 				 model = new TestModelCU3();
 					table = new JTable(model);
@@ -168,7 +172,7 @@ public class Cu003 extends JFrame {
 				    
 				    TableColumn column2 = table.getColumnModel().getColumn(4);
 				    column2.setCellRenderer(new DeleteButtonRenderer2CU3());
-				    column2.setCellEditor(new DeleteButtonEditor2CU3(table, listaCompetenciasEncontradas));
+				    column2.setCellEditor(new DeleteButtonEditor2CU3(table, listaCompetenciasEncontradas,id_usuario));
 				    column2.setMinWidth(60);
 				    column2.setMaxWidth(60);
 				    column2.setResizable(false);
@@ -179,33 +183,34 @@ public class Cu003 extends JFrame {
 				for(CompetenciaDTO CDTO : listaCompetenciasEncontradas){
 					model.addTest(new TestCU3(CDTO.getNombre(),CDTO.getDeporte().getNombre(),""+CDTO.getModalidad().getId_modalidad()));
 				}
+				//}
 			}
 			
 		});
 		
-		btnBuscar.setBounds(206, 286, 151, 23);
+		btnBuscar.setBounds(150, 288, 151, 23);
 		contentPane.add(btnBuscar);
 		
 		JButton btnCrearCompetencia = new JButton("Crear competencia");
 		btnCrearCompetencia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Cu004 ventana = new Cu004();
+				Cu004 ventana = new Cu004(id_usuario);
 				ventana.setVisible(true);
 				dispose();
 			}
 		});
-		btnCrearCompetencia.setBounds(529, 286, 151, 23);
+		btnCrearCompetencia.setBounds(473, 288, 151, 23);
 		contentPane.add(btnCrearCompetencia);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				menuprincipal ventana = new menuprincipal();
+				menuprincipal ventana = new menuprincipal(id_usuario);
 				ventana.setVisible(true);
 				dispose();
 			}
 		});
-		btnCancelar.setBounds(381, 522, 89, 23);
+		btnCancelar.setBounds(340, 522, 89, 23);
 		contentPane.add(btnCancelar);
 		
 		
@@ -398,13 +403,13 @@ class DeleteButtonEditorCU3 extends DeleteButtonCU3 implements TableCellEditor {
 }
 
 class DeleteButtonEditor2CU3 extends DeleteButton2CU3 implements TableCellEditor {
-    public DeleteButtonEditor2CU3(final JTable table, final ArrayList<CompetenciaDTO> listaCompetenciasEncontradas) {
+    public DeleteButtonEditor2CU3(final JTable table, final ArrayList<CompetenciaDTO> listaCompetenciasEncontradas, final long id_usuario) {
         super();
         addActionListener(new ActionListener() {
             @Override public void actionPerformed(ActionEvent e) {
                 int row = table.convertRowIndexToModel(table.getEditingRow());
                 fireEditingStopped();
-                Cu020 ventana = new Cu020(listaCompetenciasEncontradas.get(row).getId_competencia());
+                Cu020 ventana = new Cu020(listaCompetenciasEncontradas.get(row).getId_competencia(),id_usuario);
 				ventana.setVisible(true);
                 //String nombre = table.getValueAt(row, 1).toString();
                 //JOptionPane.showMessageDialog(null, nombre);

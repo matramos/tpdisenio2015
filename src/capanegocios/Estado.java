@@ -4,24 +4,26 @@ import DTO.EstadoDTO;
 
 public class Estado {
 	
-	private long id_estado;
+	private long id;
 	private String nombre;
 	
 	public Estado(EstadoDTO estado) {
-		this.id_estado=estado.getId_estado();
+		this.id=estado.getId_estado();
 		this.nombre=estado.getNombre();
 	}
 	public Estado() {
 		// TODO Auto-generated constructor stub
 	}
-	public long getId_estado() {
-		return id_estado;
+	
+	
+	public long getId() {
+		return id;
 	}
-	public void setId_estado(long id_estado) {
-		this.id_estado = id_estado;
+	public void setId(long id) {
+		this.id = id;
 	}
 	public String getNombre() {
-		return nombre;
+		return this.nombre;
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;

@@ -6,58 +6,42 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import Inicio.CrearSesion;
 import antlr.collections.List;
+import capanegocios.FormaPuntuacion;
+import capanegocios.Usuario;
 import Prueba.Student;
 
 public class UsuarioDAO {
 
-		public void guardar(Student s){
-			Configuration cfg = new Configuration();
-			cfg.configure ("hibernate.cfg.xml");
-			cfg.addClass(Prueba.Student.class);
+		public static long sesionUsuario(String email, String contrasena){
+			Transaction tx = CrearSesion.session.beginTransaction();
 			
-			SessionFactory factory = cfg.buildSessionFactory();
-			Session session = factory.openSession();
+			Query query = CrearSesion.session.createQuery("from Usuario u where u.email=? and u.contrasena=?");
+			query.setParameter(0, email);
+			query.setParameter(1, contrasena);
+
 			
-			Transaction tx = session.beginTransaction();
-			session.save(s);
+			Usuario usr = (Usuario) query.uniqueResult();
+
 			tx.commit();
-			session.close();
-			factory.close();
+			
+			long id_usuario = usr.getId();
+			
+			return id_usuario;
 		}
-		
-		public String obtenerGrado(){
-			Configuration cfg = new Configuration();
-			cfg.configure ("hibernate.cfg.xml");
-			cfg.addClass(Prueba.Student.class);
+
+		public static Usuario getUsuario(long idUsuario) {
+			Transaction tx = CrearSesion.session.beginTransaction();
 			
-			SessionFactory factory = cfg.buildSessionFactory();
-			Session session = factory.openSession();
+			Query query = CrearSesion.session.createQuery("from Usuario u where u.id=?");
+			query.setParameter(0, idUsuario);
+
+
 			
-			Transaction tx = session.beginTransaction();
-			
-			Query query = session.createQuery("SELECT s.degree FROM Student as s");
-			
-			return (String) query.uniqueResult();
-			
-			
-		}
-		
-		public Student obtenerStudent(){
-			Student student;
-			Long id = (long) 0;
-			
-			Configuration cfg = new Configuration();
-			cfg.configure ("hibernate.cfg.xml");
-			cfg.addClass(Prueba.Student.class);
-			
-			SessionFactory factory = cfg.buildSessionFactory();
-			Session session = factory.openSession();
-			
-			Transaction tx = session.beginTransaction();
-			
-			student = session.get(Student.class, id);
-			
-			return student;
+			Usuario usr = (Usuario) query.uniqueResult();
+
+			tx.commit();
+			return usr;
 		}
 }

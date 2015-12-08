@@ -33,7 +33,7 @@ public class Cu013 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Cu013 frame = new Cu013();
+					Cu013 frame = new Cu013(1);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +45,7 @@ public class Cu013 extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Cu013() {
+	public Cu013(final long id_usuario) {
 		setTitle("Gevico");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
@@ -104,7 +104,7 @@ public class Cu013 extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				menuprincipal ventana = new menuprincipal();
+				menuprincipal ventana = new menuprincipal(id_usuario);
 				ventana.setVisible(true);
 				dispose();
 				

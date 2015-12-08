@@ -87,7 +87,7 @@ public class Cu004 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Cu004 frame = new Cu004();
+					Cu004 frame = new Cu004(1);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -113,7 +113,7 @@ public class Cu004 extends JFrame {
 	 */
 	
 	//ESTE ES EL CONSTRUCTOR, NO?-matt
-	public Cu004() {
+	public Cu004(final long id_usuario) {
 		
 		//DEFINIMOS LA VENTANA?--matt
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -419,14 +419,14 @@ public class Cu004 extends JFrame {
 						competencia.addLugar(disponibilidad);
 					}
 					competencia.setNombre(nombre.getText());
-					competencia.setPuntos_ganador(Integer.parseInt(puntosVictoria.getText()));
-					competencia.setPuntos_empate(Integer.parseInt(puntosEmpate.getText()));
-					competencia.setPermite_empates(chckbxSePermiteEmpate.isSelected());
+					
+					
 					competencia.setReglamento(reglamento.getText());
-					competencia.setResultado_final(Integer.parseInt(resultado.getText()));
+					
 					competencia.setCantidad_sets((int)comboCantidadSets.getSelectedItem());
-					competencia.setPuntos_presentarse((int)comboPuntos.getSelectedItem());
+					
 					competencia.setFecha_hora(ahora);
+					
 					
 					/*Falta agregar los lugares y disponibilidad*/
 					int idforma;
@@ -438,18 +438,23 @@ public class Cu004 extends JFrame {
 					else
 						idforma=3;
 					
-					if(comboModalidad.getSelectedIndex()==0)
+					if(comboModalidad.getSelectedIndex()==0){
 						idmodalidad = 1;
+						competencia.setPuntos_ganador(Integer.parseInt(puntosVictoria.getText()));
+						competencia.setPuntos_empate(Integer.parseInt(puntosEmpate.getText()));
+						competencia.setPermite_empates(chckbxSePermiteEmpate.isSelected());
+						competencia.setPuntos_presentarse((int)comboPuntos.getSelectedItem());
+						competencia.setResultado_final(Integer.parseInt(resultado.getText()));
+					}
 					else if(comboModalidad.getSelectedIndex()==1)
 						idmodalidad=2;
 					else
 						idmodalidad=3;
-					long idGenerado = GestorCompetencias.crearCompetencia(competencia,idforma,deporte.getText(),idmodalidad);
-					System.out.println(idGenerado);
+					long idGenerado = GestorCompetencias.crearCompetencia(competencia,idforma,deporte.getText(),idmodalidad,id_usuario);
+					
 					if(idGenerado!=(long) -1){
-						System.out.println("sirvi");
 						JOptionPane.showMessageDialog(null, "Se cargo con exito");
-						Cu008 ventana = new Cu008(idGenerado);
+						Cu008 ventana = new Cu008(idGenerado,id_usuario);
 						ventana.setVisible(true);
 						dispose();
 					}
@@ -464,7 +469,7 @@ public class Cu004 extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Cu003 ventana = new Cu003();
+				Cu003 ventana = new Cu003(id_usuario);
 				ventana.setVisible(true);
 				dispose();
 			}

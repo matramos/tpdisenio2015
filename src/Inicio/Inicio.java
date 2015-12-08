@@ -23,9 +23,12 @@ import igrafica.Cu003;
 import igrafica.Cu004;
 import igrafica.Cu008;
 import igrafica.Cu009;
+import igrafica.Cu018;
 import igrafica.Cu020;
 import igrafica.Cu021;
 import igrafica.menuprincipal;
+import igrafica.pantallainicio;
+
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -55,10 +58,8 @@ public class Inicio {
 	//CrearSesion.session.saveOrUpdate(comp);
 	//tx.commit();
 	/*List<Participante> participantes = new ArrayList<Participante>();
-
 	/*Transaction tx = CrearSesion.session.beginTransaction();
 	List<Participante> participantes = new ArrayList<Participante>();
-
 =======
 	/*Transaction tx = CrearSesion.session.beginTransaction();
 	List<Participante> participantes = new ArrayList<Participante>();
@@ -75,10 +76,8 @@ public class Inicio {
 	participantes.add(par2);
 	comp.setParticipantes(participantes);
 	System.out.println(comp.getParticipantes().get(1).getNombre());
-
 	
 <<<<<<< HEAD
-
 =======
 >>>>>>> branch 'master' of https://github.com/matramos/tpdisenio2015.git
 	CrearSesion.session.saveOrUpdate(comp);
@@ -122,14 +121,11 @@ public class Inicio {
 	
 	List<Deporte> dep = new ArrayList<Deporte>();
 	dep = (ArrayList<Deporte>) query.list();
-
 	tx.commit();
 	System.out.println(dep.size());
-
 	for(Deporte depor: dep){
 		System.out.println(depor.getNombre());
 		System.out.println(depor.getSerealizaen().size());
-
 	}
 	menuprincipal cu = new menuprincipal();
 	cu.setVisible(true);
@@ -139,19 +135,15 @@ public class Inicio {
 	
 	List<Deporte> dep = new ArrayList<Deporte>();
 	dep = (ArrayList<Deporte>) query.list();
-
 	tx.commit();
 	
 	System.out.println(dep.get(0).getId());
 	System.out.println(dep.get(0).getSerealizaen().size());
-
-
 	Query query = CrearSesion.session.createQuery("from Deporte");
 	
 	
 	List<Deporte> dep = new ArrayList<Deporte>();
 	dep = (ArrayList<Deporte>) query.list();
-
 	tx.commit();
 	
 	System.out.println(dep.size());
@@ -163,12 +155,14 @@ public class Inicio {
 	System.out.println(competencia.getParticipantes().size());
 	System.out.println(competencia.getParticipantes().get(0).getPuntaje());
 	*/
-	long id_competencia = 100;
+	long id_competencia = 1;
+	long id_ronda = 1;
+	long id_encuentro = 1;
+	Cu018 cu = new Cu018(id_competencia,id_ronda,id_encuentro);
+	//menuprincipal cu = new menuprincipal(id);
+	//cu.main(null);
 	
-	Cu020 cu = new Cu020(id_competencia);
 	cu.setVisible(true);
 	//CrearSesion.terminarSesion();
 }
 }
-
-
