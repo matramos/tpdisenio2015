@@ -30,7 +30,8 @@ public class GestorFixture{
 	private ListaRondas listaRondas;
 	private Ronda ronda;
 	private ListaEncuentros listaEncuentros;
-	private EncuentroDTO   encuentro;
+	private Encuentro   encuentro;
+	
 	private Participante participante1;
 	private Participante participante2;
 	private Modalidad modalidad;
@@ -48,8 +49,8 @@ public class GestorFixture{
 		for(int r=0; r<(participantes.size()-1);r++){
 			Ronda rondita = new Ronda();
 			for(int e=0; e<(participantes.size()/2);e++){
+				//falta lo de lugar aca
 				Encuentro encuentrito = new Encuentro(participantes.get(e), participantes.get(participantes.size()-e-1));
-				System.out.println(participantes.get(e).getNombre()+"vs"+participantes.get(participantes.size()-e-1).getNombre());
 				rondita.add(encuentrito);
 			}
 			competencia.addRonda(rondita);
@@ -67,26 +68,29 @@ public class GestorFixture{
 	
 	
 	public EncuentroDTO GestionarResultado(long id_competencia,long id_ronda,long id_encuentro){
-		
+		EncuentroDTO encuentroDTO;
 		System.out.println("entro en gestionar resultado");
 		competencia= GestorCompetencias.buscarCompetencia(id_competencia);
 		System.out.println(competencia.getNombre());
-		encuentro2= GestorCompetencias.buscarEncuentro(id_encuentro);
-		System.out.println(encuentro2.getId_encuentro());
-		listaRondas=(ListaRondas) competencia.getRondas();
-		ronda=listaRondas.buscarRonda(id_ronda);
-		listaEncuentros=(ListaEncuentros) ronda.getEncuentros();
-		encuentro=new EncuentroDTO(listaEncuentros.buscarEncuentro(id_encuentro));
-		participante1=new Participante(encuentro.getJugador1());
-		participante2=new Participante(encuentro.getJugador2());
+		//encuentro2= GestorCompetencias.buscarEncuentro(id_encuentro); //esto donde esta? en el diagrama? lo saq de gestor comp, esta  mal lo q hago
+		// el encuentro sale de la misma ronda intanciada. ya fue dejame q a la noche lo haga todo de nuevo. no a ver
 		
+		ronda = competencia.getRonda(id_ronda);
+		encuentro = ronda.getEncuentro(id_encuentro);
+		participante1=encuentro.getJugador1();
+		participante2=encuentro.getJugador2();
+		//
+		encuentroDTO=new EncuentroDTO(encuentro);
 		int cantSets=competencia.getCantidad_sets();	
-		
+		System.out.println(competencia.getCantidad_sets());
+		//
 		while(cantSets!=0){
-			SetDTO set1 = new SetDTO();
-			encuentro.addSet(set1);
+			SetDTO set1 = new SetDTO();//esto se crea vacio, fijate que hay que hacerlo con el set del encuentro, me estaba dando cuenta recien
+			// lo creo vacio al pedo, tendrai q tener los datos del set de encuentro
+			encuentroDTO.addSet(set1);
+			cantSets--;
 		}
-		return encuentro;
+		return encuentroDTO;
 	}
 
 	public void cargarResultado(long id_competencia,long id_ronda,long id_encuentro,EncuentroDTO encuentro) {

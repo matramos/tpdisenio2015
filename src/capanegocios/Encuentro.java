@@ -1,5 +1,6 @@
 package capanegocios;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,10 +23,11 @@ public class Encuentro {
 	private boolean estadop2;
 	private List<Encuentro> rganadores;
 	private List<Encuentro> rperdedores;
-	private List<Set> sets;	
+	private List<Set> sets = new ArrayList<Set>();
 	private Encuentro encuentro1;
 	private Encuentro encuentro2;
 	private boolean estado_encuentro;
+	private List<RegistroEncuentro> registros = new ArrayList<RegistroEncuentro>();
 	
 	public Encuentro(Participante participante1, Participante participante2) {
 		this.jugador1 = participante1;
@@ -66,6 +68,15 @@ public class Encuentro {
 		this.encuentro1=new Encuentro(encuentro.getEncuentro1());
 		this.encuentro2=new Encuentro(encuentro.getEncuentro2());
 		this.estado_encuentro=encuentro.isEstado_encuentro();
+	}
+
+	
+	public List<RegistroEncuentro> getRegistros() {
+		return registros;
+	}
+
+	public void setRegistros(List<RegistroEncuentro> registros) {
+		this.registros = registros;
 	}
 
 	public long getId_encuentro() {

@@ -153,9 +153,9 @@ public class Cu003 extends JFrame {
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(nombre.getText().equals("") && comboDeporte.getSelectedItem()==null && comboModalidad.getSelectedItem()==null && comboEstado.getSelectedItem()==null){
-					//JOptionPane.showMessageDialog(null, "Debe utilizar al menos un filtro");
+					JOptionPane.showMessageDialog(null, "Debe utilizar al menos un filtro");
 				}
-				//else{
+				else{
 				 listaCompetenciasEncontradas = 
 						GestorCompetencias.buscarCompetencias(nombre.getText(), comboDeporte.getSelectedIndex(), 
 								comboModalidad.getSelectedIndex(), comboEstado.getSelectedIndex(), id_usuario);
@@ -183,7 +183,7 @@ public class Cu003 extends JFrame {
 				for(CompetenciaDTO CDTO : listaCompetenciasEncontradas){
 					model.addTest(new TestCU3(CDTO.getNombre(),CDTO.getDeporte().getNombre(),""+CDTO.getModalidad().getId_modalidad()));
 				}
-				//}
+				}
 			}
 			
 		});

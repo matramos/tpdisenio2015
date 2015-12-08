@@ -83,11 +83,12 @@ public class Cu018 extends JFrame {
 	public Cu018(long id_competencia,long id_ronda,long id_encuentro) {
 		
 		//llamar al fixture
-				System.out.println("caca");
+				
 				EncuentroDTO encuentro=fixture.GestionarResultado(id_competencia,id_ronda,id_encuentro);
-				int[] puntajeP1 = null;
-				int[] puntajeP2 = null;
-				long[] idSets = null;
+				int[] puntajeP1 = new int[12]; // eu, me tengo q ir T_T. bueno fijate, ya anduvo la logica creo, falla en la parte de interfaz 
+				// si si, te amo,,, jaja. esto es manejo de vectores, miralo despues y deberia ejecutarse. banca, antes de irte hace un commit y push
+				int[] puntajeP2 = {};
+				long[] idSets = {};
 				int i=0;
 				int cantidad=encuentro.getSets().size();
 				int setGanadosP1=0;
@@ -95,8 +96,10 @@ public class Cu018 extends JFrame {
 				String ganador;
 				
 				for(SetDTO set : encuentro.getSets()){
-					idSets[i]=(set.getId_set());
-					puntajeP1[i]=(set.getPuntajep1());
+					//idSets[i]=(set.getId_set());//me explicas que hace este bucle?
+					// guardo en 3 vectores , los id de los sets , los puntajes del participante 1 y los puntajes del part 2
+					// despues en el while me voy fijando q participante gano el set , y le sumo un punto en setsGanados dependiendo q participante gano
+					puntajeP1[i]=(set.getPuntajep1());//eu, mepa q esta al pedo ese vector de id, porq solo uso los otros dos para calcular el ganador.
 					puntajeP2[i]=(set.getPuntajep2());
 					i++;
 				}

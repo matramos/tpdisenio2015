@@ -13,6 +13,11 @@ public class Set {
 		this.puntajep1=set.getPuntajep1();
 		this.puntajep2=set.getPuntajep2();
 	}
+	
+	public Set() {
+	
+	}
+	
 	public long getId_set() {
 		return id_set;
 	}

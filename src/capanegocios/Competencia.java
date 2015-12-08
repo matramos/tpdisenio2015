@@ -211,6 +211,16 @@ public class Competencia {
 	public List<Ronda> getRondas() {
 		return rondas;
 	}
+	
+	public Ronda getRonda(long id_ronda) {
+		Ronda retorno = null;
+		for(Ronda r: this.rondas){
+			if(r.getId_ronda()==id_ronda)
+				retorno=r;
+				
+		}
+		return retorno;
+	}
 
 	public void setRondas(List<Ronda> rondas) {
 		this.rondas = rondas;

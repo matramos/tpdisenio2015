@@ -8,7 +8,7 @@ import java.util.List;
 public class RegistroEncuentro {
 
 	private long id_registro;
-	private long id_encuentro;
+	private Encuentro encuentro;
 	private int puntajep1;
 	private int puntajep2;
 	private boolean estado_encuentro;
@@ -18,21 +18,22 @@ public class RegistroEncuentro {
 	private List<RegistroSet> registroSets = new ArrayList<RegistroSet>();
 	private Date fecha;
 	private Time hora;
-	private Participante ganador;
+	int ganador;
 	private boolean empate;
 	
 	public RegistroEncuentro(Encuentro encuentroActualizado,List<RegistroSet> registroSets) {
-		this.id_encuentro=encuentroActualizado.getId_encuentro();
+		//this.id_encuentro=encuentroActualizado.getId_encuentro();
+		this.encuentro=encuentroActualizado;
 		this.puntajep1=encuentroActualizado.getPuntajep1();
 		this.puntajep2=encuentroActualizado.getPuntajep2();
-		this.estado_encuentro=encuentroActualizado.isEstado_encuentro();
+		//this.estado_encuentro=encuentroActualizado.isEstado_encuentro();
 		this.estado_participante1=encuentroActualizado.isEstadop1();
 		this.estado_participante2=encuentroActualizado.isEstadop2();
-		this.numero_encuentro=encuentroActualizado.getOrden();
-		this.registroSets=registroSets;
+		//this.numero_encuentro=encuentroActualizado.getOrden();
+		//this.registroSets=registroSets;
 		//fecha
 		//hora
-		this.ganador=encuentroActualizado.getGanador();
+		//this.ganador=encuentroActualizado.getGanador();
 		this.empate=encuentroActualizado.isEmpate();
 	}
 	
@@ -42,12 +43,15 @@ public class RegistroEncuentro {
 	public void setId_registro(long id_registro) {
 		this.id_registro = id_registro;
 	}
-	public long getId_encuentro() {
-		return id_encuentro;
+	
+	public Encuentro getEncuentro() {
+		return encuentro;
 	}
-	public void setId_encuentro(long id_encuentro) {
-		this.id_encuentro = id_encuentro;
+
+	public void setEncuentro(Encuentro encuentro) {
+		this.encuentro = encuentro;
 	}
+
 	public int getPuntajep1() {
 		return puntajep1;
 	}
@@ -96,10 +100,10 @@ public class RegistroEncuentro {
 	public void setHora(Time hora) {
 		this.hora = hora;
 	}
-	public Participante getGanador() {
+	public int getGanador() {
 		return ganador;
 	}
-	public void setGanador(Participante ganador) {
+	public void setGanador(int ganador) {
 		this.ganador = ganador;
 	}
 	public boolean isEmpate() {

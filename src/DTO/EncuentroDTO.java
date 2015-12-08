@@ -1,5 +1,6 @@
 package DTO;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -27,7 +28,7 @@ public class EncuentroDTO {
 	private boolean estadop2;
 	private List<EncuentroDTO> rganadores;
 	private List<EncuentroDTO> rperdedores;
-	private List<SetDTO> sets;	
+	private List<SetDTO> sets = new ArrayList<SetDTO>();	
 	private EncuentroDTO encuentro1;
 	private EncuentroDTO encuentro2;
 	private boolean estado_encuentro;
@@ -41,25 +42,27 @@ public class EncuentroDTO {
 		this.ganador=new ParticipanteDTO(encuentro.getGanador());
 		this.jugador1=new ParticipanteDTO(encuentro.getJugador1());
 		this.jugador2=new ParticipanteDTO(encuentro.getJugador2());
-		this.lugar=new LugarDTO(encuentro.getLugar());
+		//this.lugar=new LugarDTO(encuentro.getLugar());
 		this.puntajep1=encuentro.getPuntajep1();
 		this.puntajep2=encuentro.getPuntajep2();
 		this.estadop1=encuentro.isEstadop1();
 		this.estadop2=encuentro.isEstadop2();
-		for(Encuentro rgan : encuentro.getRganadores()){
+		/*for(Encuentro rgan : encuentro.getRganadores()){
 			EncuentroDTO rganDTO = new EncuentroDTO(rgan);
 			this.rganadores.add(rganDTO);
 		}
 		for(Encuentro rper :encuentro.getRperdedores()){
 			EncuentroDTO rperDTO = new EncuentroDTO(rper);
 			this.rperdedores.add(rperDTO);
-		}
+		}*/
+		
 		for(Set set : encuentro.getSets()){
 			SetDTO setDTO = new SetDTO(set);
+			
 			this.sets.add(setDTO);
 		}
-		this.encuentro1=new EncuentroDTO(encuentro.getEncuentro1());
-		this.encuentro2=new EncuentroDTO(encuentro.getEncuentro2());
+		//this.encuentro1=new EncuentroDTO(encuentro.getEncuentro1());
+		//this.encuentro2=new EncuentroDTO(encuentro.getEncuentro2());
 		this.estado_encuentro=encuentro.isEstado_encuentro();
 	}
 	public EncuentroDTO() {

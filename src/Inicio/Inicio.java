@@ -141,7 +141,13 @@ public class Inicio {
 	System.out.println(dep.get(0).getSerealizaen().size());
 	Query query = CrearSesion.session.createQuery("from Deporte");
 	
-	
+	de donde salio la clase ListaRondas
+	ni idea, yo no la cree
+	ahh para banca que pienso por  que pasa eso jaja bueno campeon
+	fui yo
+	de aca
+	mria
+	no me acuerdo, creo que fui yo. no deberian ir, no estan el diagrama entonces flashee cualqueira si fui yo
 	List<Deporte> dep = new ArrayList<Deporte>();
 	dep = (ArrayList<Deporte>) query.list();
 	tx.commit();

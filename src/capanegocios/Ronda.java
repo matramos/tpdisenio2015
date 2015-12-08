@@ -58,4 +58,13 @@ public class Ronda {
 	public void add(Encuentro encuentrito) {
 		encuentros.add(encuentrito);	
 	}
+	public Encuentro getEncuentro(long id_encuentro) {
+		Encuentro retorno = null;
+		for(Encuentro e: this.encuentros){
+			if(e.getId_encuentro()==id_encuentro)
+				retorno=e;
+				
+		}
+		return retorno;
+	}
 }

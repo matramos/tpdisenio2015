@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="capanegocios.RegistroSet" table="registro_set">
+<id column="id_registro_set" name="id_registro_set" >
+<generator class="sequence">             
+    </generator>
+    </id>
+<property column="puntaje_participante1" name="puntajeP1"  />
+<property column="puntaje_participante2" name="puntajeP2"  />
+
+</class>
+</hibernate-mapping>
