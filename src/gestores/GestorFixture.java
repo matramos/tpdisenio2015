@@ -43,8 +43,8 @@ public class GestorFixture{
 		for(int r=0; r<(participantes.size()-1);r++){
 			Ronda rondita = new Ronda();
 			for(int e=0; e<(participantes.size()/2);e++){
+				//falta lo de lugar aca
 				Encuentro encuentrito = new Encuentro(participantes.get(e), participantes.get(participantes.size()-e-1));
-				System.out.println(participantes.get(e).getNombre()+"vs"+participantes.get(participantes.size()-e-1).getNombre());
 				rondita.add(encuentrito);
 			}
 			competencia.addRonda(rondita);

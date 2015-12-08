@@ -3,13 +3,13 @@ package capanegocios;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.List;
 
-import antlr.collections.List;
 
 public class RegistroEncuentro {
 
 	long id_registro;
-	long id_encuentro;
+	Encuentro encuentro;
 	int puntajep1;
 	int puntajep2;
 	boolean estado_encuentro;
@@ -20,11 +20,12 @@ public class RegistroEncuentro {
 	Time hora;
 	int ganador;
 	boolean empate;
+	List<RegistroSet> registroSets = new ArrayList<RegistroSet>();
 	
 	public RegistroEncuentro(Encuentro encuentroActualizado) {
 		// faltan los comentados
 		//id_ registro
-		this.id_encuentro=encuentroActualizado.getId_encuentro();
+		this.encuentro=encuentroActualizado;
 		this.puntajep1=encuentroActualizado.getPuntajep1();
 		this.puntajep2=encuentroActualizado.getPuntajep2();
 		//estado_encuentro
@@ -37,17 +38,31 @@ public class RegistroEncuentro {
 		this.empate=encuentroActualizado.isEmpate();
 	}
 	
+	
+	
+	public List<RegistroSet> getRegistroSets() {
+		return registroSets;
+	}
+
+
+
+	public void setRegistroSets(List<RegistroSet> registroSets) {
+		this.registroSets = registroSets;
+	}
+
+
+
 	public long getId_registro() {
 		return id_registro;
 	}
 	public void setId_registro(long id_registro) {
 		this.id_registro = id_registro;
 	}
-	public long getId_encuentro() {
-		return id_encuentro;
+	public Encuentro getEncuentro() {
+		return encuentro;
 	}
-	public void setId_encuentro(long id_encuentro) {
-		this.id_encuentro = id_encuentro;
+	public void setEncuentro(Encuentro encuentro) {
+		this.encuentro = encuentro;
 	}
 	public int getPuntajep1() {
 		return puntajep1;

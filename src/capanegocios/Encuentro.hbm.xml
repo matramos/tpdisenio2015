@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="capanegocios.Encuentro" table="encuentro">
+<id column="id_encuentro" name="id_encuentro" >
+<generator class="sequence">             
+    </generator>
+    </id>
+<property column="empate" name="empate"  />
+<property column="resultadoregistrado" name="resultadoReg"  />
+<property column="fecha" name="fecha"  />
+<property column="puntaje_participante1" name="puntajep1"  />
+<property column="puntaje_participante2" name="puntajep2"  />
+<property column="estado_participante1" name="estadop1"  />
+<property column="estado_participante2" name="estadop2"  />
+
+
+
+<list name="sets" cascade="all-delete-orphan">
+	<key column = "id_encuentro"/>
+	<index column ="ordenlista"/>
+	<one-to-many class="capanegocios.Set"/>
+</list>
+
+<list name="registros" cascade="all-delete-orphan">
+	<key column = "id_encuentro"/>
+	<index column ="ordenlistaregistro"/>
+	<one-to-many class="capanegocios.RegistroEncuentro"/>
+</list>
+
+<many-to-one name="lugar" class="capanegocios.Lugar" >
+	<column name="id_lugar" not-null="true"/>
+</many-to-one>
+
+<many-to-one name="ganador" class="capanegocios.Participante" >
+	<column name="id_ganadaro" not-null="true"/>
+</many-to-one>
+
+<many-to-one name="jugador1" class="capanegocios.Participante" >
+	<column name="id_participante1" not-null="true"/>
+</many-to-one>
+
+<many-to-one name="jugador2" class="capanegocios.Participante" >
+	<column name="id_participante2" not-null="true"/>
+</many-to-one>
+
+</class>
+</hibernate-mapping>

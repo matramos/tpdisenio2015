@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="capanegocios.Encuentro" table="encuentro">
+<id column="id_encuentro" name="id_encuentro" >
+<generator class="sequence">             
+    </generator>
+    </id>
+<property column="empate" name="empate"  />
+<property column="fecha" name="fecha"  />
+<property column="ganador" name="ganador"  />
+<property column="estado_encuentro" name ="estado_encuentro"/>
+<property column="numero_encuentro" name ="numero_encuentro"/>
+<property column="puntaje_participante1" name="puntajep1"  />
+<property column="puntaje_participante2" name="puntajep2"  />
+<property column="estado_participante1" name="estado_participante1"  />
+<property column="estado_participante2" name="estado_participante2"  />
+
+
+
+<list name="registroSets" cascade="all-delete-orphan">
+	<key column = "id_registro"/>
+	<index column ="orden"/>
+	<one-to-many class="capanegocios.RegistroSet"/>
+</list>
+
+
+<many-to-one name="encuentro" class="capanegocios.Encuentro" >
+	<column name="id_encuentro" not-null="true"/>
+</many-to-one>
+
+</class>
+</hibernate-mapping>

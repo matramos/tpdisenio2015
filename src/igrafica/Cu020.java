@@ -175,6 +175,7 @@ public class Cu020 extends JFrame {
 		JButton btnGenerarFixture = new JButton("Generar fixture");
 		btnGenerarFixture.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent g) {
+				System.out.println(compe.getEstado().getNombre());
 				if((compe.getEstado().getNombre().equals("creada")) || 
 						(compe.getEstado().getNombre().equals("planificada"))){
 					Cu017 ventanaGenFixture = new Cu017(id_competencia,id_usuario);

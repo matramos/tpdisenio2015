@@ -26,6 +26,12 @@
 	</list> 
 
 
+<list name="rondas" cascade="all-delete-orphan">
+	<key column = "id_competencia"/>
+	<index column ="orden"/>
+	<one-to-many class="capanegocios.Ronda"/>
+	</list>
+
 <list name="lugares" table ="disponibilidad" cascade="all-delete-orphan">
 <key column = "id_competencia"/>
 <index column ="orden"/>
@@ -40,6 +46,10 @@
 
 <many-to-one name="deporte" class="capanegocios.Deporte" >
 	<column name="id_deporte" not-null="true"/>
+</many-to-one>
+
+<many-to-one name="usuario" class="capanegocios.Usuario" >
+	<column name="id_usuario" not-null="true"/>
 </many-to-one>
  
   <many-to-one name="modalidad" class="capanegocios.Modalidad" >

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="capanegocios.Ronda" table="ronda">
+<id column="id_ronda" name="id_ronda" >
+<generator class="sequence">             
+    </generator>
+    </id>
+<property column="numero_ronda" name="numeroRonda"  />
+<property column="finalizo" name="finalizado"  />
+<property column="comenzada" name="comenzada"  />
+
+<list name="encuentros" cascade="all-delete-orphan">
+	<key column = "id_ronda"/>
+	<index column ="orden"/>
+	<one-to-many class="capanegocios.Encuentro"/>
+</list>
+
+</class>
+</hibernate-mapping>
