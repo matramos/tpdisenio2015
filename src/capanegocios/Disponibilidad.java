@@ -15,6 +15,10 @@ public class Disponibilidad {
 	public Disponibilidad() {
 		// TODO Auto-generated constructor stub
 	}
+	public Disponibilidad(Disponibilidad dispo) {
+		this.lugar=dispo.getLugar();
+		this.disponibilidad=dispo.getDisponibilidad();
+	}
 	public Lugar getLugar() {
 		return lugar;
 	}

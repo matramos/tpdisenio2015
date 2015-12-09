@@ -41,7 +41,13 @@ public class GestorFixture{
 	
 	public static void generarFixture(Competencia competencia) {
 		List<Participante> participantes = competencia.getParticipantes();
-		List<Disponibilidad> lugares = competencia.getLugares();
+		List<Disponibilidad> lugares = new ArrayList<Disponibilidad>();
+		
+		//copiamos la lista de Disponibilidades para no modificar la original
+		for(Disponibilidad dispo : competencia.getLugares()){
+			Disponibilidad copia = new Disponibilidad(dispo);
+			lugares.add(copia);
+		}
 		
 		//EN CASO DE TENER UN NUMERO IMPAR DE PARTICIPANTES, CREAMOS ESTE PARTICIPANTE "FANTASMA". VER DESPUES COMO ESTO AFECTA AL cu18 Y cu21
 		if (!(participantes.size()%2 == 0)){
