@@ -139,8 +139,16 @@ public static ListaParticipantesDTO mostrarTabla(CompetenciaDTO competencia2) {
 
 public static void generarFixture(long id_competencia) {
 	competencia = buscarCompetencia(id_competencia);
-	if(competencia.getEstado().getNombre().equals("planificada")) competencia.borrarFixture();
+	if(competencia.getEstado().getNombre().equals("planificada")){
+		competencia.borrarFixture();
+	}
 	GestorFixture.generarFixture(competencia);
+	
+	//cambiamos el estado de la competencia a "planificada"
+	Estado plani = new Estado();
+	plani.setId(2);
+	plani.setNombre("planificada");
+	competencia.setEstado(plani);
 	
 	CompetenciaDAO.agregarCompetencia(competencia);
 

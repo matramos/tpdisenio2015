@@ -33,7 +33,7 @@
 </many-to-one>
 
 <many-to-one name="ganador" class="capanegocios.Participante" >
-	<column name="id_ganador" not-null="true"/>
+	<column name="id_ganador" not-null="false"/>
 </many-to-one>
 
 <many-to-one name="jugador1" class="capanegocios.Participante" >
