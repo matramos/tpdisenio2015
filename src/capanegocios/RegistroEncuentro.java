@@ -21,7 +21,7 @@ public class RegistroEncuentro {
 	int ganador;
 	private boolean empate;
 	
-	public RegistroEncuentro(Encuentro encuentroActualizado,List<RegistroSet> registroSets) {
+	public RegistroEncuentro(Encuentro encuentroActualizado) {
 		//this.id_encuentro=encuentroActualizado.getId_encuentro();
 		this.encuentro=encuentroActualizado;
 		this.puntajep1=encuentroActualizado.getPuntajep1();

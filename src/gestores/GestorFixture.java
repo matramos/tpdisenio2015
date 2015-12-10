@@ -12,6 +12,9 @@ import DTO.SetDTO;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JOptionPane;
+
 import capanegocios.Competencia;
 import capanegocios.Encuentro;
 import capanegocios.ListaEncuentros;
@@ -69,43 +72,41 @@ public class GestorFixture{
 	
 	public EncuentroDTO GestionarResultado(long id_competencia,long id_ronda,long id_encuentro){
 		EncuentroDTO encuentroDTO;
-		System.out.println("entro en gestionar resultado");
+		System.out.println("ENTRO A GESTIONAR RESULTADO");
 		competencia= GestorCompetencias.buscarCompetencia(id_competencia);
 		System.out.println(competencia.getNombre());
-		//encuentro2= GestorCompetencias.buscarEncuentro(id_encuentro); //esto donde esta? en el diagrama? lo saq de gestor comp, esta  mal lo q hago
-		// el encuentro sale de la misma ronda intanciada. ya fue dejame q a la noche lo haga todo de nuevo. no a ver
-		
 		ronda = competencia.getRonda(id_ronda);
 		encuentro = ronda.getEncuentro(id_encuentro);
-		participante1=encuentro.getJugador1();
-		participante2=encuentro.getJugador2();
+		//participante1=encuentro.getJugador1();
+		//participante2=encuentro.getJugador2();
 		//
 		encuentroDTO=new EncuentroDTO(encuentro);
-		int cantSets=competencia.getCantidad_sets();	
-		System.out.println(competencia.getCantidad_sets());
-		//
+		//int cantSets=competencia.getCantidad_sets();	
+		//System.out.println(competencia.getCantidad_sets());
+		/*
 		while(cantSets!=0){
-			SetDTO set1 = new SetDTO();//esto se crea vacio, fijate que hay que hacerlo con el set del encuentro, me estaba dando cuenta recien
-			// lo creo vacio al pedo, tendrai q tener los datos del set de encuentro
+			SetDTO set1 = new SetDTO();
 			encuentroDTO.addSet(set1);
 			cantSets--;
-		}
+		}*/
 		return encuentroDTO;
 	}
 
-	public void cargarResultado(long id_competencia,long id_ronda,long id_encuentro,EncuentroDTO encuentro) {
+	public boolean cargarResultado(long id_competencia,long id_ronda,long id_encuentro,EncuentroDTO encuentro) {
 		
 		competencia= GestorCompetencias.buscarCompetencia(id_competencia);
-		encuentro2= GestorCompetencias.buscarEncuentro(id_encuentro);
+		ronda = competencia.getRonda(id_ronda);
+		encuentro2 = ronda.getEncuentro(id_encuentro);
 		modalidad=competencia.getModalidad();
-		
-		if(modalidad.getEliminatoriasimple()== true ^ modalidad.getEliminatoriadoble()== true){
+
+		if(modalidad.isLiga()==true){
 			
-			//seteo el encuentro con los datos nuevos ingresados por el usuario
 			encuentro2.ActualizarEncuentro(encuentro);
 			
-			//actualizo la competencia con el nuevo encuentro actualizado
-			competencia.ActualizarEncuentro(id_ronda,encuentro2);
+			
+			//creo el registro de encuentro
+			RegistroEncuentro registroEncuentro = new RegistroEncuentro(encuentro2);
+			
 			
 			//creo los registro de set, del caso de uso en particular
 			List<RegistroSet> registroSets = new ArrayList<RegistroSet>();
@@ -113,12 +114,15 @@ public class GestorFixture{
 				RegistroSet registroS = new RegistroSet(set);
 				registroSets.add(registroS);
 			}
+			registroEncuentro.setRegistroSets(registroSets);
 			
-			//creo el registro de encuentro
-			RegistroEncuentro registroEncuentro = new RegistroEncuentro(encuentro2,registroSets);
+			//actualizo el encuentro con el nuevo registro
 			
+			//encuentro2.agregarRegistros(registroEncuentro);
+			
+			// CONSIDERS DEL DIAGRAMA DEL CASO DE USO
 			//consideracion si la ronda no esta comenzada
-			ronda=GestorCompetencias.buscarRonda(id_ronda);
+			ronda = competencia.getRonda(id_ronda);
 			if(ronda.isComenzada()==false)
 				ronda.setComenzada(true);
 			
@@ -127,39 +131,57 @@ public class GestorFixture{
 			if(ronda.getEncuentros().get(cantEncuentros-1).isEstado_encuentro()==true)
 				ronda.setFinalizado(true);
 			
-			//actualizar datos de encuentro en los participantes
-			
-			Participante participanteP1 = encuentro2.getJugador1();
-			Participante participanteP2 = encuentro2.getJugador2();
-			if(encuentro2.isEmpate()==true){
-				participanteP1.setPartidosEmpatados(participanteP1.getPartidosEmpatados()+1);
-				participanteP2.setPartidosEmpatados(participanteP2.getPartidosEmpatados()+1);
-			}
-			if(encuentro2.getGanador().getId_participante()==participanteP1.getId_participante()){
-				participanteP1.setPartidosGanados(participanteP1.getPartidosGanados()+1);
-				participanteP2.setPartidosPerdidos(participanteP2.getPartidosPerdidos()+1);
-			}
+			if(competencia.getEstado().getNombre().equals("Planificada"))
+				competencia.getEstado().setNombre("En Disputa");
 			else{
-				participanteP2.setPartidosGanados(participanteP2.getPartidosGanados()+1);
-				participanteP1.setPartidosPerdidos(participanteP1.getPartidosPerdidos()+1);
+				cantEncuentros = ronda.getEncuentros().size();
+				if(ronda.getEncuentros().get(cantEncuentros-1).isEstado_encuentro()==true)
+					competencia.getEstado().setNombre("Finalizada");
 			}
+			//actualizo la competencia con el nuevo encuentro actualizado
+			
+			System.out.println("TODOS LOS DATOS PARA EL CAMPEON DE LOS CAMPEONES, PARA TROV");
+			System.out.println("LOS ID INVOLUCRADOS DE COMPETENCIA , RONDA , ENCUENTRO");
+			System.out.println(competencia.getId_competencia());
+			System.out.println(ronda.getId_ronda());
+			System.out.println(encuentro2.getId_encuentro());
+			System.out.println("TODOS LOS SET DEL ENCUENTRO SELECCIONADO, CON SU ID Y PUNTAJES DE LOS PARTICIPANTES");
 			for(Set set : encuentro2.getSets()){
-				participanteP1.setTantosFav(participanteP1.getTantosFav()+set.getPuntajep1());
-				participanteP2.setTantosFav(participanteP2.getTantosFav()+set.getPuntajep2());
-				participanteP1.setTantosCont(participanteP1.getTantosCont()+set.getPuntajep2());
-				participanteP2.setTantosCont(participanteP2.getTantosCont()+set.getPuntajep1());
-				participanteP1.setTantosDif(participanteP1.getTantosDif()+(set.getPuntajep1()-set.getPuntajep2()));
-				participanteP2.setTantosDif(participanteP2.getTantosDif()+(set.getPuntajep2()-set.getPuntajep1()));
+				System.out.println(set.getId_set());
+				System.out.println(set.getPuntajep1());
+				System.out.println(set.getPuntajep2());
 			}
+			System.out.println("REGISTRO DEL ENCUENTRO GESTIONADO");
+			System.out.println("POR DESGRACIA NO PUEDO AGREGAR EL REGISTRO A LA LISTA registros DEL ENCUENTRO POR ESO SE IMPRIME LO VIEJO PERO ANDAN LAS ASIGANCIONES");
+			System.out.println(registroEncuentro.getId_registro());
+			System.out.println(registroEncuentro.getEncuentro().getId_encuentro());
+			System.out.println(registroEncuentro.getId_registro());
+			System.out.println(registroEncuentro.getPuntajep1());
+			System.out.println(registroEncuentro.getPuntajep2());
+			System.out.println(registroEncuentro.isEstado_participante1());
+			System.out.println(registroEncuentro.isEstado_participante2());
+			System.out.println("REGISTRO DE SETS DEL REGISTRO ENCUENTRO");
+			for(RegistroSet regSet : registroEncuentro.getRegistroSets()){
+				System.out.println(regSet.getId_registro_set());
+				System.out.println(regSet.getPuntajeP1());
+				System.out.println(regSet.getPuntajeP2());
+			}
+			
+			
+			competencia.ActualizarEncuentro(id_ronda,encuentro2);
+			competencia.actualizarParticipantes(encuentro2.getJugador1(),encuentro2.getJugador2());
+			GestorCompetencias.actualizar(competencia);
+			
+			return true;
 		}
-		if(competencia.getEstado().getNombre().equals("Planificada"))
-			competencia.getEstado().setNombre("En Disputa");
 		else{
-			int cantEncuentros = ronda.getEncuentros().size();
-			if(ronda.getEncuentros().get(cantEncuentros-1).isEstado_encuentro()==true)
-				competencia.getEstado().setNombre("Finalizada");
+			JOptionPane.showMessageDialog(null, "No se puede gestionar el encuentro, la modalidad es Eliminacion Simple o Doble");
+			/*Cu008 ventana = new Cu008(idGenerado,id_usuario);
+			ventana.setVisible(true);*/
+			//dispose();
+			return false;
 		}
-		GestorCompetencias.actualizar(competencia);
+		
 	}
 
 }

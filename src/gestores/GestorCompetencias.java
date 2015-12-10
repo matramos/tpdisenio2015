@@ -148,7 +148,6 @@ public static void generarFixture(long id_competencia) {
 
 public static Competencia buscarCompetencia(long id_competencia) {
 	
-	System.out.println("entro a buscar competencia");
 	competencia = CompetenciaDAO.getCompetencia(id_competencia);
 	return competencia;
 }
@@ -159,11 +158,11 @@ public static Ronda buscarRonda(long id_ronda) {
 }
 
 public static void actualizar(Competencia competencia) {
+	
 	CompetenciaDAO.actualizarCompetencia(competencia); 
 }
 
 public static Encuentro buscarEncuentro(long id_encuentro) {
-	System.out.println("entro a bucar el encuentro");
 	encuentro = EncuentroDAO.getEncuentro(id_encuentro);
 	return encuentro;
 }

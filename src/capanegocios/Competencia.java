@@ -268,6 +268,9 @@ public class Competencia {
 		
 		int i=0;
 		int j=0;
+		int x=0;
+		int y=0;
+		
 		for(Ronda ronda : rondas ){
 			if(ronda.getId_ronda()==id_ronda){
 				for(Encuentro encuentro : ronda.getEncuentros()){
@@ -275,11 +278,29 @@ public class Competencia {
 						ronda.getEncuentros().set(j,encuentroActualizado);
 						Ronda rondaActualizada=ronda;
 						rondas.set(i, rondaActualizada);
+						x=i;
+						y=j;
+						
 					}
 					j++;
 				}
 			}
 			i++;
+		}
+		
+	}
+
+	public void actualizarParticipantes(Participante participanteP1, Participante participanteP2) {
+		
+		for(Participante p : this.participantes){
+			if(p.getId_participante()==participanteP1.getId_participante()){
+				p=participanteP1;
+				
+			}
+			if(p.getId_participante()==participanteP2.getId_participante()){
+				p=participanteP2;
+				
+			}
 		}
 		
 	}

@@ -3,6 +3,7 @@ package DAO;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -197,7 +198,7 @@ public class CompetenciaDAO {
 			
 			competencia.setNombre(object.getNombre());
 			modalidad.setEliminatoriaDoble(object.getModalidad().getEliminatoriadoble());
-			modalidad.setEliminatoriaSimple(object.getModalidad().getElminatoriasimple());
+			modalidad.setEliminatoriaSimple(object.getModalidad().getEliminatoriasimple());
 			modalidad.setId_modalidad(object.getModalidad().getId_modalidad());
 			modalidad.setLiga(object.getModalidad().liga);
 			competencia.setModalidad(modalidad);
@@ -233,13 +234,39 @@ public class CompetenciaDAO {
 		tx.commit();
 		/*session.close();
 		factory.close();*/
-		//System.out.println(competencia.getNombre());
+		//System.out.println(competencia.getNombre()); al participante le cargas los puntos y todo eso?si, aca
 		return competencia;
 	}
 
 	public static void actualizarCompetencia(Competencia competencia) {
+		
+		// METODO 1 - ERROR EN tx.commit();
+		/*Transaction tx = CrearSesion.session.beginTransaction();
+		CrearSesion.session.update(competencia);
+		tx.commit();*/
+		
+		/* METODO 2 - ERROR EN tx.commit();
 		Transaction tx = CrearSesion.session.beginTransaction();
-		CrearSesion.session.saveOrUpdate(competencia);
-		tx.commit();
+		Competencia nuevacomp = (Competencia) CrearSesion.session.get(Competencia.class,competencia.getId_competencia());
+		CrearSesion.session.update(nuevacomp);
+		tx.commit();*/
+		
+		
+		// Session session = factory.openSession();
+		//METODO 3
+      //Transaction tx = null;
+		Transaction tx = CrearSesion.session.beginTransaction();
+      try{
+         tx = CrearSesion.session.beginTransaction();
+         Competencia nuevacomp = (Competencia) CrearSesion.session.get(Competencia.class, competencia.getId_competencia()); 
+		 //CrearSesion.session.merge(nuevacomp); 
+		 CrearSesion.session.update(nuevacomp);
+         tx.commit();
+      }catch (HibernateException e) {
+         if (tx!=null) tx.rollback();
+         e.printStackTrace(); 
+      }finally {
+         CrearSesion.session.close(); 
+      }
 	}
 }

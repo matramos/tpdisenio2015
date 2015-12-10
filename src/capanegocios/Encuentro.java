@@ -211,26 +211,38 @@ public class Encuentro {
 		this.ganador=new Participante(encuentro.getGanador());
 		this.jugador1=new Participante(encuentro.getJugador1());
 		this.jugador2=new Participante(encuentro.getJugador2());
-		this.lugar=new Lugar(encuentro.getLugar());
+		//this.lugar=new Lugar(encuentro.getLugar());
 		this.puntajep1=encuentro.getPuntajep1();
 		this.puntajep2=encuentro.getPuntajep2();
 		this.estadop1=encuentro.isEstadop1();
 		this.estadop2=encuentro.isEstadop2();
-		for(EncuentroDTO encuDTO : encuentro.getRganadores()){
-			Encuentro encu = new Encuentro(encuDTO);
+		/*for(EncuentroDTO encuDTO : encuentro.getRganadores()){
+			Encuentro encu = new Encuentro(encuDTO); dejame q vea algo
 			rganadores.add(encu);
 		}
 		for(EncuentroDTO encuDTO : encuentro.getRperdedores()){
 			Encuentro encu = new Encuentro(encuDTO);
 			rperdedores.add(encu);
-		}
+		}*/
+		sets = new ArrayList<>();
 		for(SetDTO setDTO : encuentro.getSets()){
 			Set set = new Set(setDTO);
 			sets.add(set);
 		}
-		this.encuentro1=new Encuentro(encuentro.getEncuentro1());
-		this.encuentro2=new Encuentro(encuentro.getEncuentro2());
+		//this.encuentro1=new Encuentro(encuentro.getEncuentro1());
+		//this.encuentro2=new Encuentro(encuentro.getEncuentro2());
 		this.estado_encuentro=encuentro.isEstado_encuentro();
+		
+	}
+
+	public void actualizarParticipantes(Participante participanteP1, Participante participanteP2) {
+		this.jugador1=participanteP1;
+		this.jugador2=participanteP2;
+		
+	}
+
+	public void agregarRegistros(RegistroEncuentro registroEncuentro) {
+		registros.add(registroEncuentro);
 		
 	}
 	
