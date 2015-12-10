@@ -142,7 +142,13 @@ public class Cu004 extends JFrame {
 		JButton btnAgregar = new JButton("Agregar");
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				model.addTest(new Test(lugar.getText(), disponibilidad.getText()));
+				if(disponibilidad.getText().isEmpty() || !(isNumeric(disponibilidad.getText()))|| lugar.getText().isEmpty()){
+					
+				}
+				else{
+					model.addTest(new Test(lugar.getText(), disponibilidad.getText()));
+				}
+				
 			}
 		});
 		btnAgregar.setBounds(169, 146, 89, 23);
@@ -222,12 +228,12 @@ public class Cu004 extends JFrame {
 
 		
 		JLabel lblModalidad = new JLabel("Modalidad");
-		lblModalidad.setBounds(427, 106, 63, 14);
+		lblModalidad.setBounds(437, 115, 63, 14);
 		contentPane.add(lblModalidad);
 
 
 		puntosVictoria = new JTextField();
-		puntosVictoria.setBounds(500, 134, 86, 20);
+		puntosVictoria.setBounds(497, 146, 86, 20);
 		contentPane.add(puntosVictoria);
 		puntosVictoria.setColumns(10);
 		
@@ -336,7 +342,7 @@ public class Cu004 extends JFrame {
 				
 			}
 		}});
-		comboModalidad.setBounds(500, 103, 112, 20);
+		comboModalidad.setBounds(510, 112, 112, 20);
 		contentPane.add(comboModalidad);
 		
 		comboModalidad.addItem("Liga");
@@ -345,7 +351,7 @@ public class Cu004 extends JFrame {
 		
 		
 		JLabel lblPuntosVictoria = new JLabel("Puntos Victoria");
-		lblPuntosVictoria.setBounds(396, 136, 94, 14);
+		lblPuntosVictoria.setBounds(393, 148, 94, 14);
 		contentPane.add(lblPuntosVictoria);
 		
 		
@@ -395,20 +401,62 @@ public class Cu004 extends JFrame {
 		
 		
 		final JLabel lblSeleccioneUnNombre = new JLabel("seleccione un nombre");
-		lblSeleccioneUnNombre.setBounds(104, 90, 179, 14);
+		lblSeleccioneUnNombre.setBounds(104, 89, 179, 14);
 		lblSeleccioneUnNombre.setForeground(Color.red);
 		lblSeleccioneUnNombre.setVisible(false);
 		contentPane.add(lblSeleccioneUnNombre);
+		
+		final JLabel lblSeleccionePuntosVictoria = new JLabel("seleccione los puntos");
+		lblSeleccionePuntosVictoria.setBounds(497, 162, 179, 14);
+		lblSeleccionePuntosVictoria.setForeground(Color.red);
+		lblSeleccionePuntosVictoria.setVisible(false);
+		contentPane.add(lblSeleccionePuntosVictoria);
+		
+		
+		final JLabel lblSeleccionePuntosEmpate = new JLabel("seleccione los puntos");
+		lblSeleccionePuntosEmpate.setBounds(539, 243, 179, 14);
+		lblSeleccionePuntosEmpate.setForeground(Color.red);
+		lblSeleccionePuntosEmpate.setVisible(false);
+		contentPane.add(lblSeleccionePuntosEmpate);
+		
+		final JLabel lblSeleccioneResultado = new JLabel("seleccione resultado");
+		lblSeleccioneResultado.setBounds(619, 311, 179, 14);
+		lblSeleccioneResultado.setForeground(Color.red);
+		lblSeleccioneResultado.setVisible(false);
+		contentPane.add(lblSeleccioneResultado);
 		
 		final Date ahora = new Date();
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				//VALIDACIONES
+				if(nombre.getText().isEmpty() || (puntosVictoria.isEditable() && puntosVictoria.getText().isEmpty()) || (puntosEmpate.isEditable() && puntosEmpate.getText().isEmpty())|| resultado.isEditable() && resultado.getText().isEmpty()){
 				if(nombre.getText().isEmpty()){
 					lblSeleccioneUnNombre.setVisible(true);
 					sonido("error");
 				}
-				/*Aca irian las demas validaciones*/
+				else
+					lblSeleccioneUnNombre.setVisible(false);
+				if(puntosVictoria.isEditable() && puntosVictoria.getText().isEmpty()){
+					lblSeleccionePuntosVictoria.setVisible(true);
+					sonido("error");
+				}
+				else
+					lblSeleccionePuntosVictoria.setVisible(false);
+				if(puntosEmpate.isEditable() && puntosEmpate.getText().isEmpty()){
+					lblSeleccionePuntosEmpate.setVisible(true);
+					sonido("error");
+				}
+				else
+					lblSeleccionePuntosEmpate.setVisible(false);
+				if(resultado.isEditable() && resultado.getText().isEmpty()){
+					lblSeleccioneResultado.setVisible(true);
+					sonido("error");
+				}
+				else
+					lblSeleccioneResultado.setVisible(false);
+				}
+				//VALIDACIONES
 				else{
 					CompetenciaDTO competencia = new CompetenciaDTO();
 					for(int i = 0; i<table.getRowCount();i++){
@@ -490,6 +538,11 @@ public class Cu004 extends JFrame {
 		
 		
 		
+	}
+
+
+	public boolean isNumeric(String s) {
+		return s.matches("[-+]?\\d*\\.?\\d+");
 	}
 }
 class ButtonRenderer extends JButton implements TableCellRenderer{
