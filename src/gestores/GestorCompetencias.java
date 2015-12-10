@@ -12,8 +12,12 @@ import DAO.UsuarioDAO;
 import DAO.LugarDAO;
 import DTO.CompetenciaDTO;
 import DTO.DisponibilidadDTO;
+import DTO.EstadoDTO;
+import DTO.FormaPuntuacionDTO;
+import DTO.InfoCompetenciaDTO;
 import DTO.ListaDeportesDTO;
 import DTO.ListaParticipantesDTO;
+import DTO.ModalidadDTO;
 import DTO.ParticipanteDTO;
 import capanegocios.Competencia;
 import capanegocios.Deporte;
@@ -173,6 +177,24 @@ public static void actualizar(Competencia competencia) {
 public static Encuentro buscarEncuentro(long id_encuentro) {
 	encuentro = EncuentroDAO.getEncuentro(id_encuentro);
 	return encuentro;
+}
+
+public static InfoCompetenciaDTO getInfoCompetencia(long id_competencia) {
+	Competencia competencia = CompetenciaDAO.getCompetencia(id_competencia);
+	
+	InfoCompetenciaDTO info = new InfoCompetenciaDTO();
+	ModalidadDTO modalidad = new ModalidadDTO(competencia.getModalidad());
+	FormaPuntuacionDTO forma = new FormaPuntuacionDTO(competencia.getPuntuacion());
+	EstadoDTO estado = new EstadoDTO(competencia.getEstado());
+	info.setModalidad(modalidad);
+	info.setPuntuacion(forma);
+	info.setEstado(estado);
+	info.setPermite_empates(competencia.isPermite_empates());
+	info.setPuntos_empate(competencia.getPuntos_empate());
+	info.setPuntos_ganador(competencia.getPuntos_ganador());
+	info.setPuntos_presentarse(competencia.getPuntos_presentarse());
+	
+	return info;
 }
 
 

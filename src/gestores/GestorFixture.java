@@ -31,10 +31,8 @@ import capanegocios.Set;
 public class GestorFixture{
 	
 	private Competencia competencia;
-	private Encuentro encuentro2;
-	private ListaRondas listaRondas;
+	
 	private Ronda ronda;
-	private ListaEncuentros listaEncuentros;
 	private Encuentro   encuentro;
 	
 	private Participante participante1;
@@ -95,8 +93,11 @@ public class GestorFixture{
 	}
 	
 	
-	public EncuentroDTO GestionarResultado(long id_competencia,long id_ronda,long id_encuentro){
+	public static EncuentroDTO GestionarResultado(long id_competencia,long id_ronda,long id_encuentro){
 		EncuentroDTO encuentroDTO;
+		Competencia competencia;
+		Ronda ronda;
+		Encuentro encuentro;
 		System.out.println("ENTRO A GESTIONAR RESULTADO");
 		competencia= GestorCompetencias.buscarCompetencia(id_competencia);
 		System.out.println(competencia.getNombre());
@@ -117,8 +118,11 @@ public class GestorFixture{
 		return encuentroDTO;
 	}
 
-	public boolean cargarResultado(long id_competencia,long id_ronda,long id_encuentro,EncuentroDTO encuentro) {
-		
+	public static boolean cargarResultado(long id_competencia,long id_ronda,long id_encuentro,EncuentroDTO encuentro) {
+		Competencia competencia;
+		Ronda ronda;
+		Encuentro encuentro2;
+		Modalidad modalidad;
 		competencia= GestorCompetencias.buscarCompetencia(id_competencia);
 		ronda = competencia.getRonda(id_ronda);
 		encuentro2 = ronda.getEncuentro(id_encuentro);
@@ -195,7 +199,14 @@ public class GestorFixture{
 			
 			competencia.ActualizarEncuentro(id_ronda,encuentro2);
 			competencia.actualizarParticipantes(encuentro2.getJugador1(),encuentro2.getJugador2());
-			GestorCompetencias.actualizar(competencia);
+			System.out.println("Nombre competencia "+competencia.getNombre());
+			System.out.println("Puntaje p1: "+competencia.getParticipantes().get(1).getPuntaje());
+			System.out.println("Puntaje p2: "+competencia.getParticipantes().get(2).getPuntaje());
+			System.out.println("Ronda numero "+competencia.getRondas().get(0).getNumeroRonda());
+			System.out.println(competencia.getRondas().get(0).getEncuentros().get(0).getJugador1().getNombre()+" vs "+competencia.getRondas().get(0).getEncuentros().get(0).getJugador2().getNombre());
+			System.out.println("Resultado: "+competencia.getRondas().get(0).getEncuentros().get(0).getPuntajep1()+"-"+competencia.getRondas().get(0).getEncuentros().get(0).getPuntajep2());
+			
+			//GestorCompetencias.actualizar(competencia);
 			
 			return true;
 		}

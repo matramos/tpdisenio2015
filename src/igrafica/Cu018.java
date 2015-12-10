@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 
 import DTO.CompetenciaDTO;
 import DTO.EncuentroDTO;
+import DTO.InfoCompetenciaDTO;
 import DTO.ListaEncuentrosDTO;
 import DTO.ListaRondasDTO;
 import DTO.ModalidadDTO;
@@ -36,6 +37,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.ActionEvent;
 
 public class Cu018 extends JFrame {
@@ -62,7 +65,7 @@ public class Cu018 extends JFrame {
 	private JTextField txtS9P2;
 	private JTextField txtRP1;
 	private JTextField txtRP2;
-	private GestorFixture fixture = new GestorFixture();
+	
 	
 	int[] puntajeP1 = new int [9];  
 	int[] puntajeP2 = new int [9];
@@ -94,17 +97,20 @@ public class Cu018 extends JFrame {
 	public Cu018(long id_competencia,long id_ronda,long id_encuentro) {
 		
 		//llamar al fixture
-		final EncuentroDTO encuentro=fixture.GestionarResultado(id_competencia,id_ronda,id_encuentro);
-		final Competencia competencia= GestorCompetencias.buscarCompetencia(id_competencia);
+		final EncuentroDTO encuentro=GestorFixture.GestionarResultado(id_competencia,id_ronda,id_encuentro);
+		final InfoCompetenciaDTO informacion = GestorCompetencias.getInfoCompetencia(id_competencia);
 		final int cantidad=encuentro.getSets().size();
 		final long id_comp = id_competencia;
 		final long id_ron = id_ronda;
 		final long id_encu = id_encuentro;
 		int prueba = cantidad;
 		
-		System.out.println(encuentro.getPuntajep1());
-		System.out.println(encuentro.getPuntajep2());
-		
+		/*VALIDACIONES:
+		 * Si es por set, que no se permita empate en el puntaje de los sets
+		 * Si es por puntuacion, verificar si se permite o no empate y en base a eso tirar o no un error
+		 * Si es por resultado final, nada de eso.
+		 * otras.
+		 * */
 		
 		for(int j=0;j<9;j++){
 			puntajeP1[j]=0;
@@ -147,23 +153,193 @@ public class Cu018 extends JFrame {
 		contentPane.add(lblGestionDeResultado);
 		
 		JLabel lblParticipante = new JLabel("Participante 1:");
-		lblParticipante.setBounds(108, 52, 77, 14);
+		lblParticipante.setBounds(87, 52, 97, 14);
 		contentPane.add(lblParticipante);
 		
 		JLabel lblParticipante_1 = new JLabel("Participante 2:");
-		lblParticipante_1.setBounds(347, 52, 80, 14);
+		lblParticipante_1.setBounds(347, 52, 123, 14);
 		contentPane.add(lblParticipante_1);
 		
 		lblSePresento = new JLabel("Se Presento?");
 		lblSePresento.setBounds(279, 99, 77, 14);
 		contentPane.add(lblSePresento);
 		
+		final JComboBox comboResultadoFinal = new JComboBox();
+		comboResultadoFinal.setBounds(281, 457, 112, 20);
+		contentPane.add(comboResultadoFinal);
+		comboResultadoFinal.addItem(encuentro.getJugador1().getNombre());
+		comboResultadoFinal.addItem(encuentro.getJugador2().getNombre());
+		
 		final JCheckBox checkPart1 = new JCheckBox("",encuentro.isEstadop1());
 		checkPart1.setBounds(239, 95, 21, 23);
+		checkPart1.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				if(arg0.getStateChange()== ItemEvent.DESELECTED){
+					comboResultadoFinal.setEnabled(false);
+					txtS1P1.setEditable(false);
+					txtS1P2.setEditable(false);
+					txtS2P1.setEditable(false);
+					txtS2P2.setEditable(false);
+					txtS3P1.setEditable(false);
+					txtS3P2.setEditable(false);
+					txtS4P1.setEditable(false);
+					txtS4P2.setEditable(false);
+					txtS5P1.setEditable(false);
+					txtS5P2.setEditable(false);
+					txtS6P1.setEditable(false);
+					txtS6P2.setEditable(false);
+					txtS7P1.setEditable(false);
+					txtS7P2.setEditable(false);
+					txtS8P1.setEditable(false);
+					txtS8P2.setEditable(false);
+					txtS9P1.setEditable(false);
+					txtS9P2.setEditable(false);
+					txtRP1.setEditable(false);
+					txtRP2.setEditable(false);
+				}
+				else{
+					if(informacion.getPuntuacion().isPuntuacion()){
+						txtRP1.setEditable(true);
+						txtRP2.setEditable(true);
+					}
+					else if(informacion.getPuntuacion().isResultadoFinal()){
+						comboResultadoFinal.setEnabled(true);
+					}
+					else if(informacion.getPuntuacion().isSets()){
+						if(!(puntajeP1[0]==-1 && puntajeP2[0]==0)){
+							txtS1P1.setEditable(true);
+							txtS1P2.setEditable(true);
+						}
+						
+						if(!(puntajeP1[1]==0 && puntajeP2[1]==0)){
+							txtS2P1.setEditable(true);
+							txtS2P2.setEditable(true);
+						}
+						
+						if(!(puntajeP1[2]==0 && puntajeP2[2]==0)){
+							txtS3P1.setEditable(true);
+							txtS3P2.setEditable(true);
+						}
+						
+						if(!(puntajeP1[3]==0 && puntajeP2[3]==0)){
+							txtS4P1.setEditable(true);
+							txtS4P2.setEditable(true);
+						}
+						
+						if(!(puntajeP1[4]==0 && puntajeP2[4]==0)){
+							txtS5P1.setEditable(true);
+							txtS5P2.setEditable(true);
+						}
+						
+						if(!(puntajeP1[5]==0 && puntajeP2[5]==0)){
+							txtS6P1.setEditable(true);
+							txtS6P2.setEditable(true);
+						}
+						
+						if(!(puntajeP1[6]==0 && puntajeP2[6]==0)){
+							txtS7P1.setEditable(true);
+							txtS7P2.setEditable(true);
+						}
+						
+						if(!(puntajeP1[7]==0 && puntajeP2[7]==0)){
+							txtS8P1.setEditable(false);
+							txtS8P2.setEditable(false);
+						}
+						
+						if(!(puntajeP1[8]==0 && puntajeP2[8]==0)){
+							txtS9P1.setEditable(true);
+							txtS9P2.setEditable(true);
+						}
+					}
+				}
+			}
+		});
 		contentPane.add(checkPart1);
 		
 		final JCheckBox checkPart2 = new JCheckBox("",encuentro.isEstadop2());
 		checkPart2.setBounds(362, 95, 97, 23);
+		checkPart2.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				if(arg0.getStateChange()== ItemEvent.DESELECTED){
+					comboResultadoFinal.setEnabled(false);
+					txtS1P1.setEditable(false);
+					txtS1P2.setEditable(false);
+					txtS2P1.setEditable(false);
+					txtS2P2.setEditable(false);
+					txtS3P1.setEditable(false);
+					txtS3P2.setEditable(false);
+					txtS4P1.setEditable(false);
+					txtS4P2.setEditable(false);
+					txtS5P1.setEditable(false);
+					txtS5P2.setEditable(false);
+					txtS6P1.setEditable(false);
+					txtS6P2.setEditable(false);
+					txtS7P1.setEditable(false);
+					txtS7P2.setEditable(false);
+					txtS8P1.setEditable(false);
+					txtS8P2.setEditable(false);
+					txtS9P1.setEditable(false);
+					txtS9P2.setEditable(false);
+					txtRP1.setEditable(false);
+					txtRP2.setEditable(false);
+				}
+				else{
+					if(informacion.getPuntuacion().isPuntuacion()){
+						txtRP1.setEditable(true);
+						txtRP2.setEditable(true);
+					}
+					else if(informacion.getPuntuacion().isResultadoFinal()){
+						comboResultadoFinal.setEnabled(true);
+					}
+					else if(informacion.getPuntuacion().isSets()){
+						if(!(puntajeP1[0]==-1 && puntajeP2[0]==0)){
+							txtS1P1.setEditable(true);
+							txtS1P2.setEditable(true);
+						}
+						
+						if(!(puntajeP1[1]==0 && puntajeP2[1]==0)){
+							txtS2P1.setEditable(true);
+							txtS2P2.setEditable(true);
+						}
+						
+						if(!(puntajeP1[2]==0 && puntajeP2[2]==0)){
+							txtS3P1.setEditable(true);
+							txtS3P2.setEditable(true);
+						}
+						
+						if(!(puntajeP1[3]==0 && puntajeP2[3]==0)){
+							txtS4P1.setEditable(true);
+							txtS4P2.setEditable(true);
+						}
+						
+						if(!(puntajeP1[4]==0 && puntajeP2[4]==0)){
+							txtS5P1.setEditable(true);
+							txtS5P2.setEditable(true);
+						}
+						
+						if(!(puntajeP1[5]==0 && puntajeP2[5]==0)){
+							txtS6P1.setEditable(true);
+							txtS6P2.setEditable(true);
+						}
+						
+						if(!(puntajeP1[6]==0 && puntajeP2[6]==0)){
+							txtS7P1.setEditable(true);
+							txtS7P2.setEditable(true);
+						}
+						
+						if(!(puntajeP1[7]==0 && puntajeP2[7]==0)){
+							txtS8P1.setEditable(false);
+							txtS8P2.setEditable(false);
+						}
+						
+						if(!(puntajeP1[8]==0 && puntajeP2[8]==0)){
+							txtS9P1.setEditable(true);
+							txtS9P2.setEditable(true);
+						}
+					}
+				}
+			}
+		});
 		contentPane.add(checkPart2);
 		
 		JLabel lblSet = new JLabel("Set 1");
@@ -293,74 +469,120 @@ public class Cu018 extends JFrame {
 		contentPane.add(txtS9P2);
 		
 		JLabel lblPuntuacion = new JLabel("Puntuacion");
-		lblPuntuacion.setBounds(279, 411, 56, 14);
+		lblPuntuacion.setBounds(262, 411, 94, 14);
 		contentPane.add(lblPuntuacion);
 		
 		txtRP1 = new JTextField(Integer.toString(encuentro.getPuntajep1()));
-		txtRP1.setBounds(226, 408, 46, 20);
+		txtRP1.setBounds(206, 408, 46, 20);
 		contentPane.add(txtRP1);
 		txtRP1.setColumns(10);
 		
 		txtRP2 = new JTextField(Integer.toString(encuentro.getPuntajep2()));
 		txtRP2.setColumns(10);
-		txtRP2.setBounds(341, 408, 46, 20);
+		txtRP2.setBounds(361, 408, 46, 20);
 		contentPane.add(txtRP2);
 		
 		JLabel lblResultadoFinal = new JLabel("Resultado Final:");
-		lblResultadoFinal.setBounds(180, 460, 112, 14);
+		lblResultadoFinal.setBounds(134, 460, 138, 14);
 		contentPane.add(lblResultadoFinal);
 		
-		final JComboBox comboResultadoFinal = new JComboBox();
-		comboResultadoFinal.setBounds(281, 457, 112, 20);
-		contentPane.add(comboResultadoFinal);
-		comboResultadoFinal.addItem(encuentro.getJugador1().getNombre());
-		comboResultadoFinal.addItem(encuentro.getJugador2().getNombre());
+		
         //comboResultadoFinal.addItemListener(this);
 		
-		if(puntajeP1[0]==0 && puntajeP2[0]==0){
+		if(informacion.getPuntuacion().isSets()){
+			comboResultadoFinal.setEnabled(false);
+			txtRP1.setEditable(false);
+			txtRP2.setEditable(false);
+			if(puntajeP1[0]==0 && puntajeP2[0]==0){
+				txtS1P1.setEditable(false);
+				txtS1P2.setEditable(false);
+			}
+			
+			if(puntajeP1[1]==0 && puntajeP2[1]==0){
+				txtS2P1.setEditable(false);
+				txtS2P2.setEditable(false);
+			}
+			
+			if(puntajeP1[2]==0 && puntajeP2[2]==0){
+				txtS3P1.setEditable(false);
+				txtS3P2.setEditable(false);
+			}
+			
+			if(puntajeP1[3]==0 && puntajeP2[3]==0){
+				txtS4P1.setEditable(false);
+				txtS4P2.setEditable(false);
+			}
+			
+			if(puntajeP1[4]==0 && puntajeP2[4]==0){
+				txtS5P1.setEditable(false);
+				txtS5P2.setEditable(false);
+			}
+			
+			if(puntajeP1[5]==0 && puntajeP2[5]==0){
+				txtS6P1.setEditable(false);
+				txtS6P2.setEditable(false);
+			}
+			
+			if(puntajeP1[6]==0 && puntajeP2[6]==0){
+				txtS7P1.setEditable(false);
+				txtS7P2.setEditable(false);
+			}
+			
+			if(puntajeP1[7]==0 && puntajeP2[7]==0){
+				txtS8P1.setEditable(false);
+				txtS8P2.setEditable(false);
+			}
+			
+			if(puntajeP1[8]==0 && puntajeP2[8]==0){
+				txtS9P1.setEditable(false);
+				txtS9P2.setEditable(false);
+			}
+		}
+		else if (informacion.getPuntuacion().isResultadoFinal()){
 			txtS1P1.setEditable(false);
 			txtS1P2.setEditable(false);
-		}
-		
-		if(puntajeP1[1]==0 && puntajeP2[1]==0){
 			txtS2P1.setEditable(false);
 			txtS2P2.setEditable(false);
-		}
-		
-		if(puntajeP1[2]==0 && puntajeP2[2]==0){
 			txtS3P1.setEditable(false);
 			txtS3P2.setEditable(false);
-		}
-		
-		if(puntajeP1[3]==0 && puntajeP2[3]==0){
 			txtS4P1.setEditable(false);
 			txtS4P2.setEditable(false);
-		}
-		
-		if(puntajeP1[4]==0 && puntajeP2[4]==0){
 			txtS5P1.setEditable(false);
 			txtS5P2.setEditable(false);
-		}
-		
-		if(puntajeP1[5]==0 && puntajeP2[5]==0){
 			txtS6P1.setEditable(false);
 			txtS6P2.setEditable(false);
-		}
-		
-		if(puntajeP1[6]==0 && puntajeP2[6]==0){
 			txtS7P1.setEditable(false);
 			txtS7P2.setEditable(false);
-		}
-		
-		if(puntajeP1[7]==0 && puntajeP2[7]==0){
 			txtS8P1.setEditable(false);
 			txtS8P2.setEditable(false);
-		}
-		
-		if(puntajeP1[8]==0 && puntajeP2[8]==0){
 			txtS9P1.setEditable(false);
 			txtS9P2.setEditable(false);
+			txtRP1.setEditable(false);
+			txtRP2.setEditable(false);
 		}
+		else if (informacion.getPuntuacion().puntuacion){
+			txtS1P1.setEditable(false);
+			txtS1P2.setEditable(false);
+			txtS2P1.setEditable(false);
+			txtS2P2.setEditable(false);
+			txtS3P1.setEditable(false);
+			txtS3P2.setEditable(false);
+			txtS4P1.setEditable(false);
+			txtS4P2.setEditable(false);
+			txtS5P1.setEditable(false);
+			txtS5P2.setEditable(false);
+			txtS6P1.setEditable(false);
+			txtS6P2.setEditable(false);
+			txtS7P1.setEditable(false);
+			txtS7P2.setEditable(false);
+			txtS8P1.setEditable(false);
+			txtS8P2.setEditable(false);
+			txtS9P1.setEditable(false);
+			txtS9P2.setEditable(false);
+			comboResultadoFinal.setEnabled(false);
+		}
+		
+		/**/
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(195, 537, 89, 23);
@@ -369,8 +591,37 @@ public class Cu018 extends JFrame {
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				//settear el encuentro si no se presento ninguno (no me acuerdo este caso)
+				if(!(checkPart1.isSelected()) && !(checkPart2.isSelected()))
+					;
+				//setear el encuentro si no se presento el primero
+				else if(!(checkPart1.isSelected()) && (checkPart2.isSelected())){
+					
+				}
 				
-				puntajeP1[0]=Integer.parseInt(txtS1P1.getText());
+				//settear el encuentro si no se presento el segundo
+				else if((checkPart1.isSelected()) && !(checkPart2.isSelected())){
+					
+				}
+				
+				else{
+				// setear el encuentro teniendo en cuenta el combobox de resultado final
+				if(informacion.getPuntuacion().isResultadoFinal()){
+					
+				}
+				
+				//setear el encuentro teniendo en cuenta el textfield de puntuacion
+				else if(informacion.getPuntuacion().isPuntuacion()){
+					
+				}
+				
+				//setear el encuentro teniendo en cuenta los textfields de set
+				else if(informacion.getPuntuacion().isSets()){
+					
+				}
+				
+				}
+				/*puntajeP1[0]=Integer.parseInt(txtS1P1.getText());
 				puntajeP2[0]=Integer.parseInt(txtS1P2.getText());
 				puntajeP1[1]=Integer.parseInt(txtS2P1.getText());
 				puntajeP2[1]=Integer.parseInt(txtS2P2.getText());
@@ -417,18 +668,7 @@ public class Cu018 extends JFrame {
 					participanteP1.setPartidosEmpatados(participanteP1.getPartidosEmpatados()+1);
 					participanteP2.setPartidosEmpatados(participanteP2.getPartidosEmpatados()+1);
 				}
-				if(encuentro.getGanador().getId_participante()==participanteP1.getId_participante()){
-					participanteP1.setPartidosGanados(participanteP1.getPartidosGanados()+1);
-					participanteP2.setPartidosPerdidos(participanteP2.getPartidosPerdidos()+1);
-					participanteP1.setPuntaje(participanteP1.getPuntaje()+competencia.getPuntos_ganador()*encuentro.getPuntajep1()+competencia.getPuntos_presentarse());
-					participanteP2.setPuntaje(participanteP2.getPuntaje()+competencia.getPuntos_presentarse());
-				}
-				else{
-					participanteP2.setPartidosGanados(participanteP2.getPartidosGanados()+1);
-					participanteP1.setPartidosPerdidos(participanteP1.getPartidosPerdidos()+1);
-					participanteP2.setPuntaje(participanteP2.getPuntaje()+competencia.getPuntos_ganador()*encuentro.getPuntajep2()+competencia.getPuntos_presentarse());
-					participanteP1.setPuntaje(participanteP1.getPuntaje()+competencia.getPuntos_presentarse());
-				}
+				
 				for(SetDTO set : encuentro.getSets()){
 					participanteP1.setTantosFav(participanteP1.getTantosFav()+set.getPuntajep1());
 					participanteP2.setTantosFav(participanteP2.getTantosFav()+set.getPuntajep2());
@@ -451,25 +691,25 @@ public class Cu018 extends JFrame {
 					
 				
 				//voy a gestionar fixture para cargar el resultado de los datos actualizados
-				secargo=fixture.cargarResultado(id_comp,id_ron,id_encu,encuentro);
+				secargo=GestorFixture.cargarResultado(id_comp,id_ron,id_encu,encuentro);
 				
 				if(secargo==true){
 					JOptionPane.showMessageDialog(null, "Se cargo con exito");
 					/*Cu008 ventana = new Cu008(idGenerado,id_usuario);
-					ventana.setVisible(true);*/
+					ventana.setVisible(true);
 					dispose();
-				}
+				}*/
 			}
 		});
 		btnAceptar.setBounds(362, 537, 89, 23);
 		contentPane.add(btnAceptar);
 		
 		JLabel nombreP1 = new JLabel(encuentro.getJugador1().getNombre());
-		nombreP1.setBounds(214, 52, 78, 14);
+		nombreP1.setBounds(180, 52, 123, 14);
 		contentPane.add(nombreP1);
 		
 		JLabel nombreP2 = new JLabel(encuentro.getJugador2().getNombre());
-		nombreP2.setBounds(428, 52, 64, 14);
+		nombreP2.setBounds(462, 52, 198, 14);
 		contentPane.add(nombreP2);
 	}
 }

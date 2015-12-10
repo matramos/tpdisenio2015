@@ -260,7 +260,7 @@ public class CompetenciaDAO {
          tx = CrearSesion.session.beginTransaction();
          Competencia nuevacomp = (Competencia) CrearSesion.session.get(Competencia.class, competencia.getId_competencia()); 
 		 //CrearSesion.session.merge(nuevacomp); 
-		 CrearSesion.session.update(nuevacomp);
+		 CrearSesion.session.merge(nuevacomp);
          tx.commit();
       }catch (HibernateException e) {
          if (tx!=null) tx.rollback();
