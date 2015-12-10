@@ -29,9 +29,10 @@ public class Encuentro {
 	private boolean estado_encuentro;
 	private List<RegistroEncuentro> registros = new ArrayList<RegistroEncuentro>();
 	
-	public Encuentro(Participante participante1, Participante participante2) {
+	public Encuentro(Participante participante1, Participante participante2, Lugar lugarcito) {
 		this.jugador1 = participante1;
 		this.jugador2 = participante2;
+		this.lugar = lugarcito;
 	}
 	
 	public Encuentro(){

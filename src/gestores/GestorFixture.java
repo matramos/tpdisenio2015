@@ -16,9 +16,11 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import capanegocios.Competencia;
+import capanegocios.Disponibilidad;
 import capanegocios.Encuentro;
 import capanegocios.ListaEncuentros;
 import capanegocios.ListaRondas;
+import capanegocios.Lugar;
 import capanegocios.Modalidad;
 import capanegocios.Participante;
 import capanegocios.RegistroEncuentro;
@@ -42,6 +44,13 @@ public class GestorFixture{
 	
 	public static void generarFixture(Competencia competencia) {
 		List<Participante> participantes = competencia.getParticipantes();
+		List<Disponibilidad> lugares = new ArrayList<Disponibilidad>();
+		
+		//copiamos la lista de Disponibilidades para no modificar la original
+		for(Disponibilidad dispo : competencia.getLugares()){
+			Disponibilidad copia = new Disponibilidad(dispo);
+			lugares.add(copia);
+		}
 		
 		//EN CASO DE TENER UN NUMERO IMPAR DE PARTICIPANTES, CREAMOS ESTE PARTICIPANTE "FANTASMA". VER DESPUES COMO ESTO AFECTA AL cu18 Y cu21
 		if (!(participantes.size()%2 == 0)){
@@ -51,9 +60,25 @@ public class GestorFixture{
 		
 		for(int r=0; r<(participantes.size()-1);r++){
 			Ronda rondita = new Ronda();
+			rondita.setNumeroRonda(r);
+			rondita.setComenzada(false);
+			rondita.setFinalizado(false);
+			
 			for(int e=0; e<(participantes.size()/2);e++){
-				//falta lo de lugar aca
-				Encuentro encuentrito = new Encuentro(participantes.get(e), participantes.get(participantes.size()-e-1));
+				
+				//getLugar lo hago aca porque no tengo idea como hacerlo en competencia.
+				int l = 0;
+				while(lugares.get(l).getDisponibilidad() == 0){
+					l++;
+				}
+				Lugar lugarcito = lugares.get(l).getLugar();
+				lugares.get(l).setDisponibilidad(lugares.get(l).getDisponibilidad()-1);
+				
+				Encuentro encuentrito = new Encuentro(participantes.get(e), participantes.get(participantes.size()-e-1), lugarcito);
+				for(int s=0; s <= competencia.getCantidad_sets(); s++){
+					Set setito = new Set();
+					encuentrito.addSet(setito);
+				}
 				rondita.add(encuentrito);
 			}
 			competencia.addRonda(rondita);
