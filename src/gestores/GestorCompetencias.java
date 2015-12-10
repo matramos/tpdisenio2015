@@ -196,7 +196,4 @@ public static InfoCompetenciaDTO getInfoCompetencia(long id_competencia) {
 	
 	return info;
 }
-
-
-
 }
