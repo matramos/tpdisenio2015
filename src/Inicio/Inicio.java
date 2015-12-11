@@ -40,12 +40,11 @@ public class Inicio {
 
 	
 	long id_competencia = 1;
-	long id_ronda = 1;
+	long id_usuario = 1;
 	long id_encuentro = 1;
-	Cu018 cu = new Cu018(id_competencia,id_ronda,id_encuentro);
-	//menuprincipal cu = new menuprincipal(id);
+	//Cu020 cu = new Cu020(id_competencia,id_usuario);
+	menuprincipal cu = new menuprincipal(id_usuario);
 	//cu.main(null);
-	
 	cu.setVisible(true);
 	//CrearSesion.terminarSesion();en que momento se le carga el atributo puntaje?
 }
