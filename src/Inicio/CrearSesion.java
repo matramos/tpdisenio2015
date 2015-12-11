@@ -17,13 +17,13 @@ public class CrearSesion {
 	public static SessionFactory factory;
 	public static Session session;
 	
+	
 	public static void empezarSesion(){
 		Configuration cfg = new Configuration();
 		cfg.configure ("hibernate.cfg.xml");
 		factory = cfg.buildSessionFactory();
 		session = factory.openSession();
-		
-		
+	
 	}
 	
 	public static void terminarSesion(){

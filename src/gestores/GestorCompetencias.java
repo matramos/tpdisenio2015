@@ -120,7 +120,7 @@ public static long agregarParticipante(ParticipanteDTO participanteDTO,long id_c
 	competencia.agregarParticipante(participante);
 	Estado estado = new Estado();
 	estado.setId(1);
-	estado.setNombre("Creada");
+	estado.setNombre("creada");
 	competencia.setEstado(estado);
 	
 	
@@ -145,6 +145,7 @@ public static void generarFixture(long id_competencia) {
 	competencia = buscarCompetencia(id_competencia);
 	if(competencia.getEstado().getNombre().equals("planificada")){
 		competencia.borrarFixture();
+		CompetenciaDAO.actualizarCompetencia(competencia);
 	}
 	GestorFixture.generarFixture(competencia);
 	
@@ -154,7 +155,7 @@ public static void generarFixture(long id_competencia) {
 	plani.setNombre("planificada");
 	competencia.setEstado(plani);
 	
-	CompetenciaDAO.agregarCompetencia(competencia);
+	CompetenciaDAO.actualizarCompetencia(competencia);
 
 }
 
@@ -203,4 +204,5 @@ public static boolean validarNombre(String text) {
 	retorno = CompetenciaDAO.validarNombre(text);
 	return retorno;
 }
+
 }

@@ -16,7 +16,7 @@ public class Encuentro {
 	private Participante ganador;
 	private Participante jugador1;
 	private Participante jugador2;
-	//private Lugar lugar;
+	private Lugar lugar;
 	private int puntajep1;
 	private int puntajep2;
 	private boolean estadop1;
@@ -32,7 +32,7 @@ public class Encuentro {
 	public Encuentro(Participante participante1, Participante participante2, Lugar lugarcito) {
 		this.jugador1 = participante1;
 		this.jugador2 = participante2;
-		//this.lugar = lugarcito;
+		this.lugar = lugarcito;
 	}
 	
 	public Encuentro(){
@@ -128,12 +128,12 @@ public class Encuentro {
 	public void setJugador2(Participante jugador2) {
 		this.jugador2 = jugador2;
 	}
-	//public Lugar getLugar() {
-	//	return lugar;
-	//}
-	//public void setLugar(Lugar lugar) {
-	//	this.lugar = lugar;
-	//}
+	public Lugar getLugar() {
+		return lugar;
+	}
+	public void setLugar(Lugar lugar) {
+		this.lugar = lugar;
+	}
 
 	public int getPuntajep1() {
 		return puntajep1;

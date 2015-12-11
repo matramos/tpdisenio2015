@@ -1,6 +1,7 @@
 package capanegocios;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import DTO.CompetenciaDTO;
@@ -13,7 +14,7 @@ public class Lugar {
 	private String nombre;
 	private String descripcion;
 	private List<SeRealizaEn> serealizaen;
-	private List<Competencia> competencias;
+	private List<Competencia> competencias = new ArrayList<Competencia>();
 
 	
 	public Lugar(LugarDTO lugar) {

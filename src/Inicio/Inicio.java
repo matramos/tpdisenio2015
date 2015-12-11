@@ -39,10 +39,11 @@ public class Inicio {
 	CrearSesion.empezarSesion();
 
 	
-	long id_competencia = 1;
+	long id_competencia = 92;
 	long id_ronda = 1;
 	long id_encuentro = 1;
-	Cu018 cu = new Cu018(id_competencia,id_ronda,id_encuentro);
+	
+	Cu004 cu = new Cu004(id_ronda);
 	//menuprincipal cu = new menuprincipal(id);
 	//cu.main(null);
 	

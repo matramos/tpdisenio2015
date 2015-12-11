@@ -44,11 +44,7 @@ public class GestorFixture{
 		List<Participante> participantes = competencia.getParticipantes();
 		List<Disponibilidad> lugares = new ArrayList<Disponibilidad>();
 		
-		//copiamos la lista de Disponibilidades para no modificar la original
-		for(Disponibilidad dispo : competencia.getLugares()){
-			Disponibilidad copia = new Disponibilidad(dispo);
-			lugares.add(copia);
-		}
+		
 		
 		//EN CASO DE TENER UN NUMERO IMPAR DE PARTICIPANTES, CREAMOS ESTE PARTICIPANTE "FANTASMA". VER DESPUES COMO ESTO AFECTA AL cu18 Y cu21
 		if (!(participantes.size()%2 == 0)){
@@ -62,18 +58,25 @@ public class GestorFixture{
 			rondita.setComenzada(false);
 			rondita.setFinalizado(false);
 			
+			//copiamos la lista de Disponibilidades para no modificar la original
+			for(Disponibilidad dispo : competencia.getLugares()){
+				Disponibilidad copia = new Disponibilidad(dispo);
+				lugares.add(copia);
+			}
+			int l = 0;
+			
 			for(int e=0; e<(participantes.size()/2);e++){
 				
 				//getLugar lo hago aca porque no tengo idea como hacerlo en competencia.
-				int l = 0;
-				while(lugares.get(l).getDisponibilidad() == 0){
+				
+				if(lugares.get(l).getDisponibilidad() == 0){
 					l++;
 				}
 				Lugar lugarcito = lugares.get(l).getLugar();
 				lugares.get(l).setDisponibilidad(lugares.get(l).getDisponibilidad()-1);
 				
 				Encuentro encuentrito = new Encuentro(participantes.get(e), participantes.get(participantes.size()-e-1), lugarcito);
-				for(int s=0; s <= competencia.getCantidad_sets(); s++){
+				for(int s=0; s < competencia.getCantidad_sets(); s++){
 					Set setito = new Set();
 					encuentrito.addSet(setito);
 				}
@@ -89,6 +92,8 @@ public class GestorFixture{
 			participantes.remove(participantes.size()-1);
 			participantes.add(0, ultimo); //Lo ponemos en la posicion 1
 			participantes.add(0, pivot);  //El participante 1, siempre va a estar en la posicion 0
+			
+			lugares.clear();
 		}
 	}
 	
