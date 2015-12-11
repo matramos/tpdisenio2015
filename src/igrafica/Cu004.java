@@ -23,6 +23,7 @@ import java.util.Objects;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
@@ -138,24 +139,46 @@ public class Cu004 extends JFrame {
 		JLabel lblDisponibilidad = new JLabel("Disponibilidad");
 		lblDisponibilidad.setBounds(210, 118, 89, 14);
 		contentPane.add(lblDisponibilidad);
+		
+		
+		final JLabel lblIndiqueAlgunLugar = new JLabel("Debe agregar al menos un lugar a la tabla");
+		lblIndiqueAlgunLugar.setBounds(75, 349, 255, 14);
+		lblIndiqueAlgunLugar.setForeground(Color.red);
+		lblIndiqueAlgunLugar.setVisible(false);
+		contentPane.add(lblIndiqueAlgunLugar);
 		// boton agregar para la tabla
 		JButton btnAgregar = new JButton("Agregar");
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(disponibilidad.getText().isEmpty() || !(isNumeric(disponibilidad.getText()))|| lugar.getText().isEmpty()){
+				
+				boolean lugarRepetido = false;
+				for(int i = 0; i<table.getRowCount(); i++){
+					if(table.getValueAt(i, 0).equals(lugar.getText()))
+						lugarRepetido = true;
+				}
+				if(disponibilidad.getText().isEmpty() || !(isNumeric(disponibilidad.getText()))|| lugar.getText().isEmpty() || !(perteneceL(lugar.getText(),lugares)) || lugarRepetido){
 					
 				}
-				else{
+				else {
 					model.addTest(new Test(lugar.getText(), disponibilidad.getText()));
 				}
 				
+			}
+
+			private boolean perteneceL(String text, ListaLugaresDTO lugares) {
+				boolean b = false;
+				for(LugarDTO l: lugares.getLugares()){
+					if(l.getNombre().equals(text))
+						b = true;
+				}
+				return b;
 			}
 		});
 		btnAgregar.setBounds(169, 146, 89, 23);
 		contentPane.add(btnAgregar);
 		
 		JLabel lblDeporte = new JLabel("Deporte");
-		lblDeporte.setBounds(427, 78, 46, 14);
+		lblDeporte.setBounds(393, 75, 46, 14);
 		contentPane.add(lblDeporte);
 		
 		nombre = new JTextField();
@@ -180,6 +203,11 @@ public class Cu004 extends JFrame {
 		lugar.setColumns(10);
 		lugar.setEditable(false);
 		
+		final JLabel lblSeleccioneDeporte = new JLabel("seleccione un deporte valido");
+		lblSeleccioneDeporte.setBounds(539, 90, 179, 14);
+		lblSeleccioneDeporte.setForeground(Color.red);
+		lblSeleccioneDeporte.setVisible(false);
+		contentPane.add(lblSeleccioneDeporte);
 		
 		
 		/*Toda esta parte hay que corregirla despues para que busque los lugares despues de haber elegido el deporte,
@@ -192,7 +220,7 @@ public class Cu004 extends JFrame {
 		deporte = new JTextField();
 		deporte.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			if(deporte.getText()!=""){
+			if(perteneceD(deporte.getText(),deportes)){
 				lugar.setEditable(true);
 				long idDeporteElegido = deportes.returnId(deporte.getText());
 				
@@ -204,14 +232,25 @@ public class Cu004 extends JFrame {
 					lugaresAC.addItem(object.getNombre());
 				}
 				
-
+				lblSeleccioneDeporte.setVisible(false);
 			}
 			else{
+				lblSeleccioneDeporte.setVisible(true);
 				lugar.setEditable(false);
 			}
 			}
+
+			private boolean perteneceD(String text, ListaDeportesDTO deportes) {
+				boolean b = false;
+				for(DeporteDTO d : deportes.getDeportes()){
+					if(d.getNombre().equals(text)){
+						b = true;
+					}
+				}
+				return b;
+			}
 		});
-		deporte.setBounds(473, 75, 86, 20);
+		deporte.setBounds(539, 72, 86, 20);
 		contentPane.add(deporte);
 		deporte.setColumns(10);		
 		/*Recupero la lista de deportes (tipo ListaDeportesDTO)*/
@@ -228,25 +267,40 @@ public class Cu004 extends JFrame {
 
 		
 		JLabel lblModalidad = new JLabel("Modalidad");
-		lblModalidad.setBounds(437, 115, 63, 14);
+		lblModalidad.setBounds(393, 118, 63, 14);
 		contentPane.add(lblModalidad);
 
-
+		final JComboBox comboPuntos = new JComboBox();
+		comboPuntos.setBounds(539, 263, 86, 20);
+		contentPane.add(comboPuntos);
+		
+		
 		puntosVictoria = new JTextField();
-		puntosVictoria.setBounds(497, 146, 86, 20);
+		puntosVictoria.setBounds(539, 147, 86, 20);
+		puntosVictoria.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				for(int i = 0; i<Integer.parseInt(puntosVictoria.getText());i++){
+					comboPuntos.addItem(i);
+				}
+			}
+		});
 		contentPane.add(puntosVictoria);
 		puntosVictoria.setColumns(10);
 		
+		Border border = BorderFactory.createLineBorder(Color.GRAY);
 		final JTextArea reglamento = new JTextArea();
-		reglamento.setBounds(75, 377, 255, 159);
+		reglamento.setBounds(75, 401, 255, 159);
+		reglamento.setBorder(border);
 		contentPane.add(reglamento);
+		
 		
 		puntosEmpate = new JTextField();
 		puntosEmpate.setBounds(539, 218, 86, 20);
 		contentPane.add(puntosEmpate);
 		puntosEmpate.setColumns(10);
 
-
+		
+		
 		final JCheckBox chckbxSePermiteEmpate = new JCheckBox("Se permite empate?");
 		chckbxSePermiteEmpate.setSelected(true);
 		chckbxSePermiteEmpate.addItemListener(new ItemListener() {
@@ -260,11 +314,11 @@ public class Cu004 extends JFrame {
 			}
 		});
 		
-		chckbxSePermiteEmpate.setBounds(393, 181, 140, 23);
+		chckbxSePermiteEmpate.setBounds(392, 183, 140, 23);
 		contentPane.add(chckbxSePermiteEmpate);
 		
 		resultado = new JTextField();
-		resultado.setBounds(609, 294, 86, 20);
+		resultado.setBounds(539, 312, 86, 20);
 		contentPane.add(resultado);
 		resultado.setColumns(10);
 		
@@ -278,13 +332,14 @@ public class Cu004 extends JFrame {
 		comboCantidadSets.addItem(7);
 		
 		comboCantidadSets.addItem(9);
-		comboCantidadSets.setBounds(542, 374, 70, 20);
+		comboCantidadSets.setBounds(539, 404, 70, 20);
 		contentPane.add(comboCantidadSets);
 		comboCantidadSets.setEnabled(false);
-		final JComboBox comboPuntos = new JComboBox();
-		comboPuntos.setBounds(559, 258, 86, 20);
-		contentPane.add(comboPuntos);
-		comboPuntos.addItem(1);
+		
+		
+		
+		
+		
 		
 		final JComboBox comboFormaPuntuacion = new JComboBox();
 		comboFormaPuntuacion.addItem("Puntuacion");
@@ -312,7 +367,7 @@ public class Cu004 extends JFrame {
 				
 			}
 		}});
-		comboFormaPuntuacion.setBounds(534, 331, 147, 20);
+		comboFormaPuntuacion.setBounds(539, 354, 147, 20);
 		contentPane.add(comboFormaPuntuacion);
 		
 		
@@ -342,7 +397,7 @@ public class Cu004 extends JFrame {
 				
 			}
 		}});
-		comboModalidad.setBounds(510, 112, 112, 20);
+		comboModalidad.setBounds(539, 115, 112, 20);
 		contentPane.add(comboModalidad);
 		
 		comboModalidad.addItem("Liga");
@@ -375,74 +430,148 @@ public class Cu004 extends JFrame {
 		scrollPane.setViewportView(table);
 		
 		JLabel lblPuntosEmpate = new JLabel("Puntos Empate");
-		lblPuntosEmpate.setBounds(427, 221, 106, 14);
+		lblPuntosEmpate.setBounds(393, 221, 106, 14);
 		contentPane.add(lblPuntosEmpate);
 		
 				
 		JLabel lblPuntosPorPresentarse = new JLabel("Puntos por Presentarse");
-		lblPuntosPorPresentarse.setBounds(396, 261, 137, 14);
+		lblPuntosPorPresentarse.setBounds(393, 266, 137, 14);
 		contentPane.add(lblPuntosPorPresentarse);
 		
-		JLabel lblResultadoPorNo = new JLabel("Resultado por no presentarse contrincante");
-		lblResultadoPorNo.setBounds(356, 297, 289, 14);
+		JLabel lblResultadoPorNo = new JLabel("Resultado por no ");
+		lblResultadoPorNo.setBounds(393, 315, 158, 14);
 		contentPane.add(lblResultadoPorNo);
 		
 		
 		
 		JLabel lblFormaDePuntuacin = new JLabel("Forma de Puntuaci\u00F3n");
-		lblFormaDePuntuacin.setBounds(356, 334, 134, 14);
+		lblFormaDePuntuacin.setBounds(393, 357, 134, 14);
 		contentPane.add(lblFormaDePuntuacin);
 		
 		
 		
 		JLabel lblCantidadDeSets = new JLabel("Cantidad de Sets");
-		lblCantidadDeSets.setBounds(381, 377, 109, 14);
+		lblCantidadDeSets.setBounds(393, 407, 109, 14);
 		contentPane.add(lblCantidadDeSets);
 		
 		
 		final JLabel lblSeleccioneUnNombre = new JLabel("seleccione un nombre");
-		lblSeleccioneUnNombre.setBounds(104, 89, 179, 14);
+		lblSeleccioneUnNombre.setBounds(104, 93, 179, 14);
 		lblSeleccioneUnNombre.setForeground(Color.red);
 		lblSeleccioneUnNombre.setVisible(false);
 		contentPane.add(lblSeleccioneUnNombre);
 		
 		final JLabel lblSeleccionePuntosVictoria = new JLabel("seleccione los puntos");
-		lblSeleccionePuntosVictoria.setBounds(497, 162, 179, 14);
+		lblSeleccionePuntosVictoria.setBounds(539, 169, 179, 14);
 		lblSeleccionePuntosVictoria.setForeground(Color.red);
 		lblSeleccionePuntosVictoria.setVisible(false);
 		contentPane.add(lblSeleccionePuntosVictoria);
 		
 		
+		
 		final JLabel lblSeleccionePuntosEmpate = new JLabel("seleccione los puntos");
-		lblSeleccionePuntosEmpate.setBounds(539, 243, 179, 14);
+		lblSeleccionePuntosEmpate.setBounds(539, 241, 179, 14);
 		lblSeleccionePuntosEmpate.setForeground(Color.red);
 		lblSeleccionePuntosEmpate.setVisible(false);
 		contentPane.add(lblSeleccionePuntosEmpate);
 		
 		final JLabel lblSeleccioneResultado = new JLabel("seleccione resultado");
-		lblSeleccioneResultado.setBounds(619, 311, 179, 14);
+		lblSeleccioneResultado.setBounds(539, 329, 158, 14);
 		lblSeleccioneResultado.setForeground(Color.red);
 		lblSeleccioneResultado.setVisible(false);
 		contentPane.add(lblSeleccioneResultado);
+		
+		final JLabel lblYaExiste = new JLabel("ya existe una competencia con ese nombre");
+		lblYaExiste.setBounds(104, 93, 295, 14);
+		lblYaExiste.setForeground(Color.red);
+		lblYaExiste.setVisible(false);
+		contentPane.add(lblYaExiste);
+		
+		
+		final JLabel lblPuntosvMenor = new JLabel("debe ser mayor que puntos por empate");
+		lblPuntosvMenor.setBounds(539, 169, 272, 14);
+		lblPuntosvMenor.setForeground(Color.red);
+		lblPuntosvMenor.setVisible(false);
+		contentPane.add(lblPuntosvMenor);
+		
+		
+		final JLabel lblPuntosNegativos = new JLabel("Los puntos no pueden ser negativos");
+		lblPuntosNegativos.setBounds(539, 169, 272, 14);
+		lblPuntosNegativos.setForeground(Color.red);
+		lblPuntosNegativos.setVisible(false);
+		contentPane.add(lblPuntosNegativos);
+		
+		final JLabel lblComboVacio = new JLabel("Seleccione puntos victoria y presione enter");
+		lblComboVacio.setBounds(539, 286, 272, 14);
+		lblComboVacio.setForeground(Color.red);
+		lblComboVacio.setVisible(false);
+		contentPane.add(lblComboVacio);
 		
 		final Date ahora = new Date();
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//VALIDACIONES
-				if(nombre.getText().isEmpty() || (puntosVictoria.isEditable() && puntosVictoria.getText().isEmpty()) || (puntosEmpate.isEditable() && puntosEmpate.getText().isEmpty())|| resultado.isEditable() && resultado.getText().isEmpty()){
+				
+				boolean noexiste = GestorCompetencias.validarNombre(nombre.getText());
+				boolean menor = !(puntosVictoria.isEditable() && puntosVictoria.getText().isEmpty()) && !(puntosEmpate.isEditable() && puntosEmpate.getText().isEmpty()) && ((Integer.parseInt(puntosVictoria.getText()) < Integer.parseInt(puntosEmpate.getText())));
+				boolean negativo = !(puntosVictoria.isEditable() && puntosVictoria.getText().isEmpty()) && !(puntosEmpate.isEditable() && puntosEmpate.getText().isEmpty()) && (Integer.parseInt(puntosVictoria.getText()) <0);
+				
+				if(nombre.getText().isEmpty() || (puntosVictoria.isEditable() && puntosVictoria.getText().isEmpty()) || (puntosEmpate.isEditable() && puntosEmpate.getText().isEmpty())|| resultado.isEditable() && resultado.getText().isEmpty() || table.getRowCount()==0  || !noexiste || menor || negativo || comboPuntos.getItemCount()==0){
 				if(nombre.getText().isEmpty()){
 					lblSeleccioneUnNombre.setVisible(true);
 					sonido("error");
 				}
 				else
 					lblSeleccioneUnNombre.setVisible(false);
+				if(comboPuntos.getItemCount()==0){
+					lblComboVacio.setVisible(true);
+					sonido("error");
+				}
+				else{
+					lblComboVacio.setVisible(false);
+				}
+				if(!noexiste){
+					lblYaExiste.setVisible(true);
+					sonido("error");
+				}
+				else
+					lblYaExiste.setVisible(false);
+				if(table.getRowCount() == 0){
+					lblIndiqueAlgunLugar.setVisible(true);
+					sonido("error");
+				}
+				else{
+					lblIndiqueAlgunLugar.setVisible(false);
+				}
 				if(puntosVictoria.isEditable() && puntosVictoria.getText().isEmpty()){
 					lblSeleccionePuntosVictoria.setVisible(true);
 					sonido("error");
 				}
-				else
+				else if(Integer.parseInt(puntosVictoria.getText()) <0){
+					lblSeleccionePuntosVictoria.setVisible(false);	
+					lblPuntosNegativos.setVisible(true);
+					sonido("error");
+				}
+				else if (puntosEmpate.isEditable() && puntosEmpate.getText().isEmpty()){
+					lblPuntosNegativos.setVisible(false);
 					lblSeleccionePuntosVictoria.setVisible(false);
+					lblSeleccionePuntosEmpate.setVisible(true);
+					sonido("error");
+				}
+				
+				else{
+					lblPuntosNegativos.setVisible(false);
+					lblSeleccionePuntosVictoria.setVisible(false);
+					lblSeleccionePuntosEmpate.setVisible(false);
+					if((Integer.parseInt(puntosVictoria.getText()) < Integer.parseInt(puntosEmpate.getText()))){
+						lblPuntosvMenor.setVisible(true);
+						sonido("error");
+					}
+					else{
+						lblPuntosvMenor.setVisible(false);
+					}
+				}
 				if(puntosEmpate.isEditable() && puntosEmpate.getText().isEmpty()){
 					lblSeleccionePuntosEmpate.setVisible(true);
 					sonido("error");
@@ -511,7 +640,7 @@ public class Cu004 extends JFrame {
 				}
 			}
 		});
-		btnAceptar.setBounds(424, 513, 89, 23);
+		btnAceptar.setBounds(424, 537, 89, 23);
 		contentPane.add(btnAceptar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -522,18 +651,22 @@ public class Cu004 extends JFrame {
 				dispose();
 			}
 		});
-		btnCancelar.setBounds(581, 513, 89, 23);
+		btnCancelar.setBounds(581, 537, 89, 23);
 		contentPane.add(btnCancelar);
 		
 		JLabel lblDarDeAlta = new JLabel("DAR DE ALTA COMPETENCIA DEPORTIVA");
-		lblDarDeAlta.setBounds(159, 21, 400, 14);
+		lblDarDeAlta.setBounds(209, 24, 400, 14);
 		lblDarDeAlta.setFont(new Font("Arial",Font.BOLD,18));
 		contentPane.add(lblDarDeAlta);
 		
 	
 		JLabel reg = new JLabel("Reglamento (opcional)");
-		reg.setBounds(75, 350, 140, 14);
+		reg.setBounds(75, 374, 140, 14);
 		contentPane.add(reg);
+		
+		JLabel lblNewLabel = new JLabel("presentarse contrincante");
+		lblNewLabel.setBounds(394, 329, 166, 14);
+		contentPane.add(lblNewLabel);
 		
 		
 		

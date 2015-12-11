@@ -24,6 +24,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
@@ -87,6 +89,17 @@ public class Cu003 extends JFrame {
 		
 		nombre = new JTextField();
 		nombre.setBounds(150, 149, 172, 20);
+		nombre.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				char c = arg0.getKeyChar();
+				if(Character.isLowerCase(c)){
+					String cad = (""+c).toUpperCase();
+					c=cad.charAt(0);
+					arg0.setKeyChar(c);
+				}
+			}
+		});
 		contentPane.add(nombre);
 		nombre.setColumns(10);
 		

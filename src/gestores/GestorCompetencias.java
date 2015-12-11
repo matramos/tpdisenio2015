@@ -197,4 +197,10 @@ public static InfoCompetenciaDTO getInfoCompetencia(long id_competencia) {
 	
 	return info;
 }
+
+public static boolean validarNombre(String text) {
+	boolean retorno=false;
+	retorno = CompetenciaDAO.validarNombre(text);
+	return retorno;
+}
 }
