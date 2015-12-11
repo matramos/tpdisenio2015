@@ -107,7 +107,7 @@ public class Cu008 extends JFrame {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				menuprincipal ventana = new menuprincipal(id_usuario);
+				Cu020 ventana = new Cu020(id_competencia, id_usuario);
 				ventana.setVisible(true);
 				dispose();
 			}

@@ -47,9 +47,11 @@ public class GestorFixture{
 		
 		
 		//EN CASO DE TENER UN NUMERO IMPAR DE PARTICIPANTES, CREAMOS ESTE PARTICIPANTE "FANTASMA". VER DESPUES COMO ESTO AFECTA AL cu18 Y cu21
+		boolean flagF = false;
+		Participante fantasma = new Participante("ghost");
 		if (!(participantes.size()%2 == 0)){
-			Participante fantasma = new Participante("ghost"); 
 			participantes.add(fantasma);
+			flagF = true;
 		}
 		
 		for(int r=0; r<(participantes.size()-1);r++){
@@ -72,15 +74,21 @@ public class GestorFixture{
 				if(lugares.get(l).getDisponibilidad() == 0){
 					l++;
 				}
-				Lugar lugarcito = lugares.get(l).getLugar();
-				lugares.get(l).setDisponibilidad(lugares.get(l).getDisponibilidad()-1);
 				
-				Encuentro encuentrito = new Encuentro(participantes.get(e), participantes.get(participantes.size()-e-1), lugarcito);
-				for(int s=0; s < competencia.getCantidad_sets(); s++){
-					Set setito = new Set();
-					encuentrito.addSet(setito);
+				Lugar lugarcito = lugares.get(l).getLugar();
+				
+				if(!participantes.get(e).getNombre().equals("ghost") 
+						&& !participantes.get(participantes.size()-e-1).getNombre().equals("ghost")){
+					
+					lugares.get(l).setDisponibilidad(lugares.get(l).getDisponibilidad()-1);
+					
+					Encuentro encuentrito = new Encuentro(participantes.get(e), participantes.get(participantes.size()-e-1), lugarcito);
+					for(int s=0; s < competencia.getCantidad_sets(); s++){
+						Set setito = new Set();
+						encuentrito.addSet(setito);
+					}
+					rondita.add(encuentrito);
 				}
-				rondita.add(encuentrito);
 			}
 			competencia.addRonda(rondita);
 			
@@ -95,6 +103,11 @@ public class GestorFixture{
 			
 			lugares.clear();
 		}
+		
+		if(flagF){
+			participantes.remove(fantasma);
+		}
+
 	}
 	
 	

@@ -181,7 +181,7 @@ public class Cu003 extends JFrame {
 					scrollPane.setViewportView(table);
 				
 				for(CompetenciaDTO CDTO : listaCompetenciasEncontradas){
-					model.addTest(new TestCU3(CDTO.getNombre(),CDTO.getDeporte().getNombre(),""+CDTO.getModalidad().getId_modalidad()));
+					model.addTest(new TestCU3(CDTO.getNombre(),CDTO.getDeporte().getNombre(),""+CDTO.getModalidad().getNombre()));
 				}
 				}
 			}

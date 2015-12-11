@@ -112,10 +112,19 @@ public static long agregarParticipante(ParticipanteDTO participanteDTO,long id_c
 	participante.ParticipanteDTO(participanteDTO);
 	
 	competencia.agregarParticipante(participante);
+	System.out.println(competencia.getEstado().getNombre());
+	if(competencia.getEstado().getNombre().equals("planificada")){
+		System.out.println("borrando fixture");
+		competencia.borrarFixture();
+	}
+	
+	
 	Estado estado = new Estado();
 	estado.setId(1);
 	estado.setNombre("creada");
 	competencia.setEstado(estado);
+	
+	
 	
 	
 	res = CompetenciaDAO.agregarCompetencia(competencia);
@@ -137,7 +146,9 @@ public static ListaParticipantesDTO mostrarTabla(CompetenciaDTO competencia2) {
 
 public static void generarFixture(long id_competencia) {
 	competencia = buscarCompetencia(id_competencia);
+	System.out.println(competencia.getEstado().getNombre());
 	if(competencia.getEstado().getNombre().equals("planificada")){
+		System.out.println("borrando fixture");
 		competencia.borrarFixture();
 		CompetenciaDAO.actualizarCompetencia(competencia);
 	}
