@@ -1,26 +1,27 @@
 package DTO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import capanegocios.Competencia;
 import capanegocios.Lugar;
-import capanegocios.Participante;
 import capanegocios.SeRealizaEn;
 
 public class LugarDTO {
 	private long id;
 	private String nombre;
 	private String descripcion;
-	private List<SeRealizaEnDTO> serealizaen;
-	private List<CompetenciaDTO> competencias;
+	private List<SeRealizaEnDTO> serealizaen = new ArrayList<SeRealizaEnDTO>();
+	private List<CompetenciaDTO> competencias = new ArrayList<CompetenciaDTO>();
 	
 	public LugarDTO(Lugar lugar){
 		this.id=lugar.getId();
 		this.descripcion=lugar.getDescripcion();
-		for(SeRealizaEn realiza : lugar.getSerealizaen()){
+		this.nombre = lugar.getNombre();
+		/*for(SeRealizaEn realiza : lugar.getSerealizaen()){
 			SeRealizaEnDTO realizaDTO = new SeRealizaEnDTO(realiza);
 			this.serealizaen.add(realizaDTO);
-		}
+		}*/
 		for(Competencia comp : lugar.getCompetencias()){
 			CompetenciaDTO compDTO = new CompetenciaDTO(comp);
 			this.competencias.add(compDTO);

@@ -1,7 +1,7 @@
 package DTO;
 
+import java.util.ArrayList;
 import java.util.List;
-import capanegocios.Competencia;
 import capanegocios.Encuentro;
 import capanegocios.Ronda;
 
@@ -10,7 +10,7 @@ public class RondaDTO {
 	private int numeroRonda;
 	private boolean finalizado;
 	private boolean comenzada;
-	private List<EncuentroDTO> encuentros;
+	private List<EncuentroDTO> encuentros = new ArrayList<EncuentroDTO>();
 	
 	public RondaDTO(Ronda ronda){
 		this.id_ronda=ronda.getId_ronda();

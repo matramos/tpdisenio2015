@@ -28,10 +28,10 @@
 	<one-to-many class="capanegocios.RegistroEncuentro"/>
 </list>
 
-<!-- <many-to-one name="lugar" class="capanegocios.Lugar" >
+<many-to-one name="lugar" class="capanegocios.Lugar" >
 	<column name="id_lugar" not-null="true"/>
 </many-to-one>
- -->
+
 <many-to-one name="ganador" class="capanegocios.Participante" >
 	<column name="id_ganador" not-null="false"/>
 </many-to-one>

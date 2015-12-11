@@ -39,10 +39,13 @@ public class EncuentroDTO {
 		this.resultadoReg=encuentro.isResultadoReg();
 		this.orden=encuentro.getOrden();
 		this.fecha=encuentro.getFecha();
-		this.ganador=new ParticipanteDTO(encuentro.getGanador());
+		
+		if(encuentro.getGanador()==null) this.ganador=null;
+		else this.ganador=new ParticipanteDTO(encuentro.getGanador());
+		
 		this.jugador1=new ParticipanteDTO(encuentro.getJugador1());
 		this.jugador2=new ParticipanteDTO(encuentro.getJugador2());
-		//this.lugar=new LugarDTO(encuentro.getLugar());
+		this.lugar=new LugarDTO(encuentro.getLugar());
 		this.puntajep1=encuentro.getPuntajep1();
 		this.puntajep2=encuentro.getPuntajep2();
 		this.estadop1=encuentro.isEstadop1();

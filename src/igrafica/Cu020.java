@@ -22,7 +22,9 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
 import DTO.CompetenciaDTO;
+import DTO.EncuentroDTO;
 import DTO.ParticipanteDTO;
+import DTO.RondaDTO;
 import gestores.GestorCompetencias;
 
 public class Cu020 extends JFrame {
@@ -53,7 +55,6 @@ public class Cu020 extends JFrame {
 	public Cu020(final long id_competencia, final long id_usuario) {
 		//BUSCAMOS LA COMPETENCIA
 		compe = GestorCompetencias.getCompetencia(id_competencia);
-		System.out.println(compe.getEstado().getNombre());
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
@@ -139,17 +140,13 @@ public class Cu020 extends JFrame {
 		scrollPane.setBounds(420, 348, 314, 143);
 		contentPane.add(scrollPane);
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-			},
-			new String[] {
-					"Participante 1","Participante 2","Lugar"   
-			}
-		));
+		DefaultTableModel tableModel2 = new DefaultTableModel(new String [] {"Participante 1","Participante 2","Lugar"},0);
+		table = new JTable(tableModel2);
+		RondaDTO rondaActual = compe.rondaActual();
+		for (EncuentroDTO e : rondaActual.getEncuentros() ){
+			Object[] obj2 = {e.getJugador1().getNombre(),e.getJugador2().getNombre(),e.getLugar().getNombre()};
+			tableModel2.addRow(obj2);
+		}
 		scrollPane.setViewportView(table);
 		
 		JButton btnCancelar_1 = new JButton("Cancelar");

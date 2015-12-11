@@ -5,8 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import capanegocios.Competencia;
-import capanegocios.FormaPuntuacion;
-import capanegocios.Lugar;
 import capanegocios.Participante;
 import capanegocios.Ronda;
 
@@ -29,14 +27,14 @@ public class CompetenciaDTO {
 	private EstadoDTO estado;
 	private int resultado_final;
 	private List<ParticipanteDTO> participantes = new ArrayList<ParticipanteDTO>();
-	private List<RondaDTO> rondas;
+	private List<RondaDTO> rondas = new ArrayList<RondaDTO>();
 	private List<DisponibilidadDTO> lugares = new ArrayList<DisponibilidadDTO>();
 	
 	
 	public CompetenciaDTO(Competencia comp) {
 		this.id_competencia = comp.getId_competencia();
 		this.nombre = comp.getNombre();
-		List<Participante> listaParticipantes = comp.getParticipantes();
+		
 		
 		for(Participante part : comp.getParticipantes()){
 			ParticipanteDTO partDTO = new ParticipanteDTO(part);
@@ -45,6 +43,10 @@ public class CompetenciaDTO {
 		this.deporte = new DeporteDTO(comp.getDeporte());
 		this.modalidad=new ModalidadDTO(comp.getModalidad());
 		this.estado = new EstadoDTO(comp.getEstado());
+		for(Ronda rond : comp.getRondas()){
+			RondaDTO ronDTO = new RondaDTO(rond);
+			this.rondas.add(ronDTO);
+		}
 	}
 	
 	public CompetenciaDTO() {
@@ -175,6 +177,14 @@ public class CompetenciaDTO {
 
 	public void setLugares(List<DisponibilidadDTO> lugares) {
 		this.lugares = lugares;
+	}
+
+	public RondaDTO rondaActual() {
+		int r = 0;
+		while(rondas.get(r).isFinalizado()){
+			r++;
+		}
+		return rondas.get(r);
 	}
 	
 }
