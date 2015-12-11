@@ -247,34 +247,28 @@ public class CompetenciaDAO {
 		
 		tx.commit();
 		
+			}
+
+	public static boolean validarNombre(String text) {
+		boolean retorno = false;
+		Transaction tx = CrearSesion.session.beginTransaction();
+		//Creo la consulta
+		Query query = CrearSesion.session.createQuery("from Competencia s where s.nombre=?");
+		query.setParameter(0, text);
+		//Hago la consulta
+		Competencia competencia= new Competencia();
+		competencia = (Competencia) query.uniqueResult();
 		
-		/*// METODO 1 - ERROR EN tx.commit();
-		/*Transaction tx = CrearSesion.session.beginTransaction();
-		CrearSesion.session.update(competencia);
 		tx.commit();
 		
-		/* METODO 2 - ERROR EN tx.commit();
-		Transaction tx = CrearSesion.session.beginTransaction();
-		Competencia nuevacomp = (Competencia) CrearSesion.session.get(Competencia.class,competencia.getId_competencia());
-		CrearSesion.session.update(nuevacomp);
-		tx.commit();
+		if(competencia == null)
+			retorno = true;
+		else
+			retorno = false;
+		/*session.close();
+		factory.close();*/
+		//System.out.println(competencia.getNombre()); al participante le cargas los puntos y todo eso?si, aca
 		
-		
-		// Session session = factory.openSession();
-		//METODO 3
-      //Transaction tx = null;
-		Transaction tx = CrearSesion.session.beginTransaction();
-      try{
-         tx = CrearSesion.session.beginTransaction();
-         Competencia nuevacomp = (Competencia) CrearSesion.session.get(Competencia.class, competencia.getId_competencia()); 
-		 //CrearSesion.session.merge(nuevacomp); 
-		 CrearSesion.session.update(nuevacomp);
-         tx.commit();
-      }catch (HibernateException e) {
-         if (tx!=null) tx.rollback();
-         e.printStackTrace(); 
-      }finally {
-         CrearSesion.session.close(); 
-      }*/
+		return retorno;
 	}
 }

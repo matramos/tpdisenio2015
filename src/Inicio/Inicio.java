@@ -39,11 +39,13 @@ public class Inicio {
 	CrearSesion.empezarSesion();
 
 	
+
 	long id_competencia = 1;
 	long id_usuario = 1;
-	long id_encuentro = 1;
+
 	//Cu020 cu = new Cu020(id_competencia,id_usuario);
 	menuprincipal cu = new menuprincipal(id_usuario);
+
 	//cu.main(null);
 	cu.setVisible(true);
 	//CrearSesion.terminarSesion();en que momento se le carga el atributo puntaje?
