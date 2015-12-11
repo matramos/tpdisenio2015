@@ -11,7 +11,16 @@ public class InfoCompetenciaDTO {
 	private int puntos_empate;
 	private int puntos_ganador;
 	private int puntos_presentarse;
+	private int resultado_final;
 	
+	
+	
+	public int getResultado_final() {
+		return resultado_final;
+	}
+	public void setResultado_final(int resultado_final) {
+		this.resultado_final = resultado_final;
+	}
 	public ModalidadDTO getModalidad() {
 		return modalidad;
 	}

@@ -621,11 +621,11 @@ public class Cu018 extends JFrame {
 							ParticipanteDTO x = encuentro.getJugador1();
 							ParticipanteDTO y = encuentro.getJugador2();
 							x.setPartidosPerdidos((x.getPartidosPerdidos()+1));
-							x.setTantosCont(x.getTantosCont()+3);
-							x.setTantosDif(x.getTantosDif()-3);
+							x.setTantosCont(x.getTantosCont()+informacion.getResultado_final());
+							x.setTantosDif(x.getTantosDif()-informacion.getResultado_final());
 							y.setPartidosGanados(y.getPartidosGanados()+1);
-							y.setTantosFav(y.getTantosFav()+3);
-							y.setTantosDif(y.getTantosDif()+3);
+							y.setTantosFav(y.getTantosFav()+informacion.getResultado_final());
+							y.setTantosDif(y.getTantosDif()+informacion.getResultado_final());
 							y.setPuntaje(y.getPuntaje()+informacion.getPuntos_presentarse()+informacion.getPuntos_ganador());
 							encuentro.setJugador1(x);
 							encuentro.setJugador2(y);
@@ -638,11 +638,11 @@ public class Cu018 extends JFrame {
 							ParticipanteDTO x = encuentro.getJugador1();
 							ParticipanteDTO y = encuentro.getJugador2();
 							y.setPartidosPerdidos((x.getPartidosPerdidos()+1));
-							y.setTantosCont(x.getTantosCont()+3);
-							y.setTantosDif(x.getTantosDif()-3);
+							y.setTantosCont(x.getTantosCont()+informacion.getResultado_final());
+							y.setTantosDif(x.getTantosDif()-informacion.getResultado_final());
 							x.setPartidosGanados(y.getPartidosGanados()+1);
-							x.setTantosFav(y.getTantosFav()+3);
-							x.setTantosDif(y.getTantosDif()+3);
+							x.setTantosFav(y.getTantosFav()+informacion.getResultado_final());
+							x.setTantosDif(y.getTantosDif()+informacion.getResultado_final());
 							x.setPuntaje(y.getPuntaje()+informacion.getPuntos_presentarse()+informacion.getPuntos_ganador());
 							encuentro.setJugador1(x);
 							encuentro.setJugador2(y);
@@ -675,6 +675,10 @@ public class Cu018 extends JFrame {
 							ParticipanteDTO x = encuentro.getJugador1();
 							ParticipanteDTO y = encuentro.getJugador2();
 							
+							encuentro.setPuntajep1(puntajeP1);
+							encuentro.setPuntajep2(puntajeP2);
+							encuentro.getSets().get(0).setPuntajep1(puntajeP1);
+							encuentro.getSets().get(0).setPuntajep2(puntajeP2);
 							if(informacion.isPermite_empates() && puntajeP1==puntajeP2){
 								JOptionPane.showMessageDialog(null, "La competencia no permite empates en los resultados");
 								Cu018 ventana = new Cu018(id_comp,id_ron,id_encu);
@@ -683,45 +687,44 @@ public class Cu018 extends JFrame {
 							}
 							else{
 								if(puntajeP1 > puntajeP2){
-									x.setTantosFav(x.getTantosFav()+puntajeP1);
-									x.setTantosCont(x.getTantosCont()+puntajeP2);
-									x.setTantosDif(x.getTantosDif()+puntajeP1-puntajeP2);
-									x.setPartidosGanados(x.getPartidosGanados()+1);
-									x.setPuntaje(x.getPuntaje()+informacion.getPuntos_ganador()+informacion.getPuntos_presentarse());
-									
-									y.setTantosFav(y.getTantosFav()+puntajeP2);
-									y.setTantosCont(y.getTantosCont()+puntajeP1);
-									y.setTantosDif(y.getTantosDif()+puntajeP2-puntajeP1);
-									y.setPartidosPerdidos(y.getPartidosPerdidos()+1);
-									y.setPuntaje(y.getPuntaje()+informacion.getPuntos_presentarse());
+									encuentro.getJugador1().setTantosFav(x.getTantosFav()+puntajeP1);
+									encuentro.getJugador1().setTantosCont(x.getTantosCont()+puntajeP2);
+									encuentro.getJugador1().setTantosDif(x.getTantosDif()+puntajeP1-puntajeP2);
+									encuentro.getJugador1().setPartidosGanados(x.getPartidosGanados()+1);
+									encuentro.getJugador1().setPuntaje(encuentro.getJugador1().getPuntaje()+informacion.getPuntos_ganador()+informacion.getPuntos_presentarse());
+									encuentro.getJugador2().setTantosFav(y.getTantosFav()+puntajeP2);
+									encuentro.getJugador2().setTantosCont(y.getTantosCont()+puntajeP1);
+									encuentro.getJugador2().setTantosDif(y.getTantosDif()+puntajeP2-puntajeP1);
+									encuentro.getJugador2().setPartidosPerdidos(y.getPartidosPerdidos()+1);
+									encuentro.getJugador2().setPuntaje(y.getPuntaje()+informacion.getPuntos_presentarse());
 									encuentro.setGanador(encuentro.getJugador1());
 								}
 								else if (puntajeP2 > puntajeP1){
-									y.setTantosFav(y.getTantosFav()+puntajeP2);
-									y.setTantosCont(y.getTantosCont()+puntajeP1);
-									y.setTantosDif(y.getTantosDif()+puntajeP2-puntajeP1);
-									y.setPartidosGanados(y.getPartidosGanados()+1);
-									y.setPuntaje(y.getPuntaje()+informacion.getPuntos_ganador()+informacion.getPuntos_presentarse());
+									encuentro.getJugador2().setTantosFav(y.getTantosFav()+puntajeP2);
+									encuentro.getJugador2().setTantosCont(y.getTantosCont()+puntajeP1);
+									encuentro.getJugador2().setTantosDif(y.getTantosDif()+puntajeP2-puntajeP1);
+									encuentro.getJugador2().setPartidosGanados(y.getPartidosGanados()+1);
+									encuentro.getJugador2().setPuntaje(y.getPuntaje()+informacion.getPuntos_ganador()+informacion.getPuntos_presentarse());
 									
-									x.setTantosFav(x.getTantosFav()+puntajeP1);
-									x.setTantosCont(x.getTantosCont()+puntajeP2);
-									x.setTantosDif(x.getTantosDif()+puntajeP1-puntajeP2);
-									x.setPartidosPerdidos(x.getPartidosPerdidos()+1);
-									x.setPuntaje(x.getPuntaje()+informacion.getPuntos_presentarse());
+									encuentro.getJugador1().setTantosFav(x.getTantosFav()+puntajeP1);
+									encuentro.getJugador1().setTantosCont(x.getTantosCont()+puntajeP2);
+									encuentro.getJugador1().setTantosDif(x.getTantosDif()+puntajeP1-puntajeP2);
+									encuentro.getJugador1().setPartidosPerdidos(x.getPartidosPerdidos()+1);
+									encuentro.getJugador1().setPuntaje(x.getPuntaje()+informacion.getPuntos_presentarse());
 									encuentro.setGanador(encuentro.getJugador2());
 								}
 								else{
-									y.setTantosFav(y.getTantosFav()+puntajeP2);
-									y.setTantosCont(y.getTantosCont()+puntajeP1);
-									y.setTantosDif(y.getTantosDif()+puntajeP2-puntajeP1);
-									y.setPartidosEmpatados(y.getPartidosEmpatados()+1);
-									y.setPuntaje(y.getPuntaje()+informacion.getPuntos_empate()+informacion.getPuntos_presentarse());
+									encuentro.getJugador2().setTantosFav(y.getTantosFav()+puntajeP2);
+									encuentro.getJugador2().setTantosCont(y.getTantosCont()+puntajeP1);
+									encuentro.getJugador2().setTantosDif(y.getTantosDif()+puntajeP2-puntajeP1);
+									encuentro.getJugador2().setPartidosEmpatados(y.getPartidosEmpatados()+1);
+									encuentro.getJugador2().setPuntaje(y.getPuntaje()+informacion.getPuntos_empate()+informacion.getPuntos_presentarse());
 									
-									x.setTantosFav(x.getTantosFav()+puntajeP1);
-									x.setTantosCont(x.getTantosCont()+puntajeP2);
-									x.setTantosDif(x.getTantosDif()+puntajeP1-puntajeP2);
-									x.setPartidosEmpatados(x.getPartidosEmpatados()+1);
-									x.setPuntaje(x.getPuntaje()+informacion.getPuntos_presentarse()+informacion.getPuntos_empate());
+									encuentro.getJugador1().setTantosFav(x.getTantosFav()+puntajeP1);
+									encuentro.getJugador1().setTantosCont(x.getTantosCont()+puntajeP2);
+									encuentro.getJugador1().setTantosDif(x.getTantosDif()+puntajeP1-puntajeP2);
+									encuentro.getJugador1().setPartidosEmpatados(x.getPartidosEmpatados()+1);
+									encuentro.getJugador1().setPuntaje(x.getPuntaje()+informacion.getPuntos_presentarse()+informacion.getPuntos_empate());
 								}
 							}						
 						}
@@ -733,12 +736,19 @@ public class Cu018 extends JFrame {
 							int setGanadosP2=0;
 							int tantosFavorP1=0;
 							int tantosFavorP2=0;
+							int a=0;
 							boolean hayEmpate=false;
 							
 							for(int i=0 ; i<9 ; i++)
 								if(puntajeP1[i]==puntajeP2[i])
 									hayEmpate=true;
 							
+							for(SetDTO s: encuentro.getSets()){
+								s.setPuntajep1(puntajeP1[a]);
+								s.setPuntajep2(puntajeP2[a]);
+								a++;
+								
+							}
 							if(hayEmpate){
 								JOptionPane.showMessageDialog(null, "No se permiten empates en los Sets");
 								Cu018 ventana = new Cu018(id_comp,id_ron,id_encu);
@@ -755,57 +765,59 @@ public class Cu018 extends JFrame {
 										setGanadosP2++;
 								}
 								if(setGanadosP1 > setGanadosP2){
-									x.setTantosFav(x.getTantosFav()+tantosFavorP1);
-									x.setTantosCont(x.getTantosCont()+tantosFavorP2);
-									x.setTantosDif(x.getTantosDif()+tantosFavorP1-tantosFavorP2);
-									x.setPartidosGanados(x.getPartidosGanados()+1);
-									x.setPuntaje(x.getPuntaje()+informacion.getPuntos_ganador()+informacion.getPuntos_presentarse());
+									encuentro.getJugador1().setTantosFav(x.getTantosFav()+tantosFavorP1);
+									encuentro.getJugador1().setTantosCont(x.getTantosCont()+tantosFavorP2);
+									encuentro.getJugador1().setTantosDif(x.getTantosDif()+tantosFavorP1-tantosFavorP2);
+									encuentro.getJugador1().setPartidosGanados(x.getPartidosGanados()+1);
+									encuentro.getJugador1().setPuntaje(x.getPuntaje()+informacion.getPuntos_ganador()+informacion.getPuntos_presentarse());
 									
-									y.setTantosFav(y.getTantosFav()+tantosFavorP2);
-									y.setTantosCont(y.getTantosCont()+tantosFavorP1);
-									y.setTantosDif(y.getTantosDif()+tantosFavorP2-tantosFavorP1);
-									y.setPartidosPerdidos(y.getPartidosPerdidos()+1);
-									y.setPuntaje(y.getPuntaje()+informacion.getPuntos_presentarse());
+									encuentro.getJugador2().setTantosFav(y.getTantosFav()+tantosFavorP2);
+									encuentro.getJugador2().setTantosCont(y.getTantosCont()+tantosFavorP1);
+									encuentro.getJugador2().setTantosDif(y.getTantosDif()+tantosFavorP2-tantosFavorP1);
+									encuentro.getJugador2().setPartidosPerdidos(y.getPartidosPerdidos()+1);
+									encuentro.getJugador2().setPuntaje(y.getPuntaje()+informacion.getPuntos_presentarse());
 									encuentro.setGanador(encuentro.getJugador1());
 								}
 								else if(setGanadosP2 > setGanadosP1){
-									y.setTantosFav(y.getTantosFav()+tantosFavorP2);
-									y.setTantosCont(y.getTantosCont()+tantosFavorP1);
-									y.setTantosDif(y.getTantosDif()+tantosFavorP2-tantosFavorP1);
-									y.setPartidosGanados(y.getPartidosGanados()+1);
-									y.setPuntaje(y.getPuntaje()+informacion.getPuntos_ganador()+informacion.getPuntos_presentarse());
+									encuentro.getJugador2().setTantosFav(y.getTantosFav()+tantosFavorP2);
+									encuentro.getJugador2().setTantosCont(y.getTantosCont()+tantosFavorP1);
+									encuentro.getJugador2().setTantosDif(y.getTantosDif()+tantosFavorP2-tantosFavorP1);
+									encuentro.getJugador2().setPartidosGanados(y.getPartidosGanados()+1);
+									encuentro.getJugador2().setPuntaje(y.getPuntaje()+informacion.getPuntos_ganador()+informacion.getPuntos_presentarse());
 									
-									x.setTantosFav(x.getTantosFav()+tantosFavorP1);
-									x.setTantosCont(x.getTantosCont()+tantosFavorP2);
-									x.setTantosDif(x.getTantosDif()+tantosFavorP1-tantosFavorP2);
-									x.setPartidosPerdidos(x.getPartidosPerdidos()+1);
-									x.setPuntaje(x.getPuntaje()+informacion.getPuntos_presentarse());
+									encuentro.getJugador1().setTantosFav(x.getTantosFav()+tantosFavorP1);
+									encuentro.getJugador1().setTantosCont(x.getTantosCont()+tantosFavorP2);
+									encuentro.getJugador1().setTantosDif(x.getTantosDif()+tantosFavorP1-tantosFavorP2);
+									encuentro.getJugador1().setPartidosPerdidos(x.getPartidosPerdidos()+1);
+									encuentro.getJugador1().setPuntaje(x.getPuntaje()+informacion.getPuntos_presentarse());
 									encuentro.setGanador(encuentro.getJugador2());
 								}
 								else{
-									y.setTantosFav(y.getTantosFav()+tantosFavorP2);
-									y.setTantosCont(y.getTantosCont()+tantosFavorP1);
-									y.setTantosDif(y.getTantosDif()+tantosFavorP2-tantosFavorP1);
-									y.setPartidosEmpatados(y.getPartidosEmpatados()+1);
-									y.setPuntaje(y.getPuntaje()+informacion.getPuntos_empate()+informacion.getPuntos_presentarse());
+									encuentro.getJugador2().setTantosFav(y.getTantosFav()+tantosFavorP2);
+									encuentro.getJugador2().setTantosCont(y.getTantosCont()+tantosFavorP1);
+									encuentro.getJugador2().setTantosDif(y.getTantosDif()+tantosFavorP2-tantosFavorP1);
+									encuentro.getJugador2().setPartidosEmpatados(y.getPartidosEmpatados()+1);
+									encuentro.getJugador2().setPuntaje(y.getPuntaje()+informacion.getPuntos_empate()+informacion.getPuntos_presentarse());
 									
-									x.setTantosFav(x.getTantosFav()+tantosFavorP1);
-									x.setTantosCont(x.getTantosCont()+tantosFavorP2);
-									x.setTantosDif(x.getTantosDif()+tantosFavorP1-tantosFavorP2);
-									x.setPartidosEmpatados(x.getPartidosEmpatados()+1);
-									x.setPuntaje(x.getPuntaje()+informacion.getPuntos_presentarse()+informacion.getPuntos_empate());
+									encuentro.getJugador1().setTantosFav(x.getTantosFav()+tantosFavorP1);
+									encuentro.getJugador1().setTantosCont(x.getTantosCont()+tantosFavorP2);
+									encuentro.getJugador1().setTantosDif(x.getTantosDif()+tantosFavorP1-tantosFavorP2);
+									encuentro.getJugador1().setPartidosEmpatados(x.getPartidosEmpatados()+1);
+									encuentro.getJugador1().setPuntaje(x.getPuntaje()+informacion.getPuntos_presentarse()+informacion.getPuntos_empate());
 								}
 							}
 						}
 					}
 						//voy a gestionar fixture para cargar el resultado de los datos actualizados
-						/*secargo=GestorFixture.cargarResultado(id_comp,id_ron,id_encu,encuentro);
 						
-						if(secargo==true){
+						GestorFixture.cargarResultado(id_comp,id_ron,id_encu,encuentro);
+						
+						
+						/*if(secargo==true){
 							JOptionPane.showMessageDialog(null, "Se cargo con exito");
-							Cu008 ventana = new Cu008(idGenerado,id_usuario);
-							ventana.setVisible(true);
-							dispose();
+							//Cu008 ventana = new Cu008(idGenerado,id_usuario);
+							//ventana.setVisible(true);
+							//dispose();
 						}*/
 			
 			}

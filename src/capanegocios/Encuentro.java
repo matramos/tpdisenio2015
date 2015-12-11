@@ -16,7 +16,7 @@ public class Encuentro {
 	private Participante ganador;
 	private Participante jugador1;
 	private Participante jugador2;
-	private Lugar lugar;
+	//private Lugar lugar;
 	private int puntajep1;
 	private int puntajep2;
 	private boolean estadop1;
@@ -32,7 +32,7 @@ public class Encuentro {
 	public Encuentro(Participante participante1, Participante participante2, Lugar lugarcito) {
 		this.jugador1 = participante1;
 		this.jugador2 = participante2;
-		this.lugar = lugarcito;
+		//this.lugar = lugarcito;
 	}
 	
 	public Encuentro(){
@@ -49,7 +49,7 @@ public class Encuentro {
 		this.ganador=new Participante(encuentro.getGanador());
 		this.jugador1=new Participante(encuentro.getJugador1());
 		this.jugador2=new Participante(encuentro.getJugador2());
-		this.lugar=new Lugar(encuentro.getLugar());
+		//this.lugar=new Lugar(encuentro.getLugar());
 		this.puntajep1=encuentro.getPuntajep1();
 		this.puntajep2=encuentro.getPuntajep2();
 		this.estadop1=encuentro.isEstadop1();
@@ -128,12 +128,12 @@ public class Encuentro {
 	public void setJugador2(Participante jugador2) {
 		this.jugador2 = jugador2;
 	}
-	public Lugar getLugar() {
-		return lugar;
-	}
-	public void setLugar(Lugar lugar) {
-		this.lugar = lugar;
-	}
+	//public Lugar getLugar() {
+	//	return lugar;
+	//}
+	//public void setLugar(Lugar lugar) {
+	//	this.lugar = lugar;
+	//}
 
 	public int getPuntajep1() {
 		return puntajep1;
@@ -209,9 +209,27 @@ public class Encuentro {
 		this.resultadoReg=encuentro.isResultadoReg();
 		this.orden=encuentro.getOrden();
 		this.fecha=encuentro.getFecha();
-		this.ganador=new Participante(encuentro.getGanador());
-		this.jugador1=new Participante(encuentro.getJugador1());
-		this.jugador2=new Participante(encuentro.getJugador2());
+		
+		this.jugador1.setPuntaje(encuentro.getJugador1().getPuntaje());
+		this.jugador1.setPartidosEmpatados(encuentro.getJugador1().getPartidosEmpatados());
+		this.jugador1.setPartidosGanados(encuentro.getJugador1().getPartidosGanados());
+		this.jugador1.setPartidosPerdidos(encuentro.getJugador1().getPartidosPerdidos());
+		this.jugador1.setTantosDif(encuentro.getJugador1().getTantosDif());
+		this.jugador1.setTantosFav(encuentro.getJugador1().getTantosFav());
+		this.jugador1.setTantosCont(encuentro.getJugador1().getTantosCont());
+		
+		this.jugador2.setPuntaje(encuentro.getJugador2().getPuntaje());
+		this.jugador2.setPartidosEmpatados(encuentro.getJugador2().getPartidosEmpatados());
+		this.jugador2.setPartidosGanados(encuentro.getJugador2().getPartidosGanados());
+		this.jugador2.setPartidosPerdidos(encuentro.getJugador2().getPartidosPerdidos());
+		this.jugador2.setTantosDif(encuentro.getJugador2().getTantosDif());
+		this.jugador2.setTantosFav(encuentro.getJugador2().getTantosFav());
+		this.jugador2.setTantosCont(encuentro.getJugador2().getTantosCont());
+		
+		if(encuentro.getGanador().getNombre().equals(jugador1.getNombre()))
+			this.ganador=jugador1;
+		else
+			this.ganador = jugador2;
 		//this.lugar=new Lugar(encuentro.getLugar());
 		this.puntajep1=encuentro.getPuntajep1();
 		this.puntajep2=encuentro.getPuntajep2();
@@ -225,11 +243,18 @@ public class Encuentro {
 			Encuentro encu = new Encuentro(encuDTO);
 			rperdedores.add(encu);
 		}*/
-		sets = new ArrayList<>();
+		/*sets = new ArrayList<>();
 		for(SetDTO setDTO : encuentro.getSets()){
 			Set set = new Set(setDTO);
 			sets.add(set);
+		}*/
+		
+		for(int i = 0 ; i<sets.size() ; i++){
+			sets.get(i).setPuntajep1(encuentro.getSets().get(i).getPuntajep1());
+			sets.get(i).setPuntajep2(encuentro.getSets().get(i).getPuntajep2());
+			
 		}
+		
 		//this.encuentro1=new Encuentro(encuentro.getEncuentro1());
 		//this.encuentro2=new Encuentro(encuentro.getEncuentro2());
 		this.estado_encuentro=encuentro.isEstado_encuentro();

@@ -98,14 +98,16 @@ public class GestorFixture{
 		Competencia competencia;
 		Ronda ronda;
 		Encuentro encuentro;
-		System.out.println("ENTRO A GESTIONAR RESULTADO");
+		
 		competencia= GestorCompetencias.buscarCompetencia(id_competencia);
-		System.out.println(competencia.getNombre());
+		
 		ronda = competencia.getRonda(id_ronda);
+		
 		encuentro = ronda.getEncuentro(id_encuentro);
 		//participante1=encuentro.getJugador1();
 		//participante2=encuentro.getJugador2();
 		//
+		
 		encuentroDTO=new EncuentroDTO(encuentro);
 		//int cantSets=competencia.getCantidad_sets();	
 		//System.out.println(competencia.getCantidad_sets());
@@ -169,44 +171,13 @@ public class GestorFixture{
 			}
 			//actualizo la competencia con el nuevo encuentro actualizado
 			
-			System.out.println("TODOS LOS DATOS PARA EL CAMPEON DE LOS CAMPEONES, PARA TROV");
-			System.out.println("LOS ID INVOLUCRADOS DE COMPETENCIA , RONDA , ENCUENTRO");
-			System.out.println(competencia.getId_competencia());
-			System.out.println(ronda.getId_ronda());
-			System.out.println(encuentro2.getId_encuentro());
-			System.out.println("TODOS LOS SET DEL ENCUENTRO SELECCIONADO, CON SU ID Y PUNTAJES DE LOS PARTICIPANTES");
-			for(Set set : encuentro2.getSets()){
-				System.out.println(set.getId_set());
-				System.out.println(set.getPuntajep1());
-				System.out.println(set.getPuntajep2());
-			}
-			System.out.println("REGISTRO DEL ENCUENTRO GESTIONADO");
-			System.out.println("POR DESGRACIA NO PUEDO AGREGAR EL REGISTRO A LA LISTA registros DEL ENCUENTRO POR ESO SE IMPRIME LO VIEJO PERO ANDAN LAS ASIGANCIONES");
-			System.out.println(registroEncuentro.getId_registro());
-			System.out.println(registroEncuentro.getEncuentro().getId_encuentro());
-			System.out.println(registroEncuentro.getId_registro());
-			System.out.println(registroEncuentro.getPuntajep1());
-			System.out.println(registroEncuentro.getPuntajep2());
-			System.out.println(registroEncuentro.isEstado_participante1());
-			System.out.println(registroEncuentro.isEstado_participante2());
-			System.out.println("REGISTRO DE SETS DEL REGISTRO ENCUENTRO");
-			for(RegistroSet regSet : registroEncuentro.getRegistroSets()){
-				System.out.println(regSet.getId_registro_set());
-				System.out.println(regSet.getPuntajeP1());
-				System.out.println(regSet.getPuntajeP2());
-			}
+			
 			
 			
 			competencia.ActualizarEncuentro(id_ronda,encuentro2);
 			competencia.actualizarParticipantes(encuentro2.getJugador1(),encuentro2.getJugador2());
-			System.out.println("Nombre competencia "+competencia.getNombre());
-			System.out.println("Puntaje p1: "+competencia.getParticipantes().get(1).getPuntaje());
-			System.out.println("Puntaje p2: "+competencia.getParticipantes().get(2).getPuntaje());
-			System.out.println("Ronda numero "+competencia.getRondas().get(0).getNumeroRonda());
-			System.out.println(competencia.getRondas().get(0).getEncuentros().get(0).getJugador1().getNombre()+" vs "+competencia.getRondas().get(0).getEncuentros().get(0).getJugador2().getNombre());
-			System.out.println("Resultado: "+competencia.getRondas().get(0).getEncuentros().get(0).getPuntajep1()+"-"+competencia.getRondas().get(0).getEncuentros().get(0).getPuntajep2());
 			
-			//GestorCompetencias.actualizar(competencia);
+			GestorCompetencias.actualizar(competencia);
 			
 			return true;
 		}

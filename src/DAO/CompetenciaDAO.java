@@ -240,16 +240,24 @@ public class CompetenciaDAO {
 
 	public static void actualizarCompetencia(Competencia competencia) {
 		
-		// METODO 1 - ERROR EN tx.commit();
+		
+		
+		Transaction tx = CrearSesion.session.beginTransaction();
+		CrearSesion.session.merge(competencia);
+		
+		tx.commit();
+		
+		
+		/*// METODO 1 - ERROR EN tx.commit();
 		/*Transaction tx = CrearSesion.session.beginTransaction();
 		CrearSesion.session.update(competencia);
-		tx.commit();*/
+		tx.commit();
 		
 		/* METODO 2 - ERROR EN tx.commit();
 		Transaction tx = CrearSesion.session.beginTransaction();
 		Competencia nuevacomp = (Competencia) CrearSesion.session.get(Competencia.class,competencia.getId_competencia());
 		CrearSesion.session.update(nuevacomp);
-		tx.commit();*/
+		tx.commit();
 		
 		
 		// Session session = factory.openSession();
@@ -260,13 +268,13 @@ public class CompetenciaDAO {
          tx = CrearSesion.session.beginTransaction();
          Competencia nuevacomp = (Competencia) CrearSesion.session.get(Competencia.class, competencia.getId_competencia()); 
 		 //CrearSesion.session.merge(nuevacomp); 
-		 CrearSesion.session.merge(nuevacomp);
+		 CrearSesion.session.update(nuevacomp);
          tx.commit();
       }catch (HibernateException e) {
          if (tx!=null) tx.rollback();
          e.printStackTrace(); 
       }finally {
          CrearSesion.session.close(); 
-      }
+      }*/
 	}
 }
