@@ -213,6 +213,7 @@ public class Cu004 extends JFrame {
 		/*Toda esta parte hay que corregirla despues para que busque los lugares despues de haber elegido el deporte,
 		 o sea, que busque la lista de lugares con un id_deporte en la base de datos, ma�ana lo voy a ver*/
 		deportes = GestorDeportes.getListadoDeportes();
+		
 		disponibilidad = new JTextField();
 		disponibilidad.setBounds(290, 115, 86, 20);
 		contentPane.add(disponibilidad);

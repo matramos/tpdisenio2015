@@ -58,17 +58,10 @@ public class GestorCompetencias {
 			dispo.setLugar(LugarDAO.getLugar(object.getLugar()));
 			competencia.addLugar(dispo);
 		}
-		/*for(DisponibilidadDTO object: competenciaDTO.getDisponibilidades()){
-			Lugar lugar = LugarDAO.getLugar(object.getLugar());
-			Disponibilidad disponibilidad = new Disponibilidad();
-			disponibilidad.setLugar(lugar);
-			disponibilidad.setDisponibilidad(object.getDisponibilidad());
-			competencia.addDisponibilidad(disponibilidad);
-			
-		}*/
+		
 		Estado estado = new Estado();
 		estado.setId(1);
-		estado.setNombre("Creada");
+		estado.setNombre("creada");
 		competencia.setEstado(estado);
 		
 		
@@ -108,8 +101,7 @@ public static CompetenciaDTO getCompetencia(long id_competencia){
 
 public static long agregarParticipante(ParticipanteDTO participanteDTO,long id_competencia){
 	
-	System.out.println(participanteDTO.getId_participante());
-	System.out.println(participanteDTO.getEmail());
+	
 	
 	competencia = CompetenciaDAO.getCompetencia(id_competencia);
 	long res = 0;
@@ -118,9 +110,9 @@ public static long agregarParticipante(ParticipanteDTO participanteDTO,long id_c
 	participante.ParticipanteDTO(participanteDTO);
 	
 	competencia.agregarParticipante(participante);
-	System.out.println(competencia.getEstado().getNombre());
+	
 	if(competencia.getEstado().getNombre().equals("planificada")){
-		System.out.println("borrando fixture");
+	
 		competencia.borrarFixture();
 	}
 	
@@ -213,6 +205,18 @@ public static InfoCompetenciaDTO getInfoCompetencia(long id_competencia) {
 public static boolean validarNombre(String text) {
 	boolean retorno=false;
 	retorno = CompetenciaDAO.validarNombre(text);
+	return retorno;
+}
+
+public static boolean validarMail(String text) {
+	boolean retorno=false;
+	retorno = CompetenciaDAO.validarMail(text);
+	return retorno;
+}
+
+public static boolean validarNombreP(String text) {
+	boolean retorno=false;
+	retorno = CompetenciaDAO.validarNombreP(text);
 	return retorno;
 }
 

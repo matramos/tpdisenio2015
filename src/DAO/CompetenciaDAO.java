@@ -23,6 +23,7 @@ import capanegocios.Competencia;
 import capanegocios.Deporte;
 import capanegocios.FormaPuntuacion;
 import capanegocios.Modalidad;
+import capanegocios.Participante;
 import capanegocios.SeRealizaEn;
 
 public class CompetenciaDAO {
@@ -268,6 +269,46 @@ public class CompetenciaDAO {
 		/*session.close();
 		factory.close();*/
 		//System.out.println(competencia.getNombre()); al participante le cargas los puntos y todo eso?si, aca
+		
+		return retorno;
+	}
+
+	public static boolean validarMail(String text) {
+		boolean retorno = false;
+		Transaction tx = CrearSesion.session.beginTransaction();
+		//Creo la consulta
+		Query query = CrearSesion.session.createQuery("from Participante p where p.email=?");
+		query.setParameter(0, text);
+		//Hago la consulta
+		Participante participante= new Participante();
+		participante = (Participante) query.uniqueResult();
+		
+		tx.commit();
+		
+		if(participante == null)
+			retorno = true;
+		else
+			retorno = false;
+		
+		return retorno;
+	}
+	
+	public static boolean validarNombreP(String text) {
+		boolean retorno = false;
+		Transaction tx = CrearSesion.session.beginTransaction();
+		//Creo la consulta
+		Query query = CrearSesion.session.createQuery("from Participante p where p.nombre=?");
+		query.setParameter(0, text);
+		//Hago la consulta
+		Participante participante= new Participante();
+		participante = (Participante) query.uniqueResult();
+		
+		tx.commit();
+		
+		if(participante == null)
+			retorno = true;
+		else
+			retorno = false;
 		
 		return retorno;
 	}
