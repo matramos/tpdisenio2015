@@ -140,12 +140,14 @@ public class Cu020 extends JFrame {
 		scrollPane.setBounds(420, 348, 314, 143);
 		contentPane.add(scrollPane);
 		
-		DefaultTableModel tableModel2 = new DefaultTableModel(new String [] {"Participante 1","Participante 2","Lugar"},0);
+		DefaultTableModel tableModel2 = new DefaultTableModel(new String [] {"ID Ronda","ID Encuentro", 
+				"Participante 1","Participante 2","Lugar"},0);
 		table = new JTable(tableModel2);
 		if(!compe.getRondas().isEmpty()){
 			RondaDTO rondaActual = compe.rondaActual();
 			for (EncuentroDTO e : rondaActual.getEncuentros() ){
-				Object[] obj2 = {e.getJugador1().getNombre(),e.getJugador2().getNombre(),e.getLugar().getNombre()};
+				Object[] obj2 = {rondaActual.getId_ronda(), e.getId_encuentro(),
+						e.getJugador1().getNombre(),e.getJugador2().getNombre(),e.getLugar().getNombre()};
 				tableModel2.addRow(obj2);
 			}
 		}
