@@ -816,7 +816,7 @@ public class Cu018 extends JFrame {
 							encuentro.setPuntajep2(puntajeP2);
 							encuentro.getSets().get(0).setPuntajep1(puntajeP1);
 							encuentro.getSets().get(0).setPuntajep2(puntajeP2);
-							if(informacion.isPermite_empates() && puntajeP1==puntajeP2){
+							if(!informacion.isPermite_empates() && puntajeP1==puntajeP2){
 								JOptionPane.showMessageDialog(null, "La competencia no permite empates en los resultados");
 								Cu018 ventana = new Cu018(id_comp,id_ron,id_encu,id_usuario);
 								ventana.setVisible(true);
@@ -955,10 +955,12 @@ public class Cu018 extends JFrame {
 					
 				
 						//voy a gestionar fixture para cargar el resultado de los datos actualizados
-						
+							encuentro.setEstadop1(checkPart1.isSelected());
+							encuentro.setEstadop2(checkPart2.isSelected());
+							
 							GestorFixture.cargarResultado(id_comp,id_ron,id_encu,encuentro);		
 							JOptionPane.showMessageDialog(null, "Se cargo con exito");
-							Cu008 ventana = new Cu008(id_comp,1);
+							Cu018 ventana = new Cu018(id_comp,id_ron, id_encu, id_usuario);
 							ventana.setVisible(true);
 							dispose();
 						

@@ -225,11 +225,12 @@ public class Encuentro {
 		this.jugador2.setTantosDif(encuentro.getJugador2().getTantosDif());
 		this.jugador2.setTantosFav(encuentro.getJugador2().getTantosFav());
 		this.jugador2.setTantosCont(encuentro.getJugador2().getTantosCont());
-		
-		if(encuentro.getGanador().getNombre().equals(jugador1.getNombre()))
-			this.ganador=jugador1;
-		else
-			this.ganador = jugador2;
+		if(!(encuentro.getGanador()==null)){
+			if(encuentro.getGanador().getNombre().equals(jugador1.getNombre()))
+				this.ganador=jugador1;
+			else
+				this.ganador = jugador2;
+		}
 		//this.lugar=new Lugar(encuentro.getLugar());
 		this.puntajep1=encuentro.getPuntajep1();
 		this.puntajep2=encuentro.getPuntajep2();
