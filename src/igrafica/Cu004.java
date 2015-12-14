@@ -457,7 +457,7 @@ public class Cu004 extends JFrame {
 		
 		
 		final JLabel lblSeleccioneUnNombre = new JLabel("seleccione un nombre");
-		lblSeleccioneUnNombre.setBounds(104, 93, 179, 14);
+		lblSeleccioneUnNombre.setBounds(103, 93, 179, 14);
 		lblSeleccioneUnNombre.setForeground(Color.red);
 		lblSeleccioneUnNombre.setVisible(false);
 		contentPane.add(lblSeleccioneUnNombre);
@@ -652,7 +652,7 @@ public class Cu004 extends JFrame {
 				dispose();
 			}
 		});
-		btnCancelar.setBounds(581, 537, 89, 23);
+		btnCancelar.setBounds(559, 537, 89, 23);
 		contentPane.add(btnCancelar);
 		
 		JLabel lblDarDeAlta = new JLabel("DAR DE ALTA COMPETENCIA DEPORTIVA");
@@ -668,6 +668,17 @@ public class Cu004 extends JFrame {
 		JLabel lblNewLabel = new JLabel("presentarse contrincante");
 		lblNewLabel.setBounds(394, 329, 166, 14);
 		contentPane.add(lblNewLabel);
+		
+		JButton btnMenuPrincipal = new JButton("Menu Principal");
+		btnMenuPrincipal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				menuprincipal ventana = new menuprincipal (id_usuario);
+				ventana.setVisible(true);
+				dispose();
+			}
+		});
+		btnMenuPrincipal.setBounds(665, 537, 105, 23);
+		contentPane.add(btnMenuPrincipal);
 		
 		
 		

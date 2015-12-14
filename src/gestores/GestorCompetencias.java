@@ -198,6 +198,7 @@ public static InfoCompetenciaDTO getInfoCompetencia(long id_competencia) {
 	info.setPuntos_ganador(competencia.getPuntos_ganador());
 	info.setPuntos_presentarse(competencia.getPuntos_presentarse());
 	info.setResultado_final(competencia.getResultado_final());
+	info.setCantidad_sets(competencia.getCantidad_sets());
 	
 	return info;
 }

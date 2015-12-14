@@ -14,6 +14,7 @@
 <property column="permite_empates" name = "permite_empates"/>
 <property name="resultado_final" column="resultado_np"/>
 <property column="fecha_hora" name ="fecha_hora"/>
+<property column="cantidadsets" name="cantidad_sets"/>
 
 
 

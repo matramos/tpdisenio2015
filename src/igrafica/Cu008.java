@@ -155,6 +155,17 @@ public class Cu008 extends JFrame {
 		
 		lblCompe.setText(competencia.getNombre());
 		
+		JButton btnMenuPrincipal = new JButton("Menu Principal");
+		btnMenuPrincipal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				menuprincipal ventana = new menuprincipal (id_usuario);
+				ventana.setVisible(true);
+				dispose();
+			}
+		});
+		btnMenuPrincipal.setBounds(488, 400, 114, 23);
+		contentPane.add(btnMenuPrincipal);
+		
 		
 	}
 

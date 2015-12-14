@@ -138,7 +138,7 @@ public class GestorFixture{
 		return encuentroDTO;
 	}
 
-	public static boolean cargarResultado(long id_competencia,long id_ronda,long id_encuentro,EncuentroDTO encuentro) {
+	public static void cargarResultado(long id_competencia,long id_ronda,long id_encuentro,EncuentroDTO encuentro) {
 		Competencia competencia;
 		Ronda ronda;
 		Encuentro encuentro2;
@@ -147,6 +147,7 @@ public class GestorFixture{
 		ronda = competencia.getRonda(id_ronda);
 		encuentro2 = ronda.getEncuentro(id_encuentro);
 		modalidad=competencia.getModalidad();
+		
 
 		if(modalidad.isLiga()==true){
 			
@@ -167,7 +168,7 @@ public class GestorFixture{
 			
 			//actualizo el encuentro con el nuevo registro
 			
-			//encuentro2.agregarRegistros(registroEncuentro);
+			encuentro2.agregarRegistros(registroEncuentro);
 			
 			// CONSIDERS DEL DIAGRAMA DEL CASO DE USO
 			//consideracion si la ronda no esta comenzada
@@ -196,15 +197,13 @@ public class GestorFixture{
 			competencia.actualizarParticipantes(encuentro2.getJugador1(),encuentro2.getJugador2());
 			
 			GestorCompetencias.actualizar(competencia);
-			
-			return true;
 		}
 		else{
-			JOptionPane.showMessageDialog(null, "No se puede gestionar el encuentro, la modalidad es Eliminacion Simple o Doble");
-			/*Cu008 ventana = new Cu008(idGenerado,id_usuario);
-			ventana.setVisible(true);*/
-			//dispose();
-			return false;
+			/*JOptionPane.showMessageDialog(null, "No se puede gestionar el encuentro, la modalidad es Eliminacion Simple o Doble");
+			Cu018 ventana = new Cu018(idGenerado,id_usuario);
+			ventana.setVisible(true);
+			dispose();*/
+			
 		}
 		
 	}

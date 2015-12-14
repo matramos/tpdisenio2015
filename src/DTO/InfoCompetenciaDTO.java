@@ -12,6 +12,7 @@ public class InfoCompetenciaDTO {
 	private int puntos_ganador;
 	private int puntos_presentarse;
 	private int resultado_final;
+	private int cantidad_sets;
 	
 	
 	
@@ -63,5 +64,11 @@ public class InfoCompetenciaDTO {
 	}
 	public void setPuntuacion(FormaPuntuacionDTO puntuacion) {
 		this.puntuacion = puntuacion;
+	}
+	public int getCantidad_sets() {
+		return cantidad_sets;
+	}
+	public void setCantidad_sets(int cantidad_sets) {
+		this.cantidad_sets = cantidad_sets;
 	}
 }

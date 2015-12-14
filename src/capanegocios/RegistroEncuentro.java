@@ -21,6 +21,10 @@ public class RegistroEncuentro {
 	int ganador;
 	private boolean empate;
 	
+	public RegistroEncuentro() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public RegistroEncuentro(Encuentro encuentroActualizado) {
 		//this.id_encuentro=encuentroActualizado.getId_encuentro();
 		this.encuentro=encuentroActualizado;

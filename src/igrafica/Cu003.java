@@ -226,9 +226,19 @@ public class Cu003 extends JFrame {
 		btnCancelar.setBounds(340, 522, 89, 23);
 		contentPane.add(btnCancelar);
 		
+		JButton btnMenuPrincipal = new JButton("Menu Principal");
+		btnMenuPrincipal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				menuprincipal ventana = new menuprincipal (id_usuario);
+				ventana.setVisible(true);
+				dispose();
+			}
+		});
+		btnMenuPrincipal.setBounds(519, 522, 105, 23);
+		contentPane.add(btnMenuPrincipal);
+		
 		
 	}
-	
 }
 
 

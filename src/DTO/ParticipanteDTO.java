@@ -28,6 +28,7 @@ public class ParticipanteDTO {
 	
 	
 	public ParticipanteDTO(Participante part) {
+		this.id_participante=part.getId_participante();
 		this.nombre= part.getNombre();
 		this.email= part.getEmail();
 		this.puntaje = part.getPuntaje();

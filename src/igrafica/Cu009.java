@@ -300,7 +300,7 @@ public class Cu009 extends JFrame {
 			}
 			}});
 		
-		btnAceptar.setBounds(400, 511, 89, 23);
+		btnAceptar.setBounds(260, 511, 89, 23);
 		contentPane.add(btnAceptar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -311,11 +311,20 @@ public class Cu009 extends JFrame {
 				dispose();
 			}
 		});
-		btnCancelar.setBounds(566, 511, 89, 23);
+		btnCancelar.setBounds(402, 511, 89, 23);
 		contentPane.add(btnCancelar);
+		
+		JButton btnMenuPrincipal = new JButton("Menu Principal");
+		btnMenuPrincipal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				menuprincipal ventana = new menuprincipal (id_usuario);
+				ventana.setVisible(true);
+				dispose();
+			}
+		});
+		btnMenuPrincipal.setBounds(532, 511, 101, 23);
+		contentPane.add(btnMenuPrincipal);
 		
 		
 		}
-	
-
 }

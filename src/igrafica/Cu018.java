@@ -40,6 +40,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class Cu018 extends JFrame {
 
@@ -82,7 +83,7 @@ public class Cu018 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Cu018 frame = new Cu018(1,1,1);
+					Cu018 frame = new Cu018(1,1,1,1);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -94,10 +95,11 @@ public class Cu018 extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Cu018(long id_competencia,long id_ronda,long id_encuentro) {
+	public Cu018(long id_competencia,long id_ronda,long id_encuentro, final long id_usuario) {
 		
 		//llamar al fixture
 		final EncuentroDTO encuentro=GestorFixture.GestionarResultado(id_competencia,id_ronda,id_encuentro);
+		final EncuentroDTO encuentroAnterior = GestorFixture.GestionarResultado(id_competencia,id_ronda,id_encuentro);
 		final InfoCompetenciaDTO informacion = GestorCompetencias.getInfoCompetencia(id_competencia);
 		final int cantidad=encuentro.getSets().size();
 		final long id_comp = id_competencia;
@@ -339,129 +341,129 @@ public class Cu018 extends JFrame {
 		contentPane.add(checkPart2);
 		
 		JLabel lblSet = new JLabel("Set 1");
-		lblSet.setBounds(289, 124, 46, 14);
+		lblSet.setBounds(281, 146, 46, 14);
 		contentPane.add(lblSet);
 		
 		JLabel lblSet_1 = new JLabel("Set 2");
-		lblSet_1.setBounds(287, 149, 46, 14);
+		lblSet_1.setBounds(279, 171, 46, 14);
 		contentPane.add(lblSet_1);
 		
 		JLabel lblSet_2 = new JLabel("Set 3");
-		lblSet_2.setBounds(289, 177, 46, 14);
+		lblSet_2.setBounds(279, 196, 46, 14);
 		contentPane.add(lblSet_2);
 		
 		JLabel lblSet_3 = new JLabel("Set 4");
-		lblSet_3.setBounds(289, 197, 46, 14);
+		lblSet_3.setBounds(289, 221, 46, 14);
 		contentPane.add(lblSet_3);
 		
 		JLabel lblSet_4 = new JLabel("Set 5");
-		lblSet_4.setBounds(289, 228, 46, 14);
+		lblSet_4.setBounds(289, 246, 46, 14);
 		contentPane.add(lblSet_4);
 		
 		JLabel lblSet_5 = new JLabel("Set 6");
-		lblSet_5.setBounds(289, 253, 46, 14);
+		lblSet_5.setBounds(279, 271, 46, 14);
 		contentPane.add(lblSet_5);
 		
 		JLabel lblSet_6 = new JLabel("Set 7");
-		lblSet_6.setBounds(289, 284, 46, 14);
+		lblSet_6.setBounds(289, 302, 46, 14);
 		contentPane.add(lblSet_6);
 		
 		JLabel lblSet_7 = new JLabel("Set 8");
-		lblSet_7.setBounds(289, 309, 46, 14);
+		lblSet_7.setBounds(279, 333, 46, 14);
 		contentPane.add(lblSet_7);
 		
 		JLabel lblSet_8 = new JLabel("Set 9");
-		lblSet_8.setBounds(289, 338, 46, 14);
+		lblSet_8.setBounds(289, 358, 46, 14);
 		contentPane.add(lblSet_8);
 		
 		txtS1P2 = new JTextField(Integer.toString(puntajeP2[0]));
-		txtS1P2.setBounds(347, 121, 46, 20);
+		txtS1P2.setBounds(347, 140, 46, 20);
 		contentPane.add(txtS1P2);
 		txtS1P2.setColumns(10);
 		
 		txtS1P1 = new JTextField(Integer.toString(puntajeP1[0]));
 		txtS1P1.setColumns(10);
-		txtS1P1.setBounds(226, 122, 46, 20);
+		txtS1P1.setBounds(226, 140, 46, 20);
 		contentPane.add(txtS1P1);
 		
 		txtS2P1 = new JTextField(Integer.toString(puntajeP1[1]));
 		txtS2P1.setColumns(10);
-		txtS2P1.setBounds(226, 148, 46, 20);
+		txtS2P1.setBounds(226, 165, 46, 20);
 		contentPane.add(txtS2P1);
 		
 		txtS2P2 = new JTextField(Integer.toString(puntajeP2[1]));
 		txtS2P2.setColumns(10);
-		txtS2P2.setBounds(347, 148, 46, 20);
+		txtS2P2.setBounds(347, 168, 46, 20);
 		contentPane.add(txtS2P2);
 		
 		txtS3P2 = new JTextField(Integer.toString(puntajeP2[2]));
 		txtS3P2.setColumns(10);
-		txtS3P2.setBounds(346, 174, 46, 20);
+		txtS3P2.setBounds(347, 193, 46, 20);
 		contentPane.add(txtS3P2);
 		
 		txtS4P2 = new JTextField(Integer.toString(puntajeP2[3]));
 		txtS4P2.setColumns(10);
-		txtS4P2.setBounds(347, 194, 46, 20);
+		txtS4P2.setBounds(347, 215, 46, 20);
 		contentPane.add(txtS4P2);
 		
 		txtS5P2 = new JTextField(Integer.toString(puntajeP2[4]));
 		txtS5P2.setColumns(10);
-		txtS5P2.setBounds(347, 225, 46, 20);
+		txtS5P2.setBounds(347, 243, 46, 20);
 		contentPane.add(txtS5P2);
 		
 		txtS3P1 = new JTextField(Integer.toString(puntajeP1[2]));
 		txtS3P1.setColumns(10);
-		txtS3P1.setBounds(226, 172, 46, 20);
+		txtS3P1.setBounds(226, 186, 46, 20);
 		contentPane.add(txtS3P1);
 		
 		txtS4P1 = new JTextField(Integer.toString(puntajeP1[3]));
 		txtS4P1.setColumns(10);
-		txtS4P1.setBounds(226, 194, 46, 20);
+		txtS4P1.setBounds(226, 206, 46, 20);
 		contentPane.add(txtS4P1);
 		
 		txtS5P1 = new JTextField(Integer.toString(puntajeP1[4]));
 		txtS5P1.setColumns(10);
-		txtS5P1.setBounds(226, 225, 46, 20);
+		txtS5P1.setBounds(226, 237, 46, 20);
 		contentPane.add(txtS5P1);
 		
 		txtS6P1 = new JTextField(Integer.toString(puntajeP1[5]));
 		txtS6P1.setColumns(10);
-		txtS6P1.setBounds(226, 253, 46, 20);
+		txtS6P1.setBounds(226, 268, 46, 20);
 		contentPane.add(txtS6P1);
 		
 		txtS7P1 = new JTextField(Integer.toString(puntajeP1[6]));
 		txtS7P1.setColumns(10);
-		txtS7P1.setBounds(226, 281, 46, 20);
+		txtS7P1.setBounds(226, 299, 46, 20);
 		contentPane.add(txtS7P1);
 		
 		txtS8P1 = new JTextField(Integer.toString(puntajeP1[7]));
 		txtS8P1.setColumns(10);
-		txtS8P1.setBounds(226, 304, 46, 20);
+		txtS8P1.setBounds(226, 330, 46, 20);
 		contentPane.add(txtS8P1);
 		
 		txtS9P1 = new JTextField(Integer.toString(puntajeP1[8]));
 		txtS9P1.setColumns(10);
-		txtS9P1.setBounds(226, 335, 46, 20);
+		txtS9P1.setBounds(226, 355, 46, 20);
 		contentPane.add(txtS9P1);
 		
 		txtS6P2 = new JTextField(Integer.toString(puntajeP2[5]));
 		txtS6P2.setColumns(10);
-		txtS6P2.setBounds(347, 253, 46, 20);
+		txtS6P2.setBounds(347, 268, 46, 20);
 		contentPane.add(txtS6P2);
 		
 		txtS7P2 = new JTextField(Integer.toString(puntajeP2[6]));
 		txtS7P2.setColumns(10);
-		txtS7P2.setBounds(347, 281, 46, 20);
+		txtS7P2.setBounds(347, 299, 46, 20);
 		contentPane.add(txtS7P2);
 		
 		txtS8P2 = new JTextField(Integer.toString(puntajeP2[7]));
 		txtS8P2.setColumns(10);
-		txtS8P2.setBounds(347, 306, 46, 20);
+		txtS8P2.setBounds(347, 330, 46, 20);
 		contentPane.add(txtS8P2);
 		
 		txtS9P2 = new JTextField(Integer.toString(puntajeP2[8]));
 		txtS9P2.setColumns(10);
-		txtS9P2.setBounds(347, 335, 46, 20);
+		txtS9P2.setBounds(347, 355, 46, 20);
 		contentPane.add(txtS9P2);
 		
 		JLabel lblPuntuacion = new JLabel("Puntuacion");
@@ -481,6 +483,30 @@ public class Cu018 extends JFrame {
 		JLabel lblResultadoFinal = new JLabel("Resultado Final:");
 		lblResultadoFinal.setBounds(134, 460, 138, 14);
 		contentPane.add(lblResultadoFinal);
+		
+		final JLabel lblSeleccioneAlMenos = new JLabel("Seleccione al menos un equipo");
+		lblSeleccioneAlMenos.setForeground(Color.RED);
+		lblSeleccioneAlMenos.setBounds(239, 121, 161, 14);
+		lblSeleccioneAlMenos.setVisible(false);
+		contentPane.add(lblSeleccioneAlMenos);
+		
+		final JLabel lblIngreseLaPuntuacion = new JLabel("Ingrese la puntuaci\u00F3n");
+		lblIngreseLaPuntuacion.setForeground(Color.RED);
+		lblIngreseLaPuntuacion.setBounds(272, 436, 187, 14);
+		lblIngreseLaPuntuacion.setVisible(false);
+		contentPane.add(lblIngreseLaPuntuacion);
+		
+		final JLabel lblSeleccioneUnGanador = new JLabel("Seleccione un ganador");
+		lblSeleccioneUnGanador.setForeground(Color.RED);
+		lblSeleccioneUnGanador.setBounds(240, 488, 116, 14);
+		lblSeleccioneUnGanador.setVisible(false);
+		contentPane.add(lblSeleccioneUnGanador);
+		
+		final JLabel lblNoSePermite = new JLabel("No se permite que haya resultados de empate en los sets");
+		lblNoSePermite.setForeground(Color.RED);
+		lblNoSePermite.setBounds(180, 383, 329, 14);
+		lblNoSePermite.setVisible(false);
+		contentPane.add(lblNoSePermite);
 		
 		
 		if(informacion.getPuntuacion().isSets()){
@@ -577,28 +603,10 @@ public class Cu018 extends JFrame {
 		}
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(195, 537, 89, 23);
+		btnCancelar.setBounds(347, 537, 89, 23);
 		contentPane.add(btnCancelar);
 		
-		puntajeP1[0]=Integer.parseInt(txtS1P1.getText());
-		puntajeP2[0]=Integer.parseInt(txtS1P2.getText());
-		puntajeP1[1]=Integer.parseInt(txtS2P1.getText());
-		puntajeP2[1]=Integer.parseInt(txtS2P2.getText());
-		puntajeP1[2]=Integer.parseInt(txtS3P1.getText());
-		puntajeP2[2]=Integer.parseInt(txtS3P2.getText());
-		puntajeP1[3]=Integer.parseInt(txtS4P1.getText());
-		puntajeP2[3]=Integer.parseInt(txtS4P2.getText());
-		puntajeP1[4]=Integer.parseInt(txtS5P1.getText());
-		puntajeP2[4]=Integer.parseInt(txtS5P2.getText());
-		puntajeP1[5]=Integer.parseInt(txtS6P1.getText());
-		puntajeP2[5]=Integer.parseInt(txtS6P2.getText());
-		puntajeP1[6]=Integer.parseInt(txtS7P1.getText());
-		puntajeP2[6]=Integer.parseInt(txtS7P2.getText());
-		puntajeP1[7]=Integer.parseInt(txtS8P1.getText());
-		puntajeP2[7]=Integer.parseInt(txtS8P2.getText());
-		puntajeP1[8]=Integer.parseInt(txtS9P1.getText());
-		puntajeP2[8]=Integer.parseInt(txtS9P2.getText());
-		
+	
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			
@@ -610,7 +618,139 @@ public class Cu018 extends JFrame {
 			 * */
 			public void actionPerformed(ActionEvent arg0) {
 				
+				boolean datosValidos=false;
+	
+				
+				puntajeP1[0]=Integer.parseInt(txtS1P1.getText());
+				puntajeP2[0]=Integer.parseInt(txtS1P2.getText());
+				puntajeP1[1]=Integer.parseInt(txtS2P1.getText());
+				puntajeP2[1]=Integer.parseInt(txtS2P2.getText());
+				puntajeP1[2]=Integer.parseInt(txtS3P1.getText());
+				puntajeP2[2]=Integer.parseInt(txtS3P2.getText());
+				puntajeP1[3]=Integer.parseInt(txtS4P1.getText());
+				puntajeP2[3]=Integer.parseInt(txtS4P2.getText());
+				puntajeP1[4]=Integer.parseInt(txtS5P1.getText());
+				puntajeP2[4]=Integer.parseInt(txtS5P2.getText());
+				puntajeP1[5]=Integer.parseInt(txtS6P1.getText());
+				puntajeP2[5]=Integer.parseInt(txtS6P2.getText());
+				puntajeP1[6]=Integer.parseInt(txtS7P1.getText());
+				puntajeP2[6]=Integer.parseInt(txtS7P2.getText());
+				puntajeP1[7]=Integer.parseInt(txtS8P1.getText());
+				puntajeP2[7]=Integer.parseInt(txtS8P2.getText());
+				puntajeP1[8]=Integer.parseInt(txtS9P1.getText());
+				puntajeP2[8]=Integer.parseInt(txtS9P2.getText());
+				
+				if(!datosValidos){
+					if(!(checkPart1.isSelected()) && !(checkPart2.isSelected())){
+						lblSeleccioneAlMenos.setVisible(true);
+						
+						JOptionPane.showMessageDialog(null, "Ha introducido datos incorrectos");
+						Cu018 ventana = new Cu018 (id_comp,id_ron,id_encu,id_usuario);
+						ventana.setVisible(true);
+						dispose();
+					}
+					else if(informacion.getPuntuacion().isSets()){
+						for(int i=0 ; i < 9 ; i++){
+							if(puntajeP1[i]==puntajeP2[i] && puntajeP1[i]!=0 && puntajeP2[i]!=0){
+								lblNoSePermite.setVisible(true);
+								JOptionPane.showMessageDialog(null, "Ha introducido datos incorrectos");
+								Cu018 ventana = new Cu018 (id_comp,id_ron,id_encu,id_usuario);
+								ventana.setVisible(true);
+								dispose();
+							}
+						}
+					}
+					else if(txtRP1.getText().length()==0 || txtRP2.getText().length()==0 || (txtRP1.getText().length()==0 && txtRP2.getText().length()==0)){
+						lblIngreseLaPuntuacion.setVisible(true);
+						JOptionPane.showMessageDialog(null, "Ha introducido datos incorrectos");
+						Cu018 ventana = new Cu018 (id_comp,id_ron,id_encu,id_usuario);
+						ventana.setVisible(true);
+						dispose();
+					}
+					else
+						datosValidos=true;
+				}
+				
+				
 					
+					ParticipanteDTO x = encuentro.getJugador1();
+					ParticipanteDTO y = encuentro.getJugador2();
+					
+					if(!(encuentroAnterior.getGanador() == null)){
+						
+						//seteo en base al encuentro registrado anteriormente
+						if(encuentroAnterior.getGanador().getId_participante() == x.getId_participante()){
+							x.setPartidosGanados(x.getPartidosGanados()-1);
+							if(!informacion.getPuntuacion().isSets()){
+								x.setTantosFav(x.getTantosFav()-encuentroAnterior.getPuntajep1());
+								x.setTantosCont(x.getTantosCont()-encuentroAnterior.getPuntajep2());
+								
+								y.setTantosFav(y.getTantosFav()-encuentroAnterior.getPuntajep2());
+								y.setTantosCont(y.getTantosCont()-encuentroAnterior.getPuntajep1());
+							}
+							else{
+								for(int s=0; s<informacion.getCantidad_sets();s++){
+									x.setTantosFav(x.getTantosFav()-(encuentroAnterior.getSets().get(s).getPuntajep1()));
+									y.setTantosFav(y.getTantosFav()-(encuentroAnterior.getSets().get(s).getPuntajep2()));
+									x.setTantosCont(x.getTantosCont()-encuentroAnterior.getSets().get(s).getPuntajep2());
+									y.setTantosCont(y.getTantosCont()-encuentroAnterior.getSets().get(s).getPuntajep1());	
+								}
+								
+							}
+							x.setTantosDif(x.getTantosFav()-x.getTantosCont());
+							y.setTantosDif(y.getTantosFav()-y.getTantosCont());
+							x.setPuntaje(x.getPuntaje()-informacion.getPuntos_ganador()-informacion.getPuntos_presentarse());
+							y.setPartidosPerdidos(y.getPartidosPerdidos()-1);
+							y.setPuntaje(y.getPuntaje()-informacion.getPuntos_presentarse());
+						}
+						else if(encuentroAnterior.getGanador().getId_participante() == y.getId_participante()){
+							x.setPartidosPerdidos(x.getPartidosPerdidos()-1);
+							if(!informacion.getPuntuacion().isSets()){
+								x.setTantosFav(x.getTantosFav()-encuentroAnterior.getPuntajep1());
+								x.setTantosCont(x.getTantosCont()-encuentroAnterior.getPuntajep2());
+								y.setTantosFav(y.getTantosFav()-encuentroAnterior.getPuntajep2());
+								y.setTantosCont(y.getTantosCont()-encuentroAnterior.getPuntajep1());
+							}
+							else{
+								for(int s=0; s<informacion.getCantidad_sets();s++){
+									x.setTantosFav(x.getTantosFav()-(encuentroAnterior.getSets().get(s).getPuntajep1()));
+									y.setTantosFav(y.getTantosFav()-(encuentroAnterior.getSets().get(s).getPuntajep2()));
+									x.setTantosCont(x.getTantosCont()-encuentroAnterior.getSets().get(s).getPuntajep2());
+									y.setTantosCont(y.getTantosCont()-encuentroAnterior.getSets().get(s).getPuntajep1());	
+								}
+								
+							}
+							x.setTantosDif(x.getTantosFav()-x.getTantosCont());
+							y.setTantosDif(y.getTantosFav()-y.getTantosCont());
+							x.setPuntaje(x.getPuntaje()-informacion.getPuntos_presentarse());
+							y.setPartidosGanados(y.getPartidosGanados()-1);
+							y.setPuntaje(y.getPuntaje()-informacion.getPuntos_ganador()-informacion.getPuntos_presentarse());
+						}
+						else{
+							
+							x.setPartidosEmpatados(x.getPartidosEmpatados()-1);
+							if(!informacion.getPuntuacion().isSets()){
+								x.setTantosFav(x.getTantosFav()-encuentroAnterior.getPuntajep1());
+								x.setTantosCont(x.getTantosCont()-encuentroAnterior.getPuntajep2());
+								y.setTantosFav(y.getTantosFav()-encuentroAnterior.getPuntajep2());
+								y.setTantosCont(y.getTantosCont()-encuentroAnterior.getPuntajep1());
+							}
+							else{
+								for(int s=0; s<informacion.getCantidad_sets();s++){
+									x.setTantosFav(x.getTantosFav()-(encuentroAnterior.getSets().get(s).getPuntajep1()));
+									y.setTantosFav(y.getTantosFav()-(encuentroAnterior.getSets().get(s).getPuntajep2()));
+									x.setTantosCont(x.getTantosCont()-encuentroAnterior.getSets().get(s).getPuntajep2());
+									y.setTantosCont(y.getTantosCont()-encuentroAnterior.getSets().get(s).getPuntajep1());	
+								}
+								
+							}
+							x.setTantosDif(x.getTantosFav()-x.getTantosCont());
+							y.setTantosDif(y.getTantosFav()-y.getTantosCont());
+							x.setPuntaje(x.getPuntaje()-informacion.getPuntos_empate()-informacion.getPuntos_presentarse());
+							y.setPartidosEmpatados(y.getPartidosEmpatados()-1);
+							y.setPuntaje(y.getPuntaje()-informacion.getPuntos_empate()-informacion.getPuntos_presentarse());
+						}
+					}
 						//settear el encuentro si no se presento ninguno (no me acuerdo este caso) , EXPLOTA EL SISTEMA
 						if(!(checkPart1.isSelected()) && !(checkPart2.isSelected()))
 							;
@@ -618,8 +758,7 @@ public class Cu018 extends JFrame {
 						else if(!(checkPart1.isSelected()) && (checkPart2.isSelected())){
 							encuentro.setEstadop1(false);
 							encuentro.setEstadop2(true);
-							ParticipanteDTO x = encuentro.getJugador1();
-							ParticipanteDTO y = encuentro.getJugador2();
+
 							x.setPartidosPerdidos((x.getPartidosPerdidos()+1));
 							x.setTantosCont(x.getTantosCont()+informacion.getResultado_final());
 							x.setTantosDif(x.getTantosDif()-informacion.getResultado_final());
@@ -627,16 +766,16 @@ public class Cu018 extends JFrame {
 							y.setTantosFav(y.getTantosFav()+informacion.getResultado_final());
 							y.setTantosDif(y.getTantosDif()+informacion.getResultado_final());
 							y.setPuntaje(y.getPuntaje()+informacion.getPuntos_presentarse()+informacion.getPuntos_ganador());
+							
 							encuentro.setJugador1(x);
 							encuentro.setJugador2(y);
 						}
 						
 						//settear el encuentro si no se presento el segundo
 						else if((checkPart1.isSelected()) && !(checkPart2.isSelected())){
+							
 							encuentro.setEstadop1(true);
 							encuentro.setEstadop2(false);
-							ParticipanteDTO x = encuentro.getJugador1();
-							ParticipanteDTO y = encuentro.getJugador2();
 							y.setPartidosPerdidos((x.getPartidosPerdidos()+1));
 							y.setTantosCont(x.getTantosCont()+informacion.getResultado_final());
 							y.setTantosDif(x.getTantosDif()-informacion.getResultado_final());
@@ -648,12 +787,12 @@ public class Cu018 extends JFrame {
 							encuentro.setJugador2(y);
 						}
 						
-						else{
+						
 						// setear el encuentro teniendo en cuenta el combobox de resultado final
 						if(informacion.getPuntuacion().isResultadoFinal()){
+							System.out.println("SETEO EN BASE A RESULTADO FINAL DEL COMBO BOX");
 							String seleccionado =  (String) comboResultadoFinal.getSelectedItem();
-							ParticipanteDTO x = encuentro.getJugador1();
-							ParticipanteDTO y = encuentro.getJugador2();
+
 							if(seleccionado==encuentro.getJugador1().getNombre()){
 								 x.setPartidosGanados(x.getPartidosGanados()+1);
 								 x.setPuntaje(x.getPuntaje()+informacion.getPuntos_ganador()+informacion.getPuntos_presentarse());
@@ -672,8 +811,6 @@ public class Cu018 extends JFrame {
 						else if(informacion.getPuntuacion().isPuntuacion()){
 							int puntajeP1=Integer.parseInt(txtRP1.getText());
 							int puntajeP2=Integer.parseInt(txtRP2.getText());
-							ParticipanteDTO x = encuentro.getJugador1();
-							ParticipanteDTO y = encuentro.getJugador2();
 							
 							encuentro.setPuntajep1(puntajeP1);
 							encuentro.setPuntajep2(puntajeP2);
@@ -681,12 +818,14 @@ public class Cu018 extends JFrame {
 							encuentro.getSets().get(0).setPuntajep2(puntajeP2);
 							if(informacion.isPermite_empates() && puntajeP1==puntajeP2){
 								JOptionPane.showMessageDialog(null, "La competencia no permite empates en los resultados");
-								Cu018 ventana = new Cu018(id_comp,id_ron,id_encu);
+								Cu018 ventana = new Cu018(id_comp,id_ron,id_encu,id_usuario);
 								ventana.setVisible(true);
 								dispose();
 							}
+							
 							else{
 								if(puntajeP1 > puntajeP2){
+
 									encuentro.getJugador1().setTantosFav(x.getTantosFav()+puntajeP1);
 									encuentro.getJugador1().setTantosCont(x.getTantosCont()+puntajeP2);
 									encuentro.getJugador1().setTantosDif(x.getTantosDif()+puntajeP1-puntajeP2);
@@ -698,6 +837,7 @@ public class Cu018 extends JFrame {
 									encuentro.getJugador2().setPartidosPerdidos(y.getPartidosPerdidos()+1);
 									encuentro.getJugador2().setPuntaje(y.getPuntaje()+informacion.getPuntos_presentarse());
 									encuentro.setGanador(encuentro.getJugador1());
+									
 								}
 								else if (puntajeP2 > puntajeP1){
 									encuentro.getJugador2().setTantosFav(y.getTantosFav()+puntajeP2);
@@ -730,37 +870,36 @@ public class Cu018 extends JFrame {
 						}
 						//setear el encuentro teniendo en cuenta los textfields de set
 						else if(informacion.getPuntuacion().isSets()){
-							ParticipanteDTO x = encuentro.getJugador1();
-							ParticipanteDTO y = encuentro.getJugador2();
+
 							int setGanadosP1=0;
 							int setGanadosP2=0;
 							int tantosFavorP1=0;
 							int tantosFavorP2=0;
-							int a=0;
 							boolean hayEmpate=false;
 							
-							for(int i=0 ; i<9 ; i++)
-								if(puntajeP1[i]==puntajeP2[i])
-									hayEmpate=true;
+							for(int i=0 ; i<9 ; i++){
+								if(puntajeP1[i]==puntajeP2[i] && puntajeP1[i]!=0 && puntajeP2[i]!=0)
+									hayEmpate=true;}
 							
-							for(SetDTO s: encuentro.getSets()){
-								s.setPuntajep1(puntajeP1[a]);
-								s.setPuntajep2(puntajeP2[a]);
-								a++;
+							for(int a = 0; a < encuentro.getSets().size(); a++){
+								encuentro.getSets().get(a).setPuntajep1(puntajeP1[a]);
+								encuentro.getSets().get(a).setPuntajep2(puntajeP2[a]);
 								
 							}
 							if(hayEmpate){
 								JOptionPane.showMessageDialog(null, "No se permiten empates en los Sets");
-								Cu018 ventana = new Cu018(id_comp,id_ron,id_encu);
+								Cu018 ventana = new Cu018(id_comp,id_ron,id_encu,id_usuario);
 								ventana.setVisible(true);
 								dispose();
 							}
 							else{
-								for(int i=0 ; i < 9 ; i++){
+								for(int i=0 ; i < informacion.getCantidad_sets() ; i++){
 									tantosFavorP1 = tantosFavorP1 + puntajeP1[i];
 									tantosFavorP2 = tantosFavorP2 + puntajeP2[i];
-									if(puntajeP1[i] > puntajeP2[i])
+									if(puntajeP1[i] > puntajeP2[i]){
+										System.out.println(setGanadosP1);
 										setGanadosP1++;
+									}
 									else
 										setGanadosP2++;
 								}
@@ -770,12 +909,15 @@ public class Cu018 extends JFrame {
 									encuentro.getJugador1().setTantosDif(x.getTantosDif()+tantosFavorP1-tantosFavorP2);
 									encuentro.getJugador1().setPartidosGanados(x.getPartidosGanados()+1);
 									encuentro.getJugador1().setPuntaje(x.getPuntaje()+informacion.getPuntos_ganador()+informacion.getPuntos_presentarse());
+									encuentro.setPuntajep1(setGanadosP1);
 									
 									encuentro.getJugador2().setTantosFav(y.getTantosFav()+tantosFavorP2);
 									encuentro.getJugador2().setTantosCont(y.getTantosCont()+tantosFavorP1);
 									encuentro.getJugador2().setTantosDif(y.getTantosDif()+tantosFavorP2-tantosFavorP1);
 									encuentro.getJugador2().setPartidosPerdidos(y.getPartidosPerdidos()+1);
 									encuentro.getJugador2().setPuntaje(y.getPuntaje()+informacion.getPuntos_presentarse());
+									encuentro.setPuntajep2(setGanadosP2);
+									
 									encuentro.setGanador(encuentro.getJugador1());
 								}
 								else if(setGanadosP2 > setGanadosP1){
@@ -784,12 +926,15 @@ public class Cu018 extends JFrame {
 									encuentro.getJugador2().setTantosDif(y.getTantosDif()+tantosFavorP2-tantosFavorP1);
 									encuentro.getJugador2().setPartidosGanados(y.getPartidosGanados()+1);
 									encuentro.getJugador2().setPuntaje(y.getPuntaje()+informacion.getPuntos_ganador()+informacion.getPuntos_presentarse());
+									encuentro.setPuntajep2(setGanadosP2);
 									
 									encuentro.getJugador1().setTantosFav(x.getTantosFav()+tantosFavorP1);
 									encuentro.getJugador1().setTantosCont(x.getTantosCont()+tantosFavorP2);
 									encuentro.getJugador1().setTantosDif(x.getTantosDif()+tantosFavorP1-tantosFavorP2);
 									encuentro.getJugador1().setPartidosPerdidos(x.getPartidosPerdidos()+1);
 									encuentro.getJugador1().setPuntaje(x.getPuntaje()+informacion.getPuntos_presentarse());
+									encuentro.setPuntajep1(setGanadosP1);
+									
 									encuentro.setGanador(encuentro.getJugador2());
 								}
 								else{
@@ -807,104 +952,20 @@ public class Cu018 extends JFrame {
 								}
 							}
 						}
-					}
+					
+				
 						//voy a gestionar fixture para cargar el resultado de los datos actualizados
 						
-						GestorFixture.cargarResultado(id_comp,id_ron,id_encu,encuentro);
-						
-						
-						/*if(secargo==true){
+							GestorFixture.cargarResultado(id_comp,id_ron,id_encu,encuentro);		
 							JOptionPane.showMessageDialog(null, "Se cargo con exito");
-							//Cu008 ventana = new Cu008(idGenerado,id_usuario);
-							//ventana.setVisible(true);
-							//dispose();
-						}*/
-			
+							Cu008 ventana = new Cu008(id_comp,1);
+							ventana.setVisible(true);
+							dispose();
+						
+						
 			}
-			
-					
-					
-				/*puntajeP1[0]=Integer.parseInt(txtS1P1.getText());
-				puntajeP2[0]=Integer.parseInt(txtS1P2.getText());
-				puntajeP1[1]=Integer.parseInt(txtS2P1.getText());
-				puntajeP2[1]=Integer.parseInt(txtS2P2.getText());
-				puntajeP1[2]=Integer.parseInt(txtS3P1.getText());
-				puntajeP2[2]=Integer.parseInt(txtS3P2.getText());
-				puntajeP1[3]=Integer.parseInt(txtS4P1.getText());
-				puntajeP2[3]=Integer.parseInt(txtS4P2.getText());
-				puntajeP1[4]=Integer.parseInt(txtS5P1.getText());
-				puntajeP2[4]=Integer.parseInt(txtS5P2.getText());
-				puntajeP1[5]=Integer.parseInt(txtS6P1.getText());
-				puntajeP2[5]=Integer.parseInt(txtS6P2.getText());
-				puntajeP1[6]=Integer.parseInt(txtS7P1.getText());
-				puntajeP2[6]=Integer.parseInt(txtS7P2.getText());
-				puntajeP1[7]=Integer.parseInt(txtS8P1.getText());
-				puntajeP2[7]=Integer.parseInt(txtS8P2.getText());
-				puntajeP1[8]=Integer.parseInt(txtS9P1.getText());
-				puntajeP2[8]=Integer.parseInt(txtS9P2.getText());
-				
-				
-				//guardo todos los datos de nuevo en el encuentro
-				int cantidad=encuentro.getSets().size();
-				boolean secargo=false;
-				List<SetDTO> setActualizados= new ArrayList<>();
-				i=0;
-				while(cantidad!=0){
-					SetDTO set = new SetDTO(idSets[i],puntajeP1[i],puntajeP2[i]);
-					setActualizados.add(set);
-					cantidad--;
-					i++;
-				}
-				List<SetDTO> setsNuevos = new ArrayList<>();
-				encuentro.setSets(setsNuevos);
-				encuentro.setSets(setActualizados);
-				encuentro.setEstadop1(checkPart1.isSelected());
-				encuentro.setEstadop2(checkPart2.isSelected());
-				encuentro.setPuntajep1(Integer.parseInt(txtRP1.getText()));
-				encuentro.setPuntajep2(Integer.parseInt(txtRP2.getText()));
-				
-				//actualizar datos de encuentro en los participantes
-				ParticipanteDTO participanteP1 = encuentro.getJugador1();
-				ParticipanteDTO participanteP2 = encuentro.getJugador2();
-				
-				if(encuentro.isEmpate()==true){
-					participanteP1.setPartidosEmpatados(participanteP1.getPartidosEmpatados()+1);
-					participanteP2.setPartidosEmpatados(participanteP2.getPartidosEmpatados()+1);
-				}
-				
-				for(SetDTO set : encuentro.getSets()){
-					participanteP1.setTantosFav(participanteP1.getTantosFav()+set.getPuntajep1());
-					participanteP2.setTantosFav(participanteP2.getTantosFav()+set.getPuntajep2());
-					participanteP1.setTantosCont(participanteP1.getTantosCont()+set.getPuntajep2());
-					participanteP2.setTantosCont(participanteP2.getTantosCont()+set.getPuntajep1());
-					participanteP1.setTantosDif(participanteP1.getTantosDif()+(set.getPuntajep1()-set.getPuntajep2()));
-					participanteP2.setTantosDif(participanteP2.getTantosDif()+(set.getPuntajep2()-set.getPuntajep1()));
-				}
-				
-				encuentro.setJugador1(participanteP1);
-				encuentro.setJugador2(participanteP2);
-				encuentro.setEstadop1(checkPart1.isSelected());
-				encuentro.setEstadop2(checkPart2.isSelected());
-				
-				 String seleccionado =  (String) comboResultadoFinal.getSelectedItem();
-				 if(seleccionado==participanteP1.getNombre())
-					encuentro.setGanador(participanteP1);
-				 else
-					 encuentro.setGanador(participanteP2);
-					
-				
-				//voy a gestionar fixture para cargar el resultado de los datos actualizados
-				secargo=GestorFixture.cargarResultado(id_comp,id_ron,id_encu,encuentro);
-				
-				if(secargo==true){
-					JOptionPane.showMessageDialog(null, "Se cargo con exito");
-					/*Cu008 ventana = new Cu008(idGenerado,id_usuario);
-					ventana.setVisible(true);
-					dispose();
-				}*/
-			
 		});
-		btnAceptar.setBounds(362, 537, 89, 23);
+		btnAceptar.setBounds(224, 537, 89, 23);
 		contentPane.add(btnAceptar);
 		
 		JLabel nombreP1 = new JLabel(encuentro.getJugador1().getNombre());
@@ -914,5 +975,16 @@ public class Cu018 extends JFrame {
 		JLabel nombreP2 = new JLabel(encuentro.getJugador2().getNombre());
 		nombreP2.setBounds(462, 52, 198, 14);
 		contentPane.add(nombreP2);
+		
+		JButton btnMenuPrincipal = new JButton("Menu Principal");
+		btnMenuPrincipal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				menuprincipal ventana = new menuprincipal (id_usuario);
+				ventana.setVisible(true);
+				dispose();
+			}
+		});
+		btnMenuPrincipal.setBounds(469, 537, 112, 23);
+		contentPane.add(btnMenuPrincipal);
 	}
 }

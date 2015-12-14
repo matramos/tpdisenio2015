@@ -61,7 +61,6 @@ public class EncuentroDTO {
 		
 		for(Set set : encuentro.getSets()){
 			SetDTO setDTO = new SetDTO(set);
-			
 			this.sets.add(setDTO);
 		}
 		//this.encuentro1=new EncuentroDTO(encuentro.getEncuentro1());

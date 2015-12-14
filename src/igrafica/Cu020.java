@@ -159,7 +159,7 @@ public class Cu020 extends JFrame {
 				dispose();
 			}
 		});
-		btnCancelar_1.setBounds(381, 522, 89, 23);
+		btnCancelar_1.setBounds(297, 523, 89, 23);
 		contentPane.add(btnCancelar_1);
 		
 		JLabel lblDinamico = new JLabel(compe.getNombre());
@@ -220,6 +220,17 @@ public class Cu020 extends JFrame {
 		JLabel lblParticipantes = new JLabel("Participantes");
 		lblParticipantes.setBounds(78, 323, 94, 14);
 		contentPane.add(lblParticipantes);
+		
+		JButton btnMenuPrincipal = new JButton("Menu Principal");
+		btnMenuPrincipal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				menuprincipal ventana = new menuprincipal (id_usuario);
+				ventana.setVisible(true);
+				dispose();
+			}
+		});
+		btnMenuPrincipal.setBounds(411, 523, 109, 23);
+		contentPane.add(btnMenuPrincipal);
 		
 	}
 }

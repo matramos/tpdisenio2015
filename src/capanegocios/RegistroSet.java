@@ -6,6 +6,10 @@ public class RegistroSet {
 	private int puntajeP1;
 	private int puntajeP2;
 	
+	public RegistroSet() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public RegistroSet(Set set) {
 		this.puntajeP1=set.getPuntajep1();
 		this.puntajeP2=set.getPuntajep2();
