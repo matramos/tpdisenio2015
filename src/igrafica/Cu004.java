@@ -199,6 +199,17 @@ public class Cu004 extends JFrame {
 		
 		lugar = new JTextField();
 		lugar.setBounds(104, 115, 86, 20);
+		lugar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				char c = arg0.getKeyChar();
+				if(Character.isLowerCase(c)){
+					String cad = (""+c).toUpperCase();
+					c=cad.charAt(0);
+					arg0.setKeyChar(c);
+				}
+			}
+		});
 		contentPane.add(lugar);
 		lugar.setColumns(10);
 		lugar.setEditable(false);
@@ -219,6 +230,17 @@ public class Cu004 extends JFrame {
 		contentPane.add(disponibilidad);
 		disponibilidad.setColumns(10);
 		deporte = new JTextField();
+		deporte.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				char c = arg0.getKeyChar();
+				if(Character.isLowerCase(c)){
+					String cad = (""+c).toUpperCase();
+					c=cad.charAt(0);
+					arg0.setKeyChar(c);
+				}
+			}
+		});
 		deporte.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			if(perteneceD(deporte.getText(),deportes)){
@@ -457,7 +479,7 @@ public class Cu004 extends JFrame {
 		
 		
 		final JLabel lblSeleccioneUnNombre = new JLabel("seleccione un nombre");
-		lblSeleccioneUnNombre.setBounds(103, 93, 179, 14);
+		lblSeleccioneUnNombre.setBounds(104, 93, 179, 14);
 		lblSeleccioneUnNombre.setForeground(Color.red);
 		lblSeleccioneUnNombre.setVisible(false);
 		contentPane.add(lblSeleccioneUnNombre);
@@ -515,23 +537,143 @@ public class Cu004 extends JFrame {
 				//VALIDACIONES
 				
 				boolean noexiste = GestorCompetencias.validarNombre(nombre.getText());
+				if(comboModalidad.getSelectedIndex()==0){
 				boolean menor = !(puntosVictoria.isEditable() && puntosVictoria.getText().isEmpty()) && !(puntosEmpate.isEditable() && puntosEmpate.getText().isEmpty()) && ((Integer.parseInt(puntosVictoria.getText()) < Integer.parseInt(puntosEmpate.getText())));
 				boolean negativo = !(puntosVictoria.isEditable() && puntosVictoria.getText().isEmpty()) && !(puntosEmpate.isEditable() && puntosEmpate.getText().isEmpty()) && (Integer.parseInt(puntosVictoria.getText()) <0);
 				
-				if(nombre.getText().isEmpty() || (puntosVictoria.isEditable() && puntosVictoria.getText().isEmpty()) || (puntosEmpate.isEditable() && puntosEmpate.getText().isEmpty())|| resultado.isEditable() && resultado.getText().isEmpty() || table.getRowCount()==0  || !noexiste || menor || negativo || comboPuntos.getItemCount()==0){
+				if( menor || negativo || (puntosVictoria.isEditable() && puntosVictoria.getText().isEmpty()) || (puntosEmpate.isEditable() && puntosEmpate.getText().isEmpty())|| resultado.isEditable() && resultado.getText().isEmpty() ||  comboPuntos.getItemCount()==0 || nombre.getText().isEmpty() || table.getRowCount()==0  || !noexiste ){
+					if(nombre.getText().isEmpty()){
+						lblSeleccioneUnNombre.setVisible(true);
+						sonido("error");
+					}
+					else
+						lblSeleccioneUnNombre.setVisible(false);
+					
+					if(!noexiste){
+						lblYaExiste.setVisible(true);
+						sonido("error");
+					}
+					else
+						lblYaExiste.setVisible(false);
+					if(table.getRowCount() == 0){
+						lblIndiqueAlgunLugar.setVisible(true);
+						sonido("error");
+					}
+					else{
+						lblIndiqueAlgunLugar.setVisible(false);
+					}
+					if(comboPuntos.getItemCount()==0){
+						lblComboVacio.setVisible(true);
+						sonido("error");
+					}
+					else{
+						lblComboVacio.setVisible(false);
+					}
+					if(puntosVictoria.isEditable() && puntosVictoria.getText().isEmpty()){
+						lblSeleccionePuntosVictoria.setVisible(true);
+						sonido("error");
+					}
+					else if(Integer.parseInt(puntosVictoria.getText()) <0){
+						lblSeleccionePuntosVictoria.setVisible(false);	
+						lblPuntosNegativos.setVisible(true);
+						sonido("error");
+					}
+					else if (puntosEmpate.isEditable() && puntosEmpate.getText().isEmpty()){
+						lblPuntosNegativos.setVisible(false);
+						lblSeleccionePuntosVictoria.setVisible(false);
+						lblSeleccionePuntosEmpate.setVisible(true);
+						sonido("error");
+					}
+					
+					else{
+						lblPuntosNegativos.setVisible(false);
+						lblSeleccionePuntosVictoria.setVisible(false);
+						lblSeleccionePuntosEmpate.setVisible(false);
+						if((Integer.parseInt(puntosVictoria.getText()) < Integer.parseInt(puntosEmpate.getText()))){
+							lblPuntosvMenor.setVisible(true);
+							sonido("error");
+						}
+						else{
+							lblPuntosvMenor.setVisible(false);
+						}
+					}
+					if(puntosEmpate.isEditable() && puntosEmpate.getText().isEmpty()){
+						lblSeleccionePuntosEmpate.setVisible(true);
+						sonido("error");
+					}
+					else
+						lblSeleccionePuntosEmpate.setVisible(false);
+					if(resultado.isEditable() && resultado.getText().isEmpty()){
+						lblSeleccioneResultado.setVisible(true);
+						sonido("error");
+					}
+					else
+						lblSeleccioneResultado.setVisible(false);	
+				}
+				else{
+					CompetenciaDTO competencia = new CompetenciaDTO();
+					for(int i = 0; i<table.getRowCount();i++){
+						DisponibilidadDTO disponibilidad = new DisponibilidadDTO();
+						String dis = (String) table.getValueAt(i, 1);
+						disponibilidad.setDisponibilidad(Integer.parseInt(dis));
+						disponibilidad.setLugar(lugares.getLugar(table.getValueAt(i, 0).toString()));
+						competencia.addLugar(disponibilidad);
+					}
+					competencia.setNombre(nombre.getText());
+					
+					
+					competencia.setReglamento(reglamento.getText());
+					
+					if(comboCantidadSets.isEnabled())
+						competencia.setCantidad_sets((int)comboCantidadSets.getSelectedItem());
+					else
+						competencia.setCantidad_sets(0);
+					
+					competencia.setFecha_hora(ahora);
+					
+					
+					/*Falta agregar los lugares y disponibilidad*/
+					int idforma;
+					long idmodalidad;
+					if(comboFormaPuntuacion.getSelectedIndex()==0)
+						idforma = 2;
+					else if(comboFormaPuntuacion.getSelectedIndex()==1)
+						idforma=1;
+					else
+						idforma=3;
+					
+					if(comboModalidad.getSelectedIndex()==0){
+						idmodalidad = 1;
+						competencia.setPuntos_ganador(Integer.parseInt(puntosVictoria.getText()));
+						competencia.setPuntos_empate(Integer.parseInt(puntosEmpate.getText()));
+						competencia.setPermite_empates(chckbxSePermiteEmpate.isSelected());
+						competencia.setPuntos_presentarse((int)comboPuntos.getSelectedItem());
+						competencia.setResultado_final(Integer.parseInt(resultado.getText()));
+					}
+					else if(comboModalidad.getSelectedIndex()==1)
+						idmodalidad=2;
+					else
+						idmodalidad=3;
+					long idGenerado = GestorCompetencias.crearCompetencia(competencia,idforma,deporte.getText(),idmodalidad,id_usuario);
+					
+					if(idGenerado!=(long) -1){
+						JOptionPane.showMessageDialog(null, "Se cargo con exito");
+						Cu008 ventana = new Cu008(idGenerado,id_usuario);
+						ventana.setVisible(true);
+						dispose();
+					}
+					
+					
+				}
+				}
+				else if(nombre.getText().isEmpty() || table.getRowCount()==0  || !noexiste ){
 				if(nombre.getText().isEmpty()){
 					lblSeleccioneUnNombre.setVisible(true);
 					sonido("error");
 				}
 				else
 					lblSeleccioneUnNombre.setVisible(false);
-				if(comboPuntos.getItemCount()==0){
-					lblComboVacio.setVisible(true);
-					sonido("error");
-				}
-				else{
-					lblComboVacio.setVisible(false);
-				}
+				
 				if(!noexiste){
 					lblYaExiste.setVisible(true);
 					sonido("error");
@@ -545,48 +687,8 @@ public class Cu004 extends JFrame {
 				else{
 					lblIndiqueAlgunLugar.setVisible(false);
 				}
-				if(puntosVictoria.isEditable() && puntosVictoria.getText().isEmpty()){
-					lblSeleccionePuntosVictoria.setVisible(true);
-					sonido("error");
-				}
-				else if(Integer.parseInt(puntosVictoria.getText()) <0){
-					lblSeleccionePuntosVictoria.setVisible(false);	
-					lblPuntosNegativos.setVisible(true);
-					sonido("error");
-				}
-				else if (puntosEmpate.isEditable() && puntosEmpate.getText().isEmpty()){
-					lblPuntosNegativos.setVisible(false);
-					lblSeleccionePuntosVictoria.setVisible(false);
-					lblSeleccionePuntosEmpate.setVisible(true);
-					sonido("error");
-				}
 				
-				else{
-					lblPuntosNegativos.setVisible(false);
-					lblSeleccionePuntosVictoria.setVisible(false);
-					lblSeleccionePuntosEmpate.setVisible(false);
-					if((Integer.parseInt(puntosVictoria.getText()) < Integer.parseInt(puntosEmpate.getText()))){
-						lblPuntosvMenor.setVisible(true);
-						sonido("error");
-					}
-					else{
-						lblPuntosvMenor.setVisible(false);
-					}
 				}
-				if(puntosEmpate.isEditable() && puntosEmpate.getText().isEmpty()){
-					lblSeleccionePuntosEmpate.setVisible(true);
-					sonido("error");
-				}
-				else
-					lblSeleccionePuntosEmpate.setVisible(false);
-				if(resultado.isEditable() && resultado.getText().isEmpty()){
-					lblSeleccioneResultado.setVisible(true);
-					sonido("error");
-				}
-				else
-					lblSeleccioneResultado.setVisible(false);
-				}
-				//VALIDACIONES
 				else{
 					CompetenciaDTO competencia = new CompetenciaDTO();
 					for(int i = 0; i<table.getRowCount();i++){
@@ -639,6 +741,8 @@ public class Cu004 extends JFrame {
 					
 					
 				}
+				//VALIDACIONES
+				
 			}
 		});
 		btnAceptar.setBounds(424, 537, 89, 23);
@@ -652,7 +756,7 @@ public class Cu004 extends JFrame {
 				dispose();
 			}
 		});
-		btnCancelar.setBounds(559, 537, 89, 23);
+		btnCancelar.setBounds(581, 537, 89, 23);
 		contentPane.add(btnCancelar);
 		
 		JLabel lblDarDeAlta = new JLabel("DAR DE ALTA COMPETENCIA DEPORTIVA");
@@ -668,17 +772,6 @@ public class Cu004 extends JFrame {
 		JLabel lblNewLabel = new JLabel("presentarse contrincante");
 		lblNewLabel.setBounds(394, 329, 166, 14);
 		contentPane.add(lblNewLabel);
-		
-		JButton btnMenuPrincipal = new JButton("Menu Principal");
-		btnMenuPrincipal.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				menuprincipal ventana = new menuprincipal (id_usuario);
-				ventana.setVisible(true);
-				dispose();
-			}
-		});
-		btnMenuPrincipal.setBounds(665, 537, 105, 23);
-		contentPane.add(btnMenuPrincipal);
 		
 		
 		

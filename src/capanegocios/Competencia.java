@@ -85,7 +85,7 @@ public class Competencia {
 	}
 	
 	
-
+	
 	
 	
 	public Usuario getUsuario() {

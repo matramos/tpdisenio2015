@@ -44,8 +44,10 @@ public class ModalidadDTO {
 		this.eliminatoriaDoble = eliminatoriaDoble;
 	}
 	public String getNombre(){
-		if(liga) return "Liga";
-		else if (eliminatoriaSimple) return "Eliminatoria Simple";
-		else return "Eliminatoria Doble";
+		String retorno="";
+		if(id_modalidad==1) retorno = "Liga";
+		else if (id_modalidad==2) retorno =  "Eliminatoria Simple";
+		else if(id_modalidad==3) retorno =  "Eliminatoria Doble";
+		return retorno;
 	}
 }

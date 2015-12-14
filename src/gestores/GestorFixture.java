@@ -61,6 +61,7 @@ public class GestorFixture{
 			rondita.setFinalizado(false);
 			
 			//copiamos la lista de Disponibilidades para no modificar la original
+			System.out.println(competencia.getLugares().size());
 			for(Disponibilidad dispo : competencia.getLugares()){
 				Disponibilidad copia = new Disponibilidad(dispo);
 				lugares.add(copia);
