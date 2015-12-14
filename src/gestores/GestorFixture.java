@@ -1,25 +1,12 @@
 package gestores;
 
-import DTO.CompetenciaDTO;
 import DTO.EncuentroDTO;
-import DTO.ListaEncuentrosDTO;
-import DTO.ListaRondasDTO;
-import DTO.ModalidadDTO;
-import DTO.ParticipanteDTO;
-import DTO.RegistroEncuentroDTO;
-import DTO.RondaDTO;
-import DTO.SetDTO;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.JOptionPane;
 
 import capanegocios.Competencia;
 import capanegocios.Disponibilidad;
 import capanegocios.Encuentro;
-import capanegocios.ListaEncuentros;
-import capanegocios.ListaRondas;
 import capanegocios.Lugar;
 import capanegocios.Modalidad;
 import capanegocios.Participante;
@@ -29,16 +16,6 @@ import capanegocios.Ronda;
 import capanegocios.Set;
 
 public class GestorFixture{
-	
-	private Competencia competencia;
-	
-	private Ronda ronda;
-	private Encuentro   encuentro;
-	
-	private Participante participante1;
-	private Participante participante2;
-	private Modalidad modalidad;
-	private RegistroEncuentro registro;
 	
 	public static void generarFixture(Competencia competencia) {
 		List<Participante> participantes = competencia.getParticipantes();
@@ -123,19 +100,9 @@ public class GestorFixture{
 		ronda = competencia.getRonda(id_ronda);
 		
 		encuentro = ronda.getEncuentro(id_encuentro);
-		//participante1=encuentro.getJugador1();
-		//participante2=encuentro.getJugador2();
-		//
 		
 		encuentroDTO=new EncuentroDTO(encuentro);
-		//int cantSets=competencia.getCantidad_sets();	
-		//System.out.println(competencia.getCantidad_sets());
-		/*
-		while(cantSets!=0){
-			SetDTO set1 = new SetDTO();
-			encuentroDTO.addSet(set1);
-			cantSets--;
-		}*/
+
 		return encuentroDTO;
 	}
 
@@ -200,10 +167,8 @@ public class GestorFixture{
 			GestorCompetencias.actualizar(competencia);
 		}
 		else{
-			/*JOptionPane.showMessageDialog(null, "No se puede gestionar el encuentro, la modalidad es Eliminacion Simple o Doble");
-			Cu018 ventana = new Cu018(idGenerado,id_usuario);
-			ventana.setVisible(true);
-			dispose();*/
+			//"No se puede gestionar el encuentro, la modalidad es Eliminacion Simple o Doble"
+			
 			
 		}
 		

@@ -5,7 +5,6 @@ import java.util.List;
 
 import capanegocios.Competencia;
 import capanegocios.Lugar;
-import capanegocios.SeRealizaEn;
 
 public class LugarDTO {
 	private long id;

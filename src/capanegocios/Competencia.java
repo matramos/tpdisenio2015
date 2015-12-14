@@ -268,8 +268,6 @@ public class Competencia {
 		
 		int i=0;
 		int j=0;
-		int x=0;
-		int y=0;
 		
 		for(Ronda ronda : rondas ){
 			if(ronda.getId_ronda()==id_ronda){
@@ -277,10 +275,7 @@ public class Competencia {
 					if(encuentro.getId_encuentro()==encuentroActualizado.getId_encuentro()){
 						ronda.getEncuentros().set(j,encuentroActualizado);
 						Ronda rondaActualizada=ronda;
-						rondas.set(i, rondaActualizada);
-						x=i;
-						y=j;
-						
+						rondas.set(i, rondaActualizada);						
 					}
 					j++;
 				}

@@ -13,19 +13,8 @@ import javax.swing.border.EmptyBorder;
 import DTO.CompetenciaDTO;
 import DTO.EncuentroDTO;
 import DTO.InfoCompetenciaDTO;
-import DTO.ListaEncuentrosDTO;
-import DTO.ListaRondasDTO;
-import DTO.ModalidadDTO;
 import DTO.ParticipanteDTO;
-import DTO.RegistroEncuentroDTO;
-import DTO.RondaDTO;
 import DTO.SetDTO;
-import capanegocios.Competencia;
-import capanegocios.Encuentro;
-import capanegocios.Participante;
-import capanegocios.RegistroEncuentro;
-import capanegocios.Ronda;
-import capanegocios.Set;
 import gestores.GestorCompetencias;
 import gestores.GestorFixture;
 
@@ -105,7 +94,6 @@ public class Cu018 extends JFrame {
 		final long id_comp = id_competencia;
 		final long id_ron = id_ronda;
 		final long id_encu = id_encuentro;
-		final boolean secargo;
 		int prueba = cantidad;
 		
 		

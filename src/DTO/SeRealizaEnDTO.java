@@ -1,9 +1,5 @@
 package DTO;
 
-import java.util.List;
-
-import capanegocios.Deporte;
-import capanegocios.Lugar;
 import capanegocios.SeRealizaEn;
 
 public class SeRealizaEnDTO {

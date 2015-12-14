@@ -28,11 +28,11 @@ public class Provincia {
 		this.localidades.add(localidad);
 	}
 	
-	public List getLocalidades(){
+	public List<Localidad> getLocalidades(){
 		return localidades;
 	}
 	
-	public void setLocalidades(List localidades){
+	public void setLocalidades(List<Localidad> localidades){
 		this.localidades= localidades;
 	}
 	

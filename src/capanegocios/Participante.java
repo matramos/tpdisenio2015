@@ -1,8 +1,5 @@
 package capanegocios;
 
-import java.awt.Image;
-import java.util.List;
-import DTO.CompetenciaDTO;
 import DTO.ParticipanteDTO;
 
 public class Participante {
@@ -31,14 +28,16 @@ public class Participante {
 		this.tantosFav = jugador1.getTantosFav();
 		this.tantosCont = jugador1.getTantosCont();
 		this.tantosDif=jugador1.getTantosDif();
-		// TODO Auto-generated constructor stub
 	}
+	
 	public Participante(String string) {
 		this.nombre=string;
 	}
+	
 	public Participante() {
 		// TODO Auto-generated constructor stub
 	}
+	
 	public void ParticipanteDTO(ParticipanteDTO participanteDTO) {
 		this.id_participante=participanteDTO.getId_participante();
 		this.email=participanteDTO.getEmail();
@@ -52,70 +51,92 @@ public class Participante {
 		this.tantosCont = participanteDTO.getTantosCont();
 		this.tantosDif=participanteDTO.getTantosDif();
 	}
+	
 	public long getId_participante() {
 		return id_participante;
 	}
+	
 	public void setId_participante(long id_participante) {
 		this.id_participante = id_participante;
 	}
+	
 	public String getEmail() {
 		return email;
 	}
+	
 	public void setEmail(String email) {
 		this.email = email;
 	}
 	public String getNombre() {
 		return nombre;
 	}
+	
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
 	public byte[] getImagen() {
 		return imagen;
 	}
+	
 	public void setImagen(byte[] imagen) {
 		this.imagen = imagen;
 	}
+	
 	public int getPuntaje() {
 		return puntaje;
 	}
+	
 	public void setPuntaje(int puntaje) {
 		this.puntaje = puntaje;
 	}
+	
 	public int getPartidosGanados() {
 		return partidosGanados;
 	}
+	
 	public void setPartidosGanados(int partidosGanados) {
 		this.partidosGanados = partidosGanados;
 	}
+	
 	public int getPartidosPerdidos() {
 		return partidosPerdidos;
 	}
+	
 	public void setPartidosPerdidos(int partidosPerdidos) {
 		this.partidosPerdidos = partidosPerdidos;
 	}
+	
 	public int getPartidosEmpatados() {
 		return partidosEmpatados;
 	}
+	
 	public void setPartidosEmpatados(int partidosEmpatados) {
 		this.partidosEmpatados = partidosEmpatados;
 	}
+	
 	public int getTantosFav() {
 		return tantosFav;
 	}
+	
 	public void setTantosFav(int tantosFav) {
 		this.tantosFav = tantosFav;
 	}
+	
 	public int getTantosCont() {
 		return tantosCont;
 	}
+	
 	public void setTantosCont(int tantosCont) {
 		this.tantosCont = tantosCont;
 	}
+	
 	public int getTantosDif() {
 		return tantosDif;
 	}
+	
 	public void setTantosDif(int tantosDif) {
 		this.tantosDif = tantosDif;
 	}
+	
 }

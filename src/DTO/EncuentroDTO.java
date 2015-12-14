@@ -1,14 +1,10 @@
 package DTO;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 import capanegocios.Encuentro;
-import capanegocios.Lugar;
-import capanegocios.Participante;
-import capanegocios.Ronda;
 import capanegocios.Set;
 
 public class EncuentroDTO {

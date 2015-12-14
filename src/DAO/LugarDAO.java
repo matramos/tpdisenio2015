@@ -11,20 +11,14 @@ import org.hibernate.cfg.Configuration;
 import DTO.ListaLugaresDTO;
 import DTO.LugarDTO;
 import Inicio.CrearSesion;
-import capanegocios.Deporte;
 import capanegocios.Lugar;
-import capanegocios.Provincia;
 import capanegocios.SeRealizaEn;
 
 public class LugarDAO {
 
 		public static ListaLugaresDTO getListado(){
 			/*metodos para hacer la conexion*/
-			/*Configuration cfg = new Configuration();
-			cfg.configure ("hibernate.cfg.xml");
-			SessionFactory factory = cfg.buildSessionFactory();
-			Session session = factory.openSession();
-			*/
+			
 			Transaction tx = CrearSesion.session.beginTransaction();
 			
 			//Creo la consulta
@@ -34,8 +28,6 @@ public class LugarDAO {
 			
 			tx.commit();
 			
-			/*session.close();
-			factory.close();*/
 			ListaLugaresDTO listalugares= new ListaLugaresDTO();
 			
 				
@@ -54,12 +46,6 @@ public class LugarDAO {
 		
 		public static ListaLugaresDTO getListado(long idDeporte){
 			/*metodos para hacer la conexion*/
-			/*Configuration cfg = new Configuration();
-			cfg.configure ("hibernate.cfg.xml");
-			SessionFactory factory = cfg.buildSessionFactory();
-			Session session = factory.openSession();
-			
-			Transaction tx = session.beginTransaction();*/
 			Transaction tx = CrearSesion.session.beginTransaction();
 			//Creo la consulta
 			Query query = CrearSesion.session.createQuery("from SeRealizaEn s where s.iddeporte=?");
@@ -83,9 +69,7 @@ public class LugarDAO {
 				listalugares.addLugar(lugar);
 				
 			}
-			/*session.close();
-			factory.close();*/
-			//System.out.println(listalugares.getLugares().get(0).getNombre());
+			
 			return listalugares;
 		}
 

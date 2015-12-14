@@ -29,11 +29,7 @@ import capanegocios.SeRealizaEn;
 public class CompetenciaDAO {
 	
 	public static FormaPuntuacion getFormaPuntuacion(int idforma){
-		/*Configuration cfg = new Configuration();
-		cfg.configure ("hibernate.cfg.xml");
-		SessionFactory factory = cfg.buildSessionFactory();
-		Session session = factory.openSession();*/
-		
+				
 		Transaction tx = CrearSesion.session.beginTransaction();
 		
 		Query query = CrearSesion.session.createQuery("from FormaPuntuacion");
@@ -54,11 +50,7 @@ public class CompetenciaDAO {
 	}
 	
 	public static Modalidad getModalidad(long idmodalidad){
-		/*Configuration cfg = new Configuration();
-		cfg.configure ("hibernate.cfg.xml");
-		SessionFactory factory = cfg.buildSessionFactory();
-		Session session = factory.openSession();*/
-		
+				
 		Transaction tx = CrearSesion.session.beginTransaction();
 		
 		Query query = CrearSesion.session.createQuery("from Modalidad m where m.id_modalidad=?");
@@ -73,11 +65,7 @@ public class CompetenciaDAO {
 	}
 	
 	public static ArrayList<Competencia> buscarCompetencias(String nombre, int deporteID, int modalidadID, int estadoID, long usuarioID){
-		/*Configuration cfg = new Configuration();
-		cfg.configure ("hibernate.cfg.xml");
-		SessionFactory factory = cfg.buildSessionFactory();
-		Session session = factory.openSession();*/
-		
+				
 		Transaction tx = CrearSesion.session.beginTransaction();
 		
 		String consulta = "from Competencia ";
@@ -173,10 +161,7 @@ public class CompetenciaDAO {
 	}
 	
 	public static ListaCompetenciasDTO getListado(){
-		/*Configuration cfg = new Configuration();
-		cfg.configure ("hibernate.cfg.xml");
-		SessionFactory factory = cfg.buildSessionFactory();
-		Session session = factory.openSession();*/
+		
 		
 		Transaction tx = CrearSesion.session.beginTransaction();
 		
@@ -194,8 +179,7 @@ public class CompetenciaDAO {
 			ModalidadDTO modalidad = new ModalidadDTO();
 			EstadoDTO estado = new EstadoDTO();
 			DeporteDTO deporte = new DeporteDTO();
-			/*Aca van el seteo de cada dto competencia que es lo que se devuelve,
-			 setea solamente lo que se va a mostrar por pantalla, el resto ya fue*/
+			/*Aca van el seteo de cada dto competencia que es lo que se devuelve*/
 			
 			competencia.setNombre(object.getNombre());
 			modalidad.setEliminatoriaDoble(object.getModalidad().getEliminatoriadoble());
@@ -233,22 +217,18 @@ public class CompetenciaDAO {
 		competencia = (Competencia) query.uniqueResult();
 		
 		tx.commit();
-		/*session.close();
-		factory.close();*/
-		//System.out.println(competencia.getNombre()); al participante le cargas los puntos y todo eso?si, aca
+		
 		return competencia;
 	}
 
 	public static void actualizarCompetencia(Competencia competencia) {
-		
-		
-		
+				
 		Transaction tx = CrearSesion.session.beginTransaction();
 		CrearSesion.session.merge(competencia);
 		
 		tx.commit();
 		
-			}
+	}
 
 	public static boolean validarNombre(String text) {
 		boolean retorno = false;
@@ -266,9 +246,6 @@ public class CompetenciaDAO {
 			retorno = true;
 		else
 			retorno = false;
-		/*session.close();
-		factory.close();*/
-		//System.out.println(competencia.getNombre()); al participante le cargas los puntos y todo eso?si, aca
 		
 		return retorno;
 	}

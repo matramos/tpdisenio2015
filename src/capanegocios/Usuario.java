@@ -3,8 +3,6 @@ package capanegocios;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.*;
-
 
 public class Usuario {
 	
@@ -20,17 +18,6 @@ public class Usuario {
 	private Localidad localidad;
 	private Auditoria auditoria;
 	
-	
-	
-	
-	//public List<Competencia> getCompetencias() {
-	//	return competencias;
-	//}
-
-	//public void setCompetencias(List<Competencia> competencias) {
-	//	this.competencias = competencias;
-	//}
-
 	public Localidad getLocalidad() {
 		return localidad;
 	}

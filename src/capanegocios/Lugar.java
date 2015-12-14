@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DTO.CompetenciaDTO;
-import DTO.EncuentroDTO;
 import DTO.LugarDTO;
 import DTO.SeRealizaEnDTO;
 

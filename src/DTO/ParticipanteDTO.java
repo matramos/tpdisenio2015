@@ -1,12 +1,6 @@
 package DTO;
 
-import java.awt.Image;
 import java.util.List;
-
-import org.hibernate.Transaction;
-
-import Inicio.CrearSesion;
-import capanegocios.Competencia;
 import capanegocios.Encuentro;
 import capanegocios.Participante;
 

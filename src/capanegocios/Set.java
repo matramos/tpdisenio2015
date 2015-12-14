@@ -1,6 +1,5 @@
 package capanegocios;
 
-import DTO.EncuentroDTO;
 import DTO.SetDTO;
 
 public class Set {

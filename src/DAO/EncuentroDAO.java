@@ -4,7 +4,6 @@ import org.hibernate.Query;
 import org.hibernate.Transaction;
 
 import Inicio.CrearSesion;
-import capanegocios.Competencia;
 import capanegocios.Encuentro;
 
 public class EncuentroDAO {
@@ -22,8 +21,7 @@ public class EncuentroDAO {
 		encuentro = (Encuentro) query.uniqueResult();
 		
 		tx.commit();
-		/*session.close();
-		factory.close();*/
+
 		System.out.println("puta vida");
 		return encuentro;
 	}

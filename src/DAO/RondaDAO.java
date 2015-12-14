@@ -4,7 +4,6 @@ import org.hibernate.Query;
 import org.hibernate.Transaction;
 
 import Inicio.CrearSesion;
-import capanegocios.Competencia;
 import capanegocios.Ronda;
 
 public class RondaDAO {
@@ -22,9 +21,6 @@ public class RondaDAO {
 		ronda = (Ronda) query.uniqueResult();
 		
 		tx.commit();
-		/*session.close();
-		factory.close();*/
-		//System.out.println(listalugares.getLugares().get(0).getNombre());
 		return ronda;
 	}
 }

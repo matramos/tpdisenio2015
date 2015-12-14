@@ -19,7 +19,6 @@ import DTO.CompetenciaDTO;
 import DTO.ParticipanteDTO;
 import gestores.GestorCompetencias;
 import net.miginfocom.swing.MigLayout;
-import capanegocios.Participante;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -144,8 +143,6 @@ public class Cu009 extends JFrame {
 		contentPane.add(txtEmail);
 		txtEmail.setColumns(10);
 		
-		//aca estaba antes
-		
 		JLabel lblImagenopcional = new JLabel("Imagen(opcional):");
 		lblImagenopcional.setBounds(92, 258, 148, 14);
 		contentPane.add(lblImagenopcional);
@@ -192,8 +189,6 @@ public class Cu009 extends JFrame {
 				
 			}
 		});
-		
-		//panel.add(btnIngresar, "cell 0 2");
 	       
         JPanel panel_1 = new JPanel();
         panel_1.setBorder(new TitledBorder(null, "Acciones", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -221,7 +216,7 @@ public class Cu009 extends JFrame {
 		lblIngreseEmail.setVisible(false);
 		contentPane.add(lblIngreseEmail);
 		
-		final JLabel lblEmailYaExiste = new JLabel("El email ingresado est� vinculado a otro participante");
+		final JLabel lblEmailYaExiste = new JLabel("El email ingresado est� vinculado a otro participante");
 		lblEmailYaExiste.setBounds(92, 236, 344, 14);
 		lblEmailYaExiste.setForeground(Color.red);
 		lblEmailYaExiste.setVisible(false);
@@ -289,11 +284,14 @@ public class Cu009 extends JFrame {
 					participanteDTO.imagen = imageInByte;
 			
 					if(id_competencia==GestorCompetencias.agregarParticipante(participanteDTO,id_competencia)){
-						
-						JOptionPane.showMessageDialog(null, "Se cargo con exito");
-						/*Cu008 ventana = new Cu008(idcomp);
-						ventana.setVisible(true);
-						dispose();*/
+						if(competencia.getEstado().getId_estado() == 1){
+							JOptionPane.showMessageDialog(null, "La operación ha culminado con éxito");
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "La operación ha culminado con éxito y"
+									+ " el fixture ha sido eliminado.");
+						}
+
 					}
 				}
 			

@@ -36,11 +36,8 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
 import DTO.CompetenciaDTO;
-import DTO.ListaDeportesDTO;
-import DTO.ListaParticipantesDTO;
 import DTO.ParticipanteDTO;
 import gestores.GestorCompetencias;
-import gestores.GestorDeportes;
 import igrafica.TestModelCU3.ColumnContext;
 
 public class Cu008 extends JFrame {
@@ -145,11 +142,6 @@ public class Cu008 extends JFrame {
 		competencia= GestorCompetencias.getCompetencia(id_competencia);
 		
 		for(ParticipanteDTO PDTO : competencia.getParticipantes()){
-			/*System.out.println(CDTO.getNombre());
-			System.out.println(CDTO.getDeporte());
-			System.out.println(CDTO.getModalidad());
-			System.out.println(CDTO.getEstado());*/
-			//model.addTest(new TestCU3(CDTO.getNombre(),CDTO.getDeporte().getNombre(),""+CDTO.getModalidad().getId_modalidad()));
 			model.addTest(new TestCU8(PDTO.getNombre(),PDTO.getEmail()));
 		}
 		

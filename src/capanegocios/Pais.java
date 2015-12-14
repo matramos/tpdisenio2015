@@ -22,7 +22,7 @@ public class Pais {
 		this.nombre = nombre;
 	}
 	
-	public void setProvincias(List provincias){
+	public void setProvincias(List<Provincia> provincias){
 		this.provincias = provincias;
 	}
 	
@@ -30,7 +30,7 @@ public class Pais {
 		return nombre;
 	}
 	
-	public List getProvincias(){
+	public List<Provincia> getProvincias(){
 		return provincias;
 	}
 	

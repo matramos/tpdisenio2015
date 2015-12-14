@@ -3,17 +3,13 @@ package DAO;
 import org.hibernate.Transaction;
 
 import Inicio.CrearSesion;
-import capanegocios.Competencia;
 import capanegocios.Participante;
 
 public class ParticipanteDAO {
 
 	public static boolean agregarParticipante(Participante participante){
 		boolean bool=false;
-		/*Configuration cfg = new Configuration();
-		cfg.configure ("hibernate.cfg.xml");
-		SessionFactory factory = cfg.buildSessionFactory();
-		Session session = factory.openSession();*/
+		
 		Transaction tx = CrearSesion.session.beginTransaction();
 		CrearSesion.session.saveOrUpdate(participante);
 		

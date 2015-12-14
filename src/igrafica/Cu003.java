@@ -33,7 +33,6 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
-import DAO.CompetenciaDAO;
 import DTO.ListaCompetenciasDTO;
 
 import DTO.CompetenciaDTO;
@@ -172,7 +171,7 @@ public class Cu003 extends JFrame {
 				 listaCompetenciasEncontradas = 
 						GestorCompetencias.buscarCompetencias(nombre.getText(), comboDeporte.getSelectedIndex(), 
 								comboModalidad.getSelectedIndex(), comboEstado.getSelectedIndex(), id_usuario);
-				//Descomentar para ver que estamos eligiendo
+				
 				 model = new TestModelCU3();
 					table = new JTable(model);
 				    

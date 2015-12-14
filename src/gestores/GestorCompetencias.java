@@ -1,12 +1,9 @@
 package gestores;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import DAO.CompetenciaDAO;
 import DAO.DeporteDAO;
 import DAO.EncuentroDAO;
-import DAO.ParticipanteDAO;
 import DAO.RondaDAO;
 import DAO.UsuarioDAO;
 import DAO.LugarDAO;
@@ -15,7 +12,6 @@ import DTO.DisponibilidadDTO;
 import DTO.EstadoDTO;
 import DTO.FormaPuntuacionDTO;
 import DTO.InfoCompetenciaDTO;
-import DTO.ListaDeportesDTO;
 import DTO.ListaParticipantesDTO;
 import DTO.ModalidadDTO;
 import DTO.ParticipanteDTO;
@@ -25,11 +21,9 @@ import capanegocios.Disponibilidad;
 import capanegocios.Encuentro;
 import capanegocios.Estado;
 import capanegocios.FormaPuntuacion;
-import capanegocios.Lugar;
 import capanegocios.Modalidad;
 import capanegocios.Participante;
 import capanegocios.Ronda;
-import capanegocios.SeRealizaEn;
 import capanegocios.Usuario;
 public class GestorCompetencias {
 	
@@ -75,18 +69,12 @@ public class GestorCompetencias {
 		ArrayList<Competencia> competenciasEncontradas = CompetenciaDAO.buscarCompetencias(nombreComp, deporteID, modalidadID, estadoID,usuarioID);
 
 		for(Competencia comp : competenciasEncontradas){
-			//System.out.println(comp.getDeporte().getNombre());
 			CompetenciaDTO compDTO = new CompetenciaDTO(comp);
 			competenciasQueRetornan.add(compDTO);
 		}
 		return competenciasQueRetornan;
 	}
 
-	
-	/*public static ArrayList<CompetenciaDTO> buscarCompetencias(String string, int i, int j, int k) {
-		
-		return null;
-	}*/
 
 public static CompetenciaDTO getCompetencia(long id_competencia){
 	
@@ -94,15 +82,11 @@ public static CompetenciaDTO getCompetencia(long id_competencia){
 
 	CompetenciaDTO competencia2 = new CompetenciaDTO(competencia);
 	
-	
-	
 	return competencia2;
 }
 
 public static long agregarParticipante(ParticipanteDTO participanteDTO,long id_competencia){
-	
-	
-	
+		
 	competencia = CompetenciaDAO.getCompetencia(id_competencia);
 	long res = 0;
 	Participante participante = new Participante();
@@ -121,8 +105,6 @@ public static long agregarParticipante(ParticipanteDTO participanteDTO,long id_c
 	estado.setId(1);
 	estado.setNombre("creada");
 	competencia.setEstado(estado);
-	
-	
 	
 	
 	res = CompetenciaDAO.agregarCompetencia(competencia);
@@ -144,12 +126,13 @@ public static ListaParticipantesDTO mostrarTabla(CompetenciaDTO competencia2) {
 
 public static void generarFixture(long id_competencia) {
 	competencia = buscarCompetencia(id_competencia);
-	System.out.println(competencia.getEstado().getNombre());
+	
+	//Si la Competencia esta planificada, le borramos el fixture del objeto y de la BD
 	if(competencia.getEstado().getNombre().equals("planificada")){
-		System.out.println("borrando fixture");
 		competencia.borrarFixture();
 		CompetenciaDAO.actualizarCompetencia(competencia);
 	}
+	
 	GestorFixture.generarFixture(competencia);
 	
 	//cambiamos el estado de la competencia a "planificada"

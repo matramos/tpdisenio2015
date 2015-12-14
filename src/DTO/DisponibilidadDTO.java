@@ -1,7 +1,5 @@
 package DTO;
 
-import capanegocios.Lugar;
-
 public class DisponibilidadDTO {
 	private LugarDTO lugar;
 	private int disponibilidad;

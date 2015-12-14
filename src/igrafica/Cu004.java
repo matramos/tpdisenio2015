@@ -57,7 +57,6 @@ import DTO.DisponibilidadDTO;
 import DTO.ListaDeportesDTO;
 import DTO.ListaLugaresDTO;
 import DTO.LugarDTO;
-import capanegocios.Lugar;
 import gestores.GestorCompetencias;
 import gestores.GestorDeportes;
 import gestores.GestorLugar;
@@ -113,10 +112,10 @@ public class Cu004 extends JFrame {
 	 * Create the frame.
 	 */
 	
-	//ESTE ES EL CONSTRUCTOR, NO?-matt
+
 	public Cu004(final long id_usuario) {
 		
-		//DEFINIMOS LA VENTANA?--matt
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		setResizable(false);
@@ -146,6 +145,7 @@ public class Cu004 extends JFrame {
 		lblIndiqueAlgunLugar.setForeground(Color.red);
 		lblIndiqueAlgunLugar.setVisible(false);
 		contentPane.add(lblIndiqueAlgunLugar);
+		
 		// boton agregar para la tabla
 		JButton btnAgregar = new JButton("Agregar");
 		btnAgregar.addActionListener(new ActionListener() {
@@ -221,8 +221,6 @@ public class Cu004 extends JFrame {
 		contentPane.add(lblSeleccioneDeporte);
 		
 		
-		/*Toda esta parte hay que corregirla despues para que busque los lugares despues de haber elegido el deporte,
-		 o sea, que busque la lista de lugares con un id_deporte en la base de datos, ma�ana lo voy a ver*/
 		deportes = GestorDeportes.getListadoDeportes();
 		
 		disponibilidad = new JTextField();
@@ -275,7 +273,8 @@ public class Cu004 extends JFrame {
 		});
 		deporte.setBounds(539, 72, 86, 20);
 		contentPane.add(deporte);
-		deporte.setColumns(10);		
+		deporte.setColumns(10);	
+		
 		/*Recupero la lista de deportes (tipo ListaDeportesDTO)*/
 		
 		TextAutoCompleter deportesAC = new TextAutoCompleter(deporte);
