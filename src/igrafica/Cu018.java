@@ -591,6 +591,11 @@ public class Cu018 extends JFrame {
 		}
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnCancelar.setBounds(347, 537, 89, 23);
 		contentPane.add(btnCancelar);
 		
@@ -965,16 +970,5 @@ public class Cu018 extends JFrame {
 		JLabel nombreP2 = new JLabel(encuentro.getJugador2().getNombre());
 		nombreP2.setBounds(462, 52, 198, 14);
 		contentPane.add(nombreP2);
-		
-		JButton btnMenuPrincipal = new JButton("Menu Principal");
-		btnMenuPrincipal.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				menuprincipal ventana = new menuprincipal (id_usuario);
-				ventana.setVisible(true);
-				dispose();
-			}
-		});
-		btnMenuPrincipal.setBounds(469, 537, 112, 23);
-		contentPane.add(btnMenuPrincipal);
 	}
 }

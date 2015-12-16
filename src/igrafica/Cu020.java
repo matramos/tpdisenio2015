@@ -95,8 +95,17 @@ public class Cu020 extends JFrame {
 		contentPane.add(nombreEstado);
 		
 		JButton btnCancelar = new JButton("Ver fixture");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(compe.getEstado().getId_estado()!=1 && compe.getEstado().getId_estado()!=5){
+				Cu019 cu = new Cu019(id_competencia,id_usuario);
+				cu.setVisible(true);
+				dispose();
+				}
+			}
+		});
 		btnCancelar.setBounds(403, 164, 170, 23);
-		btnCancelar.setEnabled(false);
+		btnCancelar.setEnabled(true);
 		contentPane.add(btnCancelar);
 		
 		JButton btnCrearCompetencia = new JButton("Eliminar competencia");
@@ -140,14 +149,12 @@ public class Cu020 extends JFrame {
 		scrollPane.setBounds(420, 348, 314, 143);
 		contentPane.add(scrollPane);
 		
-		DefaultTableModel tableModel2 = new DefaultTableModel(new String [] {"ID Ronda","ID Encuentro", 
-				"Participante 1","Participante 2","Lugar"},0);
+		DefaultTableModel tableModel2 = new DefaultTableModel(new String [] {"Participante 1","Participante 2","Lugar"},0);
 		table = new JTable(tableModel2);
 		if(!compe.getRondas().isEmpty()){
 			RondaDTO rondaActual = compe.rondaActual();
 			for (EncuentroDTO e : rondaActual.getEncuentros() ){
-				Object[] obj2 = {rondaActual.getId_ronda(), e.getId_encuentro(),
-						e.getJugador1().getNombre(),e.getJugador2().getNombre(),e.getLugar().getNombre()};
+				Object[] obj2 = {e.getJugador1().getNombre(),e.getJugador2().getNombre(),e.getLugar().getNombre()};
 				tableModel2.addRow(obj2);
 			}
 		}
