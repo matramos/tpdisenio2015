@@ -232,8 +232,8 @@ public class Cu009 extends JFrame {
 					dispose();
 				}
 				else{
-					boolean noexistemail = GestorCompetencias.validarMail(txtEmail.getText());
-					boolean noexistenombre = GestorCompetencias.validarNombreP(txtNombre.getText());
+					boolean noexistemail = GestorCompetencias.validarMail(txtEmail.getText(),id_competencia);
+					boolean noexistenombre = GestorCompetencias.validarNombreP(txtNombre.getText(),id_competencia);
 					ParticipanteDTO participanteDTO = new ParticipanteDTO();
 				if(txtNombre.getText().isEmpty() || txtEmail.getText().isEmpty() || !noexistemail || !noexistenombre){
 					if(txtNombre.getText().isEmpty()){
@@ -285,10 +285,10 @@ public class Cu009 extends JFrame {
 			
 					if(id_competencia==GestorCompetencias.agregarParticipante(participanteDTO,id_competencia)){
 						if(competencia.getEstado().getId_estado() == 1){
-							JOptionPane.showMessageDialog(null, "La operaciÃ³n ha culminado con Ã©xito");
+							JOptionPane.showMessageDialog(null, "La operación ha culminado con éxito");
 						}
 						else {
-							JOptionPane.showMessageDialog(null, "La operaciÃ³n ha culminado con Ã©xito y"
+							JOptionPane.showMessageDialog(null, "La operación ha culminado con éxito y"
 									+ " el fixture ha sido eliminado.");
 						}
 

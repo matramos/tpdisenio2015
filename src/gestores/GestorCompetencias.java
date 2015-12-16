@@ -192,16 +192,33 @@ public static boolean validarNombre(String text) {
 	return retorno;
 }
 
-public static boolean validarMail(String text) {
+public static boolean validarMail(String text, long id_competencia) {
 	boolean retorno=false;
-	retorno = CompetenciaDAO.validarMail(text);
+	Competencia competencia = CompetenciaDAO.getCompetencia(id_competencia);
+	for(Participante part: competencia.getParticipantes()){
+		if(part.getEmail().equals(text)){
+			retorno=true;
+		}
+	}
+	
 	return retorno;
 }
 
-public static boolean validarNombreP(String text) {
+public static boolean validarNombreP(String text, long id_competencia) {
 	boolean retorno=false;
-	retorno = CompetenciaDAO.validarNombreP(text);
+	Competencia competencia = CompetenciaDAO.getCompetencia(id_competencia);
+	for(Participante part: competencia.getParticipantes()){
+		if(part.getNombre().equals(text)){
+			retorno=true;
+		}
+	}
+	
 	return retorno;
+}
+
+public static Estado getEstado(long id_estado){
+	Estado est = CompetenciaDAO.getEstado(id_estado);
+	return est;
 }
 
 }
