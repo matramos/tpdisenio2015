@@ -193,11 +193,11 @@ public static boolean validarNombre(String text) {
 }
 
 public static boolean validarMail(String text, long id_competencia) {
-	boolean retorno=false;
+	boolean retorno=true;
 	Competencia competencia = CompetenciaDAO.getCompetencia(id_competencia);
 	for(Participante part: competencia.getParticipantes()){
 		if(part.getEmail().equals(text)){
-			retorno=true;
+			retorno=false;
 		}
 	}
 	
@@ -205,11 +205,11 @@ public static boolean validarMail(String text, long id_competencia) {
 }
 
 public static boolean validarNombreP(String text, long id_competencia) {
-	boolean retorno=false;
+	boolean retorno=true;
 	Competencia competencia = CompetenciaDAO.getCompetencia(id_competencia);
 	for(Participante part: competencia.getParticipantes()){
 		if(part.getNombre().equals(text)){
-			retorno=true;
+			retorno=false;
 		}
 	}
 	

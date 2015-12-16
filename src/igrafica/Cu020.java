@@ -235,16 +235,5 @@ public class Cu020 extends JFrame {
 		lblParticipantes.setBounds(78, 323, 94, 14);
 		contentPane.add(lblParticipantes);
 		
-		JButton btnMenuPrincipal = new JButton("Menu Principal");
-		btnMenuPrincipal.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				menuprincipal ventana = new menuprincipal (id_usuario);
-				ventana.setVisible(true);
-				dispose();
-			}
-		});
-		btnMenuPrincipal.setBounds(411, 523, 109, 23);
-		contentPane.add(btnMenuPrincipal);
-		
 	}
 }

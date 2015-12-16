@@ -286,10 +286,16 @@ public class Cu009 extends JFrame {
 					if(id_competencia==GestorCompetencias.agregarParticipante(participanteDTO,id_competencia)){
 						if(competencia.getEstado().getId_estado() == 1){
 							JOptionPane.showMessageDialog(null, "La operaci�n ha culminado con �xito");
+							Cu008 ventana = new Cu008(id_competencia,id_usuario);
+							ventana.setVisible(true);
+							dispose();
 						}
 						else {
 							JOptionPane.showMessageDialog(null, "La operaci�n ha culminado con �xito y"
 									+ " el fixture ha sido eliminado.");
+							Cu008 ventana = new Cu008(id_competencia,id_usuario);
+							ventana.setVisible(true);
+							dispose();
 						}
 
 					}
@@ -311,17 +317,6 @@ public class Cu009 extends JFrame {
 		});
 		btnCancelar.setBounds(402, 511, 89, 23);
 		contentPane.add(btnCancelar);
-		
-		JButton btnMenuPrincipal = new JButton("Menu Principal");
-		btnMenuPrincipal.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				menuprincipal ventana = new menuprincipal (id_usuario);
-				ventana.setVisible(true);
-				dispose();
-			}
-		});
-		btnMenuPrincipal.setBounds(532, 511, 101, 23);
-		contentPane.add(btnMenuPrincipal);
 		
 		
 		}
