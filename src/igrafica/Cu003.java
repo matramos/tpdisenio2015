@@ -1,6 +1,7 @@
 package igrafica;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EventObject;
 import java.util.Objects;
 import java.awt.BorderLayout;
@@ -110,7 +111,7 @@ public class Cu003 extends JFrame {
 		//Recuperamos los Deportes y los mostramos en el ComboBox
 		//habria que ver de ordenarlos alfabeticamente
 		deportes = GestorDeportes.getListadoDeportes();
-		
+		Collections.sort(deportes.getDeportes(),DeporteDTO.COMPARAR_POR_NOMBRE);
 		for(DeporteDTO depor: deportes.getDeportes()){
 			
 			comboDeporte.addItem(depor.getNombre());
@@ -224,17 +225,6 @@ public class Cu003 extends JFrame {
 		});
 		btnCancelar.setBounds(340, 522, 89, 23);
 		contentPane.add(btnCancelar);
-		
-		JButton btnMenuPrincipal = new JButton("Menu Principal");
-		btnMenuPrincipal.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				menuprincipal ventana = new menuprincipal (id_usuario);
-				ventana.setVisible(true);
-				dispose();
-			}
-		});
-		btnMenuPrincipal.setBounds(519, 522, 105, 23);
-		contentPane.add(btnMenuPrincipal);
 		
 		
 	}

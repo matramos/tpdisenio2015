@@ -1,6 +1,7 @@
 package DTO;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import capanegocios.Deporte;
@@ -10,6 +11,8 @@ public class DeporteDTO {
 	private long id;
 	private String nombre;
 	private List<SeRealizaEnDTO> serealizaen = new ArrayList<SeRealizaEnDTO>();
+	
+	
 	
 	public DeporteDTO(Deporte deporte) {
 		this.id = deporte.getId();
@@ -55,4 +58,11 @@ public class DeporteDTO {
 	public void addSerealizaen(SeRealizaEnDTO serealizaen){
 		this.serealizaen.add(serealizaen);
 	}
+	
+	public static Comparator<DeporteDTO> COMPARAR_POR_NOMBRE = new Comparator<DeporteDTO>(){
+		public int compare(DeporteDTO uno, DeporteDTO dos){
+			return uno.nombre.compareTo(dos.nombre);
+		}
+	};
 }
+

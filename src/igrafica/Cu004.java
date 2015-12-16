@@ -360,40 +360,6 @@ public class Cu004 extends JFrame {
 		
 		
 		
-		
-		
-		
-		final JComboBox comboFormaPuntuacion = new JComboBox();
-		comboFormaPuntuacion.addItem("Puntuacion");
-		comboFormaPuntuacion.addItem("Sets");
-		comboFormaPuntuacion.addItem("Resultado final");
-		comboFormaPuntuacion.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent arg0) {
-                String seleccion = (String) arg0.getItem();
-				if(arg0.getStateChange()== ItemEvent.SELECTED){
-					if(seleccion == "Sets"){
-					comboCantidadSets.setEnabled(true);
-					chckbxSePermiteEmpate.setEnabled(false);
-					puntosEmpate.setEditable(false);
-					
-					
-				}
-					else{
-					comboCantidadSets.setEnabled(false);
-					chckbxSePermiteEmpate.setEnabled(true);
-					puntosEmpate.setEditable(true);
-					
-				}
-				
-				
-				
-			}
-		}});
-		comboFormaPuntuacion.setBounds(539, 354, 147, 20);
-		contentPane.add(comboFormaPuntuacion);
-		
-		
-		
 		final JComboBox comboModalidad = new JComboBox();
 		comboModalidad.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
@@ -425,6 +391,73 @@ public class Cu004 extends JFrame {
 		comboModalidad.addItem("Liga");
 		comboModalidad.addItem("Eliminatoria simple");
 		comboModalidad.addItem("Eliminatoria doble");
+		
+		
+		final JComboBox comboFormaPuntuacion = new JComboBox();
+		comboFormaPuntuacion.addItem("Puntuacion");
+		comboFormaPuntuacion.addItem("Sets");
+		comboFormaPuntuacion.addItem("Resultado final");
+		comboFormaPuntuacion.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+                String seleccion = (String) arg0.getItem();
+				if(arg0.getStateChange()== ItemEvent.SELECTED){
+					
+					if(comboModalidad.getSelectedItem().toString().equals("Liga")){
+					if(seleccion == "Sets"){
+					comboCantidadSets.setEnabled(true);
+					chckbxSePermiteEmpate.setEnabled(false);
+					puntosEmpate.setEditable(false);
+					puntosVictoria.setEditable(true);
+					resultado.setEditable(true);
+					comboPuntos.setEnabled(true);
+					
+					
+				}
+					else if(seleccion == "Resultado final"){
+					comboCantidadSets.setEnabled(false);
+					
+					puntosEmpate.setEditable(false);
+					puntosVictoria.setEditable(true);
+					chckbxSePermiteEmpate.setEnabled(false);
+					puntosEmpate.setEditable(false);
+					
+					resultado.setEditable(true);
+					comboPuntos.setEnabled(true);
+					
+				}
+					else if (seleccion == "Puntuacion"){
+						chckbxSePermiteEmpate.setEnabled(true);
+						puntosEmpate.setEditable(true);
+						chckbxSePermiteEmpate.setEnabled(true);
+						if(!chckbxSePermiteEmpate.isSelected()){
+							puntosEmpate.setEditable(false);}
+					}
+				
+				}
+					else if(comboModalidad.getSelectedItem().toString().equals("Eliminatoria simple") || comboModalidad.getSelectedItem().toString().equals("Eliminatoria doble")){
+						if(seleccion == "Sets"){
+							comboCantidadSets.setEnabled(true);
+							
+							
+							
+						}
+							else if(seleccion == "Resultado final"){
+								comboCantidadSets.setEnabled(false);
+							
+						}
+							else if (seleccion == "Puntuacion"){
+								comboCantidadSets.setEnabled(false);
+							}
+					}
+					
+			}
+		}});
+		comboFormaPuntuacion.setBounds(539, 354, 147, 20);
+		contentPane.add(comboFormaPuntuacion);
+		
+		
+		
+		
 		
 		
 		JLabel lblPuntosVictoria = new JLabel("Puntos Victoria");
@@ -537,8 +570,9 @@ public class Cu004 extends JFrame {
 				
 				boolean noexiste = GestorCompetencias.validarNombre(nombre.getText());
 				if(comboModalidad.getSelectedIndex()==0){
-				boolean menor = !(puntosVictoria.isEditable() && puntosVictoria.getText().isEmpty()) && !(puntosEmpate.isEditable() && puntosEmpate.getText().isEmpty()) && ((Integer.parseInt(puntosVictoria.getText()) < Integer.parseInt(puntosEmpate.getText())));
-				boolean negativo = !(puntosVictoria.isEditable() && puntosVictoria.getText().isEmpty()) && !(puntosEmpate.isEditable() && puntosEmpate.getText().isEmpty()) && (Integer.parseInt(puntosVictoria.getText()) <0);
+				
+				boolean menor = (puntosVictoria.isEditable() && !puntosVictoria.getText().isEmpty()) && (puntosEmpate.isEditable() && !puntosEmpate.getText().isEmpty()) && ((Integer.parseInt(puntosVictoria.getText()) < Integer.parseInt(puntosEmpate.getText())));
+				boolean negativo = (puntosVictoria.isEditable() && !puntosVictoria.getText().isEmpty()) && (puntosEmpate.isEditable() && !puntosEmpate.getText().isEmpty()) && (Integer.parseInt(puntosVictoria.getText()) <0);
 				
 				if( menor || negativo || (puntosVictoria.isEditable() && puntosVictoria.getText().isEmpty()) || (puntosEmpate.isEditable() && puntosEmpate.getText().isEmpty())|| resultado.isEditable() && resultado.getText().isEmpty() ||  comboPuntos.getItemCount()==0 || nombre.getText().isEmpty() || table.getRowCount()==0  || !noexiste ){
 					if(nombre.getText().isEmpty()){
@@ -584,7 +618,7 @@ public class Cu004 extends JFrame {
 						sonido("error");
 					}
 					
-					else{
+					else if(chckbxSePermiteEmpate.isSelected()){
 						lblPuntosNegativos.setVisible(false);
 						lblSeleccionePuntosVictoria.setVisible(false);
 						lblSeleccionePuntosEmpate.setVisible(false);
@@ -595,6 +629,9 @@ public class Cu004 extends JFrame {
 						else{
 							lblPuntosvMenor.setVisible(false);
 						}
+					}
+					else{
+						lblPuntosvMenor.setVisible(false);
 					}
 					if(puntosEmpate.isEditable() && puntosEmpate.getText().isEmpty()){
 						lblSeleccionePuntosEmpate.setVisible(true);
@@ -644,7 +681,8 @@ public class Cu004 extends JFrame {
 					if(comboModalidad.getSelectedIndex()==0){
 						idmodalidad = 1;
 						competencia.setPuntos_ganador(Integer.parseInt(puntosVictoria.getText()));
-						competencia.setPuntos_empate(Integer.parseInt(puntosEmpate.getText()));
+						if(chckbxSePermiteEmpate.isSelected())
+							competencia.setPuntos_empate(Integer.parseInt(puntosEmpate.getText()));
 						competencia.setPermite_empates(chckbxSePermiteEmpate.isSelected());
 						competencia.setPuntos_presentarse((int)comboPuntos.getSelectedItem());
 						competencia.setResultado_final(Integer.parseInt(resultado.getText()));
