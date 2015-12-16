@@ -344,6 +344,11 @@ public class Cu004 extends JFrame {
 		contentPane.add(resultado);
 		resultado.setColumns(10);
 		
+		final JComboBox comboFormaPuntuacion = new JComboBox();
+		comboFormaPuntuacion.addItem("Puntuacion");
+		comboFormaPuntuacion.addItem("Sets");
+		comboFormaPuntuacion.addItem("Resultado final");
+		
 		final JComboBox comboCantidadSets = new JComboBox();
 		comboCantidadSets.addItem(1);
 		
@@ -367,16 +372,17 @@ public class Cu004 extends JFrame {
 				if(arg0.getStateChange()== ItemEvent.SELECTED){
 					if(seleccion == "Liga"){
 					puntosVictoria.setEditable(true);
+					if(comboFormaPuntuacion.getSelectedItem().toString().equals("Puntuacion")){
 					chckbxSePermiteEmpate.setEnabled(true);
-					puntosEmpate.setEditable(true);
-					resultado.setEditable(true);
+					puntosEmpate.setEditable(true);}
+					
 					comboPuntos.setEnabled(true);
 				}
 					else{
 					puntosVictoria.setEditable(false);
 					chckbxSePermiteEmpate.setEnabled(false);
 					puntosEmpate.setEditable(false);
-					resultado.setEditable(false);
+					
 					comboPuntos.setEnabled(false);
 					
 				}
@@ -393,10 +399,7 @@ public class Cu004 extends JFrame {
 		comboModalidad.addItem("Eliminatoria doble");
 		
 		
-		final JComboBox comboFormaPuntuacion = new JComboBox();
-		comboFormaPuntuacion.addItem("Puntuacion");
-		comboFormaPuntuacion.addItem("Sets");
-		comboFormaPuntuacion.addItem("Resultado final");
+		
 		comboFormaPuntuacion.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
                 String seleccion = (String) arg0.getItem();
@@ -408,9 +411,8 @@ public class Cu004 extends JFrame {
 					chckbxSePermiteEmpate.setEnabled(false);
 					puntosEmpate.setEditable(false);
 					puntosVictoria.setEditable(true);
-					resultado.setEditable(true);
 					comboPuntos.setEnabled(true);
-					
+					resultado.setEditable(false);
 					
 				}
 					else if(seleccion == "Resultado final"){
@@ -421,7 +423,7 @@ public class Cu004 extends JFrame {
 					chckbxSePermiteEmpate.setEnabled(false);
 					puntosEmpate.setEditable(false);
 					
-					resultado.setEditable(true);
+					resultado.setEditable(false);
 					comboPuntos.setEnabled(true);
 					
 				}
@@ -429,6 +431,7 @@ public class Cu004 extends JFrame {
 						chckbxSePermiteEmpate.setEnabled(true);
 						puntosEmpate.setEditable(true);
 						chckbxSePermiteEmpate.setEnabled(true);
+						resultado.setEditable(true);
 						if(!chckbxSePermiteEmpate.isSelected()){
 							puntosEmpate.setEditable(false);}
 					}
@@ -437,16 +440,17 @@ public class Cu004 extends JFrame {
 					else if(comboModalidad.getSelectedItem().toString().equals("Eliminatoria simple") || comboModalidad.getSelectedItem().toString().equals("Eliminatoria doble")){
 						if(seleccion == "Sets"){
 							comboCantidadSets.setEnabled(true);
-							
+							resultado.setEditable(false);
 							
 							
 						}
 							else if(seleccion == "Resultado final"){
 								comboCantidadSets.setEnabled(false);
-							
+								resultado.setEditable(false);
 						}
 							else if (seleccion == "Puntuacion"){
 								comboCantidadSets.setEnabled(false);
+								resultado.setEditable(true);
 							}
 					}
 					
