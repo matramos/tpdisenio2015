@@ -232,10 +232,10 @@ public class Cu009 extends JFrame {
 					dispose();
 				}
 				else{
-					boolean existemail = GestorCompetencias.validarMail(txtEmail.getText(),id_competencia);
-					boolean existenombre = GestorCompetencias.validarNombreP(txtNombre.getText(),id_competencia);
+					boolean noExistemail = GestorCompetencias.validarMail(txtEmail.getText(),id_competencia);
+					boolean noExistenombre = GestorCompetencias.validarNombreP(txtNombre.getText(),id_competencia);
 					ParticipanteDTO participanteDTO = new ParticipanteDTO();
-				if(txtNombre.getText().isEmpty() || txtEmail.getText().isEmpty() || existemail || existenombre){
+				if(txtNombre.getText().isEmpty() || txtEmail.getText().isEmpty() || !noExistemail || !noExistenombre){
 					if(txtNombre.getText().isEmpty()){
 						lblIngreseNombre.setVisible(true);
 						sonido("error");
@@ -250,14 +250,14 @@ public class Cu009 extends JFrame {
 					else{
 						lblIngreseEmail.setVisible(false);
 					}
-					if(existemail){
+					if(!noExistemail){
 						lblEmailYaExiste.setVisible(true);
 						sonido("error");
 					}
 					else{
 						lblEmailYaExiste.setVisible(false);
 					}
-					if(existenombre){
+					if(!noExistenombre){
 						lblYaExiste.setVisible(true);
 						sonido("error");
 					}

@@ -953,7 +953,7 @@ public class Cu018 extends JFrame {
 							
 							GestorFixture.cargarResultado(id_comp,id_ron,id_encu,encuentro);		
 							JOptionPane.showMessageDialog(null, "Se cargo con exito");
-							Cu018 ventana = new Cu018(id_comp,id_ron, id_encu, id_usuario);
+							Cu019 ventana = new Cu019(id_comp, id_usuario);
 							ventana.setVisible(true);
 							dispose();
 						
