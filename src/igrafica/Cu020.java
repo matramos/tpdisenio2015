@@ -164,8 +164,8 @@ public class Cu020 extends JFrame {
 		JButton btnCancelar_1 = new JButton("Cancelar");
 		btnCancelar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				menuprincipal ventana = new menuprincipal(id_usuario);
-				ventana.setVisible(true);
+				//Cu003 ventana = new Cu003(id_usuario);
+				//ventana.setVisible(true);
 				dispose();
 			}
 		});
