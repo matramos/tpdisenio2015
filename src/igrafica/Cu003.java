@@ -176,14 +176,14 @@ public class Cu003 extends JFrame {
 				 model = new TestModelCU3();
 					table = new JTable(model);
 				    
-					TableColumn column1 = table.getColumnModel().getColumn(3);
+					TableColumn column1 = table.getColumnModel().getColumn(4);
 				    column1.setCellRenderer(new DeleteButtonRendererCU3());
 				    column1.setCellEditor(new DeleteButtonEditorCU3(table, listaCompetenciasEncontradas));
 				    column1.setMinWidth(20);
 				    column1.setMaxWidth(20);
 				    column1.setResizable(false);
 				    
-				    TableColumn column2 = table.getColumnModel().getColumn(4);
+				    TableColumn column2 = table.getColumnModel().getColumn(5);
 				    column2.setCellRenderer(new DeleteButtonRenderer2CU3());
 				    column2.setCellEditor(new DeleteButtonEditor2CU3(table, listaCompetenciasEncontradas,id_usuario));
 				    column2.setMinWidth(60);
@@ -194,7 +194,7 @@ public class Cu003 extends JFrame {
 					scrollPane.setViewportView(table);
 				
 				for(CompetenciaDTO CDTO : listaCompetenciasEncontradas){
-					model.addTest(new TestCU3(CDTO.getNombre(),CDTO.getDeporte().getNombre(),""+CDTO.getModalidad().getNombre()));
+					model.addTest(new TestCU3(CDTO.getNombre(),CDTO.getDeporte().getNombre(),""+CDTO.getModalidad().getNombre(),CDTO.getEstado().getNombre()));
 				}
 				}
 			}
@@ -232,13 +232,35 @@ public class Cu003 extends JFrame {
 
 
 class TestCU3 {
-    private String nombreCompetencia, deporteAsociado,modalidad;
-    public TestCU3(String nombreCompetencia, String deporteAsociado, String modalidad) {
+    private String nombreCompetencia, deporteAsociado,modalidad,estado;
+    public TestCU3(String nombreCompetencia, String deporteAsociado, String modalidad, String estado) {
         this.nombreCompetencia=nombreCompetencia;
         this.deporteAsociado=deporteAsociado;
         this.modalidad=modalidad;
+        this.estado = estado;
     }
-    public void setNombreCompetencia(String str) {
+    
+    public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getNombreCompetencia() {
+		return nombreCompetencia;
+	}
+
+	public String getDeporteAsociado() {
+		return deporteAsociado;
+	}
+
+	public String getModalidad() {
+		return modalidad;
+	}
+
+	public void setNombreCompetencia(String str) {
         nombreCompetencia = str;
     }
     public void setDeporteAsociado(String str) {
@@ -264,11 +286,12 @@ class TestModelCU3 extends DefaultTableModel {
         new ColumnContext("Nombre de Competencia",     String.class, true),
         new ColumnContext("Deporte Asociado",    String.class,  true),
         new ColumnContext("Modalidad", String.class, true),
+        new ColumnContext("Estado", String.class, true),
         new ColumnContext("", String.class, true), 
         new ColumnContext("", String.class,  true)
     };
     public void addTest(TestCU3 t) {
-        Object[] obj = {t.getnombreCompetencia(), t.getdeporteAsociado(),t.getmodalidad(),"",""};
+        Object[] obj = {t.getnombreCompetencia(), t.getdeporteAsociado(),t.getmodalidad(),t.getEstado(),"",""};
         super.addRow(obj);
     }
     @Override public boolean isCellEditable(int row, int col) {
