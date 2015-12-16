@@ -53,10 +53,10 @@ public class GestorCompetencias {
 			competencia.addLugar(dispo);
 		}
 		
-		Estado estado = new Estado();
-		estado.setId(1);
-		estado.setNombre("creada");
-		competencia.setEstado(estado);
+		Estado creada = CompetenciaDAO.getEstado(1);
+		//estado.setId(1);
+		//estado.setNombre("creada");
+		competencia.setEstado(creada);
 		
 		
 		idGenerado = CompetenciaDAO.agregarCompetencia(competencia);
@@ -95,16 +95,18 @@ public static long agregarParticipante(ParticipanteDTO participanteDTO,long id_c
 	
 	competencia.agregarParticipante(participante);
 	
-	if(competencia.getEstado().getNombre().equals("planificada")){
+	if(competencia.getEstado().getId()==2){
 	
 		competencia.borrarFixture();
+		Estado creada = CompetenciaDAO.getEstado(1);
+		competencia.setEstado(creada);
 	}
 	
 	
-	Estado estado = new Estado();
-	estado.setId(1);
-	estado.setNombre("creada");
-	competencia.setEstado(estado);
+	//Estado estado = new Estado();
+	//estado.setId(1);
+	//estado.setNombre("creada");
+	//competencia.setEstado(estado);
 	
 	
 	res = CompetenciaDAO.agregarCompetencia(competencia);
@@ -128,7 +130,7 @@ public static void generarFixture(long id_competencia) {
 	competencia = buscarCompetencia(id_competencia);
 	
 	//Si la Competencia esta planificada, le borramos el fixture del objeto y de la BD
-	if(competencia.getEstado().getNombre().equals("planificada")){
+	if(competencia.getEstado().getId() == 2){
 		competencia.borrarFixture();
 		CompetenciaDAO.actualizarCompetencia(competencia);
 	}
@@ -136,9 +138,7 @@ public static void generarFixture(long id_competencia) {
 	GestorFixture.generarFixture(competencia);
 	
 	//cambiamos el estado de la competencia a "planificada"
-	Estado plani = new Estado();
-	plani.setId(2);
-	plani.setNombre("planificada");
+	Estado plani = CompetenciaDAO.getEstado(2);
 	competencia.setEstado(plani);
 	
 	CompetenciaDAO.actualizarCompetencia(competencia);

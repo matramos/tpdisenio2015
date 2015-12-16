@@ -7,6 +7,7 @@ import java.util.List;
 import capanegocios.Competencia;
 import capanegocios.Disponibilidad;
 import capanegocios.Encuentro;
+import capanegocios.Estado;
 import capanegocios.Lugar;
 import capanegocios.Modalidad;
 import capanegocios.Participante;
@@ -114,12 +115,17 @@ public class GestorFixture{
 		competencia= GestorCompetencias.buscarCompetencia(id_competencia);
 		ronda = competencia.getRonda(id_ronda);
 		encuentro2 = ronda.getEncuentro(id_encuentro);
+
+		
 		modalidad=competencia.getModalidad();
 		
 
 		if(modalidad.isLiga()==true){
 			
 			encuentro2.ActualizarEncuentro(encuentro);
+			encuentro2.setResultadoReg(true);
+			
+
 			
 			
 			//creo el registro de encuentro
@@ -138,30 +144,39 @@ public class GestorFixture{
 			
 			encuentro2.agregarRegistros(registroEncuentro);
 			
+			//le cargo el encuentro ahora, por las dudas			
+			competencia.ActualizarEncuentro(id_ronda,encuentro2);
+			
 			// CONSIDERS DEL DIAGRAMA DEL CASO DE USO
 			//consideracion si la ronda no esta comenzada
 			ronda = competencia.getRonda(id_ronda);
+			
 			if(ronda.isComenzada()==false)
 				ronda.setComenzada(true);
 			
 			//consideracion del ultimo encuentro de la ronda fue cargada
 			int cantEncuentros = ronda.getEncuentros().size();
-			if(ronda.getEncuentros().get(cantEncuentros-1).isEstado_encuentro()==true)
+			int cantEncuentrosCargados = 0;
+			for (Encuentro encu : ronda.getEncuentros()){
+				if(encu.isResultadoReg()) cantEncuentrosCargados++;
+			}
+			
+			if(cantEncuentros == cantEncuentrosCargados)
 				ronda.setFinalizado(true);
 			
-			if(competencia.getEstado().getNombre().equals("Planificada"))
-				competencia.getEstado().setNombre("En Disputa");
-			else{
-				cantEncuentros = ronda.getEncuentros().size();
-				if(ronda.getEncuentros().get(cantEncuentros-1).isEstado_encuentro()==true)
-					competencia.getEstado().setNombre("Finalizada");
+			if(competencia.getEstado().getId() == 2){
+				Estado endisputa = GestorCompetencias.getEstado(3);
+				competencia.setEstado(endisputa);
+			}
+			
+		
+			if(competencia.getRondas().get(competencia.getRondas().size() -1).isFinalizado()){
+				Estado finalizada = GestorCompetencias.getEstado(4);
+				competencia.setEstado(finalizada);
 			}
 			//actualizo la competencia con el nuevo encuentro actualizado
 			
 			
-			
-			
-			competencia.ActualizarEncuentro(id_ronda,encuentro2);
 			competencia.actualizarParticipantes(encuentro2.getJugador1(),encuentro2.getJugador2());
 			
 			GestorCompetencias.actualizar(competencia);

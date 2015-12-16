@@ -232,10 +232,10 @@ public class Cu009 extends JFrame {
 					dispose();
 				}
 				else{
-					boolean noexistemail = GestorCompetencias.validarMail(txtEmail.getText(),id_competencia);
-					boolean noexistenombre = GestorCompetencias.validarNombreP(txtNombre.getText(),id_competencia);
+					boolean existemail = GestorCompetencias.validarMail(txtEmail.getText(),id_competencia);
+					boolean existenombre = GestorCompetencias.validarNombreP(txtNombre.getText(),id_competencia);
 					ParticipanteDTO participanteDTO = new ParticipanteDTO();
-				if(txtNombre.getText().isEmpty() || txtEmail.getText().isEmpty() || !noexistemail || !noexistenombre){
+				if(txtNombre.getText().isEmpty() || txtEmail.getText().isEmpty() || existemail || existenombre){
 					if(txtNombre.getText().isEmpty()){
 						lblIngreseNombre.setVisible(true);
 						sonido("error");
@@ -250,14 +250,14 @@ public class Cu009 extends JFrame {
 					else{
 						lblIngreseEmail.setVisible(false);
 					}
-					if(!noexistemail){
+					if(existemail){
 						lblEmailYaExiste.setVisible(true);
 						sonido("error");
 					}
 					else{
 						lblEmailYaExiste.setVisible(false);
 					}
-					if(!noexistenombre){
+					if(existenombre){
 						lblYaExiste.setVisible(true);
 						sonido("error");
 					}
@@ -285,10 +285,10 @@ public class Cu009 extends JFrame {
 			
 					if(id_competencia==GestorCompetencias.agregarParticipante(participanteDTO,id_competencia)){
 						if(competencia.getEstado().getId_estado() == 1){
-							JOptionPane.showMessageDialog(null, "La operación ha culminado con éxito");
+							JOptionPane.showMessageDialog(null, "La operaciï¿½n ha culminado con ï¿½xito");
 						}
 						else {
-							JOptionPane.showMessageDialog(null, "La operación ha culminado con éxito y"
+							JOptionPane.showMessageDialog(null, "La operaciï¿½n ha culminado con ï¿½xito y"
 									+ " el fixture ha sido eliminado.");
 						}
 

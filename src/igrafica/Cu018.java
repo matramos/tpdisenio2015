@@ -807,8 +807,8 @@ public class Cu018 extends JFrame {
 							
 							encuentro.setPuntajep1(puntajeP1);
 							encuentro.setPuntajep2(puntajeP2);
-							encuentro.getSets().get(0).setPuntajep1(puntajeP1);
-							encuentro.getSets().get(0).setPuntajep2(puntajeP2);
+							//encuentro.getSets().get(0).setPuntajep1(puntajeP1);
+							//encuentro.getSets().get(0).setPuntajep2(puntajeP2);
 							if(!informacion.isPermite_empates() && puntajeP1==puntajeP2){
 								JOptionPane.showMessageDialog(null, "La competencia no permite empates en los resultados");
 								Cu018 ventana = new Cu018(id_comp,id_ron,id_encu,id_usuario);

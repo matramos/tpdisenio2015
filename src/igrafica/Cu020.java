@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.CardLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -151,7 +152,7 @@ public class Cu020 extends JFrame {
 		
 		DefaultTableModel tableModel2 = new DefaultTableModel(new String [] {"Participante 1","Participante 2","Lugar"},0);
 		table = new JTable(tableModel2);
-		if(!compe.getRondas().isEmpty()){
+		if(!compe.getRondas().isEmpty() && compe.getEstado().getId_estado()!=4){
 			RondaDTO rondaActual = compe.rondaActual();
 			for (EncuentroDTO e : rondaActual.getEncuentros() ){
 				Object[] obj2 = {e.getJugador1().getNombre(),e.getJugador2().getNombre(),e.getLugar().getNombre()};
@@ -184,16 +185,20 @@ public class Cu020 extends JFrame {
 		btnGenerarFixture.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent g) {
 				System.out.println(compe.getEstado().getNombre());
-				if((compe.getEstado().getNombre().equals("creada")) || 
-						(compe.getEstado().getNombre().equals("planificada"))){
+				if( ((compe.getEstado().getId_estado() == 1) && (compe.getParticipantes().size() > 1)) || 
+						(compe.getEstado().getId_estado() == 2) ){
 					Cu017 ventanaGenFixture = new Cu017(id_competencia,id_usuario);
 					ventanaGenFixture.setVisible(true);
 					dispose();
 				}
 				else{
-					Cu017Error ventanaErrFixture = new Cu017Error(id_competencia,id_usuario);
-					ventanaErrFixture.setVisible(true);
-					dispose();
+					if( (compe.getParticipantes().size() < 2) ){
+						JOptionPane.showMessageDialog(null,"No tiene suficientes participantes cargados. "
+								+ "Imposible generar Fixture");
+					}
+					else{
+						JOptionPane.showMessageDialog(null," No se puede volver a generar Fixture.");
+					}
 				}
 			}
 		});
