@@ -627,21 +627,40 @@ public class Cu018 extends JFrame {
 				if(!(datosValidos)){
 					if(!(checkPart1.isSelected()) && !(checkPart2.isSelected())){
 						lblSeleccioneAlMenos.setVisible(true);
+						
+						lblNoSePermite.setVisible(false);
+						lblIngreseLaPuntuacion.setVisible(false);
+						lblNoPermiteEmpates.setVisible(false);
+						
 						JOptionPane.showMessageDialog(null, "Ha introducido datos incorrectos");
 					}
 					else if(informacion.getPuntuacion().isSets()){
 						for(int i=0 ; i < 9 ; i++){
 							if(puntajeP1[i]==puntajeP2[i] && puntajeP1[i]!=0 && puntajeP2[i]!=0){
 								lblNoSePermite.setVisible(true);
+								
+								lblSeleccioneAlMenos.setVisible(false);
+								lblIngreseLaPuntuacion.setVisible(false);
+								lblNoPermiteEmpates.setVisible(false);
+								
 								JOptionPane.showMessageDialog(null, "Ha introducido datos incorrectos");
 							}
 						}
 					}
 					else if(txtRP1.getText().length()==0 || txtRP2.getText().length()==0 || (txtRP1.getText().length()==0 && txtRP2.getText().length()==0)){
 						lblIngreseLaPuntuacion.setVisible(true);
+						
+						lblNoSePermite.setVisible(false);
+						lblSeleccioneAlMenos.setVisible(false);
+						lblNoPermiteEmpates.setVisible(false);
+						
 						JOptionPane.showMessageDialog(null, "Ha introducido datos incorrectos");
 					}
 					else if( !informacion.isPermite_empates() && ( txtRP1.getText().equals(txtRP2.getText()) ) ){
+						lblSeleccioneAlMenos.setVisible(false);
+						lblNoSePermite.setVisible(false);
+						lblIngreseLaPuntuacion.setVisible(false);
+						
 						lblNoPermiteEmpates.setVisible(true);
 						JOptionPane.showMessageDialog(null, "La competencia NO permite empates.");
 						}
@@ -731,9 +750,11 @@ public class Cu018 extends JFrame {
 							y.setPuntaje(y.getPuntaje()-informacion.getPuntos_empate()-informacion.getPuntos_presentarse());
 						}
 					}
+					
 						//settear el encuentro si no se presento ninguno (no me acuerdo este caso) , EXPLOTA EL SISTEMA
 						if(!(checkPart1.isSelected()) && !(checkPart2.isSelected()))
 							;
+						
 						//setear el encuentro si no se presento el primero
 						else if(!(checkPart1.isSelected()) && (checkPart2.isSelected())){
 							encuentro.setEstadop1(false);
