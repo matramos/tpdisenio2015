@@ -11,11 +11,11 @@ public class Inicio {
 
 	long id_usuario = 1;
 
-	//Cu018 cu = new Cu018(184,187,188,1);
-	menuprincipal cu = new menuprincipal(id_usuario);
+	//Cu018 cu = new Cu018(196,199,200,1);
+	pantallainicio cu = new pantallainicio();
 
-	//cu.main(null);
-	cu.setVisible(true);
+	cu.main(null);
+	//cu.setVisible(true);
 	
 }
 }
