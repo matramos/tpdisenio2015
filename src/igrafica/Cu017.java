@@ -25,7 +25,7 @@ public class Cu017 extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			Cu017 dialog = new Cu017((long) 1,1);
+			Cu017 dialog = new Cu017((long) 1,1, false);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -35,8 +35,9 @@ public class Cu017 extends JDialog {
 
 	/**
 	 * Create the dialog.
+	 * @param desdeEl4 
 	 */
-	public Cu017(final long id_competencia,final long id_usuario) {
+	public Cu017(final long id_competencia,final long id_usuario, final boolean desdeEl4) {
 		//BUSCAMOS LA COMPETENCIA
 		compe = GestorCompetencias.getCompetencia(id_competencia);
 		
@@ -47,7 +48,7 @@ public class Cu017 extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		{
-			JLabel lbldeseaGenerarUn = new JLabel("¿Desea generar un nuevo fixture?");
+			JLabel lbldeseaGenerarUn = new JLabel("ï¿½Desea generar un nuevo fixture?");
 			lbldeseaGenerarUn.setFont(new Font("Dialog", Font.BOLD, 20));
 			contentPanel.add(lbldeseaGenerarUn);
 		}
@@ -61,7 +62,7 @@ public class Cu017 extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						GestorCompetencias.generarFixture(id_competencia);
-						Cu020 caso20 = new Cu020(id_competencia,id_usuario);
+						Cu020 caso20 = new Cu020(id_competencia,id_usuario, desdeEl4);
 						caso20.setVisible(true);
 						dispose();
 					}
@@ -73,7 +74,7 @@ public class Cu017 extends JDialog {
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent p) {
-						Cu020 caso20 = new Cu020(id_competencia, id_usuario);
+						Cu020 caso20 = new Cu020(id_competencia, id_usuario, desdeEl4);
 						caso20.setVisible(true);
 						dispose();
 					}

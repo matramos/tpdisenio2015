@@ -60,7 +60,7 @@ public class Cu009 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Cu009 frame = new Cu009(1,1);
+					Cu009 frame = new Cu009(1,1, false);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -83,8 +83,9 @@ public class Cu009 extends JFrame {
 	
 	/**
 	 * Create the frame.
+	 * @param desdeEl4 
 	 */
-	public Cu009(final long id_competencia,final long id_usuario) {
+	public Cu009(final long id_competencia,final long id_usuario, final boolean desdeEl4) {
 		
 		
 		competencia= (CompetenciaDTO) GestorCompetencias.getCompetencia(id_competencia);
@@ -227,15 +228,15 @@ public class Cu009 extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				if(!(competencia.getEstado().getNombre().equals("creada") || competencia.getEstado().getNombre().equals("planificada"))){
 					JOptionPane.showMessageDialog(null, "La competencia no se encuentra en estado creada o planificada");
-					Cu008 ventana = new Cu008(id_competencia, id_usuario);
+					Cu008 ventana = new Cu008(id_competencia, id_usuario, desdeEl4);
 					ventana.setVisible(true);
 					dispose();
 				}
 				else{
-					boolean noexistemail = GestorCompetencias.validarMail(txtEmail.getText());
-					boolean noexistenombre = GestorCompetencias.validarNombreP(txtNombre.getText());
+					boolean noExistemail = GestorCompetencias.validarMail(txtEmail.getText(),id_competencia);
+					boolean noExistenombre = GestorCompetencias.validarNombreP(txtNombre.getText(),id_competencia);
 					ParticipanteDTO participanteDTO = new ParticipanteDTO();
-				if(txtNombre.getText().isEmpty() || txtEmail.getText().isEmpty() || !noexistemail || !noexistenombre){
+				if(txtNombre.getText().isEmpty() || txtEmail.getText().isEmpty() || !noExistemail || !noExistenombre){
 					if(txtNombre.getText().isEmpty()){
 						lblIngreseNombre.setVisible(true);
 						sonido("error");
@@ -250,14 +251,14 @@ public class Cu009 extends JFrame {
 					else{
 						lblIngreseEmail.setVisible(false);
 					}
-					if(!noexistemail){
+					if(!noExistemail){
 						lblEmailYaExiste.setVisible(true);
 						sonido("error");
 					}
 					else{
 						lblEmailYaExiste.setVisible(false);
 					}
-					if(!noexistenombre){
+					if(!noExistenombre){
 						lblYaExiste.setVisible(true);
 						sonido("error");
 					}
@@ -285,11 +286,17 @@ public class Cu009 extends JFrame {
 			
 					if(id_competencia==GestorCompetencias.agregarParticipante(participanteDTO,id_competencia)){
 						if(competencia.getEstado().getId_estado() == 1){
-							JOptionPane.showMessageDialog(null, "La operación ha culminado con éxito");
+							JOptionPane.showMessageDialog(null, "La operaci�n ha culminado con �xito");
+							Cu008 ventana = new Cu008(id_competencia,id_usuario, desdeEl4);
+							ventana.setVisible(true);
+							dispose();
 						}
 						else {
-							JOptionPane.showMessageDialog(null, "La operación ha culminado con éxito y"
+							JOptionPane.showMessageDialog(null, "La operaci�n ha culminado con �xito y"
 									+ " el fixture ha sido eliminado.");
+							Cu008 ventana = new Cu008(id_competencia,id_usuario, desdeEl4);
+							ventana.setVisible(true);
+							dispose();
 						}
 
 					}
@@ -304,24 +311,13 @@ public class Cu009 extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Cu008 ventana = new Cu008(id_competencia,id_usuario);
+				Cu008 ventana = new Cu008(id_competencia,id_usuario, desdeEl4);
 				ventana.setVisible(true);
 				dispose();
 			}
 		});
 		btnCancelar.setBounds(402, 511, 89, 23);
 		contentPane.add(btnCancelar);
-		
-		JButton btnMenuPrincipal = new JButton("Menu Principal");
-		btnMenuPrincipal.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				menuprincipal ventana = new menuprincipal (id_usuario);
-				ventana.setVisible(true);
-				dispose();
-			}
-		});
-		btnMenuPrincipal.setBounds(532, 511, 101, 23);
-		contentPane.add(btnMenuPrincipal);
 		
 		
 		}

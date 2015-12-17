@@ -21,6 +21,7 @@ import DTO.ModalidadDTO;
 import Inicio.CrearSesion;
 import capanegocios.Competencia;
 import capanegocios.Deporte;
+import capanegocios.Estado;
 import capanegocios.FormaPuntuacion;
 import capanegocios.Modalidad;
 import capanegocios.Participante;
@@ -288,5 +289,14 @@ public class CompetenciaDAO {
 			retorno = false;
 		
 		return retorno;
+	}
+
+	public static Estado getEstado(long id_estado) {
+		Transaction tx = CrearSesion.session.beginTransaction();
+		Query query = CrearSesion.session.createQuery("from Estado e where e.id=?");
+		query.setParameter(0, id_estado);
+		Estado estado = new Estado();
+		estado = (Estado) query.uniqueResult();
+		return estado;
 	}
 }

@@ -46,7 +46,7 @@ public class Cu021 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Cu021 frame = new Cu021((long) 1,1);
+					Cu021 frame = new Cu021((long) 1,1, false);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -70,7 +70,7 @@ public class Cu021 extends JFrame {
 		}
 	}
 	
-	public Cu021(final long id_competencia, final long id_usuario) {
+	public Cu021(final long id_competencia, final long id_usuario, final boolean desdeEl4) {
 		
 	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -94,7 +94,7 @@ public class Cu021 extends JFrame {
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Cu020 ventana = new Cu020(id_competencia,id_usuario);
+				Cu020 ventana = new Cu020(id_competencia,id_usuario, desdeEl4);
 				ventana.setVisible(true);
 				dispose();
 			}
@@ -128,14 +128,14 @@ public class Cu021 extends JFrame {
 		else if(!competencia.getModalidad().liga){
 			sonido("error");
 			JOptionPane.showMessageDialog(null, "La modalidad de la competencia no es Liga");
-			Cu020 ventana = new Cu020(id_competencia,id_usuario);
+			Cu020 ventana = new Cu020(id_competencia,id_usuario, desdeEl4);
 			ventana.setVisible(true);
 			dispose();
 		}
 		else{
 			sonido("error");
-			JOptionPane.showMessageDialog(null, "La competencia aún no se disputó");
-			Cu020 ventana = new Cu020(id_competencia,id_usuario);
+			JOptionPane.showMessageDialog(null, "La competencia aï¿½n no se disputï¿½");
+			Cu020 ventana = new Cu020(id_competencia,id_usuario, desdeEl4);
 			ventana.setVisible(true);
 			dispose();
 		}
