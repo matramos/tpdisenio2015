@@ -54,7 +54,7 @@ public class Cu019 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Cu019 frame = new Cu019((long )92, (long)1);
+					Cu019 frame = new Cu019((long )92, (long)1, false);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -65,8 +65,9 @@ public class Cu019 extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @param desdeEl4 
 	 */
-	public Cu019(final long id_competencia, final long id_usuario) {
+	public Cu019(final long id_competencia, final long id_usuario, final boolean desdeEl4) {
 		CompetenciaDTO competencia = GestorCompetencias.getCompetencia(id_competencia);
 		setTitle("Gevico");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -126,7 +127,7 @@ public class Cu019 extends JFrame {
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Cu020 cu = new Cu020(id_competencia,id_usuario);
+				Cu020 cu = new Cu020(id_competencia,id_usuario, desdeEl4);
 				cu.setVisible(true);
 				dispose();
 			}

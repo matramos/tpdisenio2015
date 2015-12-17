@@ -699,7 +699,7 @@ public class Cu004 extends JFrame {
 					
 					if(idGenerado!=(long) -1){
 						JOptionPane.showMessageDialog(null, "Se cargo con exito");
-						Cu008 ventana = new Cu008(idGenerado,id_usuario);
+						Cu008 ventana = new Cu008(idGenerado,id_usuario, true);
 						ventana.setVisible(true);
 						dispose();
 					}
@@ -775,7 +775,7 @@ public class Cu004 extends JFrame {
 					
 					if(idGenerado!=(long) -1){
 						JOptionPane.showMessageDialog(null, "Se cargo con exito");
-						Cu008 ventana = new Cu008(idGenerado,id_usuario);
+						Cu008 ventana = new Cu008(idGenerado,id_usuario, true);
 						ventana.setVisible(true);
 						dispose();
 					}

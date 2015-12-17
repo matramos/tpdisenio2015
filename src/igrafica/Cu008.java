@@ -55,7 +55,7 @@ public class Cu008 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Cu008 frame = new Cu008(1,1);
+					Cu008 frame = new Cu008(1,1, false);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -67,7 +67,7 @@ public class Cu008 extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Cu008(final long id_competencia, final long id_usuario) {
+	public Cu008(final long id_competencia, final long id_usuario, final boolean desdeEl4) {
 		setTitle("Gevico");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
@@ -93,7 +93,7 @@ public class Cu008 extends JFrame {
 		JButton btnAgregarParticipante = new JButton("Agregar Participante");
 		btnAgregarParticipante.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Cu009 ventana = new Cu009(id_competencia,id_usuario);
+				Cu009 ventana = new Cu009(id_competencia,id_usuario, desdeEl4);
 				ventana.setVisible(true);
 				dispose();
 			}
@@ -104,7 +104,7 @@ public class Cu008 extends JFrame {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Cu020 ventana = new Cu020(id_competencia, id_usuario);
+				Cu020 ventana = new Cu020(id_competencia, id_usuario, desdeEl4);
 				ventana.setVisible(true);
 				dispose();
 			}

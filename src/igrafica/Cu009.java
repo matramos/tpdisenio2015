@@ -60,7 +60,7 @@ public class Cu009 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Cu009 frame = new Cu009(1,1);
+					Cu009 frame = new Cu009(1,1, false);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -83,8 +83,9 @@ public class Cu009 extends JFrame {
 	
 	/**
 	 * Create the frame.
+	 * @param desdeEl4 
 	 */
-	public Cu009(final long id_competencia,final long id_usuario) {
+	public Cu009(final long id_competencia,final long id_usuario, final boolean desdeEl4) {
 		
 		
 		competencia= (CompetenciaDTO) GestorCompetencias.getCompetencia(id_competencia);
@@ -227,7 +228,7 @@ public class Cu009 extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				if(!(competencia.getEstado().getNombre().equals("creada") || competencia.getEstado().getNombre().equals("planificada"))){
 					JOptionPane.showMessageDialog(null, "La competencia no se encuentra en estado creada o planificada");
-					Cu008 ventana = new Cu008(id_competencia, id_usuario);
+					Cu008 ventana = new Cu008(id_competencia, id_usuario, desdeEl4);
 					ventana.setVisible(true);
 					dispose();
 				}
@@ -286,14 +287,14 @@ public class Cu009 extends JFrame {
 					if(id_competencia==GestorCompetencias.agregarParticipante(participanteDTO,id_competencia)){
 						if(competencia.getEstado().getId_estado() == 1){
 							JOptionPane.showMessageDialog(null, "La operaci�n ha culminado con �xito");
-							Cu008 ventana = new Cu008(id_competencia,id_usuario);
+							Cu008 ventana = new Cu008(id_competencia,id_usuario, desdeEl4);
 							ventana.setVisible(true);
 							dispose();
 						}
 						else {
 							JOptionPane.showMessageDialog(null, "La operaci�n ha culminado con �xito y"
 									+ " el fixture ha sido eliminado.");
-							Cu008 ventana = new Cu008(id_competencia,id_usuario);
+							Cu008 ventana = new Cu008(id_competencia,id_usuario, desdeEl4);
 							ventana.setVisible(true);
 							dispose();
 						}
@@ -310,7 +311,7 @@ public class Cu009 extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Cu008 ventana = new Cu008(id_competencia,id_usuario);
+				Cu008 ventana = new Cu008(id_competencia,id_usuario, desdeEl4);
 				ventana.setVisible(true);
 				dispose();
 			}

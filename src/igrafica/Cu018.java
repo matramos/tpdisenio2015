@@ -102,23 +102,23 @@ public class Cu018 extends JFrame {
 			puntajeP1[j]=0;
 			puntajeP2[j]=0;
 		}
-				for(SetDTO set : encuentro.getSets()){
-					idSets[i]=(set.getId_set());
-					puntajeP1[i]=(set.getPuntajep1());
-					puntajeP2[i]=(set.getPuntajep2());
-					i++;
-				}
-				while(prueba!=0){
-					if(puntajeP1[prueba]>puntajeP2[prueba])
-						setGanadosP1++;
-					else
-						setGanadosP2++;
-					prueba--;
-				}
-				if(setGanadosP1>setGanadosP2)
-					ganador=encuentro.getJugador1().getNombre();
-				else
-					ganador=encuentro.getJugador2().getNombre();
+		for(SetDTO set : encuentro.getSets()){
+			idSets[i]=(set.getId_set());
+			puntajeP1[i]=(set.getPuntajep1());
+			puntajeP2[i]=(set.getPuntajep2());
+			i++;
+		}
+		while(prueba!=0){
+			if(puntajeP1[prueba]>puntajeP2[prueba])
+				setGanadosP1++;
+			else
+				setGanadosP2++;
+				prueba--;
+		}
+		if(setGanadosP1>setGanadosP2)
+			ganador=encuentro.getJugador1().getNombre();
+		else
+			ganador=encuentro.getJugador2().getNombre();
 		
 		
 				
@@ -181,12 +181,11 @@ public class Cu018 extends JFrame {
 					txtS9P1.setEditable(false);
 					txtS9P2.setEditable(false);
 					txtRP1.setEditable(false);
-					txtRP2.setEditable(false);
+					//txtRP2.setEditable(false);
 				}
 				else{
 					if(informacion.getPuntuacion().isPuntuacion()){
 						txtRP1.setEditable(true);
-						txtRP2.setEditable(true);
 					}
 					else if(informacion.getPuntuacion().isResultadoFinal()){
 						comboResultadoFinal.setEnabled(true);
@@ -194,17 +193,14 @@ public class Cu018 extends JFrame {
 					else if(informacion.getPuntuacion().isSets()){
 						if(!(puntajeP1[0]==-1 && puntajeP2[0]==0)){
 							txtS1P1.setEditable(true);
-							txtS1P2.setEditable(true);
 						}
 						
 						if(!(puntajeP1[1]==0 && puntajeP2[1]==0)){
 							txtS2P1.setEditable(true);
-							txtS2P2.setEditable(true);
 						}
 						
 						if(!(puntajeP1[2]==0 && puntajeP2[2]==0)){
 							txtS3P1.setEditable(true);
-							txtS3P2.setEditable(true);
 						}
 						
 						if(!(puntajeP1[3]==0 && puntajeP2[3]==0)){
@@ -214,27 +210,22 @@ public class Cu018 extends JFrame {
 						
 						if(!(puntajeP1[4]==0 && puntajeP2[4]==0)){
 							txtS5P1.setEditable(true);
-							txtS5P2.setEditable(true);
 						}
 						
 						if(!(puntajeP1[5]==0 && puntajeP2[5]==0)){
 							txtS6P1.setEditable(true);
-							txtS6P2.setEditable(true);
 						}
 						
 						if(!(puntajeP1[6]==0 && puntajeP2[6]==0)){
 							txtS7P1.setEditable(true);
-							txtS7P2.setEditable(true);
 						}
 						
 						if(!(puntajeP1[7]==0 && puntajeP2[7]==0)){
 							txtS8P1.setEditable(false);
-							txtS8P2.setEditable(false);
 						}
 						
 						if(!(puntajeP1[8]==0 && puntajeP2[8]==0)){
 							txtS9P1.setEditable(true);
-							txtS9P2.setEditable(true);
 						}
 					}
 				}
@@ -266,12 +257,11 @@ public class Cu018 extends JFrame {
 					txtS8P2.setEditable(false);
 					txtS9P1.setEditable(false);
 					txtS9P2.setEditable(false);
-					txtRP1.setEditable(false);
+					//txtRP1.setEditable(false);
 					txtRP2.setEditable(false);
 				}
 				else{
 					if(informacion.getPuntuacion().isPuntuacion()){
-						txtRP1.setEditable(true);
 						txtRP2.setEditable(true);
 					}
 					else if(informacion.getPuntuacion().isResultadoFinal()){
@@ -279,47 +269,38 @@ public class Cu018 extends JFrame {
 					}
 					else if(informacion.getPuntuacion().isSets()){
 						if(!(puntajeP1[0]==-1 && puntajeP2[0]==0)){
-							txtS1P1.setEditable(true);
 							txtS1P2.setEditable(true);
 						}
 						
 						if(!(puntajeP1[1]==0 && puntajeP2[1]==0)){
-							txtS2P1.setEditable(true);
 							txtS2P2.setEditable(true);
 						}
 						
 						if(!(puntajeP1[2]==0 && puntajeP2[2]==0)){
-							txtS3P1.setEditable(true);
 							txtS3P2.setEditable(true);
 						}
 						
 						if(!(puntajeP1[3]==0 && puntajeP2[3]==0)){
-							txtS4P1.setEditable(true);
 							txtS4P2.setEditable(true);
 						}
 						
 						if(!(puntajeP1[4]==0 && puntajeP2[4]==0)){
-							txtS5P1.setEditable(true);
 							txtS5P2.setEditable(true);
 						}
 						
 						if(!(puntajeP1[5]==0 && puntajeP2[5]==0)){
-							txtS6P1.setEditable(true);
 							txtS6P2.setEditable(true);
 						}
 						
 						if(!(puntajeP1[6]==0 && puntajeP2[6]==0)){
-							txtS7P1.setEditable(true);
 							txtS7P2.setEditable(true);
 						}
 						
 						if(!(puntajeP1[7]==0 && puntajeP2[7]==0)){
-							txtS8P1.setEditable(false);
 							txtS8P2.setEditable(false);
 						}
 						
 						if(!(puntajeP1[8]==0 && puntajeP2[8]==0)){
-							txtS9P1.setEditable(true);
 							txtS9P2.setEditable(true);
 						}
 					}
@@ -462,11 +443,14 @@ public class Cu018 extends JFrame {
 		txtRP1.setBounds(206, 408, 46, 20);
 		contentPane.add(txtRP1);
 		txtRP1.setColumns(10);
+		txtRP1.setEditable(checkPart1.isSelected());
 		
 		txtRP2 = new JTextField(Integer.toString(encuentro.getPuntajep2()));
 		txtRP2.setColumns(10);
 		txtRP2.setBounds(361, 408, 46, 20);
 		contentPane.add(txtRP2);
+		txtRP2.setEditable(checkPart2.isSelected());
+		
 		
 		JLabel lblResultadoFinal = new JLabel("Resultado Final:");
 		lblResultadoFinal.setBounds(134, 460, 138, 14);
@@ -495,6 +479,12 @@ public class Cu018 extends JFrame {
 		lblNoSePermite.setBounds(180, 383, 329, 14);
 		lblNoSePermite.setVisible(false);
 		contentPane.add(lblNoSePermite);
+		
+		final JLabel lblNoPermiteEmpates = new JLabel("La Competencia NO permite empates");
+		lblNoPermiteEmpates.setForeground(Color.RED);
+		lblNoPermiteEmpates.setBounds(272, 436, 187, 14);
+		lblNoPermiteEmpates.setVisible(false);
+		contentPane.add(lblNoPermiteEmpates);
 		
 		
 		if(informacion.getPuntuacion().isSets()){
@@ -568,7 +558,7 @@ public class Cu018 extends JFrame {
 			txtRP1.setEditable(false);
 			txtRP2.setEditable(false);
 		}
-		else if (informacion.getPuntuacion().puntuacion){
+		else if (informacion.getPuntuacion().isPuntuacion()){
 			txtS1P1.setEditable(false);
 			txtS1P2.setEditable(false);
 			txtS2P1.setEditable(false);
@@ -633,37 +623,34 @@ public class Cu018 extends JFrame {
 				puntajeP1[8]=Integer.parseInt(txtS9P1.getText());
 				puntajeP2[8]=Integer.parseInt(txtS9P2.getText());
 				
-				if(!datosValidos){
+
+				if(!(datosValidos)){
 					if(!(checkPart1.isSelected()) && !(checkPart2.isSelected())){
 						lblSeleccioneAlMenos.setVisible(true);
-						
 						JOptionPane.showMessageDialog(null, "Ha introducido datos incorrectos");
-						Cu018 ventana = new Cu018 (id_comp,id_ron,id_encu,id_usuario);
-						ventana.setVisible(true);
-						dispose();
 					}
 					else if(informacion.getPuntuacion().isSets()){
 						for(int i=0 ; i < 9 ; i++){
 							if(puntajeP1[i]==puntajeP2[i] && puntajeP1[i]!=0 && puntajeP2[i]!=0){
 								lblNoSePermite.setVisible(true);
 								JOptionPane.showMessageDialog(null, "Ha introducido datos incorrectos");
-								Cu018 ventana = new Cu018 (id_comp,id_ron,id_encu,id_usuario);
-								ventana.setVisible(true);
-								dispose();
 							}
 						}
 					}
 					else if(txtRP1.getText().length()==0 || txtRP2.getText().length()==0 || (txtRP1.getText().length()==0 && txtRP2.getText().length()==0)){
 						lblIngreseLaPuntuacion.setVisible(true);
 						JOptionPane.showMessageDialog(null, "Ha introducido datos incorrectos");
-						Cu018 ventana = new Cu018 (id_comp,id_ron,id_encu,id_usuario);
-						ventana.setVisible(true);
-						dispose();
 					}
-					else
-						datosValidos=true;
+					else if( !informacion.isPermite_empates() && ( txtRP1.getText().equals(txtRP2.getText()) ) ){
+						lblNoPermiteEmpates.setVisible(true);
+						JOptionPane.showMessageDialog(null, "La competencia NO permite empates.");
+						}
+					else{
+						datosValidos=true;}
 				}
 				
+				
+				if(datosValidos){
 				
 					
 					ParticipanteDTO x = encuentro.getJugador1();
@@ -811,9 +798,6 @@ public class Cu018 extends JFrame {
 							//encuentro.getSets().get(0).setPuntajep2(puntajeP2);
 							if(!informacion.isPermite_empates() && puntajeP1==puntajeP2){
 								JOptionPane.showMessageDialog(null, "La competencia no permite empates en los resultados");
-								Cu018 ventana = new Cu018(id_comp,id_ron,id_encu,id_usuario);
-								ventana.setVisible(true);
-								dispose();
 							}
 							
 							else{
@@ -881,9 +865,6 @@ public class Cu018 extends JFrame {
 							}
 							if(hayEmpate){
 								JOptionPane.showMessageDialog(null, "No se permiten empates en los Sets");
-								Cu018 ventana = new Cu018(id_comp,id_ron,id_encu,id_usuario);
-								ventana.setVisible(true);
-								dispose();
 							}
 							else{
 								for(int i=0 ; i < informacion.getCantidad_sets() ; i++){
@@ -953,10 +934,10 @@ public class Cu018 extends JFrame {
 							
 							GestorFixture.cargarResultado(id_comp,id_ron,id_encu,encuentro);		
 							JOptionPane.showMessageDialog(null, "Se cargo con exito");
-							Cu019 ventana = new Cu019(id_comp, id_usuario);
-							ventana.setVisible(true);
+							//Cu019 ventana = new Cu019(id_comp, id_usuario, false);
+							//ventana.setVisible(true);
 							dispose();
-						
+				}	
 						
 			}
 		});

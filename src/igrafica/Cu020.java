@@ -41,7 +41,7 @@ public class Cu020 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Cu020 frame = new Cu020((long) 1, 1);
+					Cu020 frame = new Cu020((long) 1, 1, false);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,7 +53,7 @@ public class Cu020 extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Cu020(final long id_competencia, final long id_usuario) {
+	public Cu020(final long id_competencia, final long id_usuario, final boolean desdeEl4) {
 		//BUSCAMOS LA COMPETENCIA
 		compe = GestorCompetencias.getCompetencia(id_competencia);
 		
@@ -99,9 +99,12 @@ public class Cu020 extends JFrame {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(compe.getEstado().getId_estado()!=1 && compe.getEstado().getId_estado()!=5){
-				Cu019 cu = new Cu019(id_competencia,id_usuario);
-				cu.setVisible(true);
-				dispose();
+					Cu019 cu = new Cu019(id_competencia,id_usuario, desdeEl4);
+					cu.setVisible(true);
+					dispose();
+				}
+				else if(compe.getEstado().getId_estado()==1){
+					JOptionPane.showMessageDialog(null,"Todavía no se genero el Fixture.");
 				}
 			}
 		});
@@ -164,8 +167,10 @@ public class Cu020 extends JFrame {
 		JButton btnCancelar_1 = new JButton("Cancelar");
 		btnCancelar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//Cu003 ventana = new Cu003(id_usuario);
-				//ventana.setVisible(true);
+				if(desdeEl4){
+					Cu003 ventana = new Cu003(id_usuario);
+					ventana.setVisible(true);
+				}
 				dispose();
 			}
 		});
@@ -185,9 +190,9 @@ public class Cu020 extends JFrame {
 		btnGenerarFixture.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent g) {
 				System.out.println(compe.getEstado().getNombre());
-				if( ((compe.getEstado().getId_estado() == 1) && (compe.getParticipantes().size() > 1)) || 
-						(compe.getEstado().getId_estado() == 2) ){
-					Cu017 ventanaGenFixture = new Cu017(id_competencia,id_usuario);
+				if( (compe.getModalidad().isLiga() && (compe.getEstado().getId_estado() == 1) && (compe.getParticipantes().size() > 1)) || 
+						(compe.getModalidad().isLiga() && (compe.getEstado().getId_estado() == 2)) ){
+					Cu017 ventanaGenFixture = new Cu017(id_competencia,id_usuario,desdeEl4);
 					ventanaGenFixture.setVisible(true);
 					dispose();
 				}
@@ -195,6 +200,9 @@ public class Cu020 extends JFrame {
 					if( (compe.getParticipantes().size() < 2) ){
 						JOptionPane.showMessageDialog(null,"No tiene suficientes participantes cargados. "
 								+ "Imposible generar Fixture");
+					}
+					else if (!compe.getModalidad().isLiga()){
+						JOptionPane.showMessageDialog(null," No se puede generar Fixture para modalidad "+compe.getModalidad().getNombre());
 					}
 					else{
 						JOptionPane.showMessageDialog(null," No se puede volver a generar Fixture.");
@@ -208,7 +216,7 @@ public class Cu020 extends JFrame {
 		JButton btnVerTablaDe = new JButton("Ver tabla de posiciones");
 		btnVerTablaDe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Cu021 ventanaPosiciones = new Cu021(id_competencia,id_usuario);
+				Cu021 ventanaPosiciones = new Cu021(id_competencia,id_usuario, desdeEl4);
 				//ventanaPosiciones.setVisible(true);
 				dispose();
 			}
@@ -219,7 +227,7 @@ public class Cu020 extends JFrame {
 		JButton btnVerParticipantes = new JButton("Ver participantes");
 		btnVerParticipantes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent p) {
-				Cu008 ventanaParticipantes = new Cu008(id_competencia,id_usuario);
+				Cu008 ventanaParticipantes = new Cu008(id_competencia,id_usuario, false);
 				ventanaParticipantes.setVisible(true);
 				dispose();
 			}

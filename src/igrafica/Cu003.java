@@ -169,6 +169,7 @@ public class Cu003 extends JFrame {
 					JOptionPane.showMessageDialog(null, "Debe utilizar al menos un filtro");
 				}
 				else{
+					System.out.println(comboDeporte.getSelectedIndex());
 				 listaCompetenciasEncontradas = 
 						GestorCompetencias.buscarCompetencias(nombre.getText(), comboDeporte.getSelectedIndex(), 
 								comboModalidad.getSelectedIndex(), comboEstado.getSelectedIndex(), id_usuario);
@@ -444,7 +445,7 @@ class DeleteButtonEditor2CU3 extends DeleteButton2CU3 implements TableCellEditor
             @Override public void actionPerformed(ActionEvent e) {
                 int row = table.convertRowIndexToModel(table.getEditingRow());
                 fireEditingStopped();
-                Cu020 ventana = new Cu020(listaCompetenciasEncontradas.get(row).getId_competencia(),id_usuario);
+                Cu020 ventana = new Cu020(listaCompetenciasEncontradas.get(row).getId_competencia(),id_usuario, false);
 				ventana.setVisible(true);
                 //String nombre = table.getValueAt(row, 1).toString();
                 //JOptionPane.showMessageDialog(null, nombre);
