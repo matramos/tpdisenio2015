@@ -195,8 +195,7 @@ public class Cu020 extends JFrame {
 						(compe.getModalidad().isLiga() && (compe.getEstado().getId_estado() == 2)) ){
 					Cu017 ventanaGenFixture = new Cu017(id_competencia,id_usuario,desdeEl4);
 					ventanaGenFixture.setVisible(true);
-					
-
+					dispose();
 				}
 				else{
 					if( (compe.getParticipantes().size() < 2) ){

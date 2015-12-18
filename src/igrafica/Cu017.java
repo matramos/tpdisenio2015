@@ -62,7 +62,9 @@ public class Cu017 extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						GestorCompetencias.generarFixture(id_competencia);
-		
+						
+						Cu020 caso20 = new Cu020(id_competencia, id_usuario, desdeEl4);
+						caso20.setVisible(true);
 						dispose();
 					}
 				});
