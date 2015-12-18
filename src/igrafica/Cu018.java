@@ -771,7 +771,7 @@ public class Cu018 extends JFrame {
 						
 						JOptionPane.showMessageDialog(null, "Ha introducido datos incorrectos");
 					}
-					else if( !(informacion.getPuntuacion().isSets()) && !informacion.isPermite_empates() && ( txtRP1.getText().equals(txtRP2.getText()) && (checkPart1.isSelected()) && (checkPart2.isSelected()))){
+					else if( !(informacion.getPuntuacion().isResultadoFinal()) && !(informacion.getPuntuacion().isSets()) && !informacion.isPermite_empates() && ( txtRP1.getText().equals(txtRP2.getText()) && (checkPart1.isSelected()) && (checkPart2.isSelected()))){
 						lblSeleccioneAlMenos.setVisible(false);
 						lblNoSePermite.setVisible(false);
 						lblIngreseLaPuntuacion.setVisible(false);
@@ -1057,6 +1057,7 @@ public class Cu018 extends JFrame {
 								x.setPartidosEmpatados(x.getPartidosEmpatados()+1);
 								x.setPuntaje(x.getPuntaje()+informacion.getPuntos_presentarse()+informacion.getPuntos_empate());
 								encuentro.setEmpate(true);
+								encuentro.getGanador().setId_participante(0);
 							}
 							
 							encuentro.setPuntajep1(puntajeP1);
