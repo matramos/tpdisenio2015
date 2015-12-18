@@ -741,6 +741,7 @@ public class Cu018 extends JFrame {
 					else if(informacion.getPuntuacion().isSets()){
 						boolean b = false;
 						for(int i=0 ; i < informacion.getCantidad_sets() ; i++){
+							
 							if(puntajeP1[i]==puntajeP2[i]){
 								lblNoSePermite.setVisible(true);
 								b = true;

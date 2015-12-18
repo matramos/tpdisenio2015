@@ -11,6 +11,7 @@ import java.awt.CardLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -194,7 +195,8 @@ public class Cu020 extends JFrame {
 						(compe.getModalidad().isLiga() && (compe.getEstado().getId_estado() == 2)) ){
 					Cu017 ventanaGenFixture = new Cu017(id_competencia,id_usuario,desdeEl4);
 					ventanaGenFixture.setVisible(true);
-					dispose();
+					
+
 				}
 				else{
 					if( (compe.getParticipantes().size() < 2) ){
