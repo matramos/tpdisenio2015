@@ -99,8 +99,8 @@ public class Cu018 extends JFrame {
 		
 		
 		for(int j=0;j<9;j++){
-			puntajeP1[j]=0;
-			puntajeP2[j]=0;
+			puntajeP1[j]=-1;
+			puntajeP2[j]=-1;
 		}
 		for(SetDTO set : encuentro.getSets()){
 			idSets[i]=(set.getId_set());
@@ -109,7 +109,7 @@ public class Cu018 extends JFrame {
 			i++;
 		}
 		while(prueba!=0){
-			if(puntajeP1[prueba]>puntajeP2[prueba])
+			if(puntajeP1[prueba-1]>puntajeP2[prueba-1])
 				setGanadosP1++;
 			else
 				setGanadosP2++;
@@ -156,11 +156,14 @@ public class Cu018 extends JFrame {
 		comboResultadoFinal.addItem(encuentro.getJugador1().getNombre());
 		comboResultadoFinal.addItem(encuentro.getJugador2().getNombre());
 		
+		final JCheckBox checkPart2 = new JCheckBox("",encuentro.isEstadop2());
+		checkPart2.setBounds(362, 95, 97, 23);
+		
 		final JCheckBox checkPart1 = new JCheckBox("",encuentro.isEstadop1());
 		checkPart1.setBounds(239, 95, 21, 23);
 		checkPart1.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
-				if(arg0.getStateChange()== ItemEvent.DESELECTED){
+				if(arg0.getStateChange()== ItemEvent.DESELECTED || !checkPart2.isSelected()){
 					comboResultadoFinal.setEnabled(false);
 					txtS1P1.setEditable(false);
 					txtS1P2.setEditable(false);
@@ -181,51 +184,60 @@ public class Cu018 extends JFrame {
 					txtS9P1.setEditable(false);
 					txtS9P2.setEditable(false);
 					txtRP1.setEditable(false);
-					//txtRP2.setEditable(false);
+					txtRP2.setEditable(false);
 				}
 				else{
 					if(informacion.getPuntuacion().isPuntuacion()){
 						txtRP1.setEditable(true);
+						txtRP2.setEditable(true);
 					}
 					else if(informacion.getPuntuacion().isResultadoFinal()){
 						comboResultadoFinal.setEnabled(true);
 					}
 					else if(informacion.getPuntuacion().isSets()){
-						if(!(puntajeP1[0]==-1 && puntajeP2[0]==0)){
+						if(!(puntajeP1[0]==-1 && puntajeP2[0]==-1)){
 							txtS1P1.setEditable(true);
+							txtS1P2.setEditable(true);
 						}
 						
-						if(!(puntajeP1[1]==0 && puntajeP2[1]==0)){
+						if(!(puntajeP1[1]==-1 && puntajeP2[1]==-1)){
 							txtS2P1.setEditable(true);
+							txtS2P2.setEditable(true);
 						}
 						
-						if(!(puntajeP1[2]==0 && puntajeP2[2]==0)){
+						if(!(puntajeP1[2]==-1 && puntajeP2[2]==-1)){
 							txtS3P1.setEditable(true);
+							txtS3P2.setEditable(true);
 						}
 						
-						if(!(puntajeP1[3]==0 && puntajeP2[3]==0)){
+						if(!(puntajeP1[3]==-1 && puntajeP2[3]==-1)){
 							txtS4P1.setEditable(true);
 							txtS4P2.setEditable(true);
 						}
 						
-						if(!(puntajeP1[4]==0 && puntajeP2[4]==0)){
+						if(!(puntajeP1[4]==-1 && puntajeP2[4]==-1)){
 							txtS5P1.setEditable(true);
+							txtS5P2.setEditable(true);
 						}
 						
-						if(!(puntajeP1[5]==0 && puntajeP2[5]==0)){
+						if(!(puntajeP1[5]==-1 && puntajeP2[5]==-1)){
 							txtS6P1.setEditable(true);
+							txtS6P2.setEditable(true);
 						}
 						
-						if(!(puntajeP1[6]==0 && puntajeP2[6]==0)){
+						if(!(puntajeP1[6]==-1 && puntajeP2[6]==-1)){
 							txtS7P1.setEditable(true);
+							txtS7P2.setEditable(true);
 						}
 						
-						if(!(puntajeP1[7]==0 && puntajeP2[7]==0)){
-							txtS8P1.setEditable(false);
+						if(!(puntajeP1[7]==-1 && puntajeP2[7]==-1)){
+							txtS8P1.setEditable(true);
+							txtS8P2.setEditable(true);
 						}
 						
-						if(!(puntajeP1[8]==0 && puntajeP2[8]==0)){
+						if(!(puntajeP1[8]==-1 && puntajeP2[8]==-1)){
 							txtS9P1.setEditable(true);
+							txtS9P2.setEditable(true);
 						}
 					}
 				}
@@ -233,11 +245,10 @@ public class Cu018 extends JFrame {
 		});
 		contentPane.add(checkPart1);
 		
-		final JCheckBox checkPart2 = new JCheckBox("",encuentro.isEstadop2());
-		checkPart2.setBounds(362, 95, 97, 23);
+		
 		checkPart2.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
-				if(arg0.getStateChange()== ItemEvent.DESELECTED){
+				if(arg0.getStateChange()== ItemEvent.DESELECTED || !checkPart1.isSelected()){
 					comboResultadoFinal.setEnabled(false);
 					txtS1P1.setEditable(false);
 					txtS1P2.setEditable(false);
@@ -257,51 +268,61 @@ public class Cu018 extends JFrame {
 					txtS8P2.setEditable(false);
 					txtS9P1.setEditable(false);
 					txtS9P2.setEditable(false);
-					//txtRP1.setEditable(false);
+					txtRP1.setEditable(false);
 					txtRP2.setEditable(false);
 				}
 				else{
 					if(informacion.getPuntuacion().isPuntuacion()){
 						txtRP2.setEditable(true);
+						txtRP1.setEditable(true);
 					}
 					else if(informacion.getPuntuacion().isResultadoFinal()){
 						comboResultadoFinal.setEnabled(true);
 					}
 					else if(informacion.getPuntuacion().isSets()){
-						if(!(puntajeP1[0]==-1 && puntajeP2[0]==0)){
+						if(!(puntajeP1[0]==-1 && puntajeP2[0]==-1)){
 							txtS1P2.setEditable(true);
+							txtS1P1.setEditable(true);
 						}
 						
-						if(!(puntajeP1[1]==0 && puntajeP2[1]==0)){
+						if(!(puntajeP1[1]==-1 && puntajeP2[1]==-1)){
 							txtS2P2.setEditable(true);
+							txtS2P1.setEditable(true);
 						}
 						
-						if(!(puntajeP1[2]==0 && puntajeP2[2]==0)){
+						if(!(puntajeP1[2]==-1 && puntajeP2[2]==-1)){
 							txtS3P2.setEditable(true);
+							txtS3P1.setEditable(true);
 						}
 						
-						if(!(puntajeP1[3]==0 && puntajeP2[3]==0)){
+						if(!(puntajeP1[3]==-1 && puntajeP2[3]==-1)){
 							txtS4P2.setEditable(true);
+							txtS4P1.setEditable(true);
 						}
 						
-						if(!(puntajeP1[4]==0 && puntajeP2[4]==0)){
+						if(!(puntajeP1[4]==-1 && puntajeP2[4]==-1)){
 							txtS5P2.setEditable(true);
+							txtS5P1.setEditable(true);
 						}
 						
-						if(!(puntajeP1[5]==0 && puntajeP2[5]==0)){
+						if(!(puntajeP1[5]==-1 && puntajeP2[5]==-1)){
 							txtS6P2.setEditable(true);
+							txtS6P1.setEditable(true);
 						}
 						
-						if(!(puntajeP1[6]==0 && puntajeP2[6]==0)){
+						if(!(puntajeP1[6]==-1 && puntajeP2[6]==-1)){
 							txtS7P2.setEditable(true);
+							txtS7P1.setEditable(true);
 						}
 						
-						if(!(puntajeP1[7]==0 && puntajeP2[7]==0)){
-							txtS8P2.setEditable(false);
+						if(!(puntajeP1[7]==-1 && puntajeP2[7]==-1)){
+							txtS8P2.setEditable(true);
+							txtS8P1.setEditable(true);
 						}
 						
-						if(!(puntajeP1[8]==0 && puntajeP2[8]==0)){
+						if(!(puntajeP1[8]==-1 && puntajeP2[8]==-1)){
 							txtS9P2.setEditable(true);
+							txtS9P1.setEditable(true);
 						}
 					}
 				}
@@ -345,92 +366,129 @@ public class Cu018 extends JFrame {
 		lblSet_8.setBounds(289, 358, 46, 14);
 		contentPane.add(lblSet_8);
 		
-		txtS1P2 = new JTextField(Integer.toString(puntajeP2[0]));
+		txtS1P2 = new JTextField();
+		if(puntajeP2[0] != -1){
+			txtS1P2.setText(Integer.toString(puntajeP2[0]));
+		}
 		txtS1P2.setBounds(347, 140, 46, 20);
 		contentPane.add(txtS1P2);
 		txtS1P2.setColumns(10);
 		
-		txtS1P1 = new JTextField(Integer.toString(puntajeP1[0]));
+		txtS1P1 = new JTextField();
+		if(puntajeP1[0] != -1)
+			txtS1P1.setText(Integer.toString(puntajeP1[0]));
 		txtS1P1.setColumns(10);
 		txtS1P1.setBounds(226, 140, 46, 20);
 		contentPane.add(txtS1P1);
 		
-		txtS2P1 = new JTextField(Integer.toString(puntajeP1[1]));
+		txtS2P1 = new JTextField();
+		if (puntajeP1[1]!=-1)
+			txtS2P1.setText(Integer.toString(puntajeP1[1]));
 		txtS2P1.setColumns(10);
 		txtS2P1.setBounds(226, 165, 46, 20);
 		contentPane.add(txtS2P1);
 		
-		txtS2P2 = new JTextField(Integer.toString(puntajeP2[1]));
+		txtS2P2 = new JTextField();
+		if(puntajeP2[1]!=-1)
+			txtS2P2.setText(Integer.toString(puntajeP2[1]));
 		txtS2P2.setColumns(10);
 		txtS2P2.setBounds(347, 168, 46, 20);
 		contentPane.add(txtS2P2);
 		
-		txtS3P2 = new JTextField(Integer.toString(puntajeP2[2]));
+		txtS3P2 = new JTextField();
+		if(puntajeP2[2]!=-1)
+			txtS3P2.setText(Integer.toString(puntajeP2[2]));
 		txtS3P2.setColumns(10);
 		txtS3P2.setBounds(347, 193, 46, 20);
 		contentPane.add(txtS3P2);
 		
-		txtS4P2 = new JTextField(Integer.toString(puntajeP2[3]));
+		txtS4P2 = new JTextField();
+		if(puntajeP2[3]!=-1)
+			txtS4P2.setText(Integer.toString(puntajeP2[3]));
 		txtS4P2.setColumns(10);
 		txtS4P2.setBounds(347, 215, 46, 20);
 		contentPane.add(txtS4P2);
 		
-		txtS5P2 = new JTextField(Integer.toString(puntajeP2[4]));
+		txtS5P2 = new JTextField();
+		if(puntajeP2[4]!=-1)
+			txtS5P2.setText(Integer.toString(puntajeP2[4]));
 		txtS5P2.setColumns(10);
 		txtS5P2.setBounds(347, 243, 46, 20);
 		contentPane.add(txtS5P2);
 		
-		txtS3P1 = new JTextField(Integer.toString(puntajeP1[2]));
+		txtS3P1 = new JTextField();
+		if(puntajeP1[2]!=-1)
+			txtS3P1.setText(Integer.toString(puntajeP1[2]));
 		txtS3P1.setColumns(10);
 		txtS3P1.setBounds(226, 186, 46, 20);
 		contentPane.add(txtS3P1);
 		
-		txtS4P1 = new JTextField(Integer.toString(puntajeP1[3]));
+		txtS4P1 = new JTextField();
+		if(puntajeP1[3]!=-1)
+			txtS4P1.setText(Integer.toString(puntajeP1[3]));
 		txtS4P1.setColumns(10);
 		txtS4P1.setBounds(226, 206, 46, 20);
 		contentPane.add(txtS4P1);
 		
-		txtS5P1 = new JTextField(Integer.toString(puntajeP1[4]));
+		txtS5P1 = new JTextField();
+		if(puntajeP1[4]!=-1)
+			txtS5P1.setText(Integer.toString(puntajeP1[4]));
 		txtS5P1.setColumns(10);
 		txtS5P1.setBounds(226, 237, 46, 20);
 		contentPane.add(txtS5P1);
 		
-		txtS6P1 = new JTextField(Integer.toString(puntajeP1[5]));
+		txtS6P1 = new JTextField();
+		if(puntajeP1[5]!=-1)
+			txtS6P1.setText(Integer.toString(puntajeP1[5]));
 		txtS6P1.setColumns(10);
 		txtS6P1.setBounds(226, 268, 46, 20);
 		contentPane.add(txtS6P1);
 		
-		txtS7P1 = new JTextField(Integer.toString(puntajeP1[6]));
+		txtS7P1 = new JTextField();
+		if(puntajeP1[6]!=-1)
+			txtS7P1.setText(Integer.toString(puntajeP1[6]));
 		txtS7P1.setColumns(10);
 		txtS7P1.setBounds(226, 299, 46, 20);
 		contentPane.add(txtS7P1);
 		
-		txtS8P1 = new JTextField(Integer.toString(puntajeP1[7]));
+		txtS8P1 = new JTextField();
+		if(puntajeP1[7]!=-1)
+			txtS8P1.setText(Integer.toString(puntajeP1[7]));
 		txtS8P1.setColumns(10);
 		txtS8P1.setBounds(226, 330, 46, 20);
 		contentPane.add(txtS8P1);
 		
-		txtS9P1 = new JTextField(Integer.toString(puntajeP1[8]));
+		txtS9P1 = new JTextField();
+		if(puntajeP1[8]!=-1)
+			txtS9P1.setText(Integer.toString(puntajeP1[8]));
 		txtS9P1.setColumns(10);
 		txtS9P1.setBounds(226, 355, 46, 20);
 		contentPane.add(txtS9P1);
 		
-		txtS6P2 = new JTextField(Integer.toString(puntajeP2[5]));
+		txtS6P2 = new JTextField();
+		if(puntajeP2[5]!=-1)
+			txtS6P2.setText(Integer.toString(puntajeP2[5]));
 		txtS6P2.setColumns(10);
 		txtS6P2.setBounds(347, 268, 46, 20);
 		contentPane.add(txtS6P2);
 		
-		txtS7P2 = new JTextField(Integer.toString(puntajeP2[6]));
+		txtS7P2 = new JTextField();
+		if(puntajeP2[6]!=-1)
+			txtS7P2.setText(Integer.toString(puntajeP2[6]));
 		txtS7P2.setColumns(10);
 		txtS7P2.setBounds(347, 299, 46, 20);
 		contentPane.add(txtS7P2);
 		
-		txtS8P2 = new JTextField(Integer.toString(puntajeP2[7]));
+		txtS8P2 = new JTextField();
+		if(puntajeP2[7]!=-1)
+			txtS8P2.setText(Integer.toString(puntajeP2[7]));
 		txtS8P2.setColumns(10);
 		txtS8P2.setBounds(347, 330, 46, 20);
 		contentPane.add(txtS8P2);
 		
-		txtS9P2 = new JTextField(Integer.toString(puntajeP2[8]));
+		txtS9P2 = new JTextField();
+		if(puntajeP2[8]!=-1)
+			txtS9P2.setText(Integer.toString(puntajeP2[8]));
 		txtS9P2.setColumns(10);
 		txtS9P2.setBounds(347, 355, 46, 20);
 		contentPane.add(txtS9P2);
@@ -439,13 +497,17 @@ public class Cu018 extends JFrame {
 		lblPuntuacion.setBounds(262, 411, 94, 14);
 		contentPane.add(lblPuntuacion);
 		
-		txtRP1 = new JTextField(Integer.toString(encuentro.getPuntajep1()));
+		txtRP1 = new JTextField();
+		if(informacion.getPuntuacion().puntuacion)
+			txtRP1.setText(Integer.toString(encuentro.getPuntajep1()));
 		txtRP1.setBounds(206, 408, 46, 20);
 		contentPane.add(txtRP1);
 		txtRP1.setColumns(10);
 		txtRP1.setEditable(checkPart1.isSelected());
 		
-		txtRP2 = new JTextField(Integer.toString(encuentro.getPuntajep2()));
+		txtRP2 = new JTextField();
+		if(informacion.getPuntuacion().puntuacion)
+			txtRP2.setText(Integer.toString(encuentro.getPuntajep2()));
 		txtRP2.setColumns(10);
 		txtRP2.setBounds(361, 408, 46, 20);
 		contentPane.add(txtRP2);
@@ -603,7 +665,7 @@ public class Cu018 extends JFrame {
 				
 				boolean datosValidos=false;
 	
-				
+				if(informacion.getPuntuacion().isSets()){
 				puntajeP1[0]=Integer.parseInt(txtS1P1.getText());
 				puntajeP2[0]=Integer.parseInt(txtS1P2.getText());
 				puntajeP1[1]=Integer.parseInt(txtS2P1.getText());
@@ -622,7 +684,7 @@ public class Cu018 extends JFrame {
 				puntajeP2[7]=Integer.parseInt(txtS8P2.getText());
 				puntajeP1[8]=Integer.parseInt(txtS9P1.getText());
 				puntajeP2[8]=Integer.parseInt(txtS9P2.getText());
-				
+				}
 
 				if(!(datosValidos)){
 					if(!(checkPart1.isSelected()) && !(checkPart2.isSelected())){
@@ -635,16 +697,20 @@ public class Cu018 extends JFrame {
 						JOptionPane.showMessageDialog(null, "Ha introducido datos incorrectos");
 					}
 					else if(informacion.getPuntuacion().isSets()){
+						boolean b = false;
 						for(int i=0 ; i < 9 ; i++){
-							if(puntajeP1[i]==puntajeP2[i] && puntajeP1[i]!=0 && puntajeP2[i]!=0){
+							if(puntajeP1[i]==puntajeP2[i]){
 								lblNoSePermite.setVisible(true);
-								
+								b = true;
 								lblSeleccioneAlMenos.setVisible(false);
 								lblIngreseLaPuntuacion.setVisible(false);
 								lblNoPermiteEmpates.setVisible(false);
-								
-								JOptionPane.showMessageDialog(null, "Ha introducido datos incorrectos");
 							}
+							else
+								datosValidos = true;
+						}
+						if(b){
+							JOptionPane.showMessageDialog(null, "Ha introducido datos incorrectos");
 						}
 					}
 					else if(txtRP1.getText().length()==0 || txtRP2.getText().length()==0 || (txtRP1.getText().length()==0 && txtRP2.getText().length()==0)){
@@ -875,8 +941,8 @@ public class Cu018 extends JFrame {
 							int tantosFavorP2=0;
 							boolean hayEmpate=false;
 							
-							for(int i=0 ; i<9 ; i++){
-								if(puntajeP1[i]==puntajeP2[i] && puntajeP1[i]!=0 && puntajeP2[i]!=0)
+							for(int i=0 ; i<encuentro.getSets().size() ; i++){
+								if(puntajeP1[i]==puntajeP2[i] )
 									hayEmpate=true;}
 							
 							for(int a = 0; a < encuentro.getSets().size(); a++){
@@ -884,6 +950,7 @@ public class Cu018 extends JFrame {
 								encuentro.getSets().get(a).setPuntajep2(puntajeP2[a]);
 								
 							}
+
 							if(hayEmpate){
 								JOptionPane.showMessageDialog(null, "No se permiten empates en los Sets");
 							}
@@ -898,6 +965,8 @@ public class Cu018 extends JFrame {
 									else
 										setGanadosP2++;
 								}
+								System.out.println(setGanadosP1);
+								System.out.println(setGanadosP2);
 								if(setGanadosP1 > setGanadosP2){
 									encuentro.getJugador1().setTantosFav(x.getTantosFav()+tantosFavorP1);
 									encuentro.getJugador1().setTantosCont(x.getTantosCont()+tantosFavorP2);
