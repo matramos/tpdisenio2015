@@ -105,7 +105,7 @@ public class Cu020 extends JFrame {
 					dispose();
 				}
 				else if(compe.getEstado().getId_estado()==1){
-					JOptionPane.showMessageDialog(null,"TodavÃ­a no se genero el Fixture.");
+					JOptionPane.showMessageDialog(null,"Todavía no se genero el Fixture.");
 				}
 			}
 		});

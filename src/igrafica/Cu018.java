@@ -331,11 +331,11 @@ public class Cu018 extends JFrame {
 		contentPane.add(checkPart2);
 		
 		JLabel lblSet = new JLabel("Set 1");
-		lblSet.setBounds(281, 146, 46, 14);
+		lblSet.setBounds(289, 143, 46, 14);
 		contentPane.add(lblSet);
 		
 		JLabel lblSet_1 = new JLabel("Set 2");
-		lblSet_1.setBounds(279, 171, 46, 14);
+		lblSet_1.setBounds(289, 168, 46, 14);
 		contentPane.add(lblSet_1);
 		
 		JLabel lblSet_2 = new JLabel("Set 3");
@@ -392,7 +392,7 @@ public class Cu018 extends JFrame {
 		if(puntajeP2[1]!=-1)
 			txtS2P2.setText(Integer.toString(puntajeP2[1]));
 		txtS2P2.setColumns(10);
-		txtS2P2.setBounds(347, 168, 46, 20);
+		txtS2P2.setBounds(347, 165, 46, 20);
 		contentPane.add(txtS2P2);
 		
 		txtS3P2 = new JTextField();
@@ -643,6 +643,7 @@ public class Cu018 extends JFrame {
 			txtS9P2.setEditable(false);
 			txtRP1.setEditable(false);
 			txtRP2.setEditable(false);
+			comboResultadoFinal.setEnabled(false);
 		}
 		else if (informacion.getPuntuacion().isPuntuacion()){
 			txtS1P1.setEditable(false);
