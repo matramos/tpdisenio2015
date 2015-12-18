@@ -688,7 +688,10 @@ public class Cu004 extends JFrame {
 						competencia.setPuntos_ganador(Integer.parseInt(puntosVictoria.getText()));
 						if(chckbxSePermiteEmpate.isSelected() && chckbxSePermiteEmpate.isEnabled())
 							competencia.setPuntos_empate(Integer.parseInt(puntosEmpate.getText()));
+						if(chckbxSePermiteEmpate.isEnabled())
 						competencia.setPermite_empates(chckbxSePermiteEmpate.isSelected());
+						else
+							competencia.setPermite_empates(false);
 						competencia.setPuntos_presentarse((int)comboPuntos.getSelectedItem());
 						if(resultado.isEditable())
 						competencia.setResultado_final(Integer.parseInt(resultado.getText()));
@@ -764,9 +767,14 @@ public class Cu004 extends JFrame {
 					if(comboModalidad.getSelectedIndex()==0){
 						idmodalidad = 1;
 						competencia.setPuntos_ganador(Integer.parseInt(puntosVictoria.getText()));
-						competencia.setPuntos_empate(Integer.parseInt(puntosEmpate.getText()));
+						if(chckbxSePermiteEmpate.isSelected() && chckbxSePermiteEmpate.isEnabled())
+							competencia.setPuntos_empate(Integer.parseInt(puntosEmpate.getText()));
+						if(chckbxSePermiteEmpate.isEnabled())
 						competencia.setPermite_empates(chckbxSePermiteEmpate.isSelected());
+						else
+							competencia.setPermite_empates(false);
 						competencia.setPuntos_presentarse((int)comboPuntos.getSelectedItem());
+						if(resultado.isEditable())
 						competencia.setResultado_final(Integer.parseInt(resultado.getText()));
 					}
 					else if(comboModalidad.getSelectedIndex()==1)
