@@ -772,13 +772,12 @@ public class Cu018 extends JFrame {
 						JOptionPane.showMessageDialog(null, "La competencia NO permite empates.");
 						}
 					else{
+						System.out.println("ENTRO LA RE CONCHA DE TU MADRE");
 						datosValidos=true;}
 				}
 				
 				
 				if(datosValidos){
-				
-					
 					ParticipanteDTO x = encuentro.getJugador1();
 					ParticipanteDTO y = encuentro.getJugador2();
 					
@@ -827,7 +826,6 @@ public class Cu018 extends JFrame {
 									x.setTantosCont(x.getTantosCont()-encuentroAnterior.getSets().get(s).getPuntajep2());
 									y.setTantosCont(y.getTantosCont()-encuentroAnterior.getSets().get(s).getPuntajep1());	
 								}
-								
 							}
 							x.setTantosDif(x.getTantosFav()-x.getTantosCont());
 							y.setTantosDif(y.getTantosFav()-y.getTantosCont());
