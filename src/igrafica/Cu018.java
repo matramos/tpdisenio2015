@@ -97,7 +97,6 @@ public class Cu018 extends JFrame {
 		int prueba = cantidad;
 		
 		
-		
 		for(int j=0;j<9;j++){
 			puntajeP1[j]=-1;
 			puntajeP2[j]=-1;
@@ -742,11 +741,16 @@ public class Cu018 extends JFrame {
 					ParticipanteDTO y = encuentro.getJugador2();
 					
 					if(!(encuentroAnterior.getGanador() == null)){
+						System.out.println("caca");
+						System.out.println(encuentro.getJugador1().getNombre());
+						System.out.println(encuentro.getJugador2().getNombre());
 						
 						//seteo en base al encuentro registrado anteriormente
 						if(encuentroAnterior.getGanador().getId_participante() == x.getId_participante()){
+							System.out.println("gano el p1");
 							x.setPartidosGanados(x.getPartidosGanados()-1);
 							if(!informacion.getPuntuacion().isSets()){
+								System.out.println("NO ES POR SET");
 								x.setTantosFav(x.getTantosFav()-encuentroAnterior.getPuntajep1());
 								x.setTantosCont(x.getTantosCont()-encuentroAnterior.getPuntajep2());
 								
@@ -769,8 +773,10 @@ public class Cu018 extends JFrame {
 							y.setPuntaje(y.getPuntaje()-informacion.getPuntos_presentarse());
 						}
 						else if(encuentroAnterior.getGanador().getId_participante() == y.getId_participante()){
+							System.out.println("gano el p2");
 							x.setPartidosPerdidos(x.getPartidosPerdidos()-1);
 							if(!informacion.getPuntuacion().isSets()){
+								System.out.println("NO ES POR SET");
 								x.setTantosFav(x.getTantosFav()-encuentroAnterior.getPuntajep1());
 								x.setTantosCont(x.getTantosCont()-encuentroAnterior.getPuntajep2());
 								y.setTantosFav(y.getTantosFav()-encuentroAnterior.getPuntajep2());
@@ -828,10 +834,10 @@ public class Cu018 extends JFrame {
 
 							x.setPartidosPerdidos((x.getPartidosPerdidos()+1));
 							x.setTantosCont(x.getTantosCont()+informacion.getResultado_final());
-							x.setTantosDif(x.getTantosDif()-informacion.getResultado_final());
+							x.setTantosDif(x.getTantosFav()-x.getTantosCont());
 							y.setPartidosGanados(y.getPartidosGanados()+1);
 							y.setTantosFav(y.getTantosFav()+informacion.getResultado_final());
-							y.setTantosDif(y.getTantosDif()+informacion.getResultado_final());
+							y.setTantosDif(y.getTantosFav()-y.getTantosCont());
 							y.setPuntaje(y.getPuntaje()+informacion.getPuntos_presentarse()+informacion.getPuntos_ganador());
 							
 							encuentro.setJugador1(x);
@@ -843,13 +849,13 @@ public class Cu018 extends JFrame {
 							
 							encuentro.setEstadop1(true);
 							encuentro.setEstadop2(false);
-							y.setPartidosPerdidos((x.getPartidosPerdidos()+1));
-							y.setTantosCont(x.getTantosCont()+informacion.getResultado_final());
-							y.setTantosDif(x.getTantosDif()-informacion.getResultado_final());
-							x.setPartidosGanados(y.getPartidosGanados()+1);
-							x.setTantosFav(y.getTantosFav()+informacion.getResultado_final());
-							x.setTantosDif(y.getTantosDif()+informacion.getResultado_final());
-							x.setPuntaje(y.getPuntaje()+informacion.getPuntos_presentarse()+informacion.getPuntos_ganador());
+							y.setPartidosPerdidos((y.getPartidosPerdidos()+1));
+							y.setTantosCont(y.getTantosCont()+informacion.getResultado_final());
+							y.setTantosDif(y.getTantosFav()-y.getTantosCont());
+							x.setPartidosGanados(x.getPartidosGanados()+1);
+							x.setTantosFav(x.getTantosFav()+informacion.getResultado_final());
+							x.setTantosDif(x.getTantosFav()-x.getTantosCont());
+							x.setPuntaje(x.getPuntaje()+informacion.getPuntos_presentarse()+informacion.getPuntos_ganador());
 							encuentro.setJugador1(x);
 							encuentro.setJugador2(y);
 						}
