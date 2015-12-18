@@ -434,6 +434,7 @@ public class Cu004 extends JFrame {
 						resultado.setEditable(true);
 						if(!chckbxSePermiteEmpate.isSelected()){
 							puntosEmpate.setEditable(false);}
+						comboCantidadSets.setEnabled(false);
 					}
 				
 				}
@@ -685,10 +686,11 @@ public class Cu004 extends JFrame {
 					if(comboModalidad.getSelectedIndex()==0){
 						idmodalidad = 1;
 						competencia.setPuntos_ganador(Integer.parseInt(puntosVictoria.getText()));
-						if(chckbxSePermiteEmpate.isSelected())
+						if(chckbxSePermiteEmpate.isSelected() && chckbxSePermiteEmpate.isEnabled())
 							competencia.setPuntos_empate(Integer.parseInt(puntosEmpate.getText()));
 						competencia.setPermite_empates(chckbxSePermiteEmpate.isSelected());
 						competencia.setPuntos_presentarse((int)comboPuntos.getSelectedItem());
+						if(resultado.isEditable())
 						competencia.setResultado_final(Integer.parseInt(resultado.getText()));
 					}
 					else if(comboModalidad.getSelectedIndex()==1)
