@@ -134,7 +134,7 @@ public class Cu021 extends JFrame {
 		}
 		else{
 			sonido("error");
-			JOptionPane.showMessageDialog(null, "La competencia aï¿½n no se disputï¿½");
+			JOptionPane.showMessageDialog(null, "La competencia aún no se disputï¿½");
 			Cu020 ventana = new Cu020(id_competencia,id_usuario, desdeEl4);
 			ventana.setVisible(true);
 			dispose();
