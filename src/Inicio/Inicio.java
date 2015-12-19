@@ -12,10 +12,10 @@ public class Inicio {
 	long id_usuario = 1;
 
 	//Cu018 cu = new Cu018(196,199,200,1);
-	pantallainicio cu = new pantallainicio();
+	menuprincipal cu = new menuprincipal(1);
 
-	cu.main(null);
-	//cu.setVisible(true);
+	//cu.main(null);
+	cu.setVisible(true);
 	
 }
 }
