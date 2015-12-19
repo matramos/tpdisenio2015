@@ -331,11 +331,11 @@ public class Cu018 extends JFrame {
 		contentPane.add(checkPart2);
 		
 		JLabel lblSet = new JLabel("Set 1");
-		lblSet.setBounds(281, 146, 46, 14);
+		lblSet.setBounds(289, 143, 46, 14);
 		contentPane.add(lblSet);
 		
 		JLabel lblSet_1 = new JLabel("Set 2");
-		lblSet_1.setBounds(279, 171, 46, 14);
+		lblSet_1.setBounds(289, 168, 46, 14);
 		contentPane.add(lblSet_1);
 		
 		JLabel lblSet_2 = new JLabel("Set 3");
@@ -392,7 +392,7 @@ public class Cu018 extends JFrame {
 		if(puntajeP2[1]!=-1)
 			txtS2P2.setText(Integer.toString(puntajeP2[1]));
 		txtS2P2.setColumns(10);
-		txtS2P2.setBounds(347, 168, 46, 20);
+		txtS2P2.setBounds(347, 165, 46, 20);
 		contentPane.add(txtS2P2);
 		
 		txtS3P2 = new JTextField();
@@ -526,7 +526,7 @@ public class Cu018 extends JFrame {
 		
 		final JLabel lblIngreseLaPuntuacion = new JLabel("Ingrese la puntuaci\u00F3n");
 		lblIngreseLaPuntuacion.setForeground(Color.RED);
-		lblIngreseLaPuntuacion.setBounds(272, 436, 187, 14);
+		lblIngreseLaPuntuacion.setBounds(347, 436, 187, 14);
 		lblIngreseLaPuntuacion.setVisible(false);
 		contentPane.add(lblIngreseLaPuntuacion);
 		
@@ -544,7 +544,7 @@ public class Cu018 extends JFrame {
 		
 		final JLabel lblNoPermiteEmpates = new JLabel("La Competencia NO permite empates");
 		lblNoPermiteEmpates.setForeground(Color.RED);
-		lblNoPermiteEmpates.setBounds(272, 436, 187, 14);
+		lblNoPermiteEmpates.setBounds(160, 436, 187, 14);
 		lblNoPermiteEmpates.setVisible(false);
 		contentPane.add(lblNoPermiteEmpates);
 		
@@ -643,6 +643,7 @@ public class Cu018 extends JFrame {
 			txtS9P2.setEditable(false);
 			txtRP1.setEditable(false);
 			txtRP2.setEditable(false);
+			comboResultadoFinal.setEnabled(false);
 		}
 		else if (informacion.getPuntuacion().isPuntuacion()){
 			txtS1P1.setEditable(false);
@@ -738,17 +739,23 @@ public class Cu018 extends JFrame {
 						
 						JOptionPane.showMessageDialog(null, "Ha introducido datos incorrectos");
 					}
-					else if(informacion.getPuntuacion().isSets()){
+					else if(informacion.getPuntuacion().isSets() &&(checkPart1.isSelected()) && (checkPart2.isSelected())){
+						System.out.println("ENTROOO");
 						boolean b = false;
+						int cantidad = informacion.getCantidad_sets();
+						int contador = 0;
 						for(int i=0 ; i < informacion.getCantidad_sets() ; i++){
 							
 							if(puntajeP1[i]==puntajeP2[i]){
+								System.out.println("caca");
 								lblNoSePermite.setVisible(true);
 								b = true;
 								lblSeleccioneAlMenos.setVisible(false);
 								lblIngreseLaPuntuacion.setVisible(false);
 								lblNoPermiteEmpates.setVisible(false);
+								
 							}
+								
 							else
 								datosValidos = true;
 						}
@@ -756,7 +763,7 @@ public class Cu018 extends JFrame {
 							JOptionPane.showMessageDialog(null, "Ha introducido datos incorrectos");
 						}
 					}
-					else if(txtRP1.getText().length()==0 || txtRP2.getText().length()==0 || (txtRP1.getText().length()==0 && txtRP2.getText().length()==0)){
+					else if((txtRP1.getText().length()==0 || txtRP2.getText().length()==0 || (txtRP1.getText().length()==0 && txtRP2.getText().length()==0))&& (checkPart1.isSelected()) && (checkPart2.isSelected()) && informacion.getPuntuacion().isPuntuacion()){
 						lblIngreseLaPuntuacion.setVisible(true);
 						
 						lblNoSePermite.setVisible(false);
@@ -765,7 +772,7 @@ public class Cu018 extends JFrame {
 						
 						JOptionPane.showMessageDialog(null, "Ha introducido datos incorrectos");
 					}
-					else if( !informacion.isPermite_empates() && ( txtRP1.getText().equals(txtRP2.getText()) ) ){
+					else if( !(informacion.getPuntuacion().isResultadoFinal()) && !(informacion.getPuntuacion().isSets()) && !informacion.isPermite_empates() && ( txtRP1.getText().equals(txtRP2.getText()) && (checkPart1.isSelected()) && (checkPart2.isSelected()))){
 						lblSeleccioneAlMenos.setVisible(false);
 						lblNoSePermite.setVisible(false);
 						lblIngreseLaPuntuacion.setVisible(false);
@@ -780,19 +787,44 @@ public class Cu018 extends JFrame {
 				
 				if(datosValidos){
 				
+					System.out.println("ENCUENTRO ANTERIOR");
+					System.out.println(encuentroAnterior.getPuntajep1());
+					System.out.println(encuentroAnterior.getPuntajep2());
+					
+					System.out.println("PARTICIPANTE 1");
+					System.out.println(encuentroAnterior.getJugador1().getTantosFav());
+					System.out.println(encuentroAnterior.getJugador1().getTantosCont());
+					System.out.println(encuentroAnterior.getJugador1().getTantosDif());
+					System.out.println("PARTICIPANTE 2");
+					System.out.println(encuentroAnterior.getJugador2().getTantosFav());
+					System.out.println(encuentroAnterior.getJugador2().getTantosCont());
+					System.out.println(encuentroAnterior.getJugador2().getTantosDif());
+					
 					
 					ParticipanteDTO x = encuentro.getJugador1();
 					ParticipanteDTO y = encuentro.getJugador2();
+					
+					System.out.println("DATOS DE X e Y");
+					System.out.println("PARTICIPANTE X");
+					System.out.println(encuentro.getJugador1().getTantosFav());
+					System.out.println(encuentro.getJugador1().getTantosCont());
+					System.out.println(encuentro.getJugador1().getTantosDif());
+					System.out.println("PARTICIPANTE Y");
+					System.out.println(encuentro.getJugador2().getTantosFav());
+					System.out.println(encuentro.getJugador2().getTantosCont());
+					System.out.println(encuentro.getJugador2().getTantosDif());
 					
 					if(!(encuentroAnterior.getGanador() == null)){
 						
 						//BORRAMOS CARGAS ANTERIORES
 						if(encuentroAnterior.getGanador().getId_participante() == x.getId_participante()){
 							//EL GANADOR ANTERIOR FUE X
+							System.out.println("GANO EL PRIMERO");
 							x.setPartidosGanados(x.getPartidosGanados()-1);
 							y.setPartidosPerdidos(y.getPartidosPerdidos()-1);
 							
 							if(!informacion.getPuntuacion().isSets()){
+								System.out.println("NO ES POR SET");
 								x.setTantosFav(x.getTantosFav()-encuentroAnterior.getPuntajep1());
 								x.setTantosCont(x.getTantosCont()-encuentroAnterior.getPuntajep2());
 								
@@ -815,14 +847,16 @@ public class Cu018 extends JFrame {
 							x.setPuntaje(x.getPuntaje()-informacion.getPuntos_ganador()-informacion.getPuntos_presentarse());
 							if(encuentroAnterior.isEstadop2()){
 								y.setPuntaje(y.getPuntaje()-informacion.getPuntos_presentarse());}
+							//y.setPuntaje(y.getPuntaje()-informacion.getPuntos_presentarse());
 						}
 						else if(encuentroAnterior.getGanador().getId_participante() == y.getId_participante()){
 							//EL GANADOR ANTERIOR FUE Y
-							
+							System.out.println("GANO EL SEGUNDO");
 							x.setPartidosPerdidos(x.getPartidosPerdidos()-1);
 							y.setPartidosGanados(y.getPartidosGanados()-1);
 							
 							if(!informacion.getPuntuacion().isSets()){
+								System.out.println("NO ES POR SET");
 								x.setTantosFav(x.getTantosFav()-encuentroAnterior.getPuntajep1());
 								x.setTantosCont(x.getTantosCont()-encuentroAnterior.getPuntajep2());
 								y.setTantosFav(y.getTantosFav()-encuentroAnterior.getPuntajep2());
@@ -843,17 +877,19 @@ public class Cu018 extends JFrame {
 							if(encuentroAnterior.isEstadop1()){
 								x.setPuntaje(x.getPuntaje()-informacion.getPuntos_presentarse());}
 							y.setPuntaje(y.getPuntaje()-informacion.getPuntos_ganador()-informacion.getPuntos_presentarse());
+							//x.setPuntaje(x.getPuntaje()-informacion.getPuntos_presentarse());
 						}
 						
 					}
 					else if (encuentroAnterior.isEmpate()){
 						//EMPATARON EL PARTIDO ANTERIOR
-						
+						System.out.println("EMPATARON");
 						x.setPartidosEmpatados(x.getPartidosEmpatados()-1);
 						y.setPartidosEmpatados(y.getPartidosEmpatados()-1);
 						encuentro.setEmpate(false);
 						
 						if(!informacion.getPuntuacion().isSets()){
+							System.out.println("NO ES POR SET");
 							x.setTantosFav(x.getTantosFav()-encuentroAnterior.getPuntajep1());
 							x.setTantosCont(x.getTantosCont()-encuentroAnterior.getPuntajep2());
 							y.setTantosFav(y.getTantosFav()-encuentroAnterior.getPuntajep2());
@@ -876,12 +912,24 @@ public class Cu018 extends JFrame {
 					}
 					encuentro.setGanador(null);
 					
+					System.out.println("DATOS DE X e Y DESPUES DE LA MODIFICACION");
+					System.out.println("PARTICIPANTE X");
+					System.out.println(encuentro.getJugador1().getTantosFav());
+					System.out.println(encuentro.getJugador1().getTantosCont());
+					System.out.println(encuentro.getJugador1().getTantosDif());
+					System.out.println("PARTICIPANTE Y");
+					System.out.println(encuentro.getJugador2().getTantosFav());
+					System.out.println(encuentro.getJugador2().getTantosCont());
+					System.out.println(encuentro.getJugador2().getTantosDif());
+					
+					
 					//settear el encuentro si no se presento ninguno (no me acuerdo este caso) , EXPLOTA EL SISTEMA
 					/*if(!(checkPart1.isSelected()) && !(checkPart2.isSelected()))
 						;*/
 						
 					//setear el encuentro si no se presento el primero
 					if(!(checkPart1.isSelected()) && (checkPart2.isSelected())){
+						System.out.println("NO SE PRESENTO EL PRIMER PARTICIPANTE");
 						encuentro.setEstadop1(false);
 						encuentro.setEstadop2(true);
 
@@ -894,6 +942,9 @@ public class Cu018 extends JFrame {
 						y.setTantosDif(y.getTantosFav() - y.getTantosCont());
 						y.setPuntaje(y.getPuntaje()+informacion.getPuntos_presentarse()+informacion.getPuntos_ganador());
 							
+						encuentro.setPuntajep1(0);
+						encuentro.setPuntajep2(informacion.getResultado_final());
+						
 						encuentro.setJugador1(x);
 						encuentro.setJugador2(y);
 						
@@ -903,17 +954,22 @@ public class Cu018 extends JFrame {
 					
 					//settear el encuentro si no se presento el segundo
 					else if((checkPart1.isSelected()) && !(checkPart2.isSelected())){
-							
+						System.out.println("NO SE PRESENTO EL SEGUNDO PARTICIPANTE");
+						
+						
 						encuentro.setEstadop1(true);
 						encuentro.setEstadop2(false);
-						y.setPartidosPerdidos((x.getPartidosPerdidos()+1));
-						y.setTantosCont(x.getTantosCont()+informacion.getResultado_final());
-						y.setTantosDif(x.getTantosFav() - y.getTantosCont());
+						y.setPartidosPerdidos((y.getPartidosPerdidos()+1));
+						y.setTantosCont(y.getTantosCont()+informacion.getResultado_final());
+						y.setTantosDif(y.getTantosFav() - y.getTantosCont());
 						
-						x.setPartidosGanados(y.getPartidosGanados()+1);
-						x.setTantosFav(y.getTantosFav()+informacion.getResultado_final());
-						x.setTantosDif(y.getTantosFav() - y.getTantosCont());
-						x.setPuntaje(y.getPuntaje()+informacion.getPuntos_presentarse()+informacion.getPuntos_ganador());
+						x.setPartidosGanados(x.getPartidosGanados()+1);
+						x.setTantosFav(x.getTantosFav()+informacion.getResultado_final());
+						x.setTantosDif(x.getTantosFav() - x.getTantosCont());
+						x.setPuntaje(x.getPuntaje()+informacion.getPuntos_presentarse()+informacion.getPuntos_ganador());
+						
+						encuentro.setPuntajep1(informacion.getResultado_final());
+						encuentro.setPuntajep2(0);
 						
 						encuentro.setJugador1(x);
 						encuentro.setJugador2(y);
@@ -932,7 +988,7 @@ public class Cu018 extends JFrame {
 								 x.setPuntaje(x.getPuntaje()+informacion.getPuntos_ganador()+informacion.getPuntos_presentarse());
 								 y.setPartidosPerdidos(y.getPartidosPerdidos()+1);
 								 y.setPuntaje(y.getPuntaje()+informacion.getPuntos_presentarse());
-								 encuentro.setGanador(encuentro.getJugador1());
+								 encuentro.setGanador(x);
 								 encuentro.setEmpate(false);
 							 }
 							 else if (seleccionado.equals(encuentro.getJugador2().getNombre()) ){
@@ -940,9 +996,11 @@ public class Cu018 extends JFrame {
 								 y.setPuntaje(y.getPuntaje()+informacion.getPuntos_ganador()+informacion.getPuntos_presentarse());
 								 x.setPartidosPerdidos(x.getPartidosPerdidos()+1);
 								 x.setPuntaje(x.getPuntaje() + informacion.getPuntos_presentarse());
-								 encuentro.setGanador(encuentro.getJugador2());
+								 encuentro.setGanador(y);
 								 encuentro.setEmpate(false);
 							 }
+							encuentro.setJugador1(x);
+							encuentro.setJugador2(y);
 					}
 						
 					//setear el encuentro teniendo en cuenta el textfield de puntuacion
@@ -950,7 +1008,7 @@ public class Cu018 extends JFrame {
 							int puntajeP1=Integer.parseInt(txtRP1.getText());
 							int puntajeP2=Integer.parseInt(txtRP2.getText());
 							
-							System.out.println("CAMBIANDO POR PUNTUACION");
+							System.out.println("SETEO POR PUNTUACION");
 							encuentro.setPuntajep1(puntajeP1);
 							encuentro.setPuntajep2(puntajeP2);
 							//encuentro.getSets().get(0).setPuntajep1(puntajeP1);
@@ -962,8 +1020,7 @@ public class Cu018 extends JFrame {
 								x.setTantosCont(x.getTantosCont()+puntajeP2);
 								x.setTantosDif(x.getTantosFav() - x.getTantosCont());
 								x.setPartidosGanados(x.getPartidosGanados()+1);
-								x.setPuntaje(x.getPuntaje() + 
-										informacion.getPuntos_ganador() + informacion.getPuntos_presentarse());
+								x.setPuntaje(x.getPuntaje() + informacion.getPuntos_ganador() + informacion.getPuntos_presentarse());
 								
 								y.setTantosFav(y.getTantosFav()+puntajeP2);
 								y.setTantosCont(y.getTantosCont()+puntajeP1);
@@ -974,22 +1031,23 @@ public class Cu018 extends JFrame {
 								encuentro.setEmpate(false);
 							}
 							else if (puntajeP2 > puntajeP1){
+								System.out.println("GANA P2");
 								y.setTantosFav(y.getTantosFav()+puntajeP2);
 								y.setTantosCont(y.getTantosCont()+puntajeP1);
 								y.setTantosDif(y.getTantosFav() - y.getTantosCont());
 								y.setPartidosGanados(y.getPartidosGanados()+1);
-								y.setPuntaje(y.getPuntaje()+informacion.getPuntos_ganador()+
-										informacion.getPuntos_presentarse());
+								y.setPuntaje(y.getPuntaje()+informacion.getPuntos_ganador()+ informacion.getPuntos_presentarse());
 									
 								x.setTantosFav(x.getTantosFav()+puntajeP1);
 								x.setTantosCont(x.getTantosCont()+puntajeP2);
 								x.setTantosDif(x.getTantosFav() - x.getTantosCont());
 								x.setPartidosPerdidos(x.getPartidosPerdidos()+1);
 								x.setPuntaje(x.getPuntaje()+informacion.getPuntos_presentarse());
-								encuentro.setGanador(encuentro.getJugador2());
+								encuentro.setGanador(y);
 								encuentro.setEmpate(false);
 							}
 							else{
+								System.out.println("EMPATARON");
 								y.setTantosFav(y.getTantosFav()+puntajeP2);
 								y.setTantosCont(y.getTantosCont()+puntajeP1);
 								y.setTantosDif(y.getTantosFav() - y.getTantosCont());
@@ -1001,14 +1059,23 @@ public class Cu018 extends JFrame {
 								x.setTantosDif(x.getTantosFav() - x.getTantosCont());
 								x.setPartidosEmpatados(x.getPartidosEmpatados()+1);
 								x.setPuntaje(x.getPuntaje()+informacion.getPuntos_presentarse()+informacion.getPuntos_empate());
-								
 								encuentro.setEmpate(true);
+								encuentro.getGanador().setId_participante(0);
 							}
+							
+							encuentro.setPuntajep1(puntajeP1);
+							encuentro.setPuntajep2(puntajeP2);
+							
+							encuentro.setJugador1(x);
+							encuentro.setJugador2(y);
 						
 						}
 						//setear el encuentro teniendo en cuenta los textfields de set
 						else if(informacion.getPuntuacion().isSets()){
-
+							System.out.println("SETEO POR SET");
+							
+							System.out.println("SETEO POR SET");
+							
 							int setGanadosP1=0;
 							int setGanadosP2=0;
 							int tantosFavorP1=0;
@@ -1029,30 +1096,49 @@ public class Cu018 extends JFrame {
 								tantosFavorP1 = tantosFavorP1 + puntajeP1[i];
 								tantosFavorP2 = tantosFavorP2 + puntajeP2[i];
 								if(puntajeP1[i] > puntajeP2[i]){
-									System.out.println(setGanadosP1);
 									setGanadosP1++;
 								}
 								else
 									setGanadosP2++;
 							}
-							System.out.println(setGanadosP1);
-							System.out.println(setGanadosP2);
+							if(hayEmpate){
+								y.setTantosFav(y.getTantosFav()+tantosFavorP2);
+								y.setTantosCont(y.getTantosCont()+tantosFavorP1);
+								y.setTantosDif(y.getTantosFav()-y.getTantosCont());
+								y.setPartidosEmpatados(y.getPartidosEmpatados()+1);
+								y.setPuntaje(y.getPuntaje()+informacion.getPuntos_empate()+informacion.getPuntos_presentarse());
+								
+								x.setTantosFav(x.getTantosFav()+tantosFavorP1);
+								x.setTantosCont(x.getTantosCont()+tantosFavorP2);
+								x.setTantosDif(x.getTantosFav()-x.getTantosCont());
+								x.setPartidosEmpatados(x.getPartidosEmpatados()+1);
+								x.setPuntaje(x.getPuntaje()+informacion.getPuntos_presentarse()+informacion.getPuntos_empate());
+							
+								encuentro.setPuntajep1(0);
+								encuentro.setPuntajep2(0);
+								encuentro.setEmpate(true);
+								
+								
+							}
+							else{
 							if(setGanadosP1 > setGanadosP2){
 								x.setTantosFav(x.getTantosFav()+tantosFavorP1);
 								x.setTantosCont(x.getTantosCont()+tantosFavorP2);
 								x.setTantosDif(x.getTantosFav() - x.getTantosCont());
 								x.setPartidosGanados(x.getPartidosGanados()+1);
 								x.setPuntaje(x.getPuntaje()+informacion.getPuntos_ganador()+informacion.getPuntos_presentarse());
-								encuentro.setPuntajep1(setGanadosP1);
+								
 									
 								y.setTantosFav(y.getTantosFav()+tantosFavorP2);
 								y.setTantosCont(y.getTantosCont()+tantosFavorP1);
 								y.setTantosDif(y.getTantosFav() - y.getTantosCont());
 								y.setPartidosPerdidos(y.getPartidosPerdidos()+1);
 								y.setPuntaje(y.getPuntaje()+informacion.getPuntos_presentarse());
+								
+								
+								encuentro.setPuntajep1(setGanadosP1);
 								encuentro.setPuntajep2(setGanadosP2);
-									
-								encuentro.setGanador(encuentro.getJugador1());
+								encuentro.setGanador(x);
 							}
 							else if(setGanadosP2 > setGanadosP1){
 								y.setTantosFav(y.getTantosFav()+tantosFavorP2);
@@ -1060,35 +1146,35 @@ public class Cu018 extends JFrame {
 								y.setTantosDif(y.getTantosFav() - y.getTantosCont());
 								y.setPartidosGanados(y.getPartidosGanados()+1);
 								y.setPuntaje(y.getPuntaje()+informacion.getPuntos_ganador()+informacion.getPuntos_presentarse());
-								encuentro.setPuntajep2(setGanadosP2);
+								
 								
 								x.setTantosFav(x.getTantosFav()+tantosFavorP1);
 								x.setTantosCont(x.getTantosCont()+tantosFavorP2);
 								x.setTantosDif(x.getTantosFav() - x.getTantosCont());
 								x.setPartidosPerdidos(x.getPartidosPerdidos()+1);
 								x.setPuntaje(x.getPuntaje()+informacion.getPuntos_presentarse());
+								
 								encuentro.setPuntajep1(setGanadosP1);
-								
-								encuentro.setGanador(encuentro.getJugador2());
+								encuentro.setPuntajep2(setGanadosP2);
+								encuentro.setGanador(y);
+							}			
 							}
-							else{
-								y.setTantosFav(y.getTantosFav()+tantosFavorP2);
-								y.setTantosCont(y.getTantosCont()+tantosFavorP1);
-								y.setTantosDif(y.getTantosDif()+tantosFavorP2-tantosFavorP1);
-								y.setPartidosEmpatados(y.getPartidosEmpatados()+1);
-								y.setPuntaje(y.getPuntaje()+informacion.getPuntos_empate()+informacion.getPuntos_presentarse());
-								
-								x.setTantosFav(x.getTantosFav()+tantosFavorP1);
-								x.setTantosCont(x.getTantosCont()+tantosFavorP2);
-								x.setTantosDif(x.getTantosDif()+tantosFavorP1-tantosFavorP2);
-								x.setPartidosEmpatados(x.getPartidosEmpatados()+1);
-								x.setPuntaje(x.getPuntaje()+informacion.getPuntos_presentarse()+informacion.getPuntos_empate());
-							
-								encuentro.setEmpate(true);
-							}
+							encuentro.setJugador1(x);
+							encuentro.setJugador2(y);
 						
 						}
 					
+					System.out.println("DATOS DE X e Y ACTUALIZADOS EN EL ENCUENTRO");
+					System.out.println(encuentro.getPuntajep1());
+					System.out.println(encuentro.getPuntajep2());
+					System.out.println("PARTICIPANTE X");
+					System.out.println(encuentro.getJugador1().getTantosFav());
+					System.out.println(encuentro.getJugador1().getTantosCont());
+					System.out.println(encuentro.getJugador1().getTantosDif());
+					System.out.println("PARTICIPANTE Y");
+					System.out.println(encuentro.getJugador2().getTantosFav());
+					System.out.println(encuentro.getJugador2().getTantosCont());
+					System.out.println(encuentro.getJugador2().getTantosDif());
 				
 						//voy a gestionar fixture para cargar el resultado de los datos actualizados
 						encuentro.setEstadop1(checkPart1.isSelected());

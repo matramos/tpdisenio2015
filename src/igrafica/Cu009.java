@@ -217,7 +217,7 @@ public class Cu009 extends JFrame {
 		lblIngreseEmail.setVisible(false);
 		contentPane.add(lblIngreseEmail);
 		
-		final JLabel lblEmailYaExiste = new JLabel("El email ingresado estï¿½ vinculado a otro participante");
+		final JLabel lblEmailYaExiste = new JLabel("El email ingresado está vinculado a otro participante");
 		lblEmailYaExiste.setBounds(92, 236, 344, 14);
 		lblEmailYaExiste.setForeground(Color.red);
 		lblEmailYaExiste.setVisible(false);
@@ -286,13 +286,13 @@ public class Cu009 extends JFrame {
 			
 					if(id_competencia==GestorCompetencias.agregarParticipante(participanteDTO,id_competencia)){
 						if(competencia.getEstado().getId_estado() == 1){
-							JOptionPane.showMessageDialog(null, "La operaciï¿½n ha culminado con ï¿½xito");
+							JOptionPane.showMessageDialog(null, "La operación ha culminado con éxito");
 							Cu008 ventana = new Cu008(id_competencia,id_usuario, desdeEl4);
 							ventana.setVisible(true);
 							dispose();
 						}
 						else {
-							JOptionPane.showMessageDialog(null, "La operaciï¿½n ha culminado con ï¿½xito y"
+							JOptionPane.showMessageDialog(null, "La operación ha culminado con éxito y"
 									+ " el fixture ha sido eliminado.");
 							Cu008 ventana = new Cu008(id_competencia,id_usuario, desdeEl4);
 							ventana.setVisible(true);
