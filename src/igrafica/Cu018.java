@@ -851,6 +851,7 @@ public class Cu018 extends JFrame {
 						
 						x.setPartidosEmpatados(x.getPartidosEmpatados()-1);
 						y.setPartidosEmpatados(y.getPartidosEmpatados()-1);
+						encuentro.setEmpate(false);
 						
 						if(!informacion.getPuntuacion().isSets()){
 							x.setTantosFav(x.getTantosFav()-encuentroAnterior.getPuntajep1());
@@ -873,6 +874,7 @@ public class Cu018 extends JFrame {
 						x.setPuntaje(x.getPuntaje()-informacion.getPuntos_empate()-informacion.getPuntos_presentarse());
 						y.setPuntaje(y.getPuntaje()-informacion.getPuntos_empate()-informacion.getPuntos_presentarse());
 					}
+					encuentro.setGanador(null);
 					
 					//settear el encuentro si no se presento ninguno (no me acuerdo este caso) , EXPLOTA EL SISTEMA
 					/*if(!(checkPart1.isSelected()) && !(checkPart2.isSelected()))
