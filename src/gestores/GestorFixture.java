@@ -48,16 +48,18 @@ public class GestorFixture{
 			
 			for(int e=0; e<(participantes.size()/2);e++){
 				
-				//getLugar lo hago aca porque no tengo idea como hacerlo en competencia.
-				
-				if(lugares.get(l).getDisponibilidad() == 0){
-					l++;
-				}
-				
-				Lugar lugarcito = lugares.get(l).getLugar();
-				
+						
+				//SI ALGUNO DE LOS PARTICIPANTES ES GHOST NO SE GENERA EL ENCUENTRO
 				if(!participantes.get(e).getNombre().equals("ghost") 
 						&& !participantes.get(participantes.size()-e-1).getNombre().equals("ghost")){
+					
+					//getLugar lo hago aca porque no tengo idea como hacerlo en competencia.
+					if(lugares.get(l).getDisponibilidad() == 0){
+						l++;
+					}
+					
+					Lugar lugarcito = lugares.get(l).getLugar();
+					
 					
 					lugares.get(l).setDisponibilidad(lugares.get(l).getDisponibilidad()-1);
 					
