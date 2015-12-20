@@ -51,7 +51,7 @@ public class Cu009 extends JFrame {
     private byte[] imageInByte;
     private JLabel lblImagen;
     private Image mostrar;
-	
+    private String path;
 
 	/**
 	 * Launch the application.
@@ -89,7 +89,7 @@ public class Cu009 extends JFrame {
 		
 		
 		competencia= (CompetenciaDTO) GestorCompetencias.getCompetencia(id_competencia);
-		
+
 		
 		
 		// codigo para agregar imagen por exploracion 
@@ -179,6 +179,7 @@ public class Cu009 extends JFrame {
         		fileChooser.setAcceptAllFileFilterUsed(false);
         		fileChooser.setFileFilter(filtro);
         		if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+        			path = fileChooser.getSelectedFile().getAbsolutePath();
         			ImageIcon icono = new ImageIcon(fileChooser.getSelectedFile().getAbsolutePath());
         			Image newimg = icono.getImage().getScaledInstance(128, 128, java.awt.Image.SCALE_SMOOTH);  
         			icono = new ImageIcon(newimg);
@@ -217,7 +218,7 @@ public class Cu009 extends JFrame {
 		lblIngreseEmail.setVisible(false);
 		contentPane.add(lblIngreseEmail);
 		
-		final JLabel lblEmailYaExiste = new JLabel("El email ingresado está vinculado a otro participante");
+		final JLabel lblEmailYaExiste = new JLabel("El email ingresado estï¿½ vinculado a otro participante");
 		lblEmailYaExiste.setBounds(92, 236, 344, 14);
 		lblEmailYaExiste.setForeground(Color.red);
 		lblEmailYaExiste.setVisible(false);
@@ -268,7 +269,7 @@ public class Cu009 extends JFrame {
 				}
 				else{
 					try {
-						BufferedImage originalImage = ImageIO.read(new File("lblImagen"));
+						BufferedImage originalImage = ImageIO.read(new File(path));
 
 						// convert BufferedImage to byte array
 						ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -286,13 +287,13 @@ public class Cu009 extends JFrame {
 			
 					if(id_competencia==GestorCompetencias.agregarParticipante(participanteDTO,id_competencia)){
 						if(competencia.getEstado().getId_estado() == 1){
-							JOptionPane.showMessageDialog(null, "La operación ha culminado con éxito");
+							JOptionPane.showMessageDialog(null, "La operaciï¿½n ha culminado con ï¿½xito");
 							Cu008 ventana = new Cu008(id_competencia,id_usuario, desdeEl4);
 							ventana.setVisible(true);
 							dispose();
 						}
 						else {
-							JOptionPane.showMessageDialog(null, "La operación ha culminado con éxito y"
+							JOptionPane.showMessageDialog(null, "La operaciï¿½n ha culminado con ï¿½xito y"
 									+ " el fixture ha sido eliminado.");
 							Cu008 ventana = new Cu008(id_competencia,id_usuario, desdeEl4);
 							ventana.setVisible(true);
