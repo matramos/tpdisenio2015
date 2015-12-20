@@ -813,13 +813,39 @@ public class Cu018 extends JFrame {
 					System.out.println(encuentro.getJugador2().getTantosFav());
 					System.out.println(encuentro.getJugador2().getTantosCont());
 					System.out.println(encuentro.getJugador2().getTantosDif());
-					
+					//System.out.println(encuentroAnterior.getGanador().getId_participante());
 					if(!(encuentroAnterior.getGanador() == null)){
-						
-						
-						
 						//BORRAMOS CARGAS ANTERIORES
-						if(encuentroAnterior.getGanador().getId_participante() == x.getId_participante()){
+						if (encuentroAnterior.isEmpate()){
+							//EMPATARON EL PARTIDO ANTERIOR
+							System.out.println("EMPATARON");
+							x.setPartidosEmpatados(x.getPartidosEmpatados()-1);
+							y.setPartidosEmpatados(y.getPartidosEmpatados()-1);
+							encuentro.setEmpate(false);
+							
+							if(!informacion.getPuntuacion().isSets()){
+								System.out.println("NO ES POR SET");
+								x.setTantosFav(x.getTantosFav()-encuentroAnterior.getPuntajep1());
+								x.setTantosCont(x.getTantosCont()-encuentroAnterior.getPuntajep2());
+								y.setTantosFav(y.getTantosFav()-encuentroAnterior.getPuntajep2());
+								y.setTantosCont(y.getTantosCont()-encuentroAnterior.getPuntajep1());
+							}
+							else{
+								for(int s=0; s<informacion.getCantidad_sets();s++){
+									x.setTantosFav(x.getTantosFav()-(encuentroAnterior.getSets().get(s).getPuntajep1()));
+									y.setTantosFav(y.getTantosFav()-(encuentroAnterior.getSets().get(s).getPuntajep2()));
+									x.setTantosCont(x.getTantosCont()-encuentroAnterior.getSets().get(s).getPuntajep2());
+									y.setTantosCont(y.getTantosCont()-encuentroAnterior.getSets().get(s).getPuntajep1());	
+								}
+								
+							}
+							x.setTantosDif(x.getTantosFav()-x.getTantosCont());
+							y.setTantosDif(y.getTantosFav()-y.getTantosCont());
+							
+							x.setPuntaje(x.getPuntaje()-informacion.getPuntos_empate()-informacion.getPuntos_presentarse());
+							y.setPuntaje(y.getPuntaje()-informacion.getPuntos_empate()-informacion.getPuntos_presentarse());
+						}
+						else if(encuentroAnterior.getGanador().getId_participante() == x.getId_participante()){
 							//EL GANADOR ANTERIOR FUE X
 							System.out.println("GANO EL PRIMERO");
 							x.setPartidosGanados(x.getPartidosGanados()-1);
@@ -883,37 +909,7 @@ public class Cu018 extends JFrame {
 						}
 						
 					}
-					else {
-						if (encuentroAnterior.isEmpate()){
-							//EMPATARON EL PARTIDO ANTERIOR
-							System.out.println("EMPATARON");
-							x.setPartidosEmpatados(x.getPartidosEmpatados()-1);
-							y.setPartidosEmpatados(y.getPartidosEmpatados()-1);
-							encuentro.setEmpate(false);
-							
-							if(!informacion.getPuntuacion().isSets()){
-								System.out.println("NO ES POR SET");
-								x.setTantosFav(x.getTantosFav()-encuentroAnterior.getPuntajep1());
-								x.setTantosCont(x.getTantosCont()-encuentroAnterior.getPuntajep2());
-								y.setTantosFav(y.getTantosFav()-encuentroAnterior.getPuntajep2());
-								y.setTantosCont(y.getTantosCont()-encuentroAnterior.getPuntajep1());
-							}
-							else{
-								for(int s=0; s<informacion.getCantidad_sets();s++){
-									x.setTantosFav(x.getTantosFav()-(encuentroAnterior.getSets().get(s).getPuntajep1()));
-									y.setTantosFav(y.getTantosFav()-(encuentroAnterior.getSets().get(s).getPuntajep2()));
-									x.setTantosCont(x.getTantosCont()-encuentroAnterior.getSets().get(s).getPuntajep2());
-									y.setTantosCont(y.getTantosCont()-encuentroAnterior.getSets().get(s).getPuntajep1());	
-								}
-								
-							}
-							x.setTantosDif(x.getTantosFav()-x.getTantosCont());
-							y.setTantosDif(y.getTantosFav()-y.getTantosCont());
-							
-							x.setPuntaje(x.getPuntaje()-informacion.getPuntos_empate()-informacion.getPuntos_presentarse());
-							y.setPuntaje(y.getPuntaje()-informacion.getPuntos_empate()-informacion.getPuntos_presentarse());
-						}
-					}
+					
 					
 					
 					
@@ -1107,7 +1103,8 @@ public class Cu018 extends JFrame {
 								x.setPartidosEmpatados(x.getPartidosEmpatados()+1);
 								x.setPuntaje(x.getPuntaje()+informacion.getPuntos_presentarse()+informacion.getPuntos_empate());
 								encuentro.setEmpate(true);
-								encuentro.setGanador(null);
+								//encuentro.getGanador().setId_participante(0);
+								//encuentro.setGanador(null);
 								
 							}
 							
