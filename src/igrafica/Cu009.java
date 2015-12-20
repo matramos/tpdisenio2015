@@ -51,6 +51,7 @@ public class Cu009 extends JFrame {
     private byte[] imageInByte;
     private JLabel lblImagen;
     private Image mostrar;
+    private String path;
 	
 
 	/**
@@ -174,13 +175,15 @@ public class Cu009 extends JFrame {
         				return "Archivos de imagen";
         			}
         		};
-        		JFileChooser fileChooser = new JFileChooser();
+        		final JFileChooser fileChooser = new JFileChooser();
         		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         		fileChooser.setAcceptAllFileFilterUsed(false);
         		fileChooser.setFileFilter(filtro);
         		if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+        			path = fileChooser.getSelectedFile().getAbsolutePath();
         			ImageIcon icono = new ImageIcon(fileChooser.getSelectedFile().getAbsolutePath());
-        			Image newimg = icono.getImage().getScaledInstance(128, 128, java.awt.Image.SCALE_SMOOTH);  
+        			Image newimg = icono.getImage().getScaledInstance(128, 128, java.awt.Image.SCALE_SMOOTH); 
+        			
         			icono = new ImageIcon(newimg);
         			mostrar = newimg;
         			lblimagen.setIcon(new ImageIcon(mostrar));
@@ -268,7 +271,8 @@ public class Cu009 extends JFrame {
 				}
 				else{
 					try {
-						BufferedImage originalImage = ImageIO.read(new File("lblImagen"));
+						
+						BufferedImage originalImage = ImageIO.read(new File(path));
 
 						// convert BufferedImage to byte array
 						ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -283,6 +287,7 @@ public class Cu009 extends JFrame {
 					participanteDTO.setNombre(txtNombre.getText());
 					participanteDTO.setEmail(txtEmail.getText());
 					participanteDTO.imagen = imageInByte;
+					
 			
 					if(id_competencia==GestorCompetencias.agregarParticipante(participanteDTO,id_competencia)){
 						if(competencia.getEstado().getId_estado() == 1){
