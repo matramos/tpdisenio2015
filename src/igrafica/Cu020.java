@@ -24,6 +24,7 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
 import DTO.CompetenciaDTO;
+import DTO.DisponibilidadDTO;
 import DTO.EncuentroDTO;
 import DTO.ParticipanteDTO;
 import DTO.RondaDTO;
@@ -190,9 +191,16 @@ public class Cu020 extends JFrame {
 		JButton btnGenerarFixture = new JButton("Generar fixture");
 		btnGenerarFixture.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent g) {
-				System.out.println(compe.getEstado().getNombre());
-				if( (compe.getModalidad().isLiga() && (compe.getEstado().getId_estado() == 1) && (compe.getParticipantes().size() > 1)) || 
-						(compe.getModalidad().isLiga() && (compe.getEstado().getId_estado() == 2)) ){
+				int disponibilidad = 0;
+				for(DisponibilidadDTO d: compe.getLugares() ){
+					System.out.println("Disponibilidad del lugar: "+d.getDisponibilidad());
+					disponibilidad = disponibilidad + d.getDisponibilidad();
+				}
+				
+				System.out.println(disponibilidad);
+				System.out.println(compe.getParticipantes().size()/2);
+				if( (compe.getModalidad().isLiga() && (compe.getEstado().getId_estado() == 1) && (compe.getParticipantes().size() > 1) && ( (compe.getParticipantes().size()/2) <= disponibilidad)) || 
+						(compe.getModalidad().isLiga() && (compe.getEstado().getId_estado() == 2) && ( (compe.getParticipantes().size()/2) <= disponibilidad) ) ){
 					Cu017 ventanaGenFixture = new Cu017(id_competencia,id_usuario,desdeEl4);
 					ventanaGenFixture.setVisible(true);
 					dispose();
@@ -204,6 +212,9 @@ public class Cu020 extends JFrame {
 					}
 					else if (!compe.getModalidad().isLiga()){
 						JOptionPane.showMessageDialog(null," No se puede generar Fixture para modalidad "+compe.getModalidad().getNombre());
+					}
+					else if (disponibilidad < (compe.getParticipantes().size()/2)){
+						JOptionPane.showMessageDialog(null, "No tiene la disponibilidad suficiente para generar el fixture");
 					}
 					else{
 						JOptionPane.showMessageDialog(null," No se puede volver a generar Fixture.");

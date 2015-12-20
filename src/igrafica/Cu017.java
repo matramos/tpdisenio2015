@@ -48,7 +48,7 @@ public class Cu017 extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		{
-			JLabel lbldeseaGenerarUn = new JLabel("ï¿½Desea generar un nuevo fixture?");
+			JLabel lbldeseaGenerarUn = new JLabel("¿Desea generar un nuevo fixture?");
 			lbldeseaGenerarUn.setFont(new Font("Dialog", Font.BOLD, 20));
 			contentPanel.add(lbldeseaGenerarUn);
 		}

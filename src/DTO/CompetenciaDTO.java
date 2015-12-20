@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import capanegocios.Competencia;
+import capanegocios.Disponibilidad;
 import capanegocios.Participante;
 import capanegocios.Ronda;
 
@@ -39,6 +40,14 @@ public class CompetenciaDTO {
 		for(Participante part : comp.getParticipantes()){
 			ParticipanteDTO partDTO = new ParticipanteDTO(part);
 			this.participantes.add(partDTO);
+		}
+		
+		for(Disponibilidad dispo: comp.getLugares()){
+			DisponibilidadDTO dispoDTO = new DisponibilidadDTO();
+			dispoDTO.setLugar(new LugarDTO(dispo.getLugar()));
+			dispoDTO.setDisponibilidad(dispo.getDisponibilidad());			
+			
+			lugares.add(dispoDTO);
 		}
 		
 		this.deporte = new DeporteDTO(comp.getDeporte());
