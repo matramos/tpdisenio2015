@@ -134,7 +134,7 @@ public class Cu021 extends JFrame {
 		}
 		else{
 			sonido("error");
-			JOptionPane.showMessageDialog(null, "La competencia aún no se disputï¿½");
+			JOptionPane.showMessageDialog(null, "La competencia aï¿½n no se disputï¿½");
 			Cu020 ventana = new Cu020(id_competencia,id_usuario, desdeEl4);
 			ventana.setVisible(true);
 			dispose();
@@ -143,10 +143,10 @@ public class Cu021 extends JFrame {
 	}
 	private void modificarTabla(ListaParticipantesDTO participantes){
 		if(participantes.getParticipantes().get(0).getTantosFav()==-1){
-			modeloTabla.setColumnIdentifiers(new String[] {"Nombre","Puntos","Ganados","Empatados", "Perididos"});
+			modeloTabla.setColumnIdentifiers(new String[] {"Nombre","Puntos","Ganados","Empatados", "Perdidos"});
 		}
 		else{
-			modeloTabla.setColumnIdentifiers(new String[] {"Nombre","Puntos","Ganados","Empatados", "Perididos","Tantos favor","Tantos contra","Diferencia"});
+			modeloTabla.setColumnIdentifiers(new String[] {"Nombre","Puntos","Ganados","Empatados", "Perdidos","Tantos favor","Tantos contra","Diferencia"});
 		}
 		for(ParticipanteDTO part : participantes.getParticipantes()){
 			modeloTabla.addRow(part.crearFila());

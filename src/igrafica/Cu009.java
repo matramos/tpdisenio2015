@@ -269,6 +269,10 @@ public class Cu009 extends JFrame {
 				}
 				else{
 					try {
+						System.out.println(path);
+						if(path == null){
+							path = "sin imagen";
+						}
 						BufferedImage originalImage = ImageIO.read(new File(path));
 
 						// convert BufferedImage to byte array
